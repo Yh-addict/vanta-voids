@@ -569,8 +569,9 @@
             border-radius: 14px;
             overflow: hidden;
             border: 1px solid var(--border-color);
-            height: 200px;
+            height: 250px;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         .gallery-item img {
@@ -581,28 +582,12 @@
         }
 
         .gallery-item:hover img {
-            transform: scale(1.08);
+            transform: scale(1.06);
         }
 
-        .gallery-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(10, 13, 18, 0.9), transparent);
-            display: flex;
-            align-items: flex-end;
-            padding: 1rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
-        }
-
-        .gallery-title {
-            color: var(--gold-light);
-            font-family: var(--font-title);
-            font-size: 0.9rem;
+        .gallery-item:hover {
+            border-color: var(--gold-primary);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
         }
 
         /* Floating WhatsApp Icon */
@@ -1173,7 +1158,7 @@
         <h3 style="font-family: var(--font-title); color: var(--gold-light); margin-bottom: 1rem;">
             <i class="fa-solid fa-images" style="color: var(--gold-primary);"></i> الاستوديو الرقمي للشهادات (تتحدث عشوائياً)
         </h3>
-        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">استعراض بصري ديناميكي للشهادات الـ 16 المعتمدة.</p>
+        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">استعراض بصري ديناميكي للشهادات الـ 16 المعتمدة (تعرض الصورة مباشرة بدون مسميات).</p>
         
         <div class="gallery-grid" id="randomGalleryGrid">
             <!-- يتم تعبئتها ديناميكياً عبر الجافاسكريبت للشهادات الـ 16 -->
@@ -1251,24 +1236,24 @@
         document.getElementById('openAdminModal').onclick = () => document.getElementById('adminModal').style.display = 'flex';
         document.getElementById('closeAdminModal').onclick = () => document.getElementById('adminModal').style.display = 'none';
 
-        // مصفوفة الـ 16 شهادة
+        // مصفوفة الـ 16 شهادة (بدون مسميات نصية، تعرض الصورة فقط)
         const allCertificates = [
-            { img: 'cert1.jpg', title: 'شهادة تدريب IOI للمعلوماتية' },
-            { img: 'cert2.jpg', title: 'مبادرة المليون سعودي للذكاء الاصطناعي' },
-            { img: 'cert3.jpg', title: 'شهادة تدريب مقياس بيبراس - موهبة' },
-            { img: 'cert4.jpg', title: 'وثيقة شهادة الماجستير - جامعة الباحة' },
-            { img: 'cert5.jpg', title: 'شهادة حضور ورشة العمل التقني' },
-            { img: 'cert6.jpg', title: 'شهادة اجتياز دورة الأمن السيبراني' },
-            { img: 'cert7.jpg', title: 'شهادة شكر وتقدير من إدارة التعليم' },
-            { img: 'cert8.jpg', title: 'شهادة تصميم وتطوير الويب' },
-            { img: 'cert9.jpg', title: 'شهادة استخدام الذكاء الاصطناعي بالتعليم' },
-            { img: 'cert10.jpg', title: 'شهادة المعلم الرقمي المعتمد' },
-            { img: 'cert11.jpg', title: 'شهادة حضور اللقاء السنوي للتقنية' },
-            { img: 'cert12.jpg', title: 'شهادة إدارة المشاريع التعليمية' },
-            { img: 'cert13.jpg', title: 'شهادة التميز في الأداء الوظيفي' },
-            { img: 'cert14.jpg', title: 'شهادة تفعيل منصات التعلم الإلكتروني' },
-            { img: 'cert15.jpg', title: 'شهادة دورة تحليل البيانات المتقدمة' },
-            { img: 'cert16.jpg', title: 'شهادة إتمام برامج الإشراف التربوي' }
+            { img: 'cert1.jpg' },
+            { img: 'cert2.jpg' },
+            { img: 'cert3.jpg' },
+            { img: 'cert4.jpg' },
+            { img: 'cert5.jpg' },
+            { img: 'cert6.jpg' },
+            { img: 'cert7.jpg' },
+            { img: 'cert8.jpg' },
+            { img: 'cert9.jpg' },
+            { img: 'cert10.jpg' },
+            { img: 'cert11.jpg' },
+            { img: 'cert12.jpg' },
+            { img: 'cert13.jpg' },
+            { img: 'cert14.jpg' },
+            { img: 'cert15.jpg' },
+            { img: 'cert16.jpg' }
         ];
 
         function renderRandomCertificates() {
@@ -1280,10 +1265,7 @@
             selected.forEach(cert => {
                 htmlContent += `
                     <div class="gallery-item" onclick="viewImage('${cert.img}')">
-                        <img src="${cert.img}" alt="${cert.title}" onerror="this.src='https://via.placeholder.com/400x300/121824/d4af37?text=Certificate'">
-                        <div class="gallery-overlay">
-                            <span class="gallery-title">${cert.title}</span>
-                        </div>
+                        <img src="${cert.img}" alt="شهادة معتمدة" onerror="this.src='https://via.placeholder.com/400x300/121824/d4af37?text=Certificate'">
                     </div>
                 `;
             });
@@ -1292,7 +1274,7 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             renderRandomCertificates();
-            setInterval(renderRandomCertificates, 5000); // تتغير كل 5 ثواني
+            setInterval(renderRandomCertificates, 5000); // تتغير عشوائياً كل 5 ثواني
         });
     </script>
 </body>
