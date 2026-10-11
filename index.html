@@ -1332,6 +1332,7 @@
     <script>
         let currentEvidenceIndex = 0;
         const SECRET_PASS = '1234'; // الرقم السري الافتراضي لمحاور الأداء الوظيفي
+        const SECRET_HASH = 'c3ab8ff13720e8ad9047dee39488f3cbb45eefb6f571b7fcf71aa88b209d6f3e'; // الرمز المشفر لكلمة المرور Jhaia1430$
 
         // بيانات افتراضية للروابط والصورة
         let siteData = {
@@ -1383,6 +1384,14 @@
             { id: 'swe', name: 'هندسة البرمجيات' }
         ];
 
+        // دالة التشفير SHA-256 لحماية كلمة المرور
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
         // تحميل البيانات المحفوظة إن وجدت
         function loadSavedData() {
             const saved = localStorage.getItem('vantaVoidsData');
@@ -1396,7 +1405,7 @@
         function applySiteData() {
             // صورة العرض
             document.querySelectorAll('.dynamic-avatar').forEach(img => {
-                img.src = siteData.avatar;
+                if(siteData.avatar) img.src = siteData.avatar;
             });
 
             // روابط مواد المختبر التعليمي
@@ -1426,11 +1435,13 @@
             }
         }
 
-        // التحقق من دخول لوحة التحكم وفتح واجهة التعديل
-        function verifyAdminLogin() {
-            const user = document.getElementById('adminUser').value;
+        // التحقق من دخول لوحة التحكم باستخدام الرمز المشفر
+        async function verifyAdminLogin() {
+            const user = document.getElementById('adminUser').value.trim();
             const pass = document.getElementById('adminPass').value;
-            if(user === 'Yh.addict' && pass === 'Jhaia1430$') {
+            const passHash = await sha256(pass);
+
+            if(user === 'Yh.addict' && passHash === SECRET_HASH) {
                 document.getElementById('adminModal').style.display = 'none';
                 populateAdminForm();
                 document.getElementById('adminDashboardModal').style.display = 'flex';
@@ -1441,7 +1452,7 @@
 
         // تعبئة نموذج لوحة الإدارة بالبيانات الحالية
         function populateAdminForm() {
-            document.getElementById('editAvatar').value = siteData.avatar;
+            document.getElementById('editAvatar').value = siteData.avatar || '';
 
             // حقول الشواهد الـ 11
             let evHtml = '';
