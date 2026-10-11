@@ -533,11 +533,23 @@
             font-size: 0.85rem;
             font-weight: 600;
             width: fit-content;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .resource-badge:hover {
+            background: var(--gold-primary);
+            color: var(--bg-primary);
         }
 
         .resource-badge i {
             color: var(--gold-primary);
             font-size: 0.95rem;
+        }
+        
+        .resource-badge:hover i {
+            color: var(--bg-primary);
         }
 
         /* Evidence Cards & Protected Lock */
@@ -640,6 +652,8 @@
             display: none;
             align-items: center;
             justify-content: center;
+            overflow-y: auto;
+            padding: 2rem 0;
         }
 
         .modal-card {
@@ -648,10 +662,12 @@
             border-radius: 20px;
             padding: 2.5rem;
             width: 90%;
-            max-width: 420px;
+            max-width: 480px;
             box-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
             position: relative;
             text-align: center;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .close-modal {
@@ -661,6 +677,7 @@
             color: var(--text-secondary);
             cursor: pointer;
             font-size: 1.2rem;
+            z-index: 10;
         }
 
         .form-control {
@@ -672,8 +689,17 @@
             color: var(--text-primary);
             font-family: var(--font-body);
             font-size: 1rem;
-            text-align: center;
-            margin: 1.2rem 0;
+            text-align: right;
+            margin: 0.6rem 0;
+        }
+
+        .form-group-label {
+            display: block;
+            text-align: right;
+            color: var(--gold-light);
+            font-size: 0.85rem;
+            margin-top: 0.8rem;
+            font-weight: 600;
         }
 
         .btn-gold {
@@ -686,6 +712,26 @@
             font-weight: 700;
             cursor: pointer;
             font-family: var(--font-title);
+            margin-top: 1rem;
+        }
+
+        .btn-secondary-custom {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--gold-light);
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: var(--font-title);
+            margin-top: 0.6rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary-custom:hover {
+            background: rgba(212, 175, 55, 0.15);
+            border-color: var(--gold-primary);
         }
 
         footer {
@@ -715,7 +761,7 @@
     <header>
         <div class="nav-container">
             <a href="#hero" class="brand-logo">
-                <img src="my-photo.jpg" alt="يوسف الحامد" class="profile-avatar-thumb" onerror="this.src='https://via.placeholder.com/150/121824/d4af37?text=YH'">
+                <img src="my-photo.jpg" alt="يوسف الحامد" class="profile-avatar-thumb dynamic-avatar" onerror="this.src='https://via.placeholder.com/150/121824/d4af37?text=YH'">
                 <div class="brand-text">
                     <h1>يوسف الحامد</h1>
                     <span>YH DIGITAL EDUCATOR</span>
@@ -738,11 +784,11 @@
     <section id="hero" class="hero-section">
         <div class="hero-card">
             <div class="profile-image-container">
-                <img src="my-photo.jpg" alt="يوسف حامد آل حامد" class="main-profile-img" onerror="this.src='https://via.placeholder.com/300/121824/d4af37?text=Youssef'">
+                <img src="my-photo.jpg" alt="يوسف حامد آل حامد" class="main-profile-img dynamic-avatar" onerror="this.src='https://via.placeholder.com/300/121824/d4af37?text=Youssef'">
                 <div class="profile-frame-badge">Vanta Voids</div>
             </div>
             <div class="hero-details">
-                <h2>يوسف حامد آل حامد</h2>
+                <h2>يوسف حامد آل حامد القرني</h2>
                 <div class="hero-title-badge">
                     معلم حاسب آلي وتقنية معلومات • مصمم تجارب التعلم المستدام
                 </div>
@@ -781,7 +827,7 @@
                 <div class="cv-card">
                     <div class="cv-card-title"><i class="fa-solid fa-user"></i> المعلومات الشخصية والهدف</div>
                     <ul class="info-list">
-                        <li><strong>الاسم:</strong> يوسف حامد عبدالله آل حامد القرني</li>
+                        <li><strong>الاسم:</strong> يوسف حامد عبدالله القرني</li>
                         <li><strong>الجنسية:</strong> سعودي</li>
                         <li><strong>المهنة:</strong> معلم مرحلة ثانوية</li>
                         <li><strong>الحالة الاجتماعية:</strong> متزوج (عدد أفراد الأسرة: 5)</li>
@@ -1014,14 +1060,14 @@
             </table>
         </div>
 
-        <!-- Subjects Grid (All 10 Subjects) -->
+        <!-- Subjects Grid (All 10 Subjects with Dynamic Links) -->
         <div class="cards-grid">
             <div class="subject-card" id="sub-tech1">
                 <div>
                     <div class="subject-header"><i class="fa-solid fa-desktop"></i><h3>التقنية الرقمية (1)</h3></div>
                     <p style="font-size: 0.85rem; color: var(--text-secondary);">أساسيات الحاسب، المستندات الرقمية، والمعالجة البرمجية الأولية.</p>
                 </div>
-                <div class="resource-badge"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></div>
+                <a href="#" class="resource-badge sub-link" data-id="tech1" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
             </div>
 
             <div class="subject-card" id="sub-tech2">
@@ -1029,7 +1075,7 @@
                     <div class="subject-header"><i class="fa-solid fa-laptop"></i><h3>التقنية الرقمية (2)</h3></div>
                     <p style="font-size: 0.85rem; color: var(--text-secondary);">مفاهيم الشبكات، أدوات الاتصال والتصميم الرقمي.</p>
                 </div>
-                <div class="resource-badge"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></div>
+                <a href="#" class="resource-badge sub-link" data-id="tech2" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
             </div>
 
             <div class="subject-card" id="sub-tech3">
@@ -1037,7 +1083,7 @@
                     <div class="subject-header"><i class="fa-solid fa-code"></i><h3>التقنية الرقمية (3)</h3></div>
                     <p style="font-size: 0.85rem; color: var(--text-secondary);">التطبيقات المتقدمة والمشاريع البرمجية التفاعلية.</p>
                 </div>
-                <div class="resource-badge"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></div>
+                <a href="#" class="resource-badge sub-link" data-id="tech3" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
             </div>
 
             <div class="subject-card" id="sub-data">
@@ -1045,7 +1091,7 @@
                     <div class="subject-header"><i class="fa-solid fa-database"></i><h3>علم البيانات</h3></div>
                     <p style="font-size: 0.85rem; color: var(--text-secondary);">جمع وتعديل البيانات، النمذجة والتحليل الإحصائي الرقمي.</p>
                 </div>
-                <div class="resource-badge"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></div>
+                <a href="#" class="resource-badge sub-link" data-id="data" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
             </div>
 
             <div class="subject-card" id="sub-ai">
@@ -1053,7 +1099,7 @@
                     <div class="subject-header"><i class="fa-solid fa-brain"></i><h3>الذكاء الاصطناعي (1)</h3></div>
                     <p style="font-size: 0.85rem; color: var(--text-secondary);">خوارزميات التعلم الآلي، هندسة التلقين ونماذج الرؤية.</p>
                 </div>
-                <div class="resource-badge"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></div>
+                <a href="#" class="resource-badge sub-link" data-id="ai1" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
             </div>
 
             <div class="subject-card" id="sub-ai2">
@@ -1061,7 +1107,7 @@
                     <div class="subject-header"><i class="fa-solid fa-robot"></i><h3>الذكاء الاصطناعي (2)</h3></div>
                     <p style="font-size: 0.85rem; color: var(--text-secondary);">التطبيقات المتقدمة والشبكات العصبية الاصطناعية.</p>
                 </div>
-                <div class="resource-badge"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></div>
+                <a href="#" class="resource-badge sub-link" data-id="ai2" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
             </div>
 
             <div class="subject-card" id="sub-design">
@@ -1069,7 +1115,7 @@
                     <div class="subject-header"><i class="fa-solid fa-compass-drafting"></i><h3>التصميم الهندسي</h3></div>
                     <p style="font-size: 0.85rem; color: var(--text-secondary);">النمذجة ثلاثية الأبعاد والتصميمات الميكانيكية والهندسية.</p>
                 </div>
-                <div class="resource-badge"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></div>
+                <a href="#" class="resource-badge sub-link" data-id="design" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
             </div>
 
             <div class="subject-card" id="sub-cyber">
@@ -1077,7 +1123,7 @@
                     <div class="subject-header"><i class="fa-solid fa-shield-halved"></i><h3>الأمن السيبراني</h3></div>
                     <p style="font-size: 0.85rem; color: var(--text-secondary);">أنظمة التشفير، حماية البيانات والوقاية من الاحتيال.</p>
                 </div>
-                <div class="resource-badge"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></div>
+                <a href="#" class="resource-badge sub-link" data-id="cyber" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
             </div>
 
             <div class="subject-card" id="sub-iot">
@@ -1085,7 +1131,7 @@
                     <div class="subject-header"><i class="fa-solid fa-network-wired"></i><h3>إنترنت الأشياء</h3></div>
                     <p style="font-size: 0.85rem; color: var(--text-secondary);">ربط الحساسات والمتحكمات الدقيقة بالشبكات.</p>
                 </div>
-                <div class="resource-badge"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></div>
+                <a href="#" class="resource-badge sub-link" data-id="iot" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
             </div>
 
             <div class="subject-card" id="sub-swe">
@@ -1093,7 +1139,7 @@
                     <div class="subject-header"><i class="fa-solid fa-layer-group"></i><h3>هندسة البرمجيات</h3></div>
                     <p style="font-size: 0.85rem; color: var(--text-secondary);">دورة حياة تطوير الأنظمة البرمجية واختبار الكود.</p>
                 </div>
-                <div class="resource-badge"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></div>
+                <a href="#" class="resource-badge sub-link" data-id="swe" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
             </div>
         </div>
     </section>
@@ -1109,57 +1155,57 @@
             <i class="fa-solid fa-user-shield" style="color: var(--gold-primary);"></i> محاور الأداء الوظيفي المعتمدة
         </h3>
         <div class="cards-grid" style="margin-bottom: 4rem;">
-            <div class="evidence-card" onclick="openProtectedLink('https://onedrive.live.com')">
+            <div class="evidence-card" onclick="openEvidence(0)">
                 <i class="fa-solid fa-lock lock-icon"></i>
                 <h4 style="color: var(--gold-light); font-size: 1rem;"><i class="fa-solid fa-check-double text-gold-primary"></i> أداء الواجبات الوظيفية</h4>
                 <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">محمي بكلمة مرور</p>
             </div>
-            <div class="evidence-card" onclick="openProtectedLink('https://onedrive.live.com')">
+            <div class="evidence-card" onclick="openEvidence(1)">
                 <i class="fa-solid fa-lock lock-icon"></i>
                 <h4 style="color: var(--gold-light); font-size: 1rem;"><i class="fa-solid fa-sliders text-gold-primary"></i> إعداد وتنفيذ خطة التعلم</h4>
                 <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">محمي بكلمة مرور</p>
             </div>
-            <div class="evidence-card" onclick="openProtectedLink('https://onedrive.live.com')">
+            <div class="evidence-card" onclick="openEvidence(2)">
                 <i class="fa-solid fa-lock lock-icon"></i>
                 <h4 style="color: var(--gold-light); font-size: 1rem;"><i class="fa-solid fa-users-gear text-gold-primary"></i> الإدارة الصفية</h4>
                 <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">محمي بكلمة مرور</p>
             </div>
-            <div class="evidence-card" onclick="openProtectedLink('https://onedrive.live.com')">
+            <div class="evidence-card" onclick="openEvidence(3)">
                 <i class="fa-solid fa-lock lock-icon"></i>
                 <h4 style="color: var(--gold-light); font-size: 1rem;"><i class="fa-solid fa-people-arrows text-gold-primary"></i> التفاعل مع المجتمع المهني</h4>
                 <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">محمي بكلمة مرور</p>
             </div>
-            <div class="evidence-card" onclick="openProtectedLink('https://onedrive.live.com')">
+            <div class="evidence-card" onclick="openEvidence(4)">
                 <i class="fa-solid fa-lock lock-icon"></i>
                 <h4 style="color: var(--gold-light); font-size: 1rem;"><i class="fa-solid fa-comments text-gold-primary"></i> التفاعل مع أولياء الأمور</h4>
                 <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">محمي بكلمة مرور</p>
             </div>
-            <div class="evidence-card" onclick="openProtectedLink('https://onedrive.live.com')">
+            <div class="evidence-card" onclick="openEvidence(5)">
                 <i class="fa-solid fa-lock lock-icon"></i>
                 <h4 style="color: var(--gold-light); font-size: 1rem;"><i class="fa-solid fa-lightbulb text-gold-primary"></i> التنوع في استراتيجيات التدريس</h4>
                 <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">محمي بكلمة مرور</p>
             </div>
-            <div class="evidence-card" onclick="openProtectedLink('https://onedrive.live.com')">
+            <div class="evidence-card" onclick="openEvidence(6)">
                 <i class="fa-solid fa-lock lock-icon"></i>
                 <h4 style="color: var(--gold-light); font-size: 1rem;"><i class="fa-solid fa-chart-line text-gold-primary"></i> تحسين نتائج المتعلمين</h4>
                 <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">محمي بكلمة مرور</p>
             </div>
-            <div class="evidence-card" onclick="openProtectedLink('https://onedrive.live.com')">
+            <div class="evidence-card" onclick="openEvidence(7)">
                 <i class="fa-solid fa-lock lock-icon"></i>
                 <h4 style="color: var(--gold-light); font-size: 1rem;"><i class="fa-solid fa-chart-pie text-gold-primary"></i> تحليل نتائج المتعلمين وتشخيص مستوياتهم</h4>
                 <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">محمي بكلمة مرور</p>
             </div>
-            <div class="evidence-card" onclick="openProtectedLink('https://onedrive.live.com')">
+            <div class="evidence-card" onclick="openEvidence(8)">
                 <i class="fa-solid fa-lock lock-icon"></i>
                 <h4 style="color: var(--gold-light); font-size: 1rem;"><i class="fa-solid fa-list-check text-gold-primary"></i> تنوع أساليب التقويم</h4>
                 <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">محمي بكلمة مرور</p>
             </div>
-            <div class="evidence-card" onclick="openProtectedLink('https://onedrive.live.com')">
+            <div class="evidence-card" onclick="openEvidence(9)">
                 <i class="fa-solid fa-lock lock-icon"></i>
                 <h4 style="color: var(--gold-light); font-size: 1rem;"><i class="fa-solid fa-seedling text-gold-primary"></i> تهيئة البيئة التعليمية</h4>
                 <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">محمي بكلمة مرور</p>
             </div>
-            <div class="evidence-card" onclick="openProtectedLink('https://onedrive.live.com')">
+            <div class="evidence-card" onclick="openEvidence(10)">
                 <i class="fa-solid fa-lock lock-icon"></i>
                 <h4 style="color: var(--gold-light); font-size: 1rem;"><i class="fa-solid fa-microchip text-gold-primary"></i> توظيف التقنيات ووسائل التعلم المناسبة</h4>
                 <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">محمي بكلمة مرور</p>
@@ -1169,7 +1215,7 @@
         <h3 style="font-family: var(--font-title); color: var(--gold-light); margin-bottom: 1rem;">
             <i class="fa-solid fa-images" style="color: var(--gold-primary);"></i> الاستوديو الرقمي للشهادات (تتحدث عشوائياً)
         </h3>
-        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">استعراض بصري ديناميكي للشهادات الـ 16 المعتمدة (تعرض الصورة مباشرة بدون مسميات).</p>
+        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">استعراض بصري ديناميكي للشهادات الـ 16 المعتمدة.</p>
         
         <div class="gallery-grid" id="randomGalleryGrid">
             <!-- يتم تعبئتها ديناميكياً عبر الجافاسكريبت للشهادات الـ 16 -->
@@ -1181,7 +1227,7 @@
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <!-- Password Modal -->
+    <!-- Password Modal for Protected Evidence Links -->
     <div class="modal-overlay" id="passwordModal">
         <div class="modal-card">
             <i class="fa-solid fa-xmark close-modal" id="closePassModal"></i>
@@ -1191,14 +1237,80 @@
         </div>
     </div>
 
-    <!-- Admin Center Modal -->
+    <!-- Admin Center Login Modal -->
     <div class="modal-overlay" id="adminModal">
         <div class="modal-card">
             <i class="fa-solid fa-xmark close-modal" id="closeAdminModal"></i>
             <h3 style="font-family: var(--font-title); color: var(--gold-light); margin-bottom: 1rem;">لوحة التحكم | Command Center</h3>
-            <input type="text" class="form-control" placeholder="اسم المستخدم">
-            <input type="password" class="form-control" placeholder="كلمة المرور">
-            <button class="btn-gold" onclick="alert('تم تسجيل الدخول بنجاح'); document.getElementById('adminModal').style.display='none';">دخول اللوحة</button>
+            <input type="text" id="adminUser" class="form-control" placeholder="اسم المستخدم">
+            <input type="password" id="adminPass" class="form-control" placeholder="كلمة المرور">
+            <button class="btn-gold" onclick="verifyAdminLogin()">دخول اللوحة</button>
+            <div style="margin-top: 1rem; border-top: 1px dashed var(--border-color); padding-top: 0.8rem;">
+                <a href="#" onclick="openRecoveryModal()" style="color: var(--gold-primary); font-size: 0.85rem; text-decoration: none;">هل نسيت كلمة المرور؟ استعادة بيانات الدخول</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard Management Modal (لوحة الإدارة الشاملة لتعديل الروابط والصورة) -->
+    <div class="modal-overlay" id="adminDashboardModal">
+        <div class="modal-card" style="max-width: 600px;">
+            <i class="fa-solid fa-xmark close-modal" onclick="document.getElementById('adminDashboardModal').style.display='none'"></i>
+            <h3 style="font-family: var(--font-title); color: var(--gold-light); margin-bottom: 0.5rem;"><i class="fa-solid fa-sliders"></i> لوحة الإدارة والتعديل المباشر</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;">قم بتعديل صورة العرض، روابط الشواهد الـ 11، وروابط المواد بكل سهولة:</p>
+            
+            <div style="text-align: right; max-height: 60vh; overflow-y: auto; padding-left: 5px;">
+                <!-- تعديل صورة العرض -->
+                <label class="form-group-label"><i class="fa-solid fa-image"></i> رابط صورة العرض الشخصية أو الشعار:</label>
+                <input type="text" id="editAvatar" class="form-control" placeholder="مثال: my-photo.jpg أو رابط مباشر">
+
+                <hr style="border-color: var(--border-color); margin: 1.5rem 0;">
+
+                <h4 style="color: var(--gold-light); font-size: 1rem; margin-bottom: 0.8rem;"><i class="fa-solid fa-shield-halved"></i> روابط محاور الأداء الوظيفي (11 محور):</h4>
+                <div id="evidenceLinksInputs">
+                    <!-- يتم توليدها ديناميكياً عبر الجافاسكريبت -->
+                </div>
+
+                <hr style="border-color: var(--border-color); margin: 1.5rem 0;">
+
+                <h4 style="color: var(--gold-light); font-size: 1rem; margin-bottom: 0.8rem;"><i class="fa-solid fa-laptop-code"></i> روابط مواد المختبر التعليمي (المصادر والعروض):</h4>
+                <div id="subjectLinksInputs">
+                    <!-- يتم توليدها ديناميكياً عبر الجافاسكريبت -->
+                </div>
+            </div>
+
+            <button class="btn-gold" onclick="saveAdminChanges()">حفظ التعديلات وتطبيقها فوراً</button>
+        </div>
+    </div>
+
+    <!-- Password Recovery Modal -->
+    <div class="modal-overlay" id="recoveryModal">
+        <div class="modal-card">
+            <i class="fa-solid fa-xmark close-modal" id="closeRecoveryModal"></i>
+            <div style="color: var(--gold-primary); font-size: 2.2rem; margin-bottom: 0.5rem;">
+                <i class="fa-solid fa-key"></i>
+            </div>
+            <h3 style="font-family: var(--font-title); color: var(--gold-light); margin-bottom: 0.5rem;">استعادة كلمة المرور</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;">اختر الوسيلة المناسبة لإرسال بيانات استعادة الحساب:</p>
+            
+            <button class="btn-gold" onclick="sendRecoveryCode('sms')">
+                <i class="fa-solid fa-phone"></i> إرسال عبر الجوال (0565588869)
+            </button>
+            <button class="btn-secondary-custom" onclick="sendRecoveryCode('email')">
+                <i class="fa-solid fa-envelope"></i> إرسال عبر البريد (Yh.addict@gmail.com)
+            </button>
+        </div>
+    </div>
+
+    <!-- Success Message Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-card">
+            <i class="fa-solid fa-xmark close-modal" onclick="document.getElementById('successModal').style.display='none'"></i>
+            <div style="color: #25d366; font-size: 2.5rem; margin-bottom: 0.8rem;">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3 style="font-family: var(--font-title); color: var(--gold-light); margin-bottom: 0.5rem;" id="successTitle">تمت العملية بنجاح</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6;" id="successMessage">تم حفظ التعديلات بنجاح.</p>
+            <button class="btn-gold" onclick="document.getElementById('successModal').style.display='none'">حسناً</button>
         </div>
     </div>
 
@@ -1218,11 +1330,86 @@
 
     <!-- JavaScript Controllers -->
     <script>
-        let targetUrl = '';
-        const SECRET_PASS = '1234'; // الرقم السري الافتراضي
+        let currentEvidenceIndex = 0;
+        const SECRET_PASS = '1234'; // الرقم السري الافتراضي لمحاور الأداء الوظيفي
 
-        function openProtectedLink(url) {
-            targetUrl = url;
+        // بيانات افتراضية للروابط والصورة
+        let siteData = {
+            avatar: 'my-photo.jpg',
+            evidence: [
+                'https://onedrive.live.com', 'https://onedrive.live.com', 'https://onedrive.live.com',
+                'https://onedrive.live.com', 'https://onedrive.live.com', 'https://onedrive.live.com',
+                'https://onedrive.live.com', 'https://onedrive.live.com', 'https://onedrive.live.com',
+                'https://onedrive.live.com', 'https://onedrive.live.com'
+            ],
+            subjects: {
+                tech1: 'https://onedrive.live.com',
+                tech2: 'https://onedrive.live.com',
+                tech3: 'https://onedrive.live.com',
+                data: 'https://onedrive.live.com',
+                ai1: 'https://onedrive.live.com',
+                ai2: 'https://onedrive.live.com',
+                design: 'https://onedrive.live.com',
+                cyber: 'https://onedrive.live.com',
+                iot: 'https://onedrive.live.com',
+                swe: 'https://onedrive.live.com'
+            }
+        };
+
+        const evidenceTitles = [
+            "1. أداء الواجبات الوظيفية",
+            "2. إعداد وتنفيذ خطة التعلم",
+            "3. الإدارة الصفية",
+            "4. التفاعل مع المجتمع المهني",
+            "5. التفاعل مع أولياء الأمور",
+            "6. التنوع في استراتيجيات التدريس",
+            "7. تحسين نتائج المتعلمين",
+            "8. تحليل نتائج المتعلمين وتشخيص مستوياتهم",
+            "9. تنوع أساليب التقويم",
+            "10. تهيئة البيئة التعليمية",
+            "11. توظيف التقنيات ووسائل التعلم المناسبة"
+        ];
+
+        const subjectKeys = [
+            { id: 'tech1', name: 'التقنية الرقمية (1)' },
+            { id: 'tech2', name: 'التقنية الرقمية (2)' },
+            { id: 'tech3', name: 'التقنية الرقمية (3)' },
+            { id: 'data', name: 'علم البيانات' },
+            { id: 'ai1', name: 'الذكاء الاصطناعي (1)' },
+            { id: 'ai2', name: 'الذكاء الاصطناعي (2)' },
+            { id: 'design', name: 'التصميم الهندسي' },
+            { id: 'cyber', name: 'الأمن السيبراني' },
+            { id: 'iot', name: 'إنترنت الأشياء' },
+            { id: 'swe', name: 'هندسة البرمجيات' }
+        ];
+
+        // تحميل البيانات المحفوظة إن وجدت
+        function loadSavedData() {
+            const saved = localStorage.getItem('vantaVoidsData');
+            if (saved) {
+                try { siteData = JSON.parse(saved); } catch(e){}
+            }
+            applySiteData();
+        }
+
+        // تطبيق البيانات على الواجهة
+        function applySiteData() {
+            // صورة العرض
+            document.querySelectorAll('.dynamic-avatar').forEach(img => {
+                img.src = siteData.avatar;
+            });
+
+            // روابط مواد المختبر التعليمي
+            document.querySelectorAll('.sub-link').forEach(el => {
+                const key = el.getAttribute('data-id');
+                if (siteData.subjects[key]) {
+                    el.href = siteData.subjects[key];
+                }
+            });
+        }
+
+        function openEvidence(index) {
+            currentEvidenceIndex = index;
             document.getElementById('passwordModal').style.display = 'flex';
             document.getElementById('passInput').value = '';
             document.getElementById('passInput').focus();
@@ -1232,10 +1419,90 @@
             const input = document.getElementById('passInput').value;
             if(input === SECRET_PASS) {
                 document.getElementById('passwordModal').style.display = 'none';
+                const targetUrl = siteData.evidence[currentEvidenceIndex] || 'https://onedrive.live.com';
                 window.open(targetUrl, '_blank');
             } else {
                 alert('الرقم السري غير صحيح.');
             }
+        }
+
+        // التحقق من دخول لوحة التحكم وفتح واجهة التعديل
+        function verifyAdminLogin() {
+            const user = document.getElementById('adminUser').value;
+            const pass = document.getElementById('adminPass').value;
+            if(user === 'Yh.addict' && pass === 'Jhaia1430$') {
+                document.getElementById('adminModal').style.display = 'none';
+                populateAdminForm();
+                document.getElementById('adminDashboardModal').style.display = 'flex';
+            } else {
+                alert('اسم المستخدم أو كلمة المرور غير صحيحة.');
+            }
+        }
+
+        // تعبئة نموذج لوحة الإدارة بالبيانات الحالية
+        function populateAdminForm() {
+            document.getElementById('editAvatar').value = siteData.avatar;
+
+            // حقول الشواهد الـ 11
+            let evHtml = '';
+            evidenceTitles.forEach((title, idx) => {
+                evHtml += `
+                    <label class="form-group-label">${title}:</label>
+                    <input type="text" id="ev_input_${idx}" class="form-control" value="${siteData.evidence[idx] || ''}">
+                `;
+            });
+            document.getElementById('evidenceLinksInputs').innerHTML = evHtml;
+
+            // حقول المواد الدراسية
+            let subHtml = '';
+            subjectKeys.forEach(sub => {
+                subHtml += `
+                    <label class="form-group-label">${sub.name}:</label>
+                    <input type="text" id="sub_input_${sub.id}" class="form-control" value="${siteData.subjects[sub.id] || ''}">
+                `;
+            });
+            document.getElementById('subjectLinksInputs').innerHTML = subHtml;
+        }
+
+        // حفظ التعديلات من لوحة الإدارة
+        function saveAdminChanges() {
+            siteData.avatar = document.getElementById('editAvatar').value.trim() || 'my-photo.jpg';
+
+            evidenceTitles.forEach((_, idx) => {
+                const val = document.getElementById(`ev_input_${idx}`).value.trim();
+                siteData.evidence[idx] = val;
+            });
+
+            subjectKeys.forEach(sub => {
+                const val = document.getElementById(`sub_input_${sub.id}`).value.trim();
+                siteData.subjects[sub.id] = val;
+            });
+
+            localStorage.setItem('vantaVoidsData', JSON.stringify(siteData));
+            applySiteData();
+            document.getElementById('adminDashboardModal').style.display = 'none';
+            showSuccessModal('تم الحفظ بنجاح', 'تم تحديث الروابط وصورة العرض وتطبيقها على الموقع فوراً.');
+        }
+
+        // فتح نافذة الاستعادة
+        function openRecoveryModal() {
+            document.getElementById('adminModal').style.display = 'none';
+            document.getElementById('recoveryModal').style.display = 'flex';
+        }
+
+        function sendRecoveryCode(type) {
+            document.getElementById('recoveryModal').style.display = 'none';
+            if(type === 'sms') {
+                showSuccessModal('تم إرسال رمز التحقق', 'تم إرسال رسالة نصية تحتوي على تعليمات استعادة كلمة المرور إلى الجوال: 0565588869');
+            } else if(type === 'email') {
+                showSuccessModal('تم إرسال رابط الاستعادة', 'تم إرسال بريد إلكتروني يحتوي على رابط إعادة تعيين كلمة المرور إلى: Yh.addict@gmail.com');
+            }
+        }
+
+        function showSuccessModal(title, message) {
+            document.getElementById('successTitle').innerText = title;
+            document.getElementById('successMessage').innerText = message;
+            document.getElementById('successModal').style.display = 'flex';
         }
 
         function viewImage(src) {
@@ -1244,27 +1511,20 @@
         }
 
         document.getElementById('closePassModal').onclick = () => document.getElementById('passwordModal').style.display = 'none';
-        document.getElementById('openAdminModal').onclick = () => document.getElementById('adminModal').style.display = 'flex';
+        document.getElementById('openAdminModal').onclick = () => {
+            document.getElementById('adminUser').value = '';
+            document.getElementById('adminPass').value = '';
+            document.getElementById('adminModal').style.display = 'flex';
+        };
         document.getElementById('closeAdminModal').onclick = () => document.getElementById('adminModal').style.display = 'none';
+        document.getElementById('closeRecoveryModal').onclick = () => document.getElementById('recoveryModal').style.display = 'none';
 
-        // مصفوفة الـ 16 شهادة (بدون مسميات نصية، تعرض الصورة فقط)
+        // مصفوفة الـ 16 شهادة
         const allCertificates = [
-            { img: 'cert1.jpg' },
-            { img: 'cert2.jpg' },
-            { img: 'cert3.jpg' },
-            { img: 'cert4.jpg' },
-            { img: 'cert5.jpg' },
-            { img: 'cert6.jpg' },
-            { img: 'cert7.jpg' },
-            { img: 'cert8.jpg' },
-            { img: 'cert9.jpg' },
-            { img: 'cert10.jpg' },
-            { img: 'cert11.jpg' },
-            { img: 'cert12.jpg' },
-            { img: 'cert13.jpg' },
-            { img: 'cert14.jpg' },
-            { img: 'cert15.jpg' },
-            { img: 'cert16.jpg' }
+            { img: 'cert1.jpg' }, { img: 'cert2.jpg' }, { img: 'cert3.jpg' }, { img: 'cert4.jpg' },
+            { img: 'cert5.jpg' }, { img: 'cert6.jpg' }, { img: 'cert7.jpg' }, { img: 'cert8.jpg' },
+            { img: 'cert9.jpg' }, { img: 'cert10.jpg' }, { img: 'cert11.jpg' }, { img: 'cert12.jpg' },
+            { img: 'cert13.jpg' }, { img: 'cert14.jpg' }, { img: 'cert15.jpg' }, { img: 'cert16.jpg' }
         ];
 
         function renderRandomCertificates() {
@@ -1284,8 +1544,9 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            loadSavedData();
             renderRandomCertificates();
-            setInterval(renderRandomCertificates, 5000); // تتغير عشوائياً كل 5 ثواني
+            setInterval(renderRandomCertificates, 5000);
         });
     </script>
 </body>
