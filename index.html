@@ -1309,11 +1309,14 @@
         <div class="modal-card" style="max-width: 600px;">
             <i class="fa-solid fa-xmark close-modal" onclick="document.getElementById('adminDashboardModal').style.display='none'"></i>
             <h3 style="font-family: var(--font-title); color: var(--gold-light); margin-bottom: 0.5rem;"><i class="fa-solid fa-sliders"></i> لوحة الإدارة والتعديل المباشر</h3>
-            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;">قم بتعديل صورة العرض، روابط الشواهد الـ 11، وروابط المواد بكل سهولة</p>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;">قم بتعديل صورة العرض، الرقم السري للشواهد، وروابط المواد بكل سهولة</p>
             
             <div style="text-align: right; max-height: 60vh; overflow-y: auto; padding-left: 5px;">
                 <label class="form-group-label"><i class="fa-solid fa-image"></i> رابط صورة العرض الشخصية أو الشعار</label>
                 <input type="text" id="editAvatar" class="form-control" placeholder="مثال my-photo.jpg أو رابط مباشر">
+
+                <label class="form-group-label"><i class="fa-solid fa-key"></i> الرقم السري الخاص بفتح الشواهد (11 محور)</label>
+                <input type="text" id="editEvidencePin" class="form-control" placeholder="أدخل الرقم السري الجديد للشواهد">
 
                 <hr style="border-color: var(--border-color); margin: 1.5rem 0;">
 
@@ -1379,9 +1382,10 @@
         <p style="color: var(--text-secondary); font-size: 0.85rem;">بيشة، المملكة العربية السعودية</p>
     </footer>
 
-    <!-- Firebase SDKs -->
+    <!-- Firebase SDKs (Compat Version) -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
     <!-- JavaScript Controllers & Firebase Initialization -->
     <script>
@@ -1398,6 +1402,7 @@
 
         // تهيئة فايربيس
         firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
 
         let currentEvidenceIndex = 0;
 
@@ -1466,18 +1471,26 @@
             document.getElementById('passInput').focus();
         }
 
-        function verifyPassword() {
-            const currentUser = firebase.auth().currentUser;
-            if (currentUser) {
-                document.getElementById('passwordModal').style.display = 'none';
-                const targetUrl = siteData.evidence[currentEvidenceIndex] || 'https://onedrive.live.com';
-                window.open(targetUrl, '_blank');
-            } else {
+        // دالة التحقق من الرقم السري عبر جلب البيانات من سحابة Firestore
+        async function verifyPassword() {
+            const input = document.getElementById('passInput').value;
+            try {
+                const doc = await db.collection('settings').doc('passwords').get();
+                const correctPin = doc.exists ? doc.data().evidencePin : '1234';
+                
+                if (input === correctPin) {
+                    document.getElementById('passwordModal').style.display = 'none';
+                    const targetUrl = siteData.evidence[currentEvidenceIndex] || 'https://onedrive.live.com';
+                    window.open(targetUrl, '_blank');
+                } else {
+                    document.getElementById('evidenceErrorAlert').style.display = 'block';
+                }
+            } catch (error) {
                 document.getElementById('evidenceErrorAlert').style.display = 'block';
             }
         }
 
-        // تسجيل دخول لوحة التحكم باستخدام Firebase Auth (بدون أي أرقام سرية مكشوفة)
+        // تسجيل دخول لوحة التحكم باستخدام Firebase Auth
         function verifyAdminLogin() {
             const email = document.getElementById('adminUser').value.trim();
             const pass = document.getElementById('adminPass').value;
@@ -1493,8 +1506,18 @@
                 });
         }
 
-        function populateAdminForm() {
+        async function populateAdminForm() {
             document.getElementById('editAvatar').value = siteData.avatar || '';
+            
+            // جلب الرقم السري الحالي وعرضه في لوحة التحكم
+            try {
+                const doc = await db.collection('settings').doc('passwords').get();
+                const currentPin = doc.exists ? doc.data().evidencePin : '1234';
+                document.getElementById('editEvidencePin').value = currentPin;
+            } catch(e) {
+                document.getElementById('editEvidencePin').value = '1234';
+            }
+
             let evHtml = '';
             evidenceTitles.forEach((title, idx) => {
                 evHtml += `
@@ -1514,8 +1537,10 @@
             document.getElementById('subjectLinksInputs').innerHTML = subHtml;
         }
 
-        function saveAdminChanges() {
+        async function saveAdminChanges() {
             siteData.avatar = document.getElementById('editAvatar').value.trim() || 'my-photo.jpg';
+            const newEvidencePin = document.getElementById('editEvidencePin').value.trim() || '1234';
+
             evidenceTitles.forEach((_, idx) => {
                 const val = document.getElementById(`ev_input_${idx}`).value.trim();
                 siteData.evidence[idx] = val;
@@ -1525,10 +1550,19 @@
                 siteData.subjects[sub.id] = val;
             });
 
-            localStorage.setItem('vantaVoidsData', JSON.stringify(siteData));
-            applySiteData();
-            document.getElementById('adminDashboardModal').style.display = 'none';
-            showSuccessModal('تم الحفظ بنجاح', 'تم تحديث الروابط وصورة العرض وتطبيقها على الموقع فوراً.');
+            try {
+                // حفظ الرقم السري الجديد سحابياً في فايربيس
+                await db.collection('settings').doc('passwords').set({
+                    evidencePin: newEvidencePin
+                }, { merge: true });
+
+                localStorage.setItem('vantaVoidsData', JSON.stringify(siteData));
+                applySiteData();
+                document.getElementById('adminDashboardModal').style.display = 'none';
+                showSuccessModal('تم الحفظ بنجاح', 'تم تحديث الروابط الرقمية والرقم السري للشواهد وتطبيقه سحابياً وفوراً.');
+            } catch (error) {
+                showSuccessModal('تنبيه', 'حدث خطأ أثناء حفظ الرقم السري سحابياً.');
+            }
         }
 
         function openRecoveryModal() {
