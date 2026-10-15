@@ -734,6 +734,47 @@
             border-color: var(--gold-primary);
         }
 
+        /* Luxury Alert Notification Box */
+        .luxury-alert {
+            display: none;
+            background: linear-gradient(135deg, rgba(18, 24, 36, 0.95), rgba(10, 13, 18, 0.98));
+            border: 1px solid var(--gold-primary);
+            border-radius: 14px;
+            padding: 1.2rem;
+            margin-top: 1rem;
+            text-align: right;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+            animation: fadeIn 0.4s ease;
+        }
+
+        .luxury-alert-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gold-light);
+            font-family: var(--font-title);
+            font-size: 0.95rem;
+            margin-bottom: 0.4rem;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 0.4rem;
+        }
+
+        .luxury-alert-header i {
+            color: var(--gold-primary);
+            font-size: 1.1rem;
+        }
+
+        .luxury-alert-body {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         footer {
             background: #06080c;
             border-top: 1px solid var(--border-color);
@@ -894,10 +935,10 @@
                 <div class="cv-card">
                     <div class="cv-card-title"><i class="fa-solid fa-gears"></i> المهارات والخبرات المنفذة</div>
                     <ul class="info-list" style="font-size: 0.88rem;">
-                        <li><i class="fa-solid fa-check" style="color: var(--gold-primary);"></i> مهارات التدريس التفاعلي والإبداعي وإدارة الصف.</li>
-                        <li><i class="fa-solid fa-check" style="color: var(--gold-primary);"></i> استخدام منصات LMS, Google Workspace, Microsoft 365.</li>
-                        <li><i class="fa-solid fa-check" style="color: var(--gold-primary);"></i> توظيف أدوات الذكاء الاصطناعي في دعم العملية التعليمية.</li>
-                        <li><i class="fa-solid fa-check" style="color: var(--gold-primary);"></i> تقديم محتوى تعليمي حديث يتناسب مع ميول الطلاب.</li>
+                        <li><i class="fa-solid fa-check" style="color: var(--gold-primary);"></i> تصميم وتقديم لدروس وصفحات ويب تفاعلية باستخدام لغات برمجة متعددة وأطر عمل رقمية حديثة لإثراء البيئة التعليمية الرقمية.</li>
+                        <li><i class="fa-solid fa-check" style="color: var(--gold-primary);"></i> مهارات التدريس التفاعلي والإبداعي وإدارة الصف المعتمدة على (5) استراتيجيات حديثة تشمل: التعلم النشط، الفصول المقلوبة، حل المشكلات البرمجية، التعلم التشاركي، والعصف الذهني الرقمي.</li>
+                        <li><i class="fa-solid fa-check" style="color: var(--gold-primary);"></i> استخدام منصات إدارة التعلم LMS، وGoogle Workspace، وMicrosoft 365 لتيسير العمليات الأكاديمية.</li>
+                        <li><i class="fa-solid fa-check" style="color: var(--gold-primary);"></i> توظيف أدوات وتقنيات الذكاء الاصطناعي لدعم التصميم التعليمي وتخصيص مسارات التعلم للطلاب.</li>
                     </ul>
                 </div>
 
@@ -1231,9 +1272,18 @@
     <div class="modal-overlay" id="passwordModal">
         <div class="modal-card">
             <i class="fa-solid fa-xmark close-modal" id="closePassModal"></i>
-            <h3 style="font-family: var(--font-title); color: var(--gold-light);">الملف محمي بكلمة مرور</h3>
+            <h3 style="font-family: var(--font-title); color: var(--gold-light); margin-bottom: 1rem;">الملف محمي بكلمة مرور</h3>
             <input type="password" id="passInput" class="form-control" placeholder="أدخل الرقم السري">
             <button class="btn-gold" onclick="verifyPassword()">عرض الملف</button>
+            <div id="evidenceErrorAlert" class="luxury-alert">
+                <div class="luxury-alert-header">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span>تنبيه أمني فاخر</span>
+                </div>
+                <div class="luxury-alert-body">
+                    عذراً، الرقم السري الذي أدخلته غير مطابق. يرجى التحقق من المدخلات وإعادة المحاولة لفتح الشاهد المطلوب.
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1245,6 +1295,15 @@
             <input type="text" id="adminUser" class="form-control" placeholder="اسم المستخدم">
             <input type="password" id="adminPass" class="form-control" placeholder="كلمة المرور">
             <button class="btn-gold" onclick="verifyAdminLogin()">دخول اللوحة</button>
+            <div id="adminErrorAlert" class="luxury-alert">
+                <div class="luxury-alert-header">
+                    <i class="fa-solid fa-shield-cat"></i>
+                    <span>خطأ في المصادقة الإدارية</span>
+                </div>
+                <div class="luxury-alert-body">
+                    بيانات الاعتماد غير صحيحة. يرجى التأكد من صحة (اسم المستخدم وكلمة المرور) والمحاولة مرة أخرى.
+                </div>
+            </div>
             <div style="margin-top: 1rem; border-top: 1px dashed var(--border-color); padding-top: 0.8rem;">
                 <a href="#" onclick="openRecoveryModal()" style="color: var(--gold-primary); font-size: 0.85rem; text-decoration: none;">هل نسيت كلمة المرور؟ استعادة بيانات الدخول</a>
             </div>
@@ -1322,17 +1381,21 @@
     </div>
 
     <footer>
-        <div style="font-family: var(--font-title); color: var(--gold-light); font-size: 1.2rem; cursor: pointer;" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
-            يوسف الحامد | Vanta Voids
+        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.4rem;">All Rights Reserved 2026 ©</p>
+        <div style="font-family: var(--font-title); font-size: 1.15rem; margin-bottom: 0.4rem;">
+            <a href="mailto:Yh.addict@gmail.com" style="color: var(--gold-light); text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='var(--gold-primary)'" onmouseout="this.style.color='var(--gold-light)'">
+                يوسف الحامد | Vanta Voids
+            </a>
         </div>
-        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">بيشة، المملكة العربية السعودية</p>
+        <p style="color: var(--text-secondary); font-size: 0.85rem;">بيشة، المملكة العربية السعودية</p>
     </footer>
 
     <!-- JavaScript Controllers -->
     <script>
         let currentEvidenceIndex = 0;
         const SECRET_PASS = '1234'; // الرقم السري الافتراضي لمحاور الأداء الوظيفي
-        const SECRET_HASH = 'c3ab8ff13720e8ad9047dee39488f3cbb45eefb6f571b7fcf71aa88b209d6f3e'; // الرمز المشفر لكلمة المرور Jhaia1430$
+        const ADMIN_USER = 'Vanta-Voids';
+        const ADMIN_PASS = 'V0000V0000';
 
         // بيانات افتراضية للروابط والصورة
         let siteData = {
@@ -1384,14 +1447,6 @@
             { id: 'swe', name: 'هندسة البرمجيات' }
         ];
 
-        // دالة التشفير SHA-256 لحماية كلمة المرور
-        async function sha256(message) {
-            const msgBuffer = new TextEncoder().encode(message);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        }
-
         // تحميل البيانات المحفوظة إن وجدت
         function loadSavedData() {
             const saved = localStorage.getItem('vantaVoidsData');
@@ -1419,6 +1474,7 @@
 
         function openEvidence(index) {
             currentEvidenceIndex = index;
+            document.getElementById('evidenceErrorAlert').style.display = 'none';
             document.getElementById('passwordModal').style.display = 'flex';
             document.getElementById('passInput').value = '';
             document.getElementById('passInput').focus();
@@ -1431,22 +1487,21 @@
                 const targetUrl = siteData.evidence[currentEvidenceIndex] || 'https://onedrive.live.com';
                 window.open(targetUrl, '_blank');
             } else {
-                alert('الرقم السري غير صحيح.');
+                document.getElementById('evidenceErrorAlert').style.display = 'block';
             }
         }
 
-        // التحقق من دخول لوحة التحكم باستخدام الرمز المشفر
-        async function verifyAdminLogin() {
+        // التحقق من دخول لوحة التحكم
+        function verifyAdminLogin() {
             const user = document.getElementById('adminUser').value.trim();
             const pass = document.getElementById('adminPass').value;
-            const passHash = await sha256(pass);
 
-            if(user === 'Yh.addict' && passHash === SECRET_HASH) {
+            if(user === ADMIN_USER && pass === ADMIN_PASS) {
                 document.getElementById('adminModal').style.display = 'none';
                 populateAdminForm();
                 document.getElementById('adminDashboardModal').style.display = 'flex';
             } else {
-                alert('اسم المستخدم أو كلمة المرور غير صحيحة.');
+                document.getElementById('adminErrorAlert').style.display = 'block';
             }
         }
 
@@ -1525,6 +1580,7 @@
         document.getElementById('openAdminModal').onclick = () => {
             document.getElementById('adminUser').value = '';
             document.getElementById('adminPass').value = '';
+            document.getElementById('adminErrorAlert').style.display = 'none';
             document.getElementById('adminModal').style.display = 'flex';
         };
         document.getElementById('closeAdminModal').onclick = () => document.getElementById('adminModal').style.display = 'none';
