@@ -136,6 +136,14 @@
           color: var(--accent-color);
         }
 
+        /* تأثير إحاطة وتوهج الكارت عند الوصول إليه عبر الرابط */
+        .subject-card:target {
+            border-color: #22c55e !important;
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.5), inset 0 0 15px rgba(34, 197, 94, 0.2);
+            transform: scale(1.02);
+            transition: all 0.4s ease;
+        }
+
         /* Header Navigation */
         header {
             position: fixed;
@@ -351,7 +359,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            scroll-margin-top: 100px; /* ضمان ظهور الكارت بدقة عند التوجيه إليه */
+            scroll-margin-top: 100px;
         }
 
         .subject-card:hover {
