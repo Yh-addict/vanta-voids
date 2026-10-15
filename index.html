@@ -362,7 +362,7 @@
             scroll-margin-top: 100px;
         }
 
-.subject-card:hover {
+        .subject-card:hover {
             border-color: var(--accent-color);
             transform: translateY(-4px);
         }
@@ -1138,6 +1138,20 @@
                 </div>
                 <a href="#" class="resource-badge sub-link" data-id="swe" target="_blank"><i class="fa-solid fa-folder-open"></i><span data-key="resourcesBtn">المصادر والعروض</span></a>
             </div>
+            <!-- بطاقة منصة محاكاة الاختبارات الوطنية الجديدة -->
+            <div class="subject-card theme-transition border-amber-400/50 shadow-lg" id="sub-qiyas">
+                <div>
+                    <div class="subject-header">
+                        <i class="fa-solid fa-graduation-cap text-amber-400"></i>
+                        <h3 data-key="cardQiyasTitle">منصة محاكاة الاختبارات الوطنية</h3>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardQiyasDesc">بنك أسئلة تدريبي تفاعلي محاكى لاختبارات قياس والتحصيلي لمقررات الحاسب.</p>
+                </div>
+                <a href="qiyas.html" class="resource-badge sub-link bg-amber-500/20 border-amber-400/40 text-amber-300 hover:bg-amber-400 hover:text-black transition" target="_blank">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <span data-key="openPlatformBtn">دخول المنصة</span>
+                </a>
+            </div>
         </div>
     </section>
 
@@ -1511,7 +1525,9 @@
             cardCyberTitle: "الأمن السيبراني", cardCyberDesc: "أنظمة التشفير، حماية البيانات والوقاية من الاحتيال.",
             cardIotTitle: "إنترنت الأشياء", cardIotDesc: "ربط الحساسات والمتحكمات الدقيقة بالشبكات.",
             cardSweTitle: "هندسة البرمجيات", cardSweDesc: "دورة حياة تطوير الأنظمة البرمجية واختبار الكود.",
+            cardQiyasTitle: "منصة محاكاة الاختبارات الوطنية", cardQiyasDesc: "بنك أسئلة تدريبي تفاعلي محاكى لاختبارات قياس والتحصيلي لمقررات الحاسب.",
             resourcesBtn: "المصادر والعروض",
+            openPlatformBtn: "دخول المنصة",
 
             evidenceSectionTitle: "الشواهد والأداء الوظيفي",
             evidenceSectionSub: "ملفات ومحاور الأداء الوظيفي المعتمدة (محمية بكلمة مرور) والاستوديو الرقمي",
@@ -1615,7 +1631,9 @@
             cardCyberTitle: "Cybersecurity", cardCyberDesc: "Encryption systems, data protection, and fraud prevention.",
             cardIotTitle: "Internet of Things", cardIotDesc: "Connecting sensors and microcontrollers to networks.",
             cardSweTitle: "Software Engineering", cardSweDesc: "Software systems development lifecycle and code testing.",
+            cardQiyasTitle: "National Exam Simulation Platform", cardQiyasDesc: "Interactive training question bank simulating Qiyas and Tahsili exams for CS.",
             resourcesBtn: "Resources & Slides",
+            openPlatformBtn: "Open Platform",
 
             evidenceSectionTitle: "Evidence & Job Performance",
             evidenceSectionSub: "Certified job performance files and axes (Password Protected) & Digital Studio",
@@ -1769,7 +1787,7 @@
             });
             document.querySelectorAll('.sub-link').forEach(el => {
                 const key = el.getAttribute('data-id');
-                if (siteData.subjects && siteData.subjects[key]) el.href = siteData.subjects[key];
+                if (key && siteData.subjects && siteData.subjects[key]) el.href = siteData.subjects[key];
             });
         }
 
