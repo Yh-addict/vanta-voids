@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>يوسف الحامد | Vanta Voids</title>
+    <title>يوسف آل حامد - الموقع الشخصي والسيرة الذاتية التفاعلية | Vanta Voids</title>
     
     <!-- Open Graph Meta Tags للواتساب ووسائل التواصل -->
-    <meta property="og:title" content="يوسف الحامد | Vanta Voids">
+    <meta property="og:title" content="يوسف آل حامد | Vanta Voids">
     <meta property="og:description" content="YH DIGITAL EDUCATOR - المعلم الرقمي ومصمم تجارب التعلم المستدام">
     <meta property="og:image" content="https://yh-addict.github.io/vanta-voids/my-photo.jpg">
     <meta property="og:image:type" content="image/jpeg">
@@ -15,29 +15,61 @@
     <meta property="og:url" content="https://yh-addict.github.io/vanta-voids/">
     <meta property="og:type" content="website">
 
-    <!-- Fonts -->
+    <!-- Google Fonts: Tajawal & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <script>
+        tailwind.config = {
+          darkMode: 'class',
+          theme: {
+            extend: {
+              fontFamily: {
+                sans: ['Tajawal', 'Inter', 'sans-serif'],
+                en: ['Inter', 'Tajawal', 'sans-serif'],
+              },
+              colors: {
+                brand: {
+                  gold: '#d4af37',
+                  navy: '#0f172a',
+                  burgundy: '#38121a',
+                  national: '#062b1e',
+                  pink: '#f472b6',
+                  cyan: '#38bdf8',
+                  portrait: '#c68b59',
+                  ivory: '#f8f6f0',
+                  cloud: '#f1f5f9',
+                  spring: '#4ade80',
+                  summer: '#f59e0b',
+                  winter: '#22d3ee',
+                  autumn: '#f97316'
+                }
+              }
+            }
+          }
+        }
+    </script>
+
     <style>
+        /* CSS Variables for Dynamic Custom Themes */
         :root {
-            --bg-primary: #0a0d12;
-            --bg-secondary: #121824;
-            --bg-card: rgba(18, 24, 36, 0.75);
-            --gold-primary: #d4af37;
-            --gold-light: #f3e5ab;
-            --gold-dark: #aa7c11;
-            --emerald: #05472a;
-            --text-primary: #f0f4f8;
-            --text-secondary: #94a3b8;
-            --border-color: rgba(212, 175, 55, 0.25);
-            --border-hover: rgba(212, 175, 55, 0.6);
-            --font-title: 'Readex Pro', sans-serif;
-            --font-body: 'IBM Plex Sans Arabic', sans-serif;
-            --font-literary: 'Amiri', serif;
+          --bg-primary: #0a0b0e;
+          --bg-secondary: #12151c;
+          --bg-card: rgba(22, 27, 38, 0.7);
+          --border-color: rgba(212, 175, 55, 0.25);
+          --accent-color: #d4af37;
+          --accent-hover: #f3e5ab;
+          --text-main: #f3f4f6;
+          --text-muted: #9ca3af;
+          --card-glow: rgba(212, 175, 55, 0.15);
+          --header-bg: rgba(10, 11, 14, 0.85);
         }
 
         * {
@@ -48,14 +80,60 @@
         }
 
         body {
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            font-family: var(--font-body);
-            line-height: 1.8;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 15% 15%, rgba(5, 71, 42, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, rgba(212, 175, 55, 0.08) 0%, transparent 40%);
+          background-color: var(--bg-primary);
+          color: var(--text-main);
+          font-family: 'Tajawal', 'Inter', sans-serif;
+          transition: background-color 0.4s ease, color 0.4s ease;
+          overflow-x: hidden;
+          line-height: 1.8;
+        }
+
+        .theme-transition {
+          transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        ::-webkit-scrollbar {
+          width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+          background: var(--bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+          background: var(--border-color);
+          border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+          background: var(--accent-color);
+        }
+
+        .glass-card {
+          background: var(--bg-card);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border: 1px solid var(--border-color);
+          box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+        }
+
+        .glass-card:hover {
+          box-shadow: 0 12px 40px 0 var(--card-glow);
+        }
+
+        .accent-gradient-text {
+          background: linear-gradient(135deg, var(--text-main) 30%, var(--accent-color) 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .accent-border {
+          border-color: var(--border-color);
+        }
+
+        .accent-bg {
+          background-color: var(--accent-color);
+        }
+
+        .accent-text {
+          color: var(--accent-color);
         }
 
         /* Header Navigation */
@@ -64,10 +142,9 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(10, 13, 18, 0.9);
+            background-color: var(--header-bg);
             backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border-color);
-            transition: all 0.3s ease;
         }
 
         .nav-container {
@@ -90,24 +167,22 @@
         .profile-avatar-thumb {
             width: 45px;
             height: 45px;
-            border-radius: 50%;
-            border: 2px solid var(--gold-primary);
+            border-radius: 12px;
+            border: 2px solid var(--accent-color);
             object-fit: cover;
             background: var(--bg-secondary);
         }
 
         .brand-text h1 {
-            font-family: var(--font-title);
-            font-size: 1.2rem;
-            color: var(--gold-light);
-            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            font-weight: 700;
             line-height: 1.2;
         }
 
         .brand-text span {
             font-size: 0.75rem;
-            letter-spacing: 1.5px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             display: block;
         }
 
@@ -119,9 +194,9 @@
         }
 
         .nav-link {
-            color: var(--text-primary);
+            color: var(--text-main);
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 500;
             transition: all 0.3s ease;
             position: relative;
@@ -129,26 +204,17 @@
         }
 
         .nav-link:hover, .nav-link.active {
-            color: var(--gold-primary);
+            color: var(--accent-color);
         }
 
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--gold-primary), transparent);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after, .nav-link.active::after {
-            width: 100%;
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
         }
 
         .admin-gear {
-            color: var(--gold-primary);
+            color: var(--accent-color);
             font-size: 1.2rem;
             cursor: pointer;
             transition: transform 0.4s ease;
@@ -162,129 +228,6 @@
             background: rgba(212, 175, 55, 0.2);
         }
 
-        /* Hero / Profile Section */
-        .hero-section {
-            min-height: 85vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8rem 2rem 3rem 2rem;
-            position: relative;
-        }
-
-        .hero-card {
-            max-width: 1100px;
-            width: 100%;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 3.5rem 2.5rem;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            display: grid;
-            grid-template-columns: 260px 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .profile-image-container {
-            position: relative;
-            text-align: center;
-        }
-
-        .main-profile-img {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--gold-primary);
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.25);
-            background: var(--bg-secondary);
-        }
-
-        .profile-frame-badge {
-            position: absolute;
-            bottom: 5px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--gold-primary);
-            color: var(--bg-primary);
-            padding: 4px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            white-space: nowrap;
-        }
-
-        .hero-details h2 {
-            font-family: var(--font-title);
-            font-size: 2.3rem;
-            color: var(--gold-light);
-            margin-bottom: 0.5rem;
-        }
-
-        .hero-title-badge {
-            display: inline-block;
-            color: var(--gold-primary);
-            font-size: 1.05rem;
-            font-weight: 500;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .philosophical-quote {
-            font-family: var(--font-literary);
-            font-size: 1.2rem;
-            line-height: 2;
-            color: #e2e8f0;
-            border-right: 3px solid var(--gold-primary);
-            padding-right: 1.2rem;
-            margin-bottom: 2rem;
-            background: rgba(212, 175, 55, 0.03);
-            padding-top: 0.8rem;
-            padding-bottom: 0.8rem;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .quick-nav-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 1.2rem;
-            margin-top: 1.5rem;
-        }
-
-        .quick-nav-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 1.2rem 1rem;
-            text-align: center;
-            color: var(--text-primary);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .quick-nav-card:hover {
-            transform: translateY(-5px);
-            background: rgba(212, 175, 55, 0.12);
-            border-color: var(--gold-primary);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.15);
-        }
-
-        .quick-nav-card i {
-            font-size: 1.6rem;
-            color: var(--gold-primary);
-            margin-bottom: 0.6rem;
-            display: block;
-        }
-
-        .quick-nav-card span {
-            font-size: 0.95rem;
-            font-weight: 600;
-        }
-
-        /* Section Global Styles */
         .content-section {
             max-width: 1300px;
             margin: 0 auto;
@@ -298,9 +241,8 @@
         }
 
         .section-title {
-            font-family: var(--font-title);
             font-size: 2.2rem;
-            color: var(--gold-light);
+            font-weight: 900;
             display: inline-block;
             position: relative;
             padding-bottom: 0.8rem;
@@ -314,90 +256,15 @@
             transform: translateX(-50%);
             width: 90px;
             height: 3px;
-            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
         }
 
         .section-subtitle {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             font-size: 1rem;
             margin-top: 0.8rem;
         }
 
-        /* CV Layout Styling */
-        .cv-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-
-        .cv-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 18px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .cv-card-title {
-            font-family: var(--font-title);
-            color: var(--gold-primary);
-            font-size: 1.25rem;
-            margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 1px dashed var(--border-color);
-            padding-bottom: 0.6rem;
-        }
-
-        .info-list {
-            list-style: none;
-        }
-
-        .info-list li {
-            margin-bottom: 0.8rem;
-            color: var(--text-primary);
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            font-size: 0.95rem;
-        }
-
-        .info-list li strong {
-            color: var(--gold-light);
-            min-width: 120px;
-        }
-
-        .timeline-item {
-            border-right: 2px solid var(--gold-primary);
-            padding-right: 1.2rem;
-            margin-bottom: 1.2rem;
-            position: relative;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            right: -6px;
-            top: 6px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--gold-primary);
-        }
-
-        .badge-tag {
-            display: inline-block;
-            background: rgba(212, 175, 55, 0.15);
-            color: var(--gold-light);
-            border: 1px solid var(--border-color);
-            padding: 2px 10px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            margin: 2px;
-        }
-
-        /* Timetable Grid */
         .timetable-wrapper {
             overflow-x: auto;
             margin-bottom: 3rem;
@@ -423,13 +290,13 @@
 
         .timetable-table th {
             background: rgba(212, 175, 55, 0.15);
-            color: var(--gold-light);
-            font-family: var(--font-title);
+            color: var(--accent-color);
+            font-weight: 700;
         }
 
         .table-subject-btn {
             background: rgba(255, 255, 255, 0.05);
-            color: var(--gold-primary);
+            color: var(--accent-color);
             border: 1px solid var(--border-color);
             padding: 8px 12px;
             border-radius: 8px;
@@ -442,9 +309,8 @@
         }
 
         .table-subject-btn:hover {
-            background: var(--gold-primary);
-            color: var(--bg-primary);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            background: var(--accent-color);
+            color: #000;
         }
 
         .table-static-cell {
@@ -459,20 +325,17 @@
         }
 
         .table-static-title {
-            color: var(--gold-primary);
+            color: var(--accent-color);
             font-weight: 700;
             font-size: 0.85rem;
-            line-height: 1.3;
         }
 
         .table-static-desc {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             font-size: 0.72rem;
             margin-top: 3px;
-            line-height: 1.2;
         }
 
-        /* Teaching Hub Grid */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -488,11 +351,10 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            scroll-margin-top: 100px;
         }
 
         .subject-card:hover {
-            border-color: var(--gold-primary);
+            border-color: var(--accent-color);
             transform: translateY(-4px);
         }
 
@@ -505,13 +367,12 @@
 
         .subject-header i {
             font-size: 1.6rem;
-            color: var(--gold-primary);
+            color: var(--accent-color);
         }
 
         .subject-header h3 {
-            font-family: var(--font-title);
             font-size: 1.2rem;
-            color: var(--gold-light);
+            font-weight: 700;
         }
 
         .resource-badge {
@@ -523,7 +384,7 @@
             background: rgba(212, 175, 55, 0.1);
             border: 1px dashed var(--border-color);
             border-radius: 8px;
-            color: var(--gold-light);
+            color: var(--accent-color);
             font-size: 0.85rem;
             font-weight: 600;
             width: fit-content;
@@ -533,20 +394,10 @@
         }
 
         .resource-badge:hover {
-            background: var(--gold-primary);
-            color: var(--bg-primary);
+            background: var(--accent-color);
+            color: #000;
         }
 
-        .resource-badge i {
-            color: var(--gold-primary);
-            font-size: 0.95rem;
-        }
-        
-        .resource-badge:hover i {
-            color: var(--bg-primary);
-        }
-
-        /* Evidence Cards & Protected Lock */
         .evidence-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -559,21 +410,19 @@
         }
 
         .evidence-card:hover {
-            border-color: var(--gold-primary);
+            border-color: var(--accent-color);
             transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.15);
         }
 
         .lock-icon {
             position: absolute;
             top: 15px;
             left: 15px;
-            color: var(--gold-primary);
+            color: var(--accent-color);
             font-size: 1.1rem;
             opacity: 0.7;
         }
 
-        /* Gallery / Studio Digital Section */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -602,12 +451,6 @@
             transform: scale(1.06);
         }
 
-        .gallery-item:hover {
-            border-color: var(--gold-primary);
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
-        }
-
-        /* Floating WhatsApp Icon */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
@@ -630,10 +473,8 @@
 
         .whatsapp-float:hover {
             transform: scale(1.1);
-            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
         }
 
-        /* Modals */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -652,26 +493,23 @@
 
         .modal-card {
             background: var(--bg-secondary);
-            border: 1px solid var(--gold-primary);
+            border: 1px solid var(--border-color);
             border-radius: 20px;
             padding: 2.5rem;
             width: 90%;
             max-width: 480px;
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
             position: relative;
             text-align: center;
-            max-height: 90vh;
-            overflow-y: auto;
         }
 
         .close-modal {
             position: absolute;
             top: 15px;
             left: 15px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             cursor: pointer;
             font-size: 1.2rem;
-            z-index: 10;
         }
 
         .form-control {
@@ -680,8 +518,8 @@
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            color: var(--text-primary);
-            font-family: var(--font-body);
+            color: var(--text-main);
+            font-family: inherit;
             font-size: 1rem;
             text-align: right;
             margin: 0.6rem 0;
@@ -690,7 +528,7 @@
         .form-group-label {
             display: block;
             text-align: right;
-            color: var(--gold-light);
+            color: var(--accent-color);
             font-size: 0.85rem;
             margin-top: 0.8rem;
             font-weight: 600;
@@ -698,75 +536,24 @@
 
         .btn-gold {
             width: 100%;
-            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-            color: var(--bg-primary);
+            background: var(--accent-color);
+            color: #000;
             padding: 0.8rem;
             border: none;
             border-radius: 8px;
             font-weight: 700;
             cursor: pointer;
-            font-family: var(--font-title);
             margin-top: 1rem;
         }
 
-        .btn-secondary-custom {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--gold-light);
-            padding: 0.8rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            font-family: var(--font-title);
-            margin-top: 0.6rem;
-            transition: all 0.3s ease;
-        }
-
-        .btn-secondary-custom:hover {
-            background: rgba(212, 175, 55, 0.15);
-            border-color: var(--gold-primary);
-        }
-
-        /* Luxury Alert Notification Box */
         .luxury-alert {
             display: none;
-            background: linear-gradient(135deg, rgba(18, 24, 36, 0.95), rgba(10, 13, 18, 0.98));
-            border: 1px solid var(--gold-primary);
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--accent-color);
             border-radius: 14px;
             padding: 1.2rem;
             margin-top: 1rem;
             text-align: right;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
-            animation: fadeIn 0.4s ease;
-        }
-
-        .luxury-alert-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--gold-light);
-            font-family: var(--font-title);
-            font-size: 0.95rem;
-            margin-bottom: 0.4rem;
-            border-bottom: 1px dashed var(--border-color);
-            padding-bottom: 0.4rem;
-        }
-
-        .luxury-alert-header i {
-            color: var(--gold-primary);
-            font-size: 1.1rem;
-        }
-
-        .luxury-alert-body {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            line-height: 1.6;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         footer {
@@ -777,172 +564,416 @@
         }
 
         @media (max-width: 900px) {
-            .hero-card {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .cv-grid {
-                grid-template-columns: 1fr;
-            }
-            .nav-menu {
-                display: none;
-            }
+            .nav-menu { display: none; }
         }
     </style>
 </head>
-<body>
+<body class="selection:bg-amber-500 selection:text-black">
 
     <!-- Header Navigation -->
-    <header>
+    <header class="theme-transition" style="border-color: var(--border-color); background-color: var(--header-bg);">
         <div class="nav-container">
             <a href="#hero" class="brand-logo">
-                <img src="my-photo.jpg" alt="يوسف الحامد" class="profile-avatar-thumb dynamic-avatar" onerror="this.src='https://via.placeholder.com/150/121824/d4af37?text=YH'">
+                <img src="my-photo.jpg" alt="يوسف آل حامد" class="profile-avatar-thumb dynamic-avatar" onerror="this.src='https://via.placeholder.com/150/121824/d4af37?text=YH'">
                 <div class="brand-text">
-                    <h1>يوسف الحامد</h1>
-                    <span>YH DIGITAL EDUCATOR</span>
+                    <h1 data-key="headerName">يوسف آل حامد</h1>
+                    <span data-key="headerSubTitle">سيرة ذاتية</span>
                 </div>
             </a>
             
             <ul class="nav-menu">
-                <li><a href="#cv" class="nav-link">السيرة الذاتية</a></li>
-                <li><a href="#teaching-hub" class="nav-link">المختبر التعليمي</a></li>
-                <li><a href="#evidence" class="nav-link">الشواهد والأداء الوظيفي</a></li>
+                <li><a href="#cv" class="nav-link" data-key="navCv">السيرة الذاتية</a></li>
+                <li><a href="#teaching-hub" class="nav-link" data-key="navHub">المختبر التعليمي</a></li>
+                <li><a href="#evidence" class="nav-link" data-key="navEvidence">الشواهد والأداء</a></li>
             </ul>
 
-            <div class="admin-gear" id="openAdminModal" title="لوحة التحكم">
-                <i class="fa-solid fa-gear"></i>
+            <div class="header-controls">
+                <button id="langToggleBtn" onclick="toggleLanguage()" class="px-3.5 py-2 rounded-xl text-sm font-semibold border transition-all duration-300 flex items-center space-x-2 rtl:space-x-reverse hover:scale-105 active:scale-95 shadow-sm" style="border-color: var(--border-color); background-color: var(--bg-secondary); color: var(--text-main);">
+                  <i class="fa-solid fa-globe text-amber-400"></i>
+                  <span id="langBtnText" data-key="langBtnText">English</span>
+                </button>
+
+                <button onclick="openThemeModal()" class="px-4 py-2 rounded-xl text-sm font-bold border transition-all duration-300 flex items-center space-x-2 rtl:space-x-reverse hover:scale-105 active:scale-95 shadow-md" style="border-color: var(--border-color); background-color: var(--accent-color); color: #000000;">
+                  <i class="fa-solid fa-palette text-black"></i>
+                  <span data-key="themeBtnText">المظهر</span>
+                </button>
+
+                <div class="admin-gear" id="openAdminModal" title="لوحة التحكم">
+                    <i class="fa-solid fa-gear"></i>
+                </div>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section id="hero" class="hero-section">
-        <div class="hero-card">
-            <div class="profile-image-container">
-                <img src="my-photo.jpg" alt="يوسف حامد آل حامد" class="main-profile-img dynamic-avatar" onerror="this.src='https://via.placeholder.com/300/121824/d4af37?text=Youssef'">
-                <div class="profile-frame-badge">Vanta Voids</div>
+    <section id="hero" class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-8">
+        <div class="glass-card rounded-3xl p-6 sm:p-10 relative overflow-hidden theme-transition">
+          <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full opacity-20 pointer-events-none blur-3xl accent-bg"></div>
+
+          <div class="flex flex-col md:flex-row items-center md:items-start gap-8 relative z-10">
+            <!-- Avatar Badge (Square style as requested) -->
+            <div class="relative group">
+              <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-3xl border-2 flex flex-col items-center justify-center p-2 shadow-2xl relative overflow-hidden theme-transition" style="border-color: var(--accent-color); background-color: var(--bg-secondary);">
+                <img src="my-photo.jpg" alt="يوسف حامد آل حامد" class="w-full h-full rounded-2xl object-cover dynamic-avatar" onerror="this.src='https://via.placeholder.com/300/121824/d4af37?text=Youssef'">
+              </div>
+              <span class="absolute -bottom-2 right-1/2 translate-x-1/2 md:translate-x-0 md:right-2 bg-emerald-500 text-black text-[10px] font-black px-3 py-1 rounded-full uppercase shadow-md flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-black animate-ping"></span>
+                <span data-key="statusActive">متاح للتميز</span>
+              </span>
             </div>
-            <div class="hero-details">
-                <h2>يوسف حامد آل حامد</h2>
-                <div class="hero-title-badge">
-                    معلم حاسب آلي وتقنية معلومات • مصمم تجارب التعلم المستدام
+
+            <!-- Details Header -->
+            <div class="flex-1 text-center md:text-right rtl:md:text-right ltr:md:text-left space-y-4">
+              <div>
+                <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold mb-3 border" style="border-color: var(--border-color); background-color: rgba(255,255,255,0.05); color: var(--accent-color);" data-key="jobBadge">
+                  معلم حاسب آلي وتكنولوجيا • مصمم تعليمي ومطور حلول رقمية
+                </div>
+                <h1 class="text-3xl sm:text-5xl font-black tracking-tight accent-gradient-text mb-2" data-key="fullName">
+                  يوسف حامد آل حامد
+                </h1>
+                <p class="text-sm sm:text-base font-medium opacity-90 max-w-3xl leading-relaxed" style="color: var(--text-muted);" data-key="headlineSub">
+                  معلم حاسب آلي في التعليم الثانوي، شغوف بالتطوير الرقمي والابتكار التعليمي والتصميم التفاعلي للمناهج والمنصات.
+                </p>
+              </div>
+
+              <!-- Quick Personal Info Grid -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 text-xs sm:text-sm">
+                <div class="p-3 rounded-2xl border theme-transition" style="border-color: var(--border-color); background-color: rgba(0,0,0,0.2);">
+                  <span class="block text-xs mb-1" style="color: var(--text-muted);" data-key="infoNationalityLabel">الجنسية</span>
+                  <span class="font-bold flex items-center gap-1.5 justify-center md:justify-start" data-key="infoNationalityVal">
+                    <i class="fa-solid fa-flag accent-text text-xs"></i> سعودي
+                  </span>
                 </div>
 
-                <div class="philosophical-quote">
-                    «إن المعرفة ليست مجرد تحصيل للحقائق، بل هي الضياء الذي يسطع في نفوس المتعلمين ليصنع الفكر والوعي. التقنية وسيلتنا لتجسيد هذا الفكر وتحويله إلى تجربة إنسانية خالدة.»
+                <div class="p-3 rounded-2xl border theme-transition" style="border-color: var(--border-color); background-color: rgba(0,0,0,0.2);">
+                  <span class="block text-xs mb-1" style="color: var(--text-muted);" data-key="infoLocationLabel">الإقامة</span>
+                  <span class="font-bold flex items-center gap-1.5 justify-center md:justify-start" data-key="infoLocationVal">
+                    <i class="fa-solid fa-location-dot accent-text text-xs"></i> عسير - بيشة
+                  </span>
                 </div>
 
-                <div class="quick-nav-grid">
-                    <a href="#cv" class="quick-nav-card">
-                        <i class="fa-solid fa-file-invoice"></i>
-                        <span>السيرة الذاتية</span>
-                    </a>
-                    <a href="#teaching-hub" class="quick-nav-card">
-                        <i class="fa-solid fa-laptop-code"></i>
-                        <span>المختبر التعليمي</span>
-                    </a>
-                    <a href="#evidence" class="quick-nav-card">
-                        <i class="fa-solid fa-award"></i>
-                        <span>الشواهد والأداء</span>
-                    </a>
+                <div class="p-3 rounded-2xl border theme-transition" style="border-color: var(--border-color); background-color: rgba(0,0,0,0.2);">
+                  <span class="block text-xs mb-1" style="color: var(--text-muted);" data-key="infoStatusLabel">الحالة الاجتماعية</span>
+                  <span class="font-bold flex items-center gap-1.5 justify-center md:justify-start" data-key="infoStatusVal">
+                    <i class="fa-solid fa-users accent-text text-xs"></i> متأهل (٥ أفراد)
+                  </span>
                 </div>
+
+                <div class="p-3 rounded-2xl border theme-transition" style="border-color: var(--border-color); background-color: rgba(0,0,0,0.2);">
+                  <span class="block text-xs mb-1" style="color: var(--text-muted);" data-key="infoPhoneLabel">الجوال</span>
+                  <a href="tel:0565588869" dir="ltr" class="font-bold flex items-center gap-1.5 justify-center md:justify-start hover:underline accent-text">
+                    <i class="fa-solid fa-phone text-xs"></i> 0565588869
+                  </a>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
     </section>
 
-    <!-- 1. السيرة الذاتية -->
+    <!-- 1. السيرة الذاتية (مطابقة 100% لصفحة CV.HTML) -->
     <section id="cv" class="content-section">
         <div class="section-header">
-            <h2 class="section-title">السيرة الذاتية والمسيرة المهنية</h2>
-            <p class="section-subtitle">توثيق للمؤهلات، الخبرات، والمهارات التقنية والتربوية المعتمدة</p>
+            <h2 class="section-title" data-key="cvSectionTitle">السيرة الذاتية والمسيرة المهنية</h2>
+            <p class="section-subtitle" data-key="cvSectionSub">توثيق للمؤهلات، الخبرات، والمهارات التقنية والتربوية المعتمدة</p>
         </div>
 
-        <div class="cv-grid">
-            <div style="display: flex; flex-direction: column; gap: 2rem;">
-                <div class="cv-card">
-                    <div class="cv-card-title"><i class="fa-solid fa-user"></i> المعلومات الشخصية والهدف</div>
-                    <ul class="info-list">
-                        <li><strong>الاسم:</strong> يوسف حامد عبدالله آل حامد القرني</li>
-                        <li><strong>الجنسية:</strong> سعودي</li>
-                        <li><strong>المهنة:</strong> معلم مرحلة ثانوية</li>
-                        <li><strong>الحالة الاجتماعية:</strong> متزوج (عدد أفراد الأسرة 5)</li>
-                        <li><strong>السكن:</strong> عسير – بيشة – حي الملك عبدالله</li>
-                    </ul>
-                    <div style="margin-top: 1.2rem; background: rgba(212, 175, 55, 0.05); padding: 1rem; border-radius: 10px; border-right: 3px solid var(--gold-primary);">
-                        <strong style="color: var(--gold-light); font-size: 0.9rem;">الهدف المهني</strong>
-                        <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 0.3rem;">
-                            أسعى إلى بناء جيل واع ومبدع، قادر على التفكير النقدي والإبداعي، من خلال بيئة تعليمية محفزة تدعم الطلاب أكاديمياً وأخلاقياً. لصناعة جيل يحول معارفه إلى قدرات يستطيع تطبيقها سلوكياً على أرض الواقع.
-                        </p>
+        <div class="space-y-8">
+            <!-- CAREER OBJECTIVE SECTION -->
+            <section class="glass-card rounded-3xl p-6 sm:p-8 theme-transition">
+              <div class="flex items-center space-x-3 rtl:space-x-reverse mb-4">
+                <div class="w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-lg" style="background-color: rgba(255,255,255,0.08); color: var(--accent-color);">
+                  <i class="fa-solid fa-bullseye"></i>
+                </div>
+                <h2 class="text-xl sm:text-2xl font-bold accent-gradient-text" data-key="careerObjectiveTitle">
+                  الهدف المهني
+                </h2>
+              </div>
+              <p class="text-base sm:text-lg leading-relaxed font-medium text-justify" style="color: var(--text-main);" data-key="careerObjectiveText">
+                سعي لبناء جيل واعٍ ومبتكر قادر على التفكير النقدي والإبداعي من خلال بيئة تعليمية محفزة تدعم الطلاب أكاديمياً وأخلاقياً. ملتزم بإعداد جيل يحول المعرفة إلى قدرات عملية واقعية، ويلهم العقول ويصنع المستقبل.
+              </p>
+            </section>
+
+            <!-- 4 CORE PILLARS -->
+            <section class="space-y-6">
+              <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                <div class="w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-lg" style="background-color: rgba(255,255,255,0.08); color: var(--accent-color);">
+                  <i class="fa-solid fa-cubes"></i>
+                </div>
+                <div>
+                  <h2 class="text-xl sm:text-2xl font-bold accent-gradient-text" data-key="corePillarsTitle">
+                    الكفايات والمحاور التنفيذية الرئيسية
+                  </h2>
+                  <p class="text-xs sm:text-sm text-muted" style="color: var(--text-muted);" data-key="corePillarsSub">
+                    ركائز الخبرة التخصصية والتطوير الرقمي
+                  </p>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Pillar 1 -->
+                <div class="glass-card rounded-3xl p-6 hover:translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                  <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); background-color: rgba(255,255,255,0.05); color: var(--accent-color);" data-key="p1Tag">المحور الأول</span>
+                      <i class="fa-solid fa-laptop-code text-2xl accent-text"></i>
                     </div>
+                    <h3 class="text-lg font-bold" data-key="p1Title">تصميم وتطوير الحلول التعليمية الرقمية</h3>
+                    <p class="text-sm leading-relaxed" style="color: var(--text-muted);" data-key="p1Desc">التركيز: بناء دروس وصفحات ويب تعليمية تفاعلية تحول المفاهيم المجردة إلى تجارب تطبيقية عملية بأسلوب جذاب ومبتكر.</p>
+                  </div>
+                  <div class="mt-6 pt-4 border-t" style="border-color: rgba(255,255,255,0.1);">
+                    <span class="text-xs font-semibold block mb-2" style="color: var(--accent-color);" data-key="p1ToolsLabel">الأدوات والتقنيات:</span>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                      <span class="px-2.5 py-1 rounded-lg bg-black/40 border border-white/10">HTML5 / CSS3 / JS</span>
+                      <span class="px-2.5 py-1 rounded-lg bg-black/40 border border-white/10">Modern Web Frameworks</span>
+                      <span class="px-2.5 py-1 rounded-lg bg-black/40 border border-white/10">GitHub Pages / Firebase</span>
+                    </div>
+                  </div>
                 </div>
 
-                <div class="cv-card">
-                    <div class="cv-card-title"><i class="fa-solid fa-briefcase"></i> الخبرات العملية</div>
-                    <div class="timeline-item">
-                        <h4 style="color: var(--gold-light);">2010 – 2025 | وزارة التعليم – إدارة تعليم بيشة</h4>
-                        <p style="color: var(--text-secondary); font-size: 0.85rem;">معلم حاسب آلي وتقنية معلومات بالمرحلة الثانوية.</p>
+                <!-- Pillar 2 -->
+                <div class="glass-card rounded-3xl p-6 hover:translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                  <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); background-color: rgba(255,255,255,0.05); color: var(--accent-color);" data-key="p2Tag">المحور الثاني</span>
+                      <i class="fa-solid fa-chalkboard-user text-2xl accent-text"></i>
                     </div>
-                    <div class="timeline-item">
-                        <h4 style="color: var(--gold-light);">2009 – 2010 | وزارة التعليم – إدارة تعليم تبوك</h4>
-                        <p style="color: var(--text-secondary); font-size: 0.85rem;">معلم حاسب آلي.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4 style="color: var(--gold-light);">2008 – 2009 | مصرف الراجحي – أبها</h4>
-                        <p style="color: var(--text-secondary); font-size: 0.85rem;">قطاع العمليات المصرفية والخدمات المالية.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4 style="color: var(--gold-light);">2007 – 2008 | وزارة التعليم – إدارة تعليم سراة عبيدة</h4>
-                        <p style="color: var(--text-secondary); font-size: 0.85rem;">معلم حاسب آلي.</p>
-                    </div>
+                    <h3 class="text-lg font-bold" data-key="p2Title">التصميم التعليمي واستراتيجيات التدريس</h3>
+                    <p class="text-sm leading-relaxed" style="color: var(--text-muted);" data-key="p2Desc">التركيز: تطبيق استراتيجيات حديثة (التعلم القائم على المشاريع، حل المشكلات، الصف المقلوب، التعلم التعاوني، العصف الذهني الرقمي).</p>
+                  </div>
+                  <div class="mt-6 pt-4 border-t" style="border-color: rgba(255,255,255,0.1);">
+                    <span class="text-xs font-semibold block mb-2" style="color: var(--accent-color);" data-key="p2ImpactLabel">الأثر والنتائج:</span>
+                    <p class="text-xs" style="color: var(--text-muted);" data-key="p2ImpactText">رفع معدل المشاركة والتفاعل، تنمية مهارات التفكير النقدي والإبداعي، وتعزيز روح العمل الجماعي لدى الطلاب.</p>
+                  </div>
                 </div>
 
-                <div class="cv-card">
-                    <div class="cv-card-title"><i class="fa-solid fa-graduation-cap"></i> المؤهلات العلمية</div>
-                    <ul class="info-list">
-                        <li><strong>2017:</strong> ماجستير – جامعة الباحة</li>
-                        <li><strong>2007:</strong> بكالوريوس – جامعة الملك خالد</li>
-                        <li><strong>2003:</strong> الثانوية – ثانوية أبو موسى الأشعري</li>
-                        <li><strong>2000:</strong> المتوسطة – متوسطة شعف بلقرن</li>
-                        <li><strong>1997:</strong> الابتدائية – ابتدائية شعف بلقرن</li>
-                    </ul>
+                <!-- Pillar 3 -->
+                <div class="glass-card rounded-3xl p-6 hover:translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                  <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); background-color: rgba(255,255,255,0.05); color: var(--accent-color);" data-key="p3Tag">المحور الثالث</span>
+                      <i class="fa-solid fa-network-wired text-2xl accent-text"></i>
+                    </div>
+                    <h3 class="text-lg font-bold" data-key="p3Title">إدارة البيئة التعليمية الرقمية</h3>
+                    <p class="text-sm leading-relaxed" style="color: var(--text-muted);" data-key="p3Desc">التركيز: تخطيط وتنظيم العمليات التعليمية، إدارة المحتوى والمهام الأكاديمية، ومتابعة تقدم الطلاب بتقنيات سحابية منظمة.</p>
+                  </div>
+                  <div class="mt-6 pt-4 border-t" style="border-color: rgba(255,255,255,0.1);">
+                    <span class="text-xs font-semibold block mb-2" style="color: var(--accent-color);" data-key="p3ToolsLabel">المنصات والأدوات:</span>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                      <span class="px-2.5 py-1 rounded-lg bg-black/40 border border-white/10">LMS Platforms</span>
+                      <span class="px-2.5 py-1 rounded-lg bg-black/40 border border-white/10">Google Workspace</span>
+                      <span class="px-2.5 py-1 rounded-lg bg-black/40 border border-white/10">Microsoft 365 Education</span>
+                    </div>
+                  </div>
                 </div>
-            </div>
 
-            <div style="display: flex; flex-direction: column; gap: 2rem;">
-                <div class="cv-card">
-                    <div class="cv-card-title"><i class="fa-solid fa-certificate"></i> التطور والتأهيل المهني</div>
-                    <p style="font-size: 0.88rem; color: var(--gold-light); margin-bottom: 0.8rem;">
-                        أمتلك سجلاً مهنياً يتجاوز 500 ساعة تطوير مهني، من أبرزها:
-                    </p>
+                <!-- Pillar 4 -->
+                <div class="glass-card rounded-3xl p-6 hover:translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                  <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); background-color: rgba(255,255,255,0.05); color: var(--accent-color);" data-key="p4Tag">المحور الرابع</span>
+                      <i class="fa-solid fa-robot text-2xl accent-text"></i>
+                    </div>
+                    <h3 class="text-lg font-bold" data-key="p4Title">دمج الذكاء الاصطناعي في التعليم</h3>
+                    <p class="text-sm leading-relaxed" style="color: var(--text-muted);" data-key="p4Desc">التركيز: توظيف أدوات الذكاء الاصطناعي في التصميم التعليمي وإنتاج المحتوى وإنشاء الأنشطة التفاعلية الفعالة.</p>
+                  </div>
+                  <div class="mt-6 pt-4 border-t" style="border-color: rgba(255,255,255,0.1);">
+                    <span class="text-xs font-semibold block mb-2" style="color: var(--accent-color);" data-key="p4ImpactLabel">الأثر والنتائج:</span>
+                    <p class="text-xs" style="color: var(--text-muted);" data-key="p4ImpactText">صياغة تجارب تعلم مخصصة تراعي الفروق الفردية وترفع من جودة وكفاءة نواتج التعلم الذكي.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- WORK EXPERIENCE TIMELINE -->
+            <section class="glass-card rounded-3xl p-6 sm:p-8 space-y-6 theme-transition">
+              <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                <div class="w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-lg" style="background-color: rgba(255,255,255,0.08); color: var(--accent-color);">
+                  <i class="fa-solid fa-briefcase"></i>
+                </div>
+                <div>
+                  <h2 class="text-xl sm:text-2xl font-bold accent-gradient-text" data-key="experienceTitle">الخبرات المهنية</h2>
+                  <p class="text-xs sm:text-sm text-muted" style="color: var(--text-muted);" data-key="experienceSub">مسيرة عطاء وتطوير مستمر لأكثر من 17 عاماً</p>
+                </div>
+              </div>
+
+              <div class="relative border-r-2 rtl:border-r-2 ltr:border-l-2 space-y-8 pr-6 rtl:pr-6 ltr:pl-6 my-4" style="border-color: var(--border-color);">
+                <div class="relative group">
+                  <div class="absolute top-1 -right-[31px] rtl:-right-[31px] ltr:-left-[31px] w-4 h-4 rounded-full border-2 theme-transition" style="border-color: var(--accent-color); background-color: var(--bg-primary);"></div>
+                  <div class="bg-black/20 p-5 rounded-2xl border theme-transition space-y-2" style="border-color: rgba(255,255,255,0.08);">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                      <h3 class="text-base sm:text-lg font-bold" data-key="job1Title">معلم حاسب آلي وتقنية معلومات (المرحلة الثانوية)</h3>
+                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); color: var(--accent-color);" data-key="job1Year">2010 - حتى الآن</span>
+                    </div>
+                    <p class="text-xs sm:text-sm font-semibold accent-text" data-key="job1Org">وزارة التعليم - إدارة التعليم بمحافظة بيشة</p>
+                    <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);" data-key="job1Desc">تدريس مناهج الحاسب والتقنية الرقمية، إعداد وتطوير البيئات التعليمية التفاعلية، تدريب الطلاب على المشاريع البرمجية والمسابقات الوطنية.</p>
+                  </div>
+                </div>
+
+                <div class="relative group">
+                  <div class="absolute top-1 -right-[31px] rtl:-right-[31px] ltr:-left-[31px] w-4 h-4 rounded-full border-2 theme-transition" style="border-color: var(--accent-color); background-color: var(--bg-primary);"></div>
+                  <div class="bg-black/20 p-5 rounded-2xl border theme-transition space-y-2" style="border-color: rgba(255,255,255,0.08);">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                      <h3 class="text-base sm:text-lg font-bold" data-key="job2Title">معلم حاسب آلي</h3>
+                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); color: var(--accent-color);">2009 - 2010</span>
+                    </div>
+                    <p class="text-xs sm:text-sm font-semibold accent-text" data-key="job2Org">وزارة التعليم - الإدارة العامة للتعليم بمنطقة تبوك</p>
+                    <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);" data-key="job2Desc">تدريس مفاهيم الحاسب الأساسية وتطوير مهارات الطلاب في المعامل الرقمية واستراتيجيات التعلم التفاعلي.</p>
+                  </div>
+                </div>
+
+                <div class="relative group">
+                  <div class="absolute top-1 -right-[31px] rtl:-right-[31px] ltr:-left-[31px] w-4 h-4 rounded-full border-2 theme-transition" style="border-color: var(--accent-color); background-color: var(--bg-primary);"></div>
+                  <div class="bg-black/20 p-5 rounded-2xl border theme-transition space-y-2" style="border-color: rgba(255,255,255,0.08);">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                      <h3 class="text-base sm:text-lg font-bold" data-key="job3Title">قطاع العمليات المصرفية والخدمات المالية</h3>
+                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); color: var(--accent-color);">2008 - 2009</span>
+                    </div>
+                    <p class="text-xs sm:text-sm font-semibold accent-text" data-key="job3Org">مصرف الراجحي - الإدارة الإقليمية بأبها</p>
+                    <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);" data-key="job3Desc">تنفيذ ومتابعة العمليات المصرفية والخدمات المالية المتقدمة، اكتساب خبرة عالية في الدقة والأنظمة الرقمية وخدمة العملاء.</p>
+                  </div>
+                </div>
+
+                <div class="relative group">
+                  <div class="absolute top-1 -right-[31px] rtl:-right-[31px] ltr:-left-[31px] w-4 h-4 rounded-full border-2 theme-transition" style="border-color: var(--accent-color); background-color: var(--bg-primary);"></div>
+                  <div class="bg-black/20 p-5 rounded-2xl border theme-transition space-y-2" style="border-color: rgba(255,255,255,0.08);">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                      <h3 class="text-base sm:text-lg font-bold" data-key="job4Title">معلم حاسب آلي وإداري مكتب</h3>
+                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); color: var(--accent-color);">2007 - 2008</span>
+                    </div>
+                    <p class="text-xs sm:text-sm font-semibold accent-text" data-key="job4Org">وزارة التعليم - إدارة التعليم بسراة عبيدة (مكتب مدير الإدارة)</p>
+                    <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);" data-key="job4Desc">بداية المسيرة التعليمية والعمل الإداري بمكتب مدير إدارة التعليم؛ حيث تشرفت بتشرب أدبيات العمل التعليمي.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- EDUCATION & LANGUAGES -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <section class="glass-card rounded-3xl p-6 sm:p-8 space-y-6 theme-transition">
+                <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                  <div class="w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-lg" style="background-color: rgba(255,255,255,0.08); color: var(--accent-color);">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                  </div>
+                  <div>
+                    <h2 class="text-xl sm:text-2xl font-bold accent-gradient-text" data-key="educationTitle">التعليم والمؤهلات</h2>
+                    <p class="text-xs sm:text-sm text-muted" style="color: var(--text-muted);" data-key="educationSub">المسار الأكاديمي</p>
+                  </div>
+                </div>
+
+                <div class="space-y-4">
+                  <div class="p-4 rounded-2xl border theme-transition space-y-1" style="border-color: rgba(255,255,255,0.08); background-color: rgba(0,0,0,0.15);">
+                    <div class="flex justify-between items-center">
+                      <span class="text-xs font-bold accent-text" data-key="edu1Year">2017 م</span>
+                      <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20" data-key="degreeMaster">ماجستير</span>
+                    </div>
+                    <h3 class="text-base font-bold" data-key="edu1Title">درجة الماجستير</h3>
+                    <p class="text-xs text-muted" style="color: var(--text-muted);" data-key="edu1Univ">جامعة الباحة</p>
+                  </div>
+
+                  <div class="p-4 rounded-2xl border theme-transition space-y-1" style="border-color: rgba(255,255,255,0.08); background-color: rgba(0,0,0,0.15);">
+                    <div class="flex justify-between items-center">
+                      <span class="text-xs font-bold accent-text" data-key="edu2Year">2007 م</span>
+                      <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20" data-key="degreeBachelor">بكالوريوس</span>
+                    </div>
+                    <h3 class="text-base font-bold" data-key="edu2Title">درجة البكالوريوس</h3>
+                    <p class="text-xs text-muted" style="color: var(--text-muted);" data-key="edu2Univ">جامعة الملك خالد</p>
+                  </div>
+
+                  <div class="p-4 rounded-2xl border theme-transition space-y-1" style="border-color: rgba(255,255,255,0.08); background-color: rgba(0,0,0,0.15);">
+                    <div class="flex justify-between items-center">
+                      <span class="text-xs font-bold accent-text" data-key="edu3Year">2003 م</span>
+                      <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" data-key="degreeHighSchool">ثانوية عامة</span>
+                    </div>
+                    <h3 class="text-base font-bold" data-key="edu3Title">شهادة الثانوية العامة</h3>
+                    <p class="text-xs text-muted" style="color: var(--text-muted);" data-key="edu3School">ثانوية أبو موسى الأشعري</p>
+                  </div>
+                </div>
+              </section>
+
+              <section class="glass-card rounded-3xl p-6 sm:p-8 space-y-6 theme-transition flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center space-x-3 rtl:space-x-reverse mb-6">
+                    <div class="w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-lg" style="background-color: rgba(255,255,255,0.08); color: var(--accent-color);">
+                      <i class="fa-solid fa-language"></i>
+                    </div>
                     <div>
-                        <span class="badge-tag">تدريب المعلمين على علوم IOI</span>
-                        <span class="badge-tag">معلوماتية - موهبة (2024)</span>
-                        <span class="badge-tag">استراتيجيات التدريس الحديثة</span>
-                        <span class="badge-tag">النموذج الإشرافي لتمكين المدرسة</span>
-                        <span class="badge-tag">التقويم الذاتي للمدارس</span>
-                        <span class="badge-tag">تدريب بيبراس - موهبة</span>
-                        <span class="badge-tag">نماذج وأدوات الذكاء الاصطناعي KKU</span>
-                        <span class="badge-tag">مبادرة المليون سعودي للذكاء الاصطناعي SDAIA</span>
+                      <h2 class="text-xl sm:text-2xl font-bold accent-gradient-text" data-key="languagesSectionTitle">اللغات ومهارات الاتصال</h2>
+                      <p class="text-xs sm:text-sm text-muted" style="color: var(--text-muted);" data-key="languagesSectionSub">مستويات إتقان اللغات</p>
                     </div>
+                  </div>
+
+                  <div class="space-y-4 mb-6">
+                    <div class="space-y-1.5">
+                      <div class="flex justify-between text-xs font-bold"><span data-key="langAr">العربية</span><span class="accent-text">100%</span></div>
+                      <div class="w-full h-2.5 rounded-full bg-black/40 border border-white/10 overflow-hidden"><div class="h-full rounded-full accent-bg" style="width: 100%;"></div></div>
+                    </div>
+                    <div class="space-y-1.5">
+                      <div class="flex justify-between text-xs font-bold"><span data-key="langEn">الإنجليزية</span><span class="accent-text">80%</span></div>
+                      <div class="w-full h-2.5 rounded-full bg-black/40 border border-white/10 overflow-hidden"><div class="h-full rounded-full accent-bg" style="width: 80%;"></div></div>
+                    </div>
+                    <div class="space-y-1.5">
+                      <div class="flex justify-between text-xs font-bold"><span data-key="langEs">الإسبانية</span><span class="accent-text">30%</span></div>
+                      <div class="w-full h-2.5 rounded-full bg-black/40 border border-white/10 overflow-hidden"><div class="h-full rounded-full accent-bg" style="width: 30%;"></div></div>
+                    </div>
+                  </div>
                 </div>
 
-                <div class="cv-card">
-                    <div class="cv-card-title"><i class="fa-solid fa-gears"></i> المهارات والخبرات المنفذة</div>
-                    <ul class="info-list" style="font-size: 0.88rem;">
-                        <li><i class="fa-solid fa-check" style="color: var(--gold-primary);"></i> تصميم وتطوير الحلول التعليمية الرقمية (Digital Learning Solutions): تصميم وتطوير دروس تفاعلية، وتجارب تعلم رقمية، وصفحات ويب تعليمية توظف لغات البرمجة الحديثة وأطر العمل الرقمية؛ بما يسهم في تحسين جودة المحتوى التعليمي، ورفع مستوى التفاعل، وتحويل المفاهيم المجردة إلى تجارب تعلم عملية وقابلة للتطبيق.</li>
-                        <li><i class="fa-solid fa-check" style="color: var(--gold-primary);"></i> استراتيجيات التدريس والتصميم التعليمي (Instructional Design & Teaching Strategies): توظيف مجموعة متنوعة من استراتيجيات التدريس والتصميم التعليمي، من بينها التعلم النشط، والتعلم القائم على المشاريع وحل المشكلات، والفصول المقلوبة، والتعلم التعاوني، والتعلم القائم على الاستقصاء، والعصف الذهني الرقمي؛ مع اختيار الاستراتيجية الأنسب وفق طبيعة المحتوى، واحتياجات المتعلمين، والأهداف التعليمية، بما يعزز المشاركة، وينمي التفكير النقدي والإبداعي، ويدعم القدرة على حل المشكلات والعمل الجماعي.</li>
-                        <li><i class="fa-solid fa-check" style="color: var(--gold-primary);"></i> إدارة بيئات التعلم الرقمية (Digital Learning Environment Management): توظيف أنظمة إدارة التعلم (LMS)، ومنظومة Google Workspace، وتطبيقات Microsoft 365 في تخطيط وتنظيم العمليات التعليمية، وإدارة المحتوى والمهام الأكاديمية، ومتابعة تقدم المتعلمين، وتعزيز التواصل والتعاون الرقمي؛ بما يرفع كفاءة إدارة التعلم ويحسن تجربة المستخدم التعليمية.</li>
-                        <li><i class="fa-solid fa-check" style="color: var(--gold-primary);"></i> توظيف الذكاء الاصطناعي في التعليم (AI in Education): دمج أدوات وتقنيات الذكاء الاصطناعي في التصميم التعليمي، وإنتاج المحتوى، وتطوير الأنشطة التفاعلية، وتحليل احتياجات المتعلمين؛ بما يدعم بناء تجارب تعلم أكثر تخصيصًا، ويراعي الفروق الفردية، ويسهم في تحسين كفاءة العملية التعليمية وجودة مخرجاتها.</li>
-                    </ul>
+                <!-- فلسفتي في التعليم (متروكة كما طلبتها بدون تغيير) -->
+                <div class="p-4 rounded-2xl border theme-transition relative" style="border-color: var(--border-color); background-color: rgba(0,0,0,0.2);">
+                  <i class="fa-solid fa-quote-right text-2xl absolute top-3 left-3 opacity-10 accent-text"></i>
+                  <h3 class="text-xs font-bold uppercase tracking-wider accent-text mb-2" data-key="philosophyHeader">فلسفتي في التعليم</h3>
+                  <p class="text-xs sm:text-sm leading-relaxed italic text-justify" style="color: var(--text-main);" data-key="philosophyText">
+                    «إن المعرفة ليست مجرد تحصيل للحقائق، بل هي الضياء الذي يسطع في نفوس المتعلمين ليصنع الفكر والوعي. التقنية وسيلتنا لتجسيد هذا الفكر وتحويله إلى تجربة إنسانية خالدة.»
+                  </p>
                 </div>
-
-                <div class="cv-card">
-                    <div class="cv-card-title"><i class="fa-solid fa-lightbulb"></i> فلسفتي في التعليم</div>
-                    <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.9;">
-                        استلهم فلسفتي من وزارة التعليم المنبثقة من رؤية السعودية 2030، والتي تؤمن بأن المعلم الناجح هو من يصنع علاقات إيجابية، ويتفاعل بمرونة مع المتغيرات، ويحمل شغفاً دائماً للتطوير الذاتي ليصبح نموذجاً عالمياً في الكفاءة.
-                    </p>
-                </div>
+              </section>
             </div>
+
+            <!-- TRAINING & DEVELOPMENT -->
+            <section class="glass-card rounded-3xl p-6 sm:p-8 space-y-6 theme-transition">
+              <div class="flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                  <div class="w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-lg" style="background-color: rgba(255,255,255,0.08); color: var(--accent-color);">
+                    <i class="fa-solid fa-award"></i>
+                  </div>
+                  <div>
+                    <h2 class="text-xl sm:text-2xl font-bold accent-gradient-text" data-key="trainingTitle">التطوير المهني والبرامج التدريبية</h2>
+                    <p class="text-xs sm:text-sm text-muted" style="color: var(--text-muted);" data-key="trainingSub">أكثر من 500 ساعة تدريبية متخصصة في مجالات التقنية والتعليم</p>
+                  </div>
+                </div>
+                <div class="px-4 py-1.5 rounded-full text-xs font-black border uppercase tracking-wider" style="border-color: var(--border-color); background-color: rgba(255,255,255,0.05); color: var(--accent-color);" data-key="hoursBadge">
+                  +500 ساعة تدريبية
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="p-4 rounded-2xl border theme-transition flex items-start gap-3" style="border-color: rgba(255,255,255,0.08); background-color: rgba(0,0,0,0.15);">
+                  <i class="fa-solid fa-code text-lg accent-text mt-1"></i>
+                  <div><h3 class="text-sm font-bold" data-key="t1Title">تدريب معلمي المعلوماتية IOI</h3><p class="text-xs text-muted" style="color: var(--text-muted);" data-key="t1Org">موهبة بالتعاون مع وزارة التعليم</p></div>
+                </div>
+                <div class="p-4 rounded-2xl border theme-transition flex items-start gap-3" style="border-color: rgba(255,255,255,0.08); background-color: rgba(0,0,0,0.15);">
+                  <i class="fa-solid fa-lightbulb text-lg accent-text mt-1"></i>
+                  <div><h3 class="text-sm font-bold" data-key="t2Title">استراتيجيات التدريس الحديثة</h3><p class="text-xs text-muted" style="color: var(--text-muted);" data-key="t2Org">مركز التدريب التربوي ببيشة</p></div>
+                </div>
+                <div class="p-4 rounded-2xl border theme-transition flex items-start gap-3" style="border-color: rgba(255,255,255,0.08); background-color: rgba(0,0,0,0.15);">
+                  <i class="fa-solid fa-brain text-lg accent-text mt-1"></i>
+                  <div><h3 class="text-sm font-bold" data-key="t3Title">تطبيقات الذكاء الاصطناعي في التعليم</h3><p class="text-xs text-muted" style="color: var(--text-muted);" data-key="t3Org">جامعة الملك خالد</p></div>
+                </div>
+                <div class="p-4 rounded-2xl border theme-transition flex items-start gap-3" style="border-color: rgba(255,255,255,0.08); background-color: rgba(0,0,0,0.15);">
+                  <i class="fa-solid fa-microchip text-lg accent-text mt-1"></i>
+                  <div><h3 class="text-sm font-bold" data-key="t4Title">مبادرة مليون سعودي في الذكاء الاصطناعي</h3><p class="text-xs text-muted" style="color: var(--text-muted);" data-key="t4Org">سدايا SDAIA</p></div>
+                </div>
+                <div class="p-4 rounded-2xl border theme-transition flex items-start gap-3" style="border-color: rgba(255,255,255,0.08); background-color: rgba(0,0,0,0.15);">
+                  <i class="fa-solid fa-puzzle-piece text-lg accent-text mt-1"></i>
+                  <div><h3 class="text-sm font-bold" data-key="t5Title">مسابقة بيبراس موهبة للتفكير الحاسوبي</h3><p class="text-xs text-muted" style="color: var(--text-muted);" data-key="t5Org">مؤسسة موهبة</p></div>
+                </div>
+                <div class="p-4 rounded-2xl border theme-transition flex items-start gap-3" style="border-color: rgba(255,255,255,0.08); background-color: rgba(0,0,0,0.15);">
+                  <i class="fa-solid fa-square-poll-vertical text-lg accent-text mt-1"></i>
+                  <div><h3 class="text-sm font-bold" data-key="t6Title">التقويم الذاتي للمدرسة</h3><p class="text-xs text-muted" style="color: var(--text-muted);" data-key="t6Org">المركز الوطني للتقويم والتميز المدرسي</p></div>
+                </div>
+              </div>
+            </section>
         </div>
     </section>
 
@@ -954,20 +985,14 @@
         </div>
 
         <div class="timetable-wrapper">
-            <h3 style="font-family: var(--font-title); color: var(--gold-light); margin-bottom: 1rem; text-align: center;">
-                <i class="fa-solid fa-calendar-days" style="color: var(--gold-primary);"></i>
+            <h3 style="color: var(--gold-light); margin-bottom: 1rem; text-align: center; font-weight: 700;">
+                <i class="fa-solid fa-calendar-days accent-text"></i>
                 جدول الحصص الأسبوعي — ثانوية الملك عبدالله بن عبدالعزيز ببيشة (مسارات 1448هـ)
             </h3>
             <table class="timetable-table">
                 <thead>
                     <tr>
-                        <th>اليوم</th>
-                        <th>الحصة 1</th>
-                        <th>الحصة 2</th>
-                        <th>الحصة 3</th>
-                        <th>الحصة 4</th>
-                        <th>الحصة 5</th>
-                        <th>الحصة 6</th>
+                        <th>اليوم</th><th>الحصة 1</th><th>الحصة 2</th><th>الحصة 3</th><th>الحصة 4</th><th>الحصة 5</th><th>الحصة 6</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -975,25 +1000,10 @@
                         <td><strong>الأحد</strong></td>
                         <td><a href="#sub-ai" class="table-subject-btn">الذكاء الاصطناعي (ثالث 4)</a></td>
                         <td><a href="#sub-tech1" class="table-subject-btn">التقنية الرقمية 1 (أول 5)</a></td>
-                        <td>
-                            <div class="table-static-cell">
-                                <span class="table-static-title">المساندة الصفية</span>
-                                <span class="table-static-desc">تغطية الشواغر التعليمية</span>
-                            </div>
-                        </td>
+                        <td><div class="table-static-cell"><span class="table-static-title">المساندة الصفية</span><span class="table-static-desc">تغطية الشواغر</span></div></td>
                         <td>—</td>
-                        <td>
-                            <div class="table-static-cell">
-                                <span class="table-static-title">استدامة رقمية</span>
-                                <span class="table-static-desc">فحص وتأمين البنية التقنية للمدرسة</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="table-static-cell">
-                                <span class="table-static-title">استدامة رقمية</span>
-                                <span class="table-static-desc">فحص وتأمين البنية التقنية للمدرسة</span>
-                            </div>
-                        </td>
+                        <td><div class="table-static-cell"><span class="table-static-title">استدامة رقمية</span><span class="table-static-desc">فحص البنية</span></div></td>
+                        <td><div class="table-static-cell"><span class="table-static-title">استدامة رقمية</span><span class="table-static-desc">فحص البنية</span></div></td>
                     </tr>
                     <tr>
                         <td><strong>الإثنين</strong></td>
@@ -1001,260 +1011,114 @@
                         <td><a href="#sub-cyber" class="table-subject-btn">الأمن السيبراني (ثالث 4)</a></td>
                         <td><a href="#sub-tech1" class="table-subject-btn">التقنية الرقمية 1 (أول 5)</a></td>
                         <td>—</td>
-                        <td>
-                            <div class="table-static-cell">
-                                <span class="table-static-title">جاهزية المعامل</span>
-                                <span class="table-static-desc">معايرة وتجهيز معامل الحاسب والبيئات الرقمية</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="table-static-cell">
-                                <span class="table-static-title">جاهزية المعامل</span>
-                                <span class="table-static-desc">معايرة وتجهيز معامل الحاسب والبيئات الرقمية</span>
-                            </div>
-                        </td>
+                        <td><div class="table-static-cell"><span class="table-static-title">جاهزية المعامل</span><span class="table-static-desc">معايرة وتجهيز</span></div></td>
+                        <td><div class="table-static-cell"><span class="table-static-title">جاهزية المعامل</span><span class="table-static-desc">معايرة وتجهيز</span></div></td>
                     </tr>
                     <tr>
                         <td><strong>الثلاثاء</strong></td>
-                        <td>
-                            <div class="table-static-cell">
-                                <span class="table-static-title">التمكين الرقمي</span>
-                                <span class="table-static-desc">التطوير المهني والتمكين التقني للكادر</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="table-static-cell">
-                                <span class="table-static-title">التمكين الرقمي</span>
-                                <span class="table-static-desc">التطوير المهني والتمكين التقني للكادر</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="table-static-cell">
-                                <span class="table-static-title">التمكين الرقمي</span>
-                                <span class="table-static-desc">التطوير المهني والتمكين التقني للكادر</span>
-                            </div>
-                        </td>
+                        <td><div class="table-static-cell"><span class="table-static-title">التمكين الرقمي</span><span class="table-static-desc">التطوير المهني</span></div></td>
+                        <td><div class="table-static-cell"><span class="table-static-title">التمكين الرقمي</span><span class="table-static-desc">التطوير المهني</span></div></td>
+                        <td><div class="table-static-cell"><span class="table-static-title">التمكين الرقمي</span><span class="table-static-desc">التطوير المهني</span></div></td>
                         <td>—</td>
                         <td><a href="#sub-design" class="table-subject-btn">التصميم الهندسي (ثالث 4)</a></td>
                         <td><a href="#sub-ai" class="table-subject-btn">الذكاء الاصطناعي (ثالث 4)</a></td>
                     </tr>
                     <tr>
                         <td><strong>الأربعاء</strong></td>
-                        <td>
-                            <div class="table-static-cell">
-                                <span class="table-static-title">استبصار تقني</span>
-                                <span class="table-static-desc">جلسة خاصة مع زملاء التخصص للتطوير والاستكشاف</span>
-                            </div>
-                        </td>
+                        <td><div class="table-static-cell"><span class="table-static-title">استبصار تقني</span><span class="table-static-desc">جلسة خاصة</span></div></td>
                         <td><a href="#sub-cyber" class="table-subject-btn">الأمن السيبراني (ثالث 4)</a></td>
                         <td><a href="#sub-design" class="table-subject-btn">التصميم الهندسي (ثالث 4)</a></td>
                         <td>—</td>
-                        <td>
-                            <div class="table-static-cell">
-                                <span class="table-static-title">التوجيه العرفي</span>
-                                <span class="table-static-desc">الجلسة التوجيهية والساعة الأكاديمية لإثراء الطلاب</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="table-static-cell">
-                                <span class="table-static-title">التوجيه العرفي</span>
-                                <span class="table-static-desc">الجلسة التوجيهية والساعة الأكاديمية لإثراء الطلاب</span>
-                            </div>
-                        </td>
+                        <td><div class="table-static-cell"><span class="table-static-title">التوجيه العرفي</span><span class="table-static-desc">جلسة إثراء</span></div></td>
+                        <td><div class="table-static-cell"><span class="table-static-title">التوجيه العرفي</span><span class="table-static-desc">جلسة إثراء</span></div></td>
                     </tr>
                     <tr>
                         <td><strong>الخميس</strong></td>
-                        <td>
-                            <div class="table-static-cell">
-                                <span class="table-static-title">المختبر البرمجي</span>
-                                <span class="table-static-desc">تطوير واختبار النماذج والحلول البرمجية</span>
-                            </div>
-                        </td>
+                        <td><div class="table-static-cell"><span class="table-static-title">المختبر البرمجي</span><span class="table-static-desc">تطوير واختبار</span></div></td>
                         <td><a href="#sub-tech1" class="table-subject-btn">التقنية الرقمية 1 (أول 5)</a></td>
-                        <td>
-                            <div class="table-static-cell">
-                                <span class="table-static-title">المختبر البرمجي</span>
-                                <span class="table-static-desc">تطوير واختبار النماذج والحلول البرمجية</span>
-                            </div>
-                        </td>
+                        <td><div class="table-static-cell"><span class="table-static-title">المختبر البرمجي</span><span class="table-static-desc">تطوير واختبار</span></div></td>
                         <td>—</td>
-                        <td>
-                            <div class="table-static-cell">
-                                <span class="table-static-title">الرصد والتحليل</span>
-                                <span class="table-static-desc">رصد وتحليل أعمال الأسبوع والتهيئة للأسبوع القادم</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="table-static-cell">
-                                <span class="table-static-title">الرصد والتحليل</span>
-                                <span class="table-static-desc">رصد وتحليل أعمال الأسبوع والتهيئة للأسبوع القادم</span>
-                            </div>
-                        </td>
+                        <td><div class="table-static-cell"><span class="table-static-title">الرصد والتحليل</span><span class="table-static-desc">أعمال الأسبوع</span></div></td>
+                        <td><div class="table-static-cell"><span class="table-static-title">الرصد والتحليل</span><span class="table-static-desc">أعمال الأسبوع</span></div></td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <!-- Subjects Grid (All 10 Subjects with Dynamic Links) -->
         <div class="cards-grid">
-            <div class="subject-card" id="sub-tech1">
-                <div>
-                    <div class="subject-header"><i class="fa-solid fa-desktop"></i><h3>التقنية الرقمية (1)</h3></div>
-                    <p style="font-size: 0.85rem; color: var(--text-secondary);">أساسيات الحاسب، المستندات الرقمية، والمعالجة البرمجية الأولية.</p>
-                </div>
+            <div class="subject-card theme-transition" id="sub-tech1">
+                <div><div class="subject-header"><i class="fa-solid fa-desktop"></i><h3>التقنية الرقمية (1)</h3></div><p style="font-size: 0.85rem; color: var(--text-muted);">أساسيات الحاسب، المستندات الرقمية، والمعالجة البرمجية الأولية.</p></div>
                 <a href="#" class="resource-badge sub-link" data-id="tech1" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
             </div>
-
-            <div class="subject-card" id="sub-tech2">
-                <div>
-                    <div class="subject-header"><i class="fa-solid fa-laptop"></i><h3>التقنية الرقمية (2)</h3></div>
-                    <p style="font-size: 0.85rem; color: var(--text-secondary);">مفاهيم الشبكات، أدوات الاتصال والتصميم الرقمي.</p>
-                </div>
+            <div class="subject-card theme-transition" id="sub-tech2">
+                <div><div class="subject-header"><i class="fa-solid fa-laptop"></i><h3>التقنية الرقمية (2)</h3></div><p style="font-size: 0.85rem; color: var(--text-muted);">مفاهيم الشبكات، أدوات الاتصال والتصميم الرقمي.</p></div>
                 <a href="#" class="resource-badge sub-link" data-id="tech2" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
             </div>
-
-            <div class="subject-card" id="sub-tech3">
-                <div>
-                    <div class="subject-header"><i class="fa-solid fa-code"></i><h3>التقنية الرقمية (3)</h3></div>
-                    <p style="font-size: 0.85rem; color: var(--text-secondary);">التطبيقات المتقدمة والمشاريع البرمجية التفاعلية.</p>
-                </div>
+            <div class="subject-card theme-transition" id="sub-tech3">
+                <div><div class="subject-header"><i class="fa-solid fa-code"></i><h3>التقنية الرقمية (3)</h3></div><p style="font-size: 0.85rem; color: var(--text-muted);">التطبيقات المتقدمة والمشاريع البرمجية التفاعلية.</p></div>
                 <a href="#" class="resource-badge sub-link" data-id="tech3" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
             </div>
-
-            <div class="subject-card" id="sub-data">
-                <div>
-                    <div class="subject-header"><i class="fa-solid fa-database"></i><h3>علم البيانات</h3></div>
-                    <p style="font-size: 0.85rem; color: var(--text-secondary);">جمع وتعديل البيانات، النمذجة والتحليل الإحصائي الرقمي.</p>
-                </div>
+            <div class="subject-card theme-transition" id="sub-data">
+                <div><div class="subject-header"><i class="fa-solid fa-database"></i><h3>علم البيانات</h3></div><p style="font-size: 0.85rem; color: var(--text-muted);">جمع وتعديل البيانات، النمذجة والتحليل الإحصائي الرقمي.</p></div>
                 <a href="#" class="resource-badge sub-link" data-id="data" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
             </div>
-
-            <div class="subject-card" id="sub-ai">
-                <div>
-                    <div class="subject-header"><i class="fa-solid fa-brain"></i><h3>الذكاء الاصطناعي (1)</h3></div>
-                    <p style="font-size: 0.85rem; color: var(--text-secondary);">خوارزميات التعلم الآلي، هندسة التلقين ونماذج الرؤية.</p>
-                </div>
+            <div class="subject-card theme-transition" id="sub-ai">
+                <div><div class="subject-header"><i class="fa-solid fa-brain"></i><h3>الذكاء الاصطناعي (1)</h3></div><p style="font-size: 0.85rem; color: var(--text-muted);">خوارزميات التعلم الآلي، هندسة التلقين ونماذج الرؤية.</p></div>
                 <a href="#" class="resource-badge sub-link" data-id="ai1" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
             </div>
-
-            <div class="subject-card" id="sub-ai2">
-                <div>
-                    <div class="subject-header"><i class="fa-solid fa-robot"></i><h3>الذكاء الاصطناعي (2)</h3></div>
-                    <p style="font-size: 0.85rem; color: var(--text-secondary);">التطبيقات المتقدمة والشبكات العصبية الاصطناعية.</p>
-                </div>
+            <div class="subject-card theme-transition" id="sub-ai2">
+                <div><div class="subject-header"><i class="fa-solid fa-robot"></i><h3>الذكاء الاصطناعي (2)</h3></div><p style="font-size: 0.85rem; color: var(--text-muted);">التطبيقات المتقدمة والشبكات العصبية الاصطناعية.</p></div>
                 <a href="#" class="resource-badge sub-link" data-id="ai2" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
             </div>
-
-            <div class="subject-card" id="sub-design">
-                <div>
-                    <div class="subject-header"><i class="fa-solid fa-compass-drafting"></i><h3>التصميم الهندسي</h3></div>
-                    <p style="font-size: 0.85rem; color: var(--text-secondary);">النمذجة ثلاثية الأبعاد والتصميمات الميكانيكية والهندسية.</p>
-                </div>
+            <div class="subject-card theme-transition" id="sub-design">
+                <div><div class="subject-header"><i class="fa-solid fa-compass-drafting"></i><h3>التصميم الهندسي</h3></div><p style="font-size: 0.85rem; color: var(--text-muted);">النمذجة ثلاثية الأبعاد والتصميمات الميكانيكية والهندسية.</p></div>
                 <a href="#" class="resource-badge sub-link" data-id="design" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
             </div>
-
-            <div class="subject-card" id="sub-cyber">
-                <div>
-                    <div class="subject-header"><i class="fa-solid fa-shield-halved"></i><h3>الأمن السيبراني</h3></div>
-                    <p style="font-size: 0.85rem; color: var(--text-secondary);">أنظمة التشفير، حماية البيانات والوقاية من الاحتيال.</p>
-                </div>
+            <div class="subject-card theme-transition" id="sub-cyber">
+                <div><div class="subject-header"><i class="fa-solid fa-shield-halved"></i><h3>الأمن السيبراني</h3></div><p style="font-size: 0.85rem; color: var(--text-muted);">أنظمة التشفير، حماية البيانات والوقاية من الاحتيال.</p></div>
                 <a href="#" class="resource-badge sub-link" data-id="cyber" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
             </div>
-
-            <div class="subject-card" id="sub-iot">
-                <div>
-                    <div class="subject-header"><i class="fa-solid fa-network-wired"></i><h3>إنترنت الأشياء</h3></div>
-                    <p style="font-size: 0.85rem; color: var(--text-secondary);">ربط الحساسات والمتحكمات الدقيقة بالشبكات.</p>
-                </div>
+            <div class="subject-card theme-transition" id="sub-iot">
+                <div><div class="subject-header"><i class="fa-solid fa-network-wired"></i><h3>إنترنت الأشياء</h3></div><p style="font-size: 0.85rem; color: var(--text-muted);">ربط الحساسات والمتحكمات الدقيقة بالشبكات.</p></div>
                 <a href="#" class="resource-badge sub-link" data-id="iot" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
             </div>
-
-            <div class="subject-card" id="sub-swe">
-                <div>
-                    <div class="subject-header"><i class="fa-solid fa-layer-group"></i><h3>هندسة البرمجيات</h3></div>
-                    <p style="font-size: 0.85rem; color: var(--text-secondary);">دورة حياة تطوير الأنظمة البرمجية واختبار الكود.</p>
-                </div>
+            <div class="subject-card theme-transition" id="sub-swe">
+                <div><div class="subject-header"><i class="fa-solid fa-layer-group"></i><h3>هندسة البرمجيات</h3></div><p style="font-size: 0.85rem; color: var(--text-muted);">دورة حياة تطوير الأنظمة البرمجية واختبار الكود.</p></div>
                 <a href="#" class="resource-badge sub-link" data-id="swe" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
             </div>
         </div>
     </section>
 
-    <!-- 3. الشواهد والأداء الوظيفي والمعرض الرقمي العشوائي -->
+    <!-- 3. الشواهد والأداء الوظيفي والمعرض الرقمي -->
     <section id="evidence" class="content-section">
         <div class="section-header">
             <h2 class="section-title">الشواهد والأداء الوظيفي</h2>
             <p class="section-subtitle">ملفات ومحاور الأداء الوظيفي المعتمدة (محمية بكلمة مرور) والاستوديو الرقمي</p>
         </div>
 
-        <h3 style="font-family: var(--font-title); color: var(--gold-light); margin-bottom: 1.5rem;">
-            <i class="fa-solid fa-user-shield" style="color: var(--gold-primary);"></i> محاور الأداء الوظيفي المعتمدة
+        <h3 style="color: var(--gold-light); margin-bottom: 1.5rem; font-weight: 700;">
+            <i class="fa-solid fa-user-shield accent-text"></i> محاور الأداء الوظيفي المعتمدة
         </h3>
         <div class="cards-grid" style="margin-bottom: 4rem;">
-            <div class="evidence-card" onclick="openEvidence(0)">
-                <i class="fa-solid fa-lock lock-icon"></i>
-                <h4 style="color: var(--gold-light); font-size: 1rem;"><i class="fa-solid fa-check-double" style="color: var(--gold-primary);"></i> أداء الواجبات الوظيفية</h4>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">محمي بكلمة مرور</p>
-            </div>
-            <div class="evidence-card" onclick="openEvidence(1)">
-                <i class="fa-solid fa-lock lock-icon"></i>
-                <h4 style="color: var(--gold-light); font-size: 1rem;"><i class="fa-solid fa-sliders" style="color: var(--gold-primary);"></i> إعداد وتنفيذ خطة التعلم</h4>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">محمي بكلمة مرور</p>
-            </div>
-            <div class="evidence-card" onclick="openEvidence(2)">
-                <i class="fa-solid fa-lock lock-icon"></i>
-                <h4 style="color: var(--gold-light); font-size: 1rem;"><i class="fa-solid fa-users-gear" style="color: var(--gold-primary);"></i> الإدارة الصفية</h4>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">محمي بكلمة مرور</p>
-            </div>
-            <div class="evidence-card" onclick="openEvidence(3)">
-                <i class="fa-solid fa-lock lock-icon"></i>
-                <h4 style="color: var(--gold-light); font-size: 1rem;"><i class="fa-solid fa-people-arrows" style="color: var(--gold-primary);"></i> التفاعل مع المجتمع المهني</h4>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">محمي بكلمة مرور</p>
-            </div>
-            <div class="evidence-card" onclick="openEvidence(4)">
-                <i class="fa-solid fa-lock lock-icon"></i>
-                <h4 style="color: var(--gold-light); font-size: 1rem;"><i class="fa-solid fa-comments" style="color: var(--gold-primary);"></i> التفاعل مع أولياء الأمور</h4>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">محمي بكلمة مرور</p>
-            </div>
-            <div class="evidence-card" onclick="openEvidence(5)">
-                <i class="fa-solid fa-lock lock-icon"></i>
-                <h4 style="color: var(--gold-light); font-size: 1rem;"><i class="fa-solid fa-lightbulb" style="color: var(--gold-primary);"></i> التنوع في استراتيجيات التدريس</h4>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">محمي بكلمة مرور</p>
-            </div>
-            <div class="evidence-card" onclick="openEvidence(6)">
-                <i class="fa-solid fa-lock lock-icon"></i>
-                <h4 style="color: var(--gold-light); font-size: 1rem;"><i class="fa-solid fa-chart-line" style="color: var(--gold-primary);"></i> تحسين نتائج المتعلمين</h4>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">محمي بكلمة مرور</p>
-            </div>
-            <div class="evidence-card" onclick="openEvidence(7)">
-                <i class="fa-solid fa-lock lock-icon"></i>
-                <h4 style="color: var(--gold-light); font-size: 1rem;"><i class="fa-solid fa-chart-pie" style="color: var(--gold-primary);"></i> تحليل نتائج المتعلمين وتشخيص مستوياتهم</h4>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">محمي بكلمة مرور</p>
-            </div>
-            <div class="evidence-card" onclick="openEvidence(8)">
-                <i class="fa-solid fa-lock lock-icon"></i>
-                <h4 style="color: var(--gold-light); font-size: 1rem;"><i class="fa-solid fa-list-check" style="color: var(--gold-primary);"></i> تنوع أساليب التقويم</h4>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">محمي بكلمة مرور</p>
-            </div>
-            <div class="evidence-card" onclick="openEvidence(9)">
-                <i class="fa-solid fa-lock lock-icon"></i>
-                <h4 style="color: var(--gold-light); font-size: 1rem;"><i class="fa-solid fa-seedling" style="color: var(--gold-primary);"></i> تهيئة البيئة التعليمية</h4>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">محمي بكلمة مرور</p>
-            </div>
-            <div class="evidence-card" onclick="openEvidence(10)">
-                <i class="fa-solid fa-lock lock-icon"></i>
-                <h4 style="color: var(--gold-light); font-size: 1rem;"><i class="fa-solid fa-microchip" style="color: var(--gold-primary);"></i> توظيف التقنيات ووسائل التعلم المناسبة</h4>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">محمي بكلمة مرور</p>
-            </div>
+            <div class="evidence-card theme-transition" onclick="openEvidence(0)"><i class="fa-solid fa-lock lock-icon"></i><h4 style="color: var(--text-main); font-size: 1rem;"><i class="fa-solid fa-check-double accent-text"></i> أداء الواجبات الوظيفية</h4><p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">محمي بكلمة مرور</p></div>
+            <div class="evidence-card theme-transition" onclick="openEvidence(1)"><i class="fa-solid fa-lock lock-icon"></i><h4 style="color: var(--text-main); font-size: 1rem;"><i class="fa-solid fa-sliders accent-text"></i> إعداد وتنفيذ خطة التعلم</h4><p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">محمي بكلمة مرور</p></div>
+            <div class="evidence-card theme-transition" onclick="openEvidence(2)"><i class="fa-solid fa-lock lock-icon"></i><h4 style="color: var(--text-main); font-size: 1rem;"><i class="fa-solid fa-users-gear accent-text"></i> الإدارة الصفية</h4><p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">محمي بكلمة مرور</p></div>
+            <div class="evidence-card theme-transition" onclick="openEvidence(3)"><i class="fa-solid fa-lock lock-icon"></i><h4 style="color: var(--text-main); font-size: 1rem;"><i class="fa-solid fa-people-arrows accent-text"></i> التفاعل مع المجتمع المهني</h4><p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">محمي بكلمة مرور</p></div>
+            <div class="evidence-card theme-transition" onclick="openEvidence(4)"><i class="fa-solid fa-lock lock-icon"></i><h4 style="color: var(--text-main); font-size: 1rem;"><i class="fa-solid fa-comments accent-text"></i> التفاعل مع أولياء الأمور</h4><p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">محمي بكلمة مرور</p></div>
+            <div class="evidence-card theme-transition" onclick="openEvidence(5)"><i class="fa-solid fa-lock lock-icon"></i><h4 style="color: var(--text-main); font-size: 1rem;"><i class="fa-solid fa-lightbulb accent-text"></i> التنوع في استراتيجيات التدريس</h4><p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">محمي بكلمة مرور</p></div>
+            <div class="evidence-card theme-transition" onclick="openEvidence(6)"><i class="fa-solid fa-lock lock-icon"></i><h4 style="color: var(--text-main); font-size: 1rem;"><i class="fa-solid fa-chart-line accent-text"></i> تحسين نتائج المتعلمين</h4><p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">محمي بكلمة مرور</p></div>
+            <div class="evidence-card theme-transition" onclick="openEvidence(7)"><i class="fa-solid fa-lock lock-icon"></i><h4 style="color: var(--text-main); font-size: 1rem;"><i class="fa-solid fa-chart-pie accent-text"></i> تحليل نتائج المتعلمين وتشخيص مستوياتهم</h4><p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">محمي بكلمة مرور</p></div>
+            <div class="evidence-card theme-transition" onclick="openEvidence(8)"><i class="fa-solid fa-lock lock-icon"></i><h4 style="color: var(--text-main); font-size: 1rem;"><i class="fa-solid fa-list-check accent-text"></i> تنوع أساليب التقويم</h4><p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">محمي بكلمة مرور</p></div>
+            <div class="evidence-card theme-transition" onclick="openEvidence(9)"><i class="fa-solid fa-lock lock-icon"></i><h4 style="color: var(--text-main); font-size: 1rem;"><i class="fa-solid fa-seedling accent-text"></i> تهيئة البيئة التعليمية</h4><p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">محمي بكلمة مرور</p></div>
+            <div class="evidence-card theme-transition" onclick="openEvidence(10)"><i class="fa-solid fa-lock lock-icon"></i><h4 style="color: var(--text-main); font-size: 1rem;"><i class="fa-solid fa-microchip accent-text"></i> توظيف التقنيات ووسائل التعلم المناسبة</h4><p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">محمي بكلمة مرور</p></div>
         </div>
 
-        <h3 style="font-family: var(--font-title); color: var(--gold-light); margin-bottom: 1rem;">
-            <i class="fa-solid fa-images" style="color: var(--gold-primary);"></i> الاستوديو الرقمي للشهادات (تتحدث عشوائياً)
+        <h3 style="color: var(--gold-light); margin-bottom: 1rem; font-weight: 700;">
+            <i class="fa-solid fa-images accent-text"></i> الاستوديو الرقمي للشهادات (تتحدث عشوائياً)
         </h3>
-        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">استعراض بصري ديناميكي للشهادات الـ 16 المعتمدة.</p>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">استعراض بصري ديناميكي للشهادات الـ 16 المعتمدة.</p>
         
-        <div class="gallery-grid" id="randomGalleryGrid">
-            <!-- يتم تعبئتها ديناميكياً عبر الجافاسكريبت -->
-        </div>
+        <div class="gallery-grid" id="randomGalleryGrid"></div>
     </section>
 
     <!-- Floating WhatsApp -->
@@ -1262,133 +1126,389 @@
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <!-- Password Modal for Protected Evidence Links -->
+    <!-- ADDRESS & CONTACT INFO (Placed right before footer as requested) -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="glass-card rounded-3xl p-6 sm:p-8 theme-transition">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center md:text-right rtl:md:text-right">
+            <div class="flex items-center gap-4 justify-center md:justify-start">
+              <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0 border" style="border-color: var(--border-color); background-color: rgba(0,0,0,0.2); color: var(--accent-color);">
+                <i class="fa-solid fa-mailbox"></i>
+              </div>
+              <div>
+                <span class="block text-xs" style="color: var(--text-muted);" data-key="postalLabel">الرمز البريدي</span>
+                <span class="font-bold text-sm" dir="ltr">67713-7492</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4 justify-center md:justify-start">
+              <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0 border" style="border-color: var(--border-color); background-color: rgba(0,0,0,0.2); color: var(--accent-color);">
+                <i class="fa-solid fa-map-location-dot"></i>
+              </div>
+              <div>
+                <span class="block text-xs" style="color: var(--text-muted);" data-key="addressLabel">العنوان الوطني / المختصر</span>
+                <span class="font-bold text-sm block" dir="ltr">ALAC3159</span>
+                <span class="text-xs" style="color: var(--text-muted);">King Abdullah District - Bishah</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4 justify-center md:justify-start">
+              <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0 border" style="border-color: var(--border-color); background-color: rgba(0,0,0,0.2); color: var(--accent-color);">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div>
+                <span class="block text-xs" style="color: var(--text-muted);" data-key="emailLabel">البريد الإلكتروني</span>
+                <a href="mailto:Yh.addict@gmail.com" class="font-bold text-sm hover:underline accent-text" dir="ltr">Yh.addict@gmail.com</a>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4 justify-center md:justify-start">
+              <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0 border" style="border-color: var(--border-color); background-color: rgba(0,0,0,0.2); color: var(--accent-color);">
+                <i class="fa-solid fa-phone-volume"></i>
+              </div>
+              <div>
+                <span class="block text-xs" style="color: var(--text-muted);" data-key="phoneLabel">التواصل المباشر</span>
+                <a href="tel:0565588869" dir="ltr" class="font-bold text-sm hover:underline accent-text">0565588869</a>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <!-- FOOTER (Ordered precisely as requested) -->
+    <footer>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.4rem;">All Rights Reserved 2026©</p>
+        <div style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--accent-color);">
+            يوسف آل حامد | Vanta Voids
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.85rem;">بيشة، المملكة العربية السعودية</p>
+    </footer>
+
+    <!-- Modals (Password, Admin, Recovery, Success, Image, Themes) -->
     <div class="modal-overlay" id="passwordModal">
         <div class="modal-card">
             <i class="fa-solid fa-xmark close-modal" id="closePassModal"></i>
-            <h3 style="font-family: var(--font-title); color: var(--gold-light); margin-bottom: 1rem;">الملف محمي بكلمة مرور</h3>
+            <h3 style="color: var(--gold-light); margin-bottom: 1rem; font-weight: 700;">الملف محمي بكلمة مرور</h3>
             <input type="password" id="passInput" class="form-control" placeholder="أدخل الرقم السري">
             <button class="btn-gold" onclick="verifyPassword()">عرض الملف</button>
             <div id="evidenceErrorAlert" class="luxury-alert">
-                <div class="luxury-alert-header">
-                    <i class="fa-solid fa-circle-exclamation"></i>
-                    <span>تنبيه أمني فاخر</span>
-                </div>
-                <div class="luxury-alert-body">
-                    عذراً، الرقم السري الذي أدخلته غير مطابق. يرجى التحقق من المدخلات وإعادة المحاولة لفتح الشاهد المطلوب.
-                </div>
+                <span style="color: var(--accent-color); font-weight: 700; display: block; margin-bottom: 4px;">تنبيه أمني فاخر</span>
+                <span style="font-size: 0.85rem; color: var(--text-muted);">عذراً، الرقم السري غير مطابق. يرجى إعادة المحاولة.</span>
             </div>
         </div>
     </div>
 
-    <!-- Admin Center Login Modal -->
     <div class="modal-overlay" id="adminModal">
         <div class="modal-card">
             <i class="fa-solid fa-xmark close-modal" id="closeAdminModal"></i>
-            <h3 style="font-family: var(--font-title); color: var(--gold-light); margin-bottom: 1rem;">لوحة التحكم | Command Center</h3>
+            <h3 style="color: var(--gold-light); margin-bottom: 1rem; font-weight: 700;">لوحة التحكم | Command Center</h3>
             <input type="text" id="adminUser" class="form-control" placeholder="البريد الإلكتروني للمشرف">
             <input type="password" id="adminPass" class="form-control" placeholder="كلمة المرور">
             <button class="btn-gold" onclick="verifyAdminLogin()">دخول اللوحة</button>
             <div id="adminErrorAlert" class="luxury-alert">
-                <div class="luxury-alert-header">
-                    <i class="fa-solid fa-shield-cat"></i>
-                    <span>خطأ في المصادقة الإدارية</span>
-                </div>
-                <div class="luxury-alert-body">
-                    بيانات الاعتماد غير صحيحة. يرجى التأكد من صحة البريد الإلكتروني وكلمة المرور المسجلة في فايربيس والمحاولة مرة أخرى.
-                </div>
-            </div>
-            <div style="margin-top: 1rem; border-top: 1px dashed var(--border-color); padding-top: 0.8rem;">
-                <a href="#" onclick="openRecoveryModal()" style="color: var(--gold-primary); font-size: 0.85rem; text-decoration: none;">هل نسيت كلمة المرور؟ استعادة بيانات الدخول</a>
+                <span style="font-size: 0.85rem; color: var(--text-muted);">بيانات الاعتماد غير صحيحة. يرجى التحقق والتجربة مرة أخرى.</span>
             </div>
         </div>
     </div>
 
-    <!-- Admin Dashboard Management Modal -->
     <div class="modal-overlay" id="adminDashboardModal">
-        <div class="modal-card" style="max-width: 600px;">
+        <div class="modal-card" style="max-width: 600px; text-align: right;">
             <i class="fa-solid fa-xmark close-modal" onclick="document.getElementById('adminDashboardModal').style.display='none'"></i>
-            <h3 style="font-family: var(--font-title); color: var(--gold-light); margin-bottom: 0.5rem;"><i class="fa-solid fa-sliders"></i> لوحة الإدارة والتعديل المباشر</h3>
-            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;">قم بتعديل صورة العرض، الرقم السري للشواهد، وروابط المواد بكل سهولة</p>
-            
-            <div style="text-align: right; max-height: 60vh; overflow-y: auto; padding-left: 5px;">
-                <label class="form-group-label"><i class="fa-solid fa-image"></i> رابط صورة العرض الشخصية أو الشعار</label>
-                <input type="text" id="editAvatar" class="form-control" placeholder="مثال my-photo.jpg أو رابط مباشر">
-
-                <label class="form-group-label"><i class="fa-solid fa-key"></i> الرقم السري الخاص بفتح الشواهد (11 محور)</label>
-                <input type="text" id="editEvidencePin" class="form-control" placeholder="أدخل الرقم السري الجديد للشواهد">
-
-                <hr style="border-color: var(--border-color); margin: 1.5rem 0;">
-
-                <h4 style="color: var(--gold-light); font-size: 1rem; margin-bottom: 0.8rem;"><i class="fa-solid fa-shield-halved"></i> روابط محاور الأداء الوظيفي (11 محور)</h4>
+            <h3 style="color: var(--gold-light); margin-bottom: 0.5rem; font-weight: 700;"><i class="fa-solid fa-sliders"></i> لوحة الإدارة والتعديل المباشر</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">تعديل روابط الشواهد والمادة العلمية وصورة العرض</p>
+            <div style="max-height: 50vh; overflow-y: auto; padding-left: 5px;">
+                <label class="form-group-label">رابط صورة العرض الشخصية</label>
+                <input type="text" id="editAvatar" class="form-control">
+                <label class="form-group-label">الرقم السري للشواهد</label>
+                <input type="text" id="editEvidencePin" class="form-control">
+                <hr style="border-color: var(--border-color); margin: 1rem 0;">
                 <div id="evidenceLinksInputs"></div>
-
-                <hr style="border-color: var(--border-color); margin: 1.5rem 0;">
-
-                <h4 style="color: var(--gold-light); font-size: 1rem; margin-bottom: 0.8rem;"><i class="fa-solid fa-laptop-code"></i> روابط مواد المختبر التعليمي (المصادر والعروض)</h4>
                 <div id="subjectLinksInputs"></div>
             </div>
-
-            <button class="btn-gold" onclick="saveAdminChanges()">حفظ التعديلات وتطبيقها فوراً</button>
+            <button class="btn-gold" onclick="saveAdminChanges()">حفظ التعديلات</button>
         </div>
     </div>
 
-    <!-- Password Recovery Modal -->
-    <div class="modal-overlay" id="recoveryModal">
-        <div class="modal-card">
-            <i class="fa-solid fa-xmark close-modal" id="closeRecoveryModal"></i>
-            <div style="color: var(--gold-primary); font-size: 2.2rem; margin-bottom: 0.5rem;">
-                <i class="fa-solid fa-key"></i>
-            </div>
-            <h3 style="font-family: var(--font-title); color: var(--gold-light); margin-bottom: 0.5rem;">استعادة كلمة المرور</h3>
-            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;">اختر الوسيلة المناسبة لإرسال بيانات استعادة الحساب</p>
-            
-            <button class="btn-gold" onclick="sendRecoveryCode('sms')">
-                <i class="fa-solid fa-phone"></i> إرسال عبر الجوال (0565588869)
-            </button>
-            <button class="btn-secondary-custom" onclick="sendRecoveryCode('email')">
-                <i class="fa-solid fa-envelope"></i> إرسال عبر البريد (Yh.addict@gmail.com)
-            </button>
-        </div>
-    </div>
-
-    <!-- Success Message Modal -->
     <div class="modal-overlay" id="successModal">
         <div class="modal-card">
             <i class="fa-solid fa-xmark close-modal" onclick="document.getElementById('successModal').style.display='none'"></i>
-            <div style="color: #25d366; font-size: 2.5rem; margin-bottom: 0.8rem;">
-                <i class="fa-solid fa-circle-check"></i>
-            </div>
-            <h3 style="font-family: var(--font-title); color: var(--gold-light); margin-bottom: 0.5rem;" id="successTitle">تمت العملية بنجاح</h3>
-            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6;" id="successMessage">تم حفظ التعديلات بنجاح.</p>
+            <div style="color: #25d366; font-size: 2.5rem; margin-bottom: 0.8rem;"><i class="fa-solid fa-circle-check"></i></div>
+            <h3 style="color: var(--gold-light); margin-bottom: 0.5rem; font-weight: 700;" id="successTitle">تمت العملية بنجاح</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;" id="successMessage">تم حفظ التعديلات بنجاح.</p>
             <button class="btn-gold" onclick="document.getElementById('successModal').style.display='none'">حسناً</button>
         </div>
     </div>
 
-    <!-- Image View Modal -->
     <div class="modal-overlay" id="imgModal" onclick="this.style.display='none'">
         <div style="max-width: 80%; max-height: 80%;">
-            <img id="modalImgSrc" src="" alt="تكبير الصورة" style="width: 100%; height: auto; border-radius: 12px; border: 2px solid var(--gold-primary);">
+            <img id="modalImgSrc" src="" alt="تكبير الصورة" style="width: 100%; height: auto; border-radius: 12px; border: 2px solid var(--accent-color);">
         </div>
     </div>
 
-    <footer>
-        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.4rem;">All Rights Reserved 2026 ©</p>
-        <div style="font-family: var(--font-title); font-size: 1.15rem; margin-bottom: 0.4rem;">
-            <a href="mailto:Yh.addict@gmail.com" style="color: var(--gold-light); text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='var(--gold-primary)'" onmouseout="this.style.color='var(--gold-light)'">
-                يوسف الحامد | Vanta Voids
-            </a>
-        </div>
-        <p style="color: var(--text-secondary); font-size: 0.85rem;">بيشة، المملكة العربية السعودية</p>
-    </footer>
+    <!-- THEME SELECTOR MODAL (All 14 Themes included) -->
+    <div id="themeModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+        <div class="glass-card max-w-2xl w-full rounded-3xl p-6 sm:p-8 space-y-6 transform scale-95 transition-all duration-300 relative border shadow-2xl" style="border-color: var(--border-color); background-color: var(--bg-secondary);">
+          <div class="flex items-center justify-between border-b pb-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="flex items-center space-x-3 rtl:space-x-reverse">
+              <i class="fa-solid fa-palette text-2xl accent-text"></i>
+              <div>
+                <h3 class="text-xl font-bold accent-gradient-text" data-key="modalTitle">اختيار المظهر (الثيمات)</h3>
+                <p class="text-xs text-muted" style="color: var(--text-muted);" data-key="modalSubTitle">حدد ثيمك المفضل لتخصيص الألوان والواجهة</p>
+              </div>
+            </div>
+            <button onclick="closeThemeModal()" class="w-9 h-9 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-lg transition-all">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
 
-    <!-- Firebase SDKs (Compat Version) -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 max-h-[60vh] overflow-y-auto p-1 pr-2">
+            <button onclick="selectTheme('royal-gold')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+              <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #0a0b0e 50%, #d4af37 50%); border: 2px solid #d4af37;"></div>
+              <span class="text-xs font-bold" data-key="thRoyalGold">الملكي الأسود والذهبي</span>
+            </button>
+            <button onclick="selectTheme('royal-navy')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+              <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #0f172a 50%, #e5c158 50%); border: 2px solid #38bdf8;"></div>
+              <span class="text-xs font-bold" data-key="thRoyalNavy">الملكي الكحلي والذهبي</span>
+            </button>
+            <button onclick="selectTheme('national')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+              <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #021a12 50%, #eab308 50%); border: 2px solid #22c55e;"></div>
+              <span class="text-xs font-bold" data-key="thNational">اللون الوطني</span>
+            </button>
+            <button onclick="selectTheme('burgundy')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+              <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #140508 50%, #fbbf24 50%); border: 2px solid #9f1239;"></div>
+              <span class="text-xs font-bold" data-key="thBurgundy">البورغندي الفاخر</span>
+            </button>
+            <button onclick="selectTheme('pink')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+              <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #1a0f14 50%, #f472b6 50%); border: 2px solid #f472b6;"></div>
+              <span class="text-xs font-bold" data-key="thPink">الوردي الأنيق</span>
+            </button>
+            <button onclick="selectTheme('sky')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+              <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #0f172a 50%, #38bdf8 50%); border: 2px solid #38bdf8;"></div>
+              <span class="text-xs font-bold" data-key="thSky">السماوي الناعم</span>
+            </button>
+            <button onclick="selectTheme('fantasy')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+              <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #0c0714 50%, #e879f9 50%); border: 2px solid #c084fc;"></div>
+              <span class="text-xs font-bold" data-key="thFantasy">الفانتازي الساحر</span>
+            </button>
+            <button onclick="selectTheme('portrait')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+              <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #1c130e 50%, #e0a96d 50%); border: 2px solid #c68b59;"></div>
+              <span class="text-xs font-bold" data-key="thPortrait">بورتريه</span>
+            </button>
+            <button onclick="selectTheme('royal-ivory')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+              <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #f8f6f0 50%, #b45309 50%); border: 2px solid #d97706;"></div>
+              <span class="text-xs font-bold text-gray-200" data-key="thRoyalIvory">الملكي العاجي</span>
+            </button>
+            <button onclick="selectTheme('calm-cloud')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+              <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #f1f5f9 50%, #2563eb 50%); border: 2px solid #3b82f6;"></div>
+              <span class="text-xs font-bold text-gray-200" data-key="thCalmCloud">الغيمة الساكنة</span>
+            </button>
+            <button onclick="selectTheme('spring')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+              <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #052e16 50%, #4ade80 50%); border: 2px solid #4ade80;"></div>
+              <span class="text-xs font-bold" data-key="thSpring">الربيع</span>
+            </button>
+            <button onclick="selectTheme('summer')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+              <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #0c2a38 50%, #f59e0b 50%); border: 2px solid #f59e0b;"></div>
+              <span class="text-xs font-bold" data-key="thSummer">الصيف</span>
+            </button>
+            <button onclick="selectTheme('winter')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+              <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #03131e 50%, #22d3ee 50%); border: 2px solid #22d3ee;"></div>
+              <span class="text-xs font-bold" data-key="thWinter">الشتاء</span>
+            </button>
+            <button onclick="selectTheme('autumn')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+              <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #200e08 50%, #f97316 50%); border: 2px solid #f97316;"></div>
+              <span class="text-xs font-bold" data-key="thAutumn">الخريف</span>
+            </button>
+          </div>
+
+          <div class="pt-2 border-t flex justify-end" style="border-color: rgba(255,255,255,0.1);">
+            <button onclick="closeThemeModal()" class="px-6 py-2.5 rounded-xl font-bold text-sm shadow-lg hover:scale-105 active:scale-95 transition-all" style="background-color: var(--accent-color); color: #000000;" data-key="saveModalBtn">
+              حفظ
+            </button>
+          </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-    <!-- JavaScript Controllers & Firebase Initialization -->
     <script>
+        const i18n = {
+          ar: {
+            headerName: "يوسف آل حامد",
+            headerSubTitle: "سيرة ذاتية وموقع تعليمي",
+            navCv: "السيرة الذاتية",
+            navHub: "المختبر التعليمي",
+            navEvidence: "الشواهد والأداء",
+            langBtnText: "English",
+            themeBtnText: "المظهر",
+            statusActive: "متاح للتميز",
+            jobBadge: "معلم حاسب آلي وتكنولوجيا • مصمم تعليمي ومطور حلول رقمية",
+            fullName: "يوسف حامد آل حامد",
+            headlineSub: "معلم حاسب آلي في التعليم الثانوي، شغوف بالتطوير الرقمي والابتكار التعليمي والتصميم التفاعلي للمناهج والمنصات.",
+            
+            infoNationalityLabel: "الجنسية",
+            infoNationalityVal: "<i class='fa-solid fa-flag accent-text text-xs'></i> سعودي",
+            infoLocationLabel: "الإقامة",
+            infoLocationVal: "<i class='fa-solid fa-location-dot accent-text text-xs'></i> عسير - بيشة",
+            infoStatusLabel: "الحالة الاجتماعية",
+            infoStatusVal: "<i class='fa-solid fa-users accent-text text-xs'></i> متأهل (٥ أفراد)",
+            infoPhoneLabel: "الجوال",
+
+            cvSectionTitle: "السيرة الذاتية والمسيرة المهنية",
+            cvSectionSub: "توثيق للمؤهلات، الخبرات، والمهارات التقنية والتربوية المعتمدة",
+            careerObjectiveTitle: "الهدف المهني",
+            careerObjectiveText: "سعي لبناء جيل واعٍ ومبتكر قادر على التفكير النقدي والإبداعي من خلال بيئة تعليمية محفزة تدعم الطلاب أكاديمياً وأخلاقياً. ملتزم بإعداد جيل يحول المعرفة إلى قدرات عملية واقعية، ويلهم العقول ويصنع المستقبل.",
+            corePillarsTitle: "الكفايات والمحاور التنفيذية الرئيسية",
+            corePillarsSub: "ركائز الخبرة التخصصية والتطوير الرقمي",
+            experienceTitle: "الخبرات المهنية",
+            experienceSub: "مسيرة عطاء وتطوير مستمر لأكثر من 17 عاماً",
+            educationTitle: "التعليم والمؤهلات",
+            educationSub: "المسار الأكاديمي",
+            languagesSectionTitle: "اللغات ومهارات الاتصال",
+            languagesSectionSub: "مستويات إتقان اللغات والقدرات التواصلية",
+            langAr: "العربية", langEn: "الإنجليزية", langEs: "الإسبانية",
+            philosophyHeader: "الفلسفة التعليمية",
+            trainingTitle: "التطوير المهني والبرامج التدريبية",
+            trainingSub: "أكثر من 500 ساعة تدريبية متخصصة في مجالات التقنية والتعليم",
+            hoursBadge: "+500 ساعة تدريبية",
+            postalLabel: "الرمز البريدي",
+            addressLabel: "العنوان الوطني / المختصر",
+            emailLabel: "البريد الإلكتروني",
+            phoneLabel: "التواصل المباشر",
+            modalTitle: "اختيار المظهر (الثيمات)",
+            modalSubTitle: "حدد ثيمك المفضل لتخصيص الألوان والواجهة",
+            saveModalBtn: "حفظ",
+            thRoyalGold: "الملكي الأسود والذهبي", thRoyalNavy: "الملكي الكحلي والذهبي", thNational: "اللون الوطني", thBurgundy: "البورغندي الفاخر",
+            thPink: "الوردي الأنيق", thSky: "السماوي الناعم", thFantasy: "الفانتازي الساحر", thPortrait: "بورتريه",
+            thRoyalIvory: "الملكي العاجي", thCalmCloud: "الغيمة الساكنة", thSpring: "الربيع", thSummer: "الصيف", thWinter: "الشتاء", thAutumn: "الخريف"
+          },
+          en: {
+            headerName: "Youssef Al-Hamed",
+            headerSubTitle: "CV & Portal",
+            navCv: "CV",
+            navHub: "Teaching Lab",
+            navEvidence: "Evidence",
+            langBtnText: "عربي",
+            themeBtnText: "Appearance",
+            statusActive: "Available",
+            jobBadge: "High School CS Teacher • Instructional Designer",
+            fullName: "Youssef Hamed Al-Hamed",
+            headlineSub: "High school Computer Science & IT educator, passionate about digital development.",
+            infoNationalityLabel: "Nationality",
+            infoNationalityVal: "<i class='fa-solid fa-flag accent-text text-xs'></i> Saudi",
+            infoLocationLabel: "Location",
+            infoLocationVal: "<i class='fa-solid fa-location-dot accent-text text-xs'></i> Aseer - Bisha",
+            infoStatusLabel: "Civil Status",
+            infoStatusVal: "<i class='fa-solid fa-users accent-text text-xs'></i> Married (5)",
+            infoPhoneLabel: "Phone",
+            cvSectionTitle: "Curriculum Vitae",
+            cvSectionSub: "Documentation of qualifications and experience",
+            careerObjectiveTitle: "Career Objective",
+            careerObjectiveText: "Seeking to build a conscious and creative generation capable of critical thinking.",
+            corePillarsTitle: "Executive Competencies",
+            corePillarsSub: "Pillars of specialized expertise",
+            experienceTitle: "Professional Experience",
+            experienceSub: "Continuous journey over 17+ years",
+            educationTitle: "Education",
+            educationSub: "Academic Pathway",
+            languagesSectionTitle: "Languages",
+            languagesSectionSub: "Proficiency levels",
+            langAr: "Arabic", langEn: "English", langEs: "Spanish",
+            philosophyHeader: "Educational Philosophy",
+            trainingTitle: "Professional Development",
+            trainingSub: "Over 500 specialized training hours",
+            hoursBadge: "+500 Hours",
+            postalLabel: "Postal Code",
+            addressLabel: "National Address",
+            emailLabel: "Email",
+            phoneLabel: "Direct Phone",
+            modalTitle: "Appearance & Themes",
+            modalSubTitle: "Choose your preferred theme palette",
+            saveModalBtn: "Save",
+            thRoyalGold: "Royal Dark & Gold", thRoyalNavy: "Royal Navy & Gold", thNational: "National Color", thBurgundy: "Luxury Burgundy",
+            thPink: "Elegant Pink", thSky: "Soft Sky", thFantasy: "Fantasy Void", thPortrait: "Portrait",
+            thRoyalIvory: "Royal Ivory", thCalmCloud: "Calm Cloud", thSpring: "Spring", thSummer: "Summer", thWinter: "Winter", thAutumn: "Autumn"
+          }
+        };
+
+        let currentLang = localStorage.getItem('vanta_cv_lang') || 'ar';
+        let currentTheme = localStorage.getItem('vanta_cv_theme') || 'royal-gold';
+
+        const themes = {
+          'royal-gold': { '--bg-primary': '#0a0b0e', '--bg-secondary': '#12151c', '--bg-card': 'rgba(22, 27, 38, 0.7)', '--border-color': 'rgba(212, 175, 55, 0.25)', '--accent-color': '#d4af37', '--accent-hover': '#f3e5ab', '--text-main': '#f3f4f6', '--text-muted': '#9ca3af', '--card-glow': 'rgba(212, 175, 55, 0.15)', '--header-bg': 'rgba(10, 11, 14, 0.85)' },
+          'royal-navy': { '--bg-primary': '#080d1a', '--bg-secondary': '#0f172a', '--bg-card': 'rgba(30, 41, 59, 0.75)', '--border-color': 'rgba(229, 193, 88, 0.3)', '--accent-color': '#e5c158', '--accent-hover': '#fef08a', '--text-main': '#f8fafc', '--text-muted': '#94a3b8', '--card-glow': 'rgba(56, 189, 248, 0.2)', '--header-bg': 'rgba(8, 13, 26, 0.85)' },
+          'national': { '--bg-primary': '#02120d', '--bg-secondary': '#062b1e', '--bg-card': 'rgba(10, 54, 38, 0.7)', '--border-color': 'rgba(234, 179, 8, 0.3)', '--accent-color': '#eab308', '--accent-hover': '#fde047', '--text-main': '#f0fdf4', '--text-muted': '#86efac', '--card-glow': 'rgba(34, 197, 94, 0.2)', '--header-bg': 'rgba(2, 18, 13, 0.85)' },
+          'burgundy': { '--bg-primary': '#0d0305', '--bg-secondary': '#1a080c', '--bg-card': 'rgba(48, 14, 22, 0.75)', '--border-color': 'rgba(251, 191, 36, 0.3)', '--accent-color': '#fbbf24', '--accent-hover': '#fde68a', '--text-main': '#fff1f2', '--text-muted': '#fda4af', '--card-glow': 'rgba(244, 63, 94, 0.2)', '--header-bg': 'rgba(13, 3, 5, 0.85)' },
+          'pink': { '--bg-primary': '#120a0e', '--bg-secondary': '#1f1219', '--bg-card': 'rgba(43, 23, 34, 0.75)', '--border-color': 'rgba(244, 114, 182, 0.3)', '--accent-color': '#f472b6', '--accent-hover': '#fbcfe8', '--text-main': '#fdf2f8', '--text-muted': '#fbcfe8', '--card-glow': 'rgba(244, 114, 182, 0.2)', '--header-bg': 'rgba(18, 10, 14, 0.85)' },
+          'sky': { '--bg-primary': '#070c14', '--bg-secondary': '#0f172a', '--bg-card': 'rgba(30, 41, 59, 0.75)', '--border-color': 'rgba(56, 189, 248, 0.3)', '--accent-color': '#38bdf8', '--accent-hover': '#bae6fd', '--text-main': '#f0f9ff', '--text-muted': '#bae6fd', '--card-glow': 'rgba(56, 189, 248, 0.2)', '--header-bg': 'rgba(7, 12, 20, 0.85)' },
+          'fantasy': { '--bg-primary': '#090510', '--bg-secondary': '#130b21', '--bg-card': 'rgba(35, 18, 59, 0.75)', '--border-color': 'rgba(232, 121, 249, 0.3)', '--accent-color': '#e879f9', '--accent-hover': '#f5d0fe', '--text-main': '#fdf4ff', '--text-muted': '#f5d0fe', '--card-glow': 'rgba(232, 121, 249, 0.2)', '--header-bg': 'rgba(9, 5, 16, 0.85)' },
+          'portrait': { '--bg-primary': '#140d09', '--bg-secondary': '#1c130e', '--bg-card': 'rgba(46, 31, 22, 0.8)', '--border-color': 'rgba(224, 169, 109, 0.35)', '--accent-color': '#e0a96d', '--accent-hover': '#f3d5b5', '--text-main': '#fefefe', '--text-muted': '#d99b73', '--card-glow': 'rgba(198, 139, 89, 0.25)', '--header-bg': 'rgba(20, 13, 9, 0.85)' },
+          'royal-ivory': { '--bg-primary': '#f8f6f0', '--bg-secondary': '#ffffff', '--bg-card': 'rgba(255, 255, 255, 0.9)', '--border-color': 'rgba(180, 83, 9, 0.25)', '--accent-color': '#b45309', '--accent-hover': '#d97706', '--text-main': '#1c1917', '--text-muted': '#78350f', '--card-glow': 'rgba(217, 119, 6, 0.15)', '--header-bg': 'rgba(248, 246, 240, 0.9)' },
+          'calm-cloud': { '--bg-primary': '#f1f5f9', '--bg-secondary': '#ffffff', '--bg-card': 'rgba(255, 255, 255, 0.9)', '--border-color': 'rgba(37, 99, 235, 0.25)', '--accent-color': '#2563eb', '--accent-hover': '#3b82f6', '--text-main': '#0f172a', '--text-muted': '#475569', '--card-glow': 'rgba(59, 130, 246, 0.15)', '--header-bg': 'rgba(241, 245, 249, 0.9)' },
+          'spring': { '--bg-primary': '#021a0d', '--bg-secondary': '#052e16', '--bg-card': 'rgba(14, 61, 34, 0.75)', '--border-color': 'rgba(74, 222, 128, 0.3)', '--accent-color': '#4ade80', '--accent-hover': '#86efac', '--text-main': '#f0fdf4', '--text-muted': '#86efac', '--card-glow': 'rgba(74, 222, 128, 0.2)', '--header-bg': 'rgba(2, 26, 13, 0.85)' },
+          'summer': { '--bg-primary': '#061721', '--bg-secondary': '#0c2a38', '--bg-card': 'rgba(18, 53, 71, 0.75)', '--border-color': 'rgba(245, 158, 11, 0.35)', '--accent-color': '#f59e0b', '--accent-hover': '#fbbf24', '--text-main': '#fffbe6', '--text-muted': '#38bdf8', '--card-glow': 'rgba(245, 158, 11, 0.2)', '--header-bg': 'rgba(6, 23, 33, 0.85)' },
+          'winter': { '--bg-primary': '#020b12', '--bg-secondary': '#03131e', '--bg-card': 'rgba(10, 31, 48, 0.8)', '--border-color': 'rgba(34, 211, 238, 0.3)', '--accent-color': '#22d3ee', '--accent-hover': '#67e8f9', '--text-main': '#f0f9ff', '--text-muted': '#93c5fd', '--card-glow': 'rgba(34, 211, 238, 0.2)', '--header-bg': 'rgba(2, 11, 18, 0.85)' },
+          'autumn': { '--bg-primary': '#140804', '--bg-secondary': '#200e08', '--bg-card': 'rgba(51, 23, 14, 0.8)', '--border-color': 'rgba(249, 115, 22, 0.35)', '--accent-color': '#f97316', '--accent-hover': '#fb923c', '--text-main': '#fff7ed', '--text-muted': '#fdba74', '--card-glow': 'rgba(249, 115, 22, 0.2)', '--header-bg': 'rgba(20, 8, 4, 0.85)' }
+        };
+
+        function selectTheme(themeKey) {
+          if (!themes[themeKey]) return;
+          currentTheme = themeKey;
+          localStorage.setItem('vanta_cv_theme', themeKey);
+          const root = document.documentElement;
+          const selected = themes[themeKey];
+          for (let varName in selected) {
+            root.style.setProperty(varName, selected[varName]);
+          }
+        }
+
+        function toggleLanguage() {
+          currentLang = (currentLang === 'ar') ? 'en' : 'ar';
+          localStorage.setItem('vanta_cv_lang', currentLang);
+          applyLanguage(currentLang);
+        }
+
+        function applyLanguage(lang) {
+          const htmlEl = document.documentElement;
+          htmlEl.setAttribute('lang', lang);
+          if (lang === 'ar') {
+            htmlEl.setAttribute('dir', 'rtl');
+            document.body.style.fontFamily = "'Tajawal', 'Inter', sans-serif";
+          } else {
+            htmlEl.setAttribute('dir', 'ltr');
+            document.body.style.fontFamily = "'Inter', 'Tajawal', sans-serif";
+          }
+          const dictionary = i18n[lang];
+          if (dictionary) {
+            document.querySelectorAll('[data-key]').forEach(el => {
+              const key = el.getAttribute('data-key');
+              if (dictionary[key]) {
+                el.innerHTML = dictionary[key];
+              }
+            });
+          }
+          const langBtnTextEl = document.getElementById('langBtnText');
+          if (langBtnTextEl && dictionary && dictionary.langBtnText) {
+            langBtnTextEl.innerHTML = dictionary.langBtnText;
+          }
+        }
+
+        function openThemeModal() {
+          const modal = document.getElementById('themeModal');
+          modal.classList.remove('opacity-0', 'pointer-events-none');
+          modal.querySelector('div').classList.remove('scale-95');
+          modal.querySelector('div').classList.add('scale-100');
+        }
+
+        function closeThemeModal() {
+          const modal = document.getElementById('themeModal');
+          modal.classList.add('opacity-0', 'pointer-events-none');
+          modal.querySelector('div').classList.remove('scale-100');
+          modal.querySelector('div').classList.add('scale-95');
+        }
+
+        // Firebase & Application Script
         const firebaseConfig = {
             apiKey: "AIzaSyC17jBlKd_pmK6Phlv03gLGIAacvHoRkJU",
             authDomain: "vanta-voids.firebaseapp.com",
@@ -1403,27 +1523,10 @@
         const db = firebase.firestore();
 
         let currentEvidenceIndex = 0;
-
         let siteData = {
             avatar: 'my-photo.jpg',
-            evidence: [
-                'https://onedrive.live.com', 'https://onedrive.live.com', 'https://onedrive.live.com',
-                'https://onedrive.live.com', 'https://onedrive.live.com', 'https://onedrive.live.com',
-                'https://onedrive.live.com', 'https://onedrive.live.com', 'https://onedrive.live.com',
-                'https://onedrive.live.com', 'https://onedrive.live.com'
-            ],
-            subjects: {
-                tech1: 'https://onedrive.live.com',
-                tech2: 'https://onedrive.live.com',
-                tech3: 'https://onedrive.live.com',
-                data: 'https://onedrive.live.com',
-                ai1: 'https://onedrive.live.com',
-                ai2: 'https://onedrive.live.com',
-                design: 'https://onedrive.live.com',
-                cyber: 'https://onedrive.live.com',
-                iot: 'https://onedrive.live.com',
-                swe: 'https://onedrive.live.com'
-            }
+            evidence: new Array(11).fill('https://onedrive.live.com'),
+            subjects: { tech1: 'https://onedrive.live.com', tech2: 'https://onedrive.live.com', tech3: 'https://onedrive.live.com', data: 'https://onedrive.live.com', ai1: 'https://onedrive.live.com', ai2: 'https://onedrive.live.com', design: 'https://onedrive.live.com', cyber: 'https://onedrive.live.com', iot: 'https://onedrive.live.com', swe: 'https://onedrive.live.com' }
         };
 
         const evidenceTitles = [
@@ -1441,18 +1544,13 @@
             { id: 'iot', name: 'إنترنت الأشياء' }, { id: 'swe', name: 'هندسة البرمجيات' }
         ];
 
-        // تحميل البيانات سحابياً من فايربيس لتتزامن بين جميع الأجهزة
         async function loadSavedData() {
             try {
                 const doc = await db.collection('settings').doc('siteConfig').get();
-                if (doc.exists) {
-                    siteData = doc.data();
-                }
+                if (doc.exists) siteData = doc.data();
             } catch (e) {
                 const saved = localStorage.getItem('vantaVoidsData');
-                if (saved) {
-                    try { siteData = JSON.parse(saved); } catch(err){}
-                }
+                if (saved) { try { siteData = JSON.parse(saved); } catch(err){} }
             }
             applySiteData();
         }
@@ -1463,9 +1561,7 @@
             });
             document.querySelectorAll('.sub-link').forEach(el => {
                 const key = el.getAttribute('data-id');
-                if (siteData.subjects && siteData.subjects[key]) {
-                    el.href = siteData.subjects[key];
-                }
+                if (siteData.subjects && siteData.subjects[key]) el.href = siteData.subjects[key];
             });
         }
 
@@ -1478,36 +1574,32 @@
         }
 
         async function verifyPassword() {
-    const input = document.getElementById('passInput').value;
-    try {
-        const doc = await db.collection('settings').doc('siteConfig').get();
-        const correctPin = (doc.exists && doc.data().evidencePin) ? doc.data().evidencePin : '1234';
-        
-        if (input === correctPin) {
-            document.getElementById('passwordModal').style.display = 'none';
-            const targetUrl = (siteData.evidence && siteData.evidence[currentEvidenceIndex]) ? siteData.evidence[currentEvidenceIndex] : 'https://onedrive.live.com';
-            
-            // فتح الرابط في نفس التبويب لتفادي حظر سفاري للنوافذ المنبثقة
-            window.location.href = targetUrl;
-        } else {
-            document.getElementById('evidenceErrorAlert').style.display = 'block';
+            const input = document.getElementById('passInput').value;
+            try {
+                const doc = await db.collection('settings').doc('siteConfig').get();
+                const correctPin = (doc.exists && doc.data().evidencePin) ? doc.data().evidencePin : '1234';
+                if (input === correctPin) {
+                    document.getElementById('passwordModal').style.display = 'none';
+                    const targetUrl = (siteData.evidence && siteData.evidence[currentEvidenceIndex]) ? siteData.evidence[currentEvidenceIndex] : 'https://onedrive.live.com';
+                    window.location.href = targetUrl;
+                } else {
+                    document.getElementById('evidenceErrorAlert').style.display = 'block';
+                }
+            } catch (error) {
+                document.getElementById('evidenceErrorAlert').style.display = 'block';
+            }
         }
-    } catch (error) {
-        document.getElementById('evidenceErrorAlert').style.display = 'block';
-    }
-}
 
         function verifyAdminLogin() {
             const email = document.getElementById('adminUser').value.trim();
             const pass = document.getElementById('adminPass').value;
-
             firebase.auth().signInWithEmailAndPassword(email, pass)
-                .then((userCredential) => {
+                .then(() => {
                     document.getElementById('adminModal').style.display = 'none';
                     populateAdminForm();
                     document.getElementById('adminDashboardModal').style.display = 'flex';
                 })
-                .catch((error) => {
+                .catch(() => {
                     document.getElementById('adminErrorAlert').style.display = 'block';
                 });
         }
@@ -1515,94 +1607,37 @@
         async function populateAdminForm() {
             document.getElementById('editAvatar').value = siteData.avatar || '';
             document.getElementById('editEvidencePin').value = siteData.evidencePin || '1234';
-
             let evHtml = '';
             evidenceTitles.forEach((title, idx) => {
                 let linkVal = (siteData.evidence && siteData.evidence[idx]) ? siteData.evidence[idx] : '';
-                evHtml += `
-                    <label class="form-group-label">${title}</label>
-                    <input type="text" id="ev_input_${idx}" class="form-control" value="${linkVal}">
-                `;
+                evHtml += `<label class="form-group-label">${title}</label><input type="text" id="ev_input_${idx}" class="form-control" value="${linkVal}">`;
             });
             document.getElementById('evidenceLinksInputs').innerHTML = evHtml;
-
             let subHtml = '';
             subjectKeys.forEach(sub => {
                 let subVal = (siteData.subjects && siteData.subjects[sub.id]) ? siteData.subjects[sub.id] : '';
-                subHtml += `
-                    <label class="form-group-label">${sub.name}</label>
-                    <input type="text" id="sub_input_${sub.id}" class="form-control" value="${subVal}">
-                `;
+                subHtml += `<label class="form-group-label">${sub.name}</label><input type="text" id="sub_input_${sub.id}" class="form-control" value="${subVal}">`;
             });
             document.getElementById('subjectLinksInputs').innerHTML = subHtml;
         }
 
-        // حفظ التعديلات سحابياً، إظهار رسالة النجاح، وإغلاق لوحة التحكم تلقائياً
         async function saveAdminChanges() {
             siteData.avatar = document.getElementById('editAvatar').value.trim() || 'my-photo.jpg';
             siteData.evidencePin = document.getElementById('editEvidencePin').value.trim() || '1234';
-
             if (!siteData.evidence) siteData.evidence = [];
-            evidenceTitles.forEach((_, idx) => {
-                const val = document.getElementById(`ev_input_${idx}`).value.trim();
-                siteData.evidence[idx] = val;
-            });
-
+            evidenceTitles.forEach((_, idx) => { siteData.evidence[idx] = document.getElementById(`ev_input_${idx}`).value.trim(); });
             if (!siteData.subjects) siteData.subjects = {};
-            subjectKeys.forEach(sub => {
-                const val = document.getElementById(`sub_input_${sub.id}`).value.trim();
-                siteData.subjects[sub.id] = val;
-            });
-
+            subjectKeys.forEach(sub => { siteData.subjects[sub.id] = document.getElementById(`sub_input_${sub.id}`).value.trim(); });
             try {
-                // حفظ كافة البيانات (الروابط، الرقم السري، الصورة) سحابياً لتتزامن عبر جميع الأجهزة
                 await db.collection('settings').doc('siteConfig').set(siteData, { merge: true });
-
                 localStorage.setItem('vantaVoidsData', JSON.stringify(siteData));
                 applySiteData();
-                
-                // إغلاق لوحة الإدارة فوراً
                 document.getElementById('adminDashboardModal').style.display = 'none';
-                
-                // إظهار رسالة النجاح
-                showSuccessModal('تم الحفظ بنجاح', 'تم تحديث البيانات وتزامنها سحابياً وتطبيقها على جميع الأجهزة فوراً.');
-            } catch (error) {
-                showSuccessModal('تنبيه', 'حدث خطأ أثناء الحفظ السحابي.');
-            }
+                document.getElementById('successModal').style.display = 'flex';
+            } catch (error) { alert('خطأ في الحفظ السحابي'); }
         }
 
-        function openRecoveryModal() {
-            document.getElementById('adminModal').style.display = 'none';
-            document.getElementById('recoveryModal').style.display = 'flex';
-        }
-
-        function sendRecoveryCode(type) {
-            document.getElementById('recoveryModal').style.display = 'none';
-            if(type === 'sms') {
-                showSuccessModal('تم إرسال رمز التحقق', 'تم إرسال رسالة نصية تحتوي على تعليمات استعادة كلمة المرور إلى الجوال 0565588869');
-            } else if(type === 'email') {
-                showSuccessModal('تم إرسال رابط الاستعادة', 'تم إرسال بريد إلكتروني يحتوي على رابط إعادة تعيين كلمة المرور إلى Yh.addict@gmail.com');
-            }
-        }
-
-        function showSuccessModal(title, message) {
-            document.getElementById('successTitle').innerText = title;
-            document.getElementById('successMessage').innerText = message;
-            document.getElementById('successModal').style.display = 'flex';
-        }
-
-        function viewImage(src) {
-            document.getElementById('modalImgSrc').src = src;
-            document.getElementById('imgModal').style.display = 'flex';
-        }
-
-        const allCertificates = [
-            { img: 'cert1.jpg' }, { img: 'cert2.jpg' }, { img: 'cert3.jpg' }, { img: 'cert4.jpg' },
-            { img: 'cert5.jpg' }, { img: 'cert6.jpg' }, { img: 'cert7.jpg' }, { img: 'cert8.jpg' },
-            { img: 'cert9.jpg' }, { img: 'cert10.jpg' }, { img: 'cert11.jpg' }, { img: 'cert12.jpg' },
-            { img: 'cert13.jpg' }, { img: 'cert14.jpg' }, { img: 'cert15.jpg' }, { img: 'cert16.jpg' }
-        ];
-
+        const allCertificates = Array.from({length: 16}, (_, i) => ({ img: `cert${i+1}.jpg` }));
         function renderRandomCertificates() {
             const grid = document.getElementById('randomGalleryGrid');
             if (!grid) return;
@@ -1610,36 +1645,26 @@
             let selected = shuffled.slice(0, 4);
             let htmlContent = '';
             selected.forEach(cert => {
-                htmlContent += `
-                    <div class="gallery-item" onclick="viewImage('${cert.img}')">
-                        <img src="${cert.img}" alt="شهادة معتمدة" onerror="this.src='https://via.placeholder.com/400x300/121824/d4af37?text=Certificate'">
-                    </div>
-                `;
+                htmlContent += `<div class="gallery-item theme-transition" onclick="document.getElementById('modalImgSrc').src='${cert.img}';document.getElementById('imgModal').style.display='flex'"><img src="${cert.img}" alt="شهادة معتمدة" onerror="this.src='https://via.placeholder.com/400x300/121824/d4af37?text=Certificate'"></div>`;
             });
             grid.innerHTML = htmlContent;
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener('DOMContentLoaded', () => {
+            applyLanguage(currentLang);
+            selectTheme(currentTheme);
             loadSavedData();
             renderRandomCertificates();
             setInterval(renderRandomCertificates, 5000);
 
-            const closePass = document.getElementById('closePassModal');
-            if(closePass) closePass.onclick = () => document.getElementById('passwordModal').style.display = 'none';
-
-            const openAdmin = document.getElementById('openAdminModal');
-            if(openAdmin) openAdmin.onclick = () => {
+            document.getElementById('closePassModal').onclick = () => document.getElementById('passwordModal').style.display = 'none';
+            document.getElementById('openAdminModal').onclick = () => {
                 document.getElementById('adminUser').value = '';
                 document.getElementById('adminPass').value = '';
                 document.getElementById('adminErrorAlert').style.display = 'none';
                 document.getElementById('adminModal').style.display = 'flex';
             };
-
-            const closeAdmin = document.getElementById('closeAdminModal');
-            if(closeAdmin) closeAdmin.onclick = () => document.getElementById('adminModal').style.display = 'none';
-
-            const closeRec = document.getElementById('closeRecoveryModal');
-            if(closeRec) closeRec.onclick = () => document.getElementById('recoveryModal').style.display = 'none';
+            document.getElementById('closeAdminModal').onclick = () => document.getElementById('adminModal').style.display = 'none';
         });
     </script>
 </body>
