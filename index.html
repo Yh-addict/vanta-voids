@@ -351,6 +351,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            scroll-margin-top: 100px; /* ضمان ظهور الكارت بدقة عند التوجيه إليه */
         }
 
         .subject-card:hover {
@@ -655,7 +656,7 @@
                 <div class="p-3 rounded-2xl border theme-transition" style="border-color: var(--border-color); background-color: rgba(0,0,0,0.2);">
                   <span class="block text-xs mb-1" style="color: var(--text-muted);" data-key="infoStatusLabel">الحالة الاجتماعية</span>
                   <span class="font-bold flex items-center gap-1.5 justify-center md:justify-start" data-key="infoStatusVal">
-                    <i class="fa-solid fa-users accent-text text-xs"></i> متزوج (٥ أفراد)
+                    <i class="fa-solid fa-users accent-text text-xs"></i> متأهل (٥ أفراد)
                   </span>
                 </div>
 
@@ -1004,7 +1005,7 @@
                 <tbody>
                     <tr>
                         <td><strong data-key="sunday">الأحد</strong></td>
-                        <td><a href="#sub-ai" class="table-subject-btn" data-key="tSubAi">الذكاء الاصطناعي (ثالث 4)</a></td>
+                        <td><a href="#sub-ai1" class="table-subject-btn" data-key="tSubAi">الذكاء الاصطناعي (ثالث 4)</a></td>
                         <td><a href="#sub-tech1" class="table-subject-btn" data-key="tSubTech1">التقنية الرقمية 1 (أول 5)</a></td>
                         <td><div class="table-static-cell"><span class="table-static-title" data-key="tSupport">المساندة الصفية</span><span class="table-static-desc" data-key="tCoverage">تغطية الشواغر</span></div></td>
                         <td>—</td>
@@ -1027,7 +1028,7 @@
                         <td><div class="table-static-cell"><span class="table-static-title" data-key="tEmpower">التمكين الرقمي</span><span class="table-static-desc" data-key="tDev">التطوير المهني</span></div></td>
                         <td>—</td>
                         <td><a href="#sub-design" class="table-subject-btn" data-key="tSubDesign">التصميم الهندسي (ثالث 4)</a></td>
-                        <td><a href="#sub-ai" class="table-subject-btn" data-key="tSubAi">الذكاء الاصطناعي (ثالث 4)</a></td>
+                        <td><a href="#sub-ai1" class="table-subject-btn" data-key="tSubAi">الذكاء الاصطناعي (ثالث 4)</a></td>
                     </tr>
                     <tr>
                         <td><strong data-key="wednesday">الأربعاء</strong></td>
@@ -1080,7 +1081,7 @@
                 </div>
                 <a href="#" class="resource-badge sub-link" data-id="data" target="_blank"><i class="fa-solid fa-folder-open"></i><span data-key="resourcesBtn">المصادر والعروض</span></a>
             </div>
-            <div class="subject-card theme-transition" id="sub-ai">
+            <div class="subject-card theme-transition" id="sub-ai1">
                 <div>
                     <div class="subject-header"><i class="fa-solid fa-brain"></i><h3 data-key="cardAi1Title">الذكاء الاصطناعي (1)</h3></div>
                     <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardAi1Desc">خوارزميات التعلم الآلي، هندسة التلقين ونماذج الرؤية.</p>
@@ -1432,7 +1433,7 @@
             infoLocationLabel: "الإقامة",
             infoLocationVal: "<i class='fa-solid fa-location-dot accent-text text-xs'></i> عسير - بيشة",
             infoStatusLabel: "الحالة الاجتماعية",
-            infoStatusVal: "<i class='fa-solid fa-users accent-text text-xs'></i> متزوج (٥ أفراد)",
+            infoStatusVal: "<i class='fa-solid fa-users accent-text text-xs'></i> متأهل (٥ أفراد)",
             infoPhoneLabel: "الجوال",
 
             cvSectionTitle: "السيرة الذاتية والمسيرة المهنية",
