@@ -362,9 +362,16 @@
             scroll-margin-top: 100px;
         }
 
-        .subject-card:hover {
+.subject-card:hover {
             border-color: var(--accent-color);
             transform: translateY(-4px);
+        }
+
+        .subject-card:target {
+            border-color: var(--accent-color) !important;
+            box-shadow: 0 0 25px var(--accent-color), inset 0 0 15px var(--accent-color);
+            transform: scale(1.02);
+            transition: all 0.4s ease;
         }
 
         .subject-header {
