@@ -611,7 +611,7 @@
           <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full opacity-20 pointer-events-none blur-3xl accent-bg"></div>
 
           <div class="flex flex-col md:flex-row items-center md:items-start gap-8 relative z-10">
-            <!-- Avatar Badge (Square style as requested) -->
+            <!-- Avatar Badge -->
             <div class="relative group">
               <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-3xl border-2 flex flex-col items-center justify-center p-2 shadow-2xl relative overflow-hidden theme-transition" style="border-color: var(--accent-color); background-color: var(--bg-secondary);">
                 <img src="my-photo.jpg" alt="يوسف حامد آل حامد" class="w-full h-full rounded-2xl object-cover dynamic-avatar" onerror="this.src='https://via.placeholder.com/300/121824/d4af37?text=Youssef'">
@@ -671,7 +671,7 @@
         </div>
     </section>
 
-    <!-- 1. السيرة الذاتية (مطابقة 100% لصفحة CV.HTML) -->
+    <!-- 1. السيرة الذاتية -->
     <section id="cv" class="content-section">
         <div class="section-header">
             <h2 class="section-title" data-key="cvSectionTitle">السيرة الذاتية والمسيرة المهنية</h2>
@@ -815,7 +815,7 @@
                   <div class="bg-black/20 p-5 rounded-2xl border theme-transition space-y-2" style="border-color: rgba(255,255,255,0.08);">
                     <div class="flex flex-wrap items-center justify-between gap-2">
                       <h3 class="text-base sm:text-lg font-bold" data-key="job2Title">معلم حاسب آلي</h3>
-                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); color: var(--accent-color);">2009 - 2010</span>
+                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); color: var(--accent-color);" data-key="job2Year">2009 - 2010</span>
                     </div>
                     <p class="text-xs sm:text-sm font-semibold accent-text" data-key="job2Org">وزارة التعليم - الإدارة العامة للتعليم بمنطقة تبوك</p>
                     <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);" data-key="job2Desc">تدريس مفاهيم الحاسب الأساسية وتطوير مهارات الطلاب في المعامل الرقمية واستراتيجيات التعلم التفاعلي.</p>
@@ -827,7 +827,7 @@
                   <div class="bg-black/20 p-5 rounded-2xl border theme-transition space-y-2" style="border-color: rgba(255,255,255,0.08);">
                     <div class="flex flex-wrap items-center justify-between gap-2">
                       <h3 class="text-base sm:text-lg font-bold" data-key="job3Title">قطاع العمليات المصرفية والخدمات المالية</h3>
-                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); color: var(--accent-color);">2008 - 2009</span>
+                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); color: var(--accent-color);" data-key="job3Year">2008 - 2009</span>
                     </div>
                     <p class="text-xs sm:text-sm font-semibold accent-text" data-key="job3Org">مصرف الراجحي - الإدارة الإقليمية بأبها</p>
                     <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);" data-key="job3Desc">تنفيذ ومتابعة العمليات المصرفية والخدمات المالية المتقدمة، اكتساب خبرة عالية في الدقة والأنظمة الرقمية وخدمة العملاء.</p>
@@ -839,7 +839,7 @@
                   <div class="bg-black/20 p-5 rounded-2xl border theme-transition space-y-2" style="border-color: rgba(255,255,255,0.08);">
                     <div class="flex flex-wrap items-center justify-between gap-2">
                       <h3 class="text-base sm:text-lg font-bold" data-key="job4Title">معلم حاسب آلي وإداري مكتب</h3>
-                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); color: var(--accent-color);">2007 - 2008</span>
+                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); color: var(--accent-color);" data-key="job4Year">2007 - 2008</span>
                     </div>
                     <p class="text-xs sm:text-sm font-semibold accent-text" data-key="job4Org">وزارة التعليم - إدارة التعليم بسراة عبيدة (مكتب مدير الإدارة)</p>
                     <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);" data-key="job4Desc">بداية المسيرة التعليمية والعمل الإداري بمكتب مدير إدارة التعليم؛ حيث تشرفت بتشرب أدبيات العمل التعليمي.</p>
@@ -919,7 +919,7 @@
                   </div>
                 </div>
 
-                <!-- فلسفتي في التعليم (متروكة كما طلبتها بدون تغيير) -->
+                <!-- فلسفتي في التعليم -->
                 <div class="p-4 rounded-2xl border theme-transition relative" style="border-color: var(--border-color); background-color: rgba(0,0,0,0.2);">
                   <i class="fa-solid fa-quote-right text-2xl absolute top-3 left-3 opacity-10 accent-text"></i>
                   <h3 class="text-xs font-bold uppercase tracking-wider accent-text mb-2" data-key="philosophyHeader">فلسفتي في التعليم</h3>
@@ -980,66 +980,72 @@
     <!-- 2. المختبر التعليمي والجدول الأسبوعي -->
     <section id="teaching-hub" class="content-section">
         <div class="section-header">
-            <h2 class="section-title">المختبر التعليمي والمقررات</h2>
-            <p class="section-subtitle">جدول الحصص الأسبوعي والموارد الدراسية للتخصصات التقنية</p>
+            <h2 class="section-title" data-key="hubSectionTitle">المختبر التعليمي والمقررات</h2>
+            <p class="section-subtitle" data-key="hubSectionSub">جدول الحصص الأسبوعي والموارد الدراسية للتخصصات التقنية</p>
         </div>
 
         <div class="timetable-wrapper">
-            <h3 style="color: var(--gold-light); margin-bottom: 1rem; text-align: center; font-weight: 700;">
+            <h3 style="color: var(--gold-light); margin-bottom: 1rem; text-align: center; font-weight: 700;" data-key="timetableTitle">
                 <i class="fa-solid fa-calendar-days accent-text"></i>
                 جدول الحصص الأسبوعي — ثانوية الملك عبدالله بن عبدالعزيز ببيشة (مسارات 1448هـ)
             </h3>
             <table class="timetable-table">
                 <thead>
                     <tr>
-                        <th>اليوم</th><th>الحصة 1</th><th>الحصة 2</th><th>الحصة 3</th><th>الحصة 4</th><th>الحصة 5</th><th>الحصة 6</th>
+                        <th data-key="dayCol">اليوم</th>
+                        <th data-key="p1Col">الحصة 1</th>
+                        <th data-key="p2Col">الحصة 2</th>
+                        <th data-key="p3Col">الحصة 3</th>
+                        <th data-key="p4Col">الحصة 4</th>
+                        <th data-key="p5Col">الحصة 5</th>
+                        <th data-key="p6Col">الحصة 6</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>الأحد</strong></td>
-                        <td><a href="#sub-ai" class="table-subject-btn">الذكاء الاصطناعي (ثالث 4)</a></td>
-                        <td><a href="#sub-tech1" class="table-subject-btn">التقنية الرقمية 1 (أول 5)</a></td>
-                        <td><div class="table-static-cell"><span class="table-static-title">المساندة الصفية</span><span class="table-static-desc">تغطية الشواغر</span></div></td>
+                        <td><strong data-key="sunday">الأحد</strong></td>
+                        <td><a href="#sub-ai" class="table-subject-btn" data-key="tSubAi">الذكاء الاصطناعي (ثالث 4)</a></td>
+                        <td><a href="#sub-tech1" class="table-subject-btn" data-key="tSubTech1">التقنية الرقمية 1 (أول 5)</a></td>
+                        <td><div class="table-static-cell"><span class="table-static-title" data-key="tSupport">المساندة الصفية</span><span class="table-static-desc" data-key="tCoverage">تغطية الشواغر</span></div></td>
                         <td>—</td>
-                        <td><div class="table-static-cell"><span class="table-static-title">استدامة رقمية</span><span class="table-static-desc">فحص البنية</span></div></td>
-                        <td><div class="table-static-cell"><span class="table-static-title">استدامة رقمية</span><span class="table-static-desc">فحص البنية</span></div></td>
+                        <td><div class="table-static-cell"><span class="table-static-title" data-key="tSustainability">استدامة رقمية</span><span class="table-static-desc" data-key="tCheck">فحص البنية</span></div></td>
+                        <td><div class="table-static-cell"><span class="table-static-title" data-key="tSustainability">استدامة رقمية</span><span class="table-static-desc" data-key="tCheck">فحص البنية</span></div></td>
                     </tr>
                     <tr>
-                        <td><strong>الإثنين</strong></td>
-                        <td><a href="#sub-design" class="table-subject-btn">التصميم الهندسي (ثالث 4)</a></td>
-                        <td><a href="#sub-cyber" class="table-subject-btn">الأمن السيبراني (ثالث 4)</a></td>
-                        <td><a href="#sub-tech1" class="table-subject-btn">التقنية الرقمية 1 (أول 5)</a></td>
+                        <td><strong data-key="monday">الإثنين</strong></td>
+                        <td><a href="#sub-design" class="table-subject-btn" data-key="tSubDesign">التصميم الهندسي (ثالث 4)</a></td>
+                        <td><a href="#sub-cyber" class="table-subject-btn" data-key="tSubCyber">الأمن السيبراني (ثالث 4)</a></td>
+                        <td><a href="#sub-tech1" class="table-subject-btn" data-key="tSubTech1">التقنية الرقمية 1 (أول 5)</a></td>
                         <td>—</td>
-                        <td><div class="table-static-cell"><span class="table-static-title">جاهزية المعامل</span><span class="table-static-desc">معايرة وتجهيز</span></div></td>
-                        <td><div class="table-static-cell"><span class="table-static-title">جاهزية المعامل</span><span class="table-static-desc">معايرة وتجهيز</span></div></td>
+                        <td><div class="table-static-cell"><span class="table-static-title" data-key="tLabPrep">جاهزية المعامل</span><span class="table-static-desc" data-key="tCalibrate">معايرة وتجهيز</span></div></td>
+                        <td><div class="table-static-cell"><span class="table-static-title" data-key="tLabPrep">جاهزية المعامل</span><span class="table-static-desc" data-key="tCalibrate">معايرة وتجهيز</span></div></td>
                     </tr>
                     <tr>
-                        <td><strong>الثلاثاء</strong></td>
-                        <td><div class="table-static-cell"><span class="table-static-title">التمكين الرقمي</span><span class="table-static-desc">التطوير المهني</span></div></td>
-                        <td><div class="table-static-cell"><span class="table-static-title">التمكين الرقمي</span><span class="table-static-desc">التطوير المهني</span></div></td>
-                        <td><div class="table-static-cell"><span class="table-static-title">التمكين الرقمي</span><span class="table-static-desc">التطوير المهني</span></div></td>
+                        <td><strong data-key="tuesday">الثلاثاء</strong></td>
+                        <td><div class="table-static-cell"><span class="table-static-title" data-key="tEmpower">التمكين الرقمي</span><span class="table-static-desc" data-key="tDev">التطوير المهني</span></div></td>
+                        <td><div class="table-static-cell"><span class="table-static-title" data-key="tEmpower">التمكين الرقمي</span><span class="table-static-desc" data-key="tDev">التطوير المهني</span></div></td>
+                        <td><div class="table-static-cell"><span class="table-static-title" data-key="tEmpower">التمكين الرقمي</span><span class="table-static-desc" data-key="tDev">التطوير المهني</span></div></td>
                         <td>—</td>
-                        <td><a href="#sub-design" class="table-subject-btn">التصميم الهندسي (ثالث 4)</a></td>
-                        <td><a href="#sub-ai" class="table-subject-btn">الذكاء الاصطناعي (ثالث 4)</a></td>
+                        <td><a href="#sub-design" class="table-subject-btn" data-key="tSubDesign">التصميم الهندسي (ثالث 4)</a></td>
+                        <td><a href="#sub-ai" class="table-subject-btn" data-key="tSubAi">الذكاء الاصطناعي (ثالث 4)</a></td>
                     </tr>
                     <tr>
-                        <td><strong>الأربعاء</strong></td>
-                        <td><div class="table-static-cell"><span class="table-static-title">استبصار تقني</span><span class="table-static-desc">جلسة خاصة</span></div></td>
-                        <td><a href="#sub-cyber" class="table-subject-btn">الأمن السيبراني (ثالث 4)</a></td>
-                        <td><a href="#sub-design" class="table-subject-btn">التصميم الهندسي (ثالث 4)</a></td>
+                        <td><strong data-key="wednesday">الأربعاء</strong></td>
+                        <td><div class="table-static-cell"><span class="table-static-title" data-key="tInsight">استبصار تقني</span><span class="table-static-desc" data-key="tSpecial">جلسة خاصة</span></div></td>
+                        <td><a href="#sub-cyber" class="table-subject-btn" data-key="tSubCyber">الأمن السيبراني (ثالث 4)</a></td>
+                        <td><a href="#sub-design" class="table-subject-btn" data-key="tSubDesign">التصميم الهندسي (ثالث 4)</a></td>
                         <td>—</td>
-                        <td><div class="table-static-cell"><span class="table-static-title">التوجيه العرفي</span><span class="table-static-desc">جلسة إثراء</span></div></td>
-                        <td><div class="table-static-cell"><span class="table-static-title">التوجيه العرفي</span><span class="table-static-desc">جلسة إثراء</span></div></td>
+                        <td><div class="table-static-cell"><span class="table-static-title" data-key="tGuidance">التوجيه العرفي</span><span class="table-static-desc" data-key="tEnrich">جلسة إثراء</span></div></td>
+                        <td><div class="table-static-cell"><span class="table-static-title" data-key="tGuidance">التوجيه العرفي</span><span class="table-static-desc" data-key="tEnrich">جلسة إثراء</span></div></td>
                     </tr>
                     <tr>
-                        <td><strong>الخميس</strong></td>
-                        <td><div class="table-static-cell"><span class="table-static-title">المختبر البرمجي</span><span class="table-static-desc">تطوير واختبار</span></div></td>
-                        <td><a href="#sub-tech1" class="table-subject-btn">التقنية الرقمية 1 (أول 5)</a></td>
-                        <td><div class="table-static-cell"><span class="table-static-title">المختبر البرمجي</span><span class="table-static-desc">تطوير واختبار</span></div></td>
+                        <td><strong data-key="thursday">الخميس</strong></td>
+                        <td><div class="table-static-cell"><span class="table-static-title" data-key="tCodeLab">المختبر البرمجي</span><span class="table-static-desc" data-key="tTest">تطوير واختبار</span></div></td>
+                        <td><a href="#sub-tech1" class="table-subject-btn" data-key="tSubTech1">التقنية الرقمية 1 (أول 5)</a></td>
+                        <td><div class="table-static-cell"><span class="table-static-title" data-key="tCodeLab">المختبر البرمجي</span><span class="table-static-desc" data-key="tTest">تطوير واختبار</span></div></td>
                         <td>—</td>
-                        <td><div class="table-static-cell"><span class="table-static-title">الرصد والتحليل</span><span class="table-static-desc">أعمال الأسبوع</span></div></td>
-                        <td><div class="table-static-cell"><span class="table-static-title">الرصد والتحليل</span><span class="table-static-desc">أعمال الأسبوع</span></div></td>
+                        <td><div class="table-static-cell"><span class="table-static-title" data-key="tMonitor">الرصد والتحليل</span><span class="table-static-desc" data-key="tWeekly">أعمال الأسبوع</span></div></td>
+                        <td><div class="table-static-cell"><span class="table-static-title" data-key="tMonitor">الرصد والتحليل</span><span class="table-static-desc" data-key="tWeekly">أعمال الأسبوع</span></div></td>
                     </tr>
                 </tbody>
             </table>
@@ -1047,44 +1053,74 @@
 
         <div class="cards-grid">
             <div class="subject-card theme-transition" id="sub-tech1">
-                <div><div class="subject-header"><i class="fa-solid fa-desktop"></i><h3>التقنية الرقمية (1)</h3></div><p style="font-size: 0.85rem; color: var(--text-muted);">أساسيات الحاسب، المستندات الرقمية، والمعالجة البرمجية الأولية.</p></div>
-                <a href="#" class="resource-badge sub-link" data-id="tech1" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
+                <div>
+                    <div class="subject-header"><i class="fa-solid fa-desktop"></i><h3 data-key="cardTech1Title">التقنية الرقمية (1)</h3></div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardTech1Desc">أساسيات الحاسب، المستندات الرقمية، والمعالجة البرمجية الأولية.</p>
+                </div>
+                <a href="#" class="resource-badge sub-link" data-id="tech1" target="_blank"><i class="fa-solid fa-folder-open"></i><span data-key="resourcesBtn">المصادر والعروض</span></a>
             </div>
             <div class="subject-card theme-transition" id="sub-tech2">
-                <div><div class="subject-header"><i class="fa-solid fa-laptop"></i><h3>التقنية الرقمية (2)</h3></div><p style="font-size: 0.85rem; color: var(--text-muted);">مفاهيم الشبكات، أدوات الاتصال والتصميم الرقمي.</p></div>
-                <a href="#" class="resource-badge sub-link" data-id="tech2" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
+                <div>
+                    <div class="subject-header"><i class="fa-solid fa-laptop"></i><h3 data-key="cardTech2Title">التقنية الرقمية (2)</h3></div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardTech2Desc">مفاهيم الشبكات، أدوات الاتصال والتصميم الرقمي.</p>
+                </div>
+                <a href="#" class="resource-badge sub-link" data-id="tech2" target="_blank"><i class="fa-solid fa-folder-open"></i><span data-key="resourcesBtn">المصادر والعروض</span></a>
             </div>
             <div class="subject-card theme-transition" id="sub-tech3">
-                <div><div class="subject-header"><i class="fa-solid fa-code"></i><h3>التقنية الرقمية (3)</h3></div><p style="font-size: 0.85rem; color: var(--text-muted);">التطبيقات المتقدمة والمشاريع البرمجية التفاعلية.</p></div>
-                <a href="#" class="resource-badge sub-link" data-id="tech3" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
+                <div>
+                    <div class="subject-header"><i class="fa-solid fa-code"></i><h3 data-key="cardTech3Title">التقنية الرقمية (3)</h3></div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardTech3Desc">التطبيقات المتقدمة والمشاريع البرمجية التفاعلية.</p>
+                </div>
+                <a href="#" class="resource-badge sub-link" data-id="tech3" target="_blank"><i class="fa-solid fa-folder-open"></i><span data-key="resourcesBtn">المصادر والعروض</span></a>
             </div>
             <div class="subject-card theme-transition" id="sub-data">
-                <div><div class="subject-header"><i class="fa-solid fa-database"></i><h3>علم البيانات</h3></div><p style="font-size: 0.85rem; color: var(--text-muted);">جمع وتعديل البيانات، النمذجة والتحليل الإحصائي الرقمي.</p></div>
-                <a href="#" class="resource-badge sub-link" data-id="data" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
+                <div>
+                    <div class="subject-header"><i class="fa-solid fa-database"></i><h3 data-key="cardDataTitle">علم البيانات</h3></div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardDataDesc">جمع وتعديل البيانات، النمذجة والتحليل الإحصائي الرقمي.</p>
+                </div>
+                <a href="#" class="resource-badge sub-link" data-id="data" target="_blank"><i class="fa-solid fa-folder-open"></i><span data-key="resourcesBtn">المصادر والعروض</span></a>
             </div>
             <div class="subject-card theme-transition" id="sub-ai">
-                <div><div class="subject-header"><i class="fa-solid fa-brain"></i><h3>الذكاء الاصطناعي (1)</h3></div><p style="font-size: 0.85rem; color: var(--text-muted);">خوارزميات التعلم الآلي، هندسة التلقين ونماذج الرؤية.</p></div>
-                <a href="#" class="resource-badge sub-link" data-id="ai1" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
+                <div>
+                    <div class="subject-header"><i class="fa-solid fa-brain"></i><h3 data-key="cardAi1Title">الذكاء الاصطناعي (1)</h3></div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardAi1Desc">خوارزميات التعلم الآلي، هندسة التلقين ونماذج الرؤية.</p>
+                </div>
+                <a href="#" class="resource-badge sub-link" data-id="ai1" target="_blank"><i class="fa-solid fa-folder-open"></i><span data-key="resourcesBtn">المصادر والعروض</span></a>
             </div>
             <div class="subject-card theme-transition" id="sub-ai2">
-                <div><div class="subject-header"><i class="fa-solid fa-robot"></i><h3>الذكاء الاصطناعي (2)</h3></div><p style="font-size: 0.85rem; color: var(--text-muted);">التطبيقات المتقدمة والشبكات العصبية الاصطناعية.</p></div>
-                <a href="#" class="resource-badge sub-link" data-id="ai2" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
+                <div>
+                    <div class="subject-header"><i class="fa-solid fa-robot"></i><h3 data-key="cardAi2Title">الذكاء الاصطناعي (2)</h3></div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardAi2Desc">التطبيقات المتقدمة والشبكات العصبية الاصطناعية.</p>
+                </div>
+                <a href="#" class="resource-badge sub-link" data-id="ai2" target="_blank"><i class="fa-solid fa-folder-open"></i><span data-key="resourcesBtn">المصادر والعروض</span></a>
             </div>
             <div class="subject-card theme-transition" id="sub-design">
-                <div><div class="subject-header"><i class="fa-solid fa-compass-drafting"></i><h3>التصميم الهندسي</h3></div><p style="font-size: 0.85rem; color: var(--text-muted);">النمذجة ثلاثية الأبعاد والتصميمات الميكانيكية والهندسية.</p></div>
-                <a href="#" class="resource-badge sub-link" data-id="design" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
+                <div>
+                    <div class="subject-header"><i class="fa-solid fa-compass-drafting"></i><h3 data-key="cardDesignTitle">التصميم الهندسي</h3></div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardDesignDesc">النمذجة ثلاثية الأبعاد والتصميمات الميكانيكية والهندسية.</p>
+                </div>
+                <a href="#" class="resource-badge sub-link" data-id="design" target="_blank"><i class="fa-solid fa-folder-open"></i><span data-key="resourcesBtn">المصادر والعروض</span></a>
             </div>
             <div class="subject-card theme-transition" id="sub-cyber">
-                <div><div class="subject-header"><i class="fa-solid fa-shield-halved"></i><h3>الأمن السيبراني</h3></div><p style="font-size: 0.85rem; color: var(--text-muted);">أنظمة التشفير، حماية البيانات والوقاية من الاحتيال.</p></div>
-                <a href="#" class="resource-badge sub-link" data-id="cyber" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
+                <div>
+                    <div class="subject-header"><i class="fa-solid fa-shield-halved"></i><h3 data-key="cardCyberTitle">الأمن السيبراني</h3></div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardCyberDesc">أنظمة التشفير، حماية البيانات والوقاية من الاحتيال.</p>
+                </div>
+                <a href="#" class="resource-badge sub-link" data-id="cyber" target="_blank"><i class="fa-solid fa-folder-open"></i><span data-key="resourcesBtn">المصادر والعروض</span></a>
             </div>
             <div class="subject-card theme-transition" id="sub-iot">
-                <div><div class="subject-header"><i class="fa-solid fa-network-wired"></i><h3>إنترنت الأشياء</h3></div><p style="font-size: 0.85rem; color: var(--text-muted);">ربط الحساسات والمتحكمات الدقيقة بالشبكات.</p></div>
-                <a href="#" class="resource-badge sub-link" data-id="iot" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
+                <div>
+                    <div class="subject-header"><i class="fa-solid fa-network-wired"></i><h3 data-key="cardIotTitle">إنترنت الأشياء</h3></div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardIotDesc">ربط الحساسات والمتحكمات الدقيقة بالشبكات.</p>
+                </div>
+                <a href="#" class="resource-badge sub-link" data-id="iot" target="_blank"><i class="fa-solid fa-folder-open"></i><span data-key="resourcesBtn">المصادر والعروض</span></a>
             </div>
             <div class="subject-card theme-transition" id="sub-swe">
-                <div><div class="subject-header"><i class="fa-solid fa-layer-group"></i><h3>هندسة البرمجيات</h3></div><p style="font-size: 0.85rem; color: var(--text-muted);">دورة حياة تطوير الأنظمة البرمجية واختبار الكود.</p></div>
-                <a href="#" class="resource-badge sub-link" data-id="swe" target="_blank"><i class="fa-solid fa-folder-open"></i><span>المصادر والعروض</span></a>
+                <div>
+                    <div class="subject-header"><i class="fa-solid fa-layer-group"></i><h3 data-key="cardSweTitle">هندسة البرمجيات</h3></div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardSweDesc">دورة حياة تطوير الأنظمة البرمجية واختبار الكود.</p>
+                </div>
+                <a href="#" class="resource-badge sub-link" data-id="swe" target="_blank"><i class="fa-solid fa-folder-open"></i><span data-key="resourcesBtn">المصادر والعروض</span></a>
             </div>
         </div>
     </section>
@@ -1092,31 +1128,75 @@
     <!-- 3. الشواهد والأداء الوظيفي والمعرض الرقمي -->
     <section id="evidence" class="content-section">
         <div class="section-header">
-            <h2 class="section-title">الشواهد والأداء الوظيفي</h2>
-            <p class="section-subtitle">ملفات ومحاور الأداء الوظيفي المعتمدة (محمية بكلمة مرور) والاستوديو الرقمي</p>
+            <h2 class="section-title" data-key="evidenceSectionTitle">الشواهد والأداء الوظيفي</h2>
+            <p class="section-subtitle" data-key="evidenceSectionSub">ملفات ومحاور الأداء الوظيفي المعتمدة (محمية بكلمة مرور) والاستوديو الرقمي</p>
         </div>
 
-        <h3 style="color: var(--gold-light); margin-bottom: 1.5rem; font-weight: 700;">
+        <h3 style="color: var(--gold-light); margin-bottom: 1.5rem; font-weight: 700;" data-key="evidenceListHeader">
             <i class="fa-solid fa-user-shield accent-text"></i> محاور الأداء الوظيفي المعتمدة
         </h3>
         <div class="cards-grid" style="margin-bottom: 4rem;">
-            <div class="evidence-card theme-transition" onclick="openEvidence(0)"><i class="fa-solid fa-lock lock-icon"></i><h4 style="color: var(--text-main); font-size: 1rem;"><i class="fa-solid fa-check-double accent-text"></i> أداء الواجبات الوظيفية</h4><p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">محمي بكلمة مرور</p></div>
-            <div class="evidence-card theme-transition" onclick="openEvidence(1)"><i class="fa-solid fa-lock lock-icon"></i><h4 style="color: var(--text-main); font-size: 1rem;"><i class="fa-solid fa-sliders accent-text"></i> إعداد وتنفيذ خطة التعلم</h4><p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">محمي بكلمة مرور</p></div>
-            <div class="evidence-card theme-transition" onclick="openEvidence(2)"><i class="fa-solid fa-lock lock-icon"></i><h4 style="color: var(--text-main); font-size: 1rem;"><i class="fa-solid fa-users-gear accent-text"></i> الإدارة الصفية</h4><p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">محمي بكلمة مرور</p></div>
-            <div class="evidence-card theme-transition" onclick="openEvidence(3)"><i class="fa-solid fa-lock lock-icon"></i><h4 style="color: var(--text-main); font-size: 1rem;"><i class="fa-solid fa-people-arrows accent-text"></i> التفاعل مع المجتمع المهني</h4><p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">محمي بكلمة مرور</p></div>
-            <div class="evidence-card theme-transition" onclick="openEvidence(4)"><i class="fa-solid fa-lock lock-icon"></i><h4 style="color: var(--text-main); font-size: 1rem;"><i class="fa-solid fa-comments accent-text"></i> التفاعل مع أولياء الأمور</h4><p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">محمي بكلمة مرور</p></div>
-            <div class="evidence-card theme-transition" onclick="openEvidence(5)"><i class="fa-solid fa-lock lock-icon"></i><h4 style="color: var(--text-main); font-size: 1rem;"><i class="fa-solid fa-lightbulb accent-text"></i> التنوع في استراتيجيات التدريس</h4><p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">محمي بكلمة مرور</p></div>
-            <div class="evidence-card theme-transition" onclick="openEvidence(6)"><i class="fa-solid fa-lock lock-icon"></i><h4 style="color: var(--text-main); font-size: 1rem;"><i class="fa-solid fa-chart-line accent-text"></i> تحسين نتائج المتعلمين</h4><p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">محمي بكلمة مرور</p></div>
-            <div class="evidence-card theme-transition" onclick="openEvidence(7)"><i class="fa-solid fa-lock lock-icon"></i><h4 style="color: var(--text-main); font-size: 1rem;"><i class="fa-solid fa-chart-pie accent-text"></i> تحليل نتائج المتعلمين وتشخيص مستوياتهم</h4><p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">محمي بكلمة مرور</p></div>
-            <div class="evidence-card theme-transition" onclick="openEvidence(8)"><i class="fa-solid fa-lock lock-icon"></i><h4 style="color: var(--text-main); font-size: 1rem;"><i class="fa-solid fa-list-check accent-text"></i> تنوع أساليب التقويم</h4><p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">محمي بكلمة مرور</p></div>
-            <div class="evidence-card theme-transition" onclick="openEvidence(9)"><i class="fa-solid fa-lock lock-icon"></i><h4 style="color: var(--text-main); font-size: 1rem;"><i class="fa-solid fa-seedling accent-text"></i> تهيئة البيئة التعليمية</h4><p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">محمي بكلمة مرور</p></div>
-            <div class="evidence-card theme-transition" onclick="openEvidence(10)"><i class="fa-solid fa-lock lock-icon"></i><h4 style="color: var(--text-main); font-size: 1rem;"><i class="fa-solid fa-microchip accent-text"></i> توظيف التقنيات ووسائل التعلم المناسبة</h4><p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">محمي بكلمة مرور</p></div>
+            <div class="evidence-card theme-transition" onclick="openEvidence(0)">
+                <i class="fa-solid fa-lock lock-icon"></i>
+                <h4 style="color: var(--text-main); font-size: 1rem;" data-key="ev1"><i class="fa-solid fa-check-double accent-text"></i> أداء الواجبات الوظيفية</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;" data-key="protectedText">محمي بكلمة مرور</p>
+            </div>
+            <div class="evidence-card theme-transition" onclick="openEvidence(1)">
+                <i class="fa-solid fa-lock lock-icon"></i>
+                <h4 style="color: var(--text-main); font-size: 1rem;" data-key="ev2"><i class="fa-solid fa-sliders accent-text"></i> إعداد وتنفيذ خطة التعلم</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;" data-key="protectedText">محمي بكلمة مرور</p>
+            </div>
+            <div class="evidence-card theme-transition" onclick="openEvidence(2)">
+                <i class="fa-solid fa-lock lock-icon"></i>
+                <h4 style="color: var(--text-main); font-size: 1rem;" data-key="ev3"><i class="fa-solid fa-users-gear accent-text"></i> الإدارة الصفية</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;" data-key="protectedText">محمي بكلمة مرور</p>
+            </div>
+            <div class="evidence-card theme-transition" onclick="openEvidence(3)">
+                <i class="fa-solid fa-lock lock-icon"></i>
+                <h4 style="color: var(--text-main); font-size: 1rem;" data-key="ev4"><i class="fa-solid fa-people-arrows accent-text"></i> التفاعل مع المجتمع المهني</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;" data-key="protectedText">محمي بكلمة مرور</p>
+            </div>
+            <div class="evidence-card theme-transition" onclick="openEvidence(4)">
+                <i class="fa-solid fa-lock lock-icon"></i>
+                <h4 style="color: var(--text-main); font-size: 1rem;" data-key="ev5"><i class="fa-solid fa-comments accent-text"></i> التفاعل مع أولياء الأمور</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;" data-key="protectedText">محمي بكلمة مرور</p>
+            </div>
+            <div class="evidence-card theme-transition" onclick="openEvidence(5)">
+                <i class="fa-solid fa-lock lock-icon"></i>
+                <h4 style="color: var(--text-main); font-size: 1rem;" data-key="ev6"><i class="fa-solid fa-lightbulb accent-text"></i> التنوع في استراتيجيات التدريس</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;" data-key="protectedText">محمي بكلمة مرور</p>
+            </div>
+            <div class="evidence-card theme-transition" onclick="openEvidence(6)">
+                <i class="fa-solid fa-lock lock-icon"></i>
+                <h4 style="color: var(--text-main); font-size: 1rem;" data-key="ev7"><i class="fa-solid fa-chart-line accent-text"></i> تحسين نتائج المتعلمين</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;" data-key="protectedText">محمي بكلمة مرور</p>
+            </div>
+            <div class="evidence-card theme-transition" onclick="openEvidence(7)">
+                <i class="fa-solid fa-lock lock-icon"></i>
+                <h4 style="color: var(--text-main); font-size: 1rem;" data-key="ev8"><i class="fa-solid fa-chart-pie accent-text"></i> تحليل نتائج المتعلمين وتشخيص مستوياتهم</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;" data-key="protectedText">محمي بكلمة مرور</p>
+            </div>
+            <div class="evidence-card theme-transition" onclick="openEvidence(8)">
+                <i class="fa-solid fa-lock lock-icon"></i>
+                <h4 style="color: var(--text-main); font-size: 1rem;" data-key="ev9"><i class="fa-solid fa-list-check accent-text"></i> تنوع أساليب التقويم</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;" data-key="protectedText">محمي بكلمة مرور</p>
+            </div>
+            <div class="evidence-card theme-transition" onclick="openEvidence(9)">
+                <i class="fa-solid fa-lock lock-icon"></i>
+                <h4 style="color: var(--text-main); font-size: 1rem;" data-key="ev10"><i class="fa-solid fa-seedling accent-text"></i> تهيئة البيئة التعليمية</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;" data-key="protectedText">محمي بكلمة مرور</p>
+            </div>
+            <div class="evidence-card theme-transition" onclick="openEvidence(10)">
+                <i class="fa-solid fa-lock lock-icon"></i>
+                <h4 style="color: var(--text-main); font-size: 1rem;" data-key="ev11"><i class="fa-solid fa-microchip accent-text"></i> توظيف التقنيات ووسائل التعلم المناسبة</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;" data-key="protectedText">محمي بكلمة مرور</p>
+            </div>
         </div>
 
-        <h3 style="color: var(--gold-light); margin-bottom: 1rem; font-weight: 700;">
+        <h3 style="color: var(--gold-light); margin-bottom: 1rem; font-weight: 700;" data-key="galleryHeader">
             <i class="fa-solid fa-images accent-text"></i> الاستوديو الرقمي للشهادات (تتحدث عشوائياً)
         </h3>
-        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">استعراض بصري ديناميكي للشهادات الـ 16 المعتمدة.</p>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;" data-key="gallerySub">استعراض بصري ديناميكي للشهادات الـ 16 المعتمدة.</p>
         
         <div class="gallery-grid" id="randomGalleryGrid"></div>
     </section>
@@ -1126,7 +1206,7 @@
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <!-- ADDRESS & CONTACT INFO (Placed right before footer as requested) -->
+    <!-- ADDRESS & CONTACT INFO -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div class="glass-card rounded-3xl p-6 sm:p-8 theme-transition">
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center md:text-right rtl:md:text-right">
@@ -1174,25 +1254,25 @@
         </div>
     </section>
 
-    <!-- FOOTER (Ordered precisely as requested) -->
+    <!-- FOOTER -->
     <footer>
         <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.4rem;">All Rights Reserved 2026©</p>
-        <div style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--accent-color);">
+        <div style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--accent-color);" data-key="footerBrand">
             يوسف آل حامد | Vanta Voids
         </div>
-        <p style="color: var(--text-muted); font-size: 0.85rem;">بيشة، المملكة العربية السعودية</p>
+        <p style="color: var(--text-muted); font-size: 0.85rem;" data-key="footerLocation">بيشة، المملكة العربية السعودية</p>
     </footer>
 
-    <!-- Modals (Password, Admin, Recovery, Success, Image, Themes) -->
+    <!-- Modals -->
     <div class="modal-overlay" id="passwordModal">
         <div class="modal-card">
             <i class="fa-solid fa-xmark close-modal" id="closePassModal"></i>
-            <h3 style="color: var(--gold-light); margin-bottom: 1rem; font-weight: 700;">الملف محمي بكلمة مرور</h3>
+            <h3 style="color: var(--gold-light); margin-bottom: 1rem; font-weight: 700;" data-key="passModalTitle">الملف محمي بكلمة مرور</h3>
             <input type="password" id="passInput" class="form-control" placeholder="أدخل الرقم السري">
-            <button class="btn-gold" onclick="verifyPassword()">عرض الملف</button>
+            <button class="btn-gold" onclick="verifyPassword()" data-key="passModalBtn">عرض الملف</button>
             <div id="evidenceErrorAlert" class="luxury-alert">
-                <span style="color: var(--accent-color); font-weight: 700; display: block; margin-bottom: 4px;">تنبيه أمني فاخر</span>
-                <span style="font-size: 0.85rem; color: var(--text-muted);">عذراً، الرقم السري غير مطابق. يرجى إعادة المحاولة.</span>
+                <span style="color: var(--accent-color); font-weight: 700; display: block; margin-bottom: 4px;" data-key="alertTitle">تنبيه أمني فاخر</span>
+                <span style="font-size: 0.85rem; color: var(--text-muted);" data-key="alertDesc">عذراً، الرقم السري غير مطابق. يرجى إعادة المحاولة.</span>
             </div>
         </div>
     </div>
@@ -1200,12 +1280,12 @@
     <div class="modal-overlay" id="adminModal">
         <div class="modal-card">
             <i class="fa-solid fa-xmark close-modal" id="closeAdminModal"></i>
-            <h3 style="color: var(--gold-light); margin-bottom: 1rem; font-weight: 700;">لوحة التحكم | Command Center</h3>
+            <h3 style="color: var(--gold-light); margin-bottom: 1rem; font-weight: 700;" data-key="adminModalTitle">لوحة التحكم | Command Center</h3>
             <input type="text" id="adminUser" class="form-control" placeholder="البريد الإلكتروني للمشرف">
             <input type="password" id="adminPass" class="form-control" placeholder="كلمة المرور">
-            <button class="btn-gold" onclick="verifyAdminLogin()">دخول اللوحة</button>
+            <button class="btn-gold" onclick="verifyAdminLogin()" data-key="adminLoginBtn">دخول اللوحة</button>
             <div id="adminErrorAlert" class="luxury-alert">
-                <span style="font-size: 0.85rem; color: var(--text-muted);">بيانات الاعتماد غير صحيحة. يرجى التحقق والتجربة مرة أخرى.</span>
+                <span style="font-size: 0.85rem; color: var(--text-muted);" data-key="adminErrorDesc">بيانات الاعتماد غير صحيحة. يرجى التحقق والتجربة مرة أخرى.</span>
             </div>
         </div>
     </div>
@@ -1232,8 +1312,8 @@
         <div class="modal-card">
             <i class="fa-solid fa-xmark close-modal" onclick="document.getElementById('successModal').style.display='none'"></i>
             <div style="color: #25d366; font-size: 2.5rem; margin-bottom: 0.8rem;"><i class="fa-solid fa-circle-check"></i></div>
-            <h3 style="color: var(--gold-light); margin-bottom: 0.5rem; font-weight: 700;" id="successTitle">تمت العملية بنجاح</h3>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;" id="successMessage">تم حفظ التعديلات بنجاح.</p>
+            <h3 style="color: var(--gold-light); margin-bottom: 0.5rem; font-weight: 700;">تمت العملية بنجاح</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">تم حفظ التعديلات بنجاح.</p>
             <button class="btn-gold" onclick="document.getElementById('successModal').style.display='none'">حسناً</button>
         </div>
     </div>
@@ -1244,7 +1324,7 @@
         </div>
     </div>
 
-    <!-- THEME SELECTOR MODAL (All 14 Themes included) -->
+    <!-- THEME SELECTOR MODAL -->
     <div id="themeModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
         <div class="glass-card max-w-2xl w-full rounded-3xl p-6 sm:p-8 space-y-6 transform scale-95 transition-all duration-300 relative border shadow-2xl" style="border-color: var(--border-color); background-color: var(--bg-secondary);">
           <div class="flex items-center justify-between border-b pb-4" style="border-color: rgba(255,255,255,0.1);">
@@ -1336,7 +1416,7 @@
         const i18n = {
           ar: {
             headerName: "يوسف آل حامد",
-            headerSubTitle: "سيرة ذاتية وموقع تعليمي",
+            headerSubTitle: "سيرة ذاتية",
             navCv: "السيرة الذاتية",
             navHub: "المختبر التعليمي",
             navEvidence: "الشواهد والأداء",
@@ -1361,24 +1441,81 @@
             careerObjectiveText: "سعي لبناء جيل واعٍ ومبتكر قادر على التفكير النقدي والإبداعي من خلال بيئة تعليمية محفزة تدعم الطلاب أكاديمياً وأخلاقياً. ملتزم بإعداد جيل يحول المعرفة إلى قدرات عملية واقعية، ويلهم العقول ويصنع المستقبل.",
             corePillarsTitle: "الكفايات والمحاور التنفيذية الرئيسية",
             corePillarsSub: "ركائز الخبرة التخصصية والتطوير الرقمي",
+            
+            p1Tag: "المحور الأول", p1Title: "تصميم وتطوير الحلول التعليمية الرقمية", p1Desc: "التركيز: بناء دروس وصفحات ويب تعليمية تفاعلية تحول المفاهيم المجردة إلى تجارب تطبيقية عملية بأسلوب جذاب ومبتكر.", p1ToolsLabel: "الأدوات والتقنيات:",
+            p2Tag: "المحور الثاني", p2Title: "التصميم التعليمي واستراتيجيات التدريس", p2Desc: "التركيز: تطبيق استراتيجيات حديثة (التعلم القائم على المشاريع، حل المشكلات، الصف المقلوب، التعلم التعاوني، العصف الذهني الرقمي).", p2ImpactLabel: "الأثر والنتائج:", p2ImpactText: "رفع معدل المشاركة والتفاعل، تنمية مهارات التفكير النقدي والإبداعي، وتعزيز روح العمل الجماعي لدى الطلاب.",
+            p3Tag: "المحور الثالث", p3Title: "إدارة البيئة التعليمية الرقمية", p3Desc: "التركيز: تخطيط وتنظيم العمليات التعليمية، إدارة المحتوى والمهام الأكاديمية، ومتابعة تقدم الطلاب بتقنيات سحابية منظمة.", p3ToolsLabel: "المنصات والأدوات:",
+            p4Tag: "المحور الرابع", p4Title: "دمج الذكاء الاصطناعي في التعليم", p4Desc: "التركيز: توظيف أدوات الذكاء الاصطناعي في التصميم التعليمي وإنتاج المحتوى وإنشاء الأنشطة التفاعلية الفعالة.", p4ImpactLabel: "الأثر والنتائج:", p4ImpactText: "صياغة تجارب تعلم مخصصة تراعي الفروق الفردية وترفع من جودة وكفاءة نواتج التعلم الذكي.",
+
             experienceTitle: "الخبرات المهنية",
             experienceSub: "مسيرة عطاء وتطوير مستمر لأكثر من 17 عاماً",
+            job1Title: "معلم حاسب آلي وتقنية معلومات (المرحلة الثانوية)", job1Year: "2010 - حتى الآن", job1Org: "وزارة التعليم - إدارة التعليم بمحافظة بيشة", job1Desc: "تدريس مناهج الحاسب والتقنية الرقمية، إعداد وتطوير البيئات التعليمية التفاعلية، تدريب الطلاب على المشاريع البرمجية والمسابقات الوطنية.",
+            job2Title: "معلم حاسب آلي", job2Year: "2009 - 2010", job2Org: "وزارة التعليم - الإدارة العامة للتعليم بمنطقة تبوك", job2Desc: "تدريس مفاهيم الحاسب الأساسية وتطوير مهارات الطلاب في المعامل الرقمية واستراتيجيات التعلم التفاعلي.",
+            job3Title: "قطاع العمليات المصرفية والخدمات المالية", job3Year: "2008 - 2009", job3Org: "مصرف الراجحي - الإدارة الإقليمية بأبها", job3Desc: "تنفيذ ومتابعة العمليات المصرفية والخدمات المالية المتقدمة، اكتساب خبرة عالية في الدقة والأنظمة الرقمية وخدمة العملاء.",
+            job4Title: "معلم حاسب آلي وإداري مكتب", job4Year: "2007 - 2008", job4Org: "وزارة التعليم - إدارة التعليم بسراة عبيدة (مكتب مدير الإدارة)", job4Desc: "بداية المسيرة التعليمية والعمل الإداري بمكتب مدير إدارة التعليم؛ حيث تشرفت بتشرب أدبيات العمل التعليمي.",
+
             educationTitle: "التعليم والمؤهلات",
             educationSub: "المسار الأكاديمي",
+            degreeMaster: "ماجستير", edu1Year: "2017 م", edu1Title: "درجة الماجستير", edu1Univ: "جامعة الباحة",
+            degreeBachelor: "بكالوريوس", edu2Year: "2007 م", edu2Title: "درجة البكالوريوس", edu2Univ: "جامعة الملك خالد",
+            degreeHighSchool: "ثانوية عامة", edu3Year: "2003 م", edu3Title: "شهادة الثانوية العامة", edu3School: "ثانوية أبو موسى الأشعري",
+
             languagesSectionTitle: "اللغات ومهارات الاتصال",
             languagesSectionSub: "مستويات إتقان اللغات والقدرات التواصلية",
             langAr: "العربية", langEn: "الإنجليزية", langEs: "الإسبانية",
             philosophyHeader: "الفلسفة التعليمية",
+            philosophyText: "«إن المعرفة ليست مجرد تحصيل للحقائق، بل هي الضياء الذي يسطع في نفوس المتعلمين ليصنع الفكر والوعي. التقنية وسيلتنا لتجسيد هذا الفكر وتحويله إلى تجربة إنسانية خالدة.»",
+
             trainingTitle: "التطوير المهني والبرامج التدريبية",
             trainingSub: "أكثر من 500 ساعة تدريبية متخصصة في مجالات التقنية والتعليم",
             hoursBadge: "+500 ساعة تدريبية",
-            postalLabel: "الرمز البريدي",
-            addressLabel: "العنوان الوطني / المختصر",
-            emailLabel: "البريد الإلكتروني",
-            phoneLabel: "التواصل المباشر",
-            modalTitle: "اختيار المظهر (الثيمات)",
-            modalSubTitle: "حدد ثيمك المفضل لتخصيص الألوان والواجهة",
-            saveModalBtn: "حفظ",
+            t1Title: "تدريب معلمي المعلوماتية IOI", t1Org: "موهبة بالتعاون مع وزارة التعليم",
+            t2Title: "استراتيجيات التدريس الحديثة", t2Org: "مركز التدريب التربوي ببيشة",
+            t3Title: "تطبيقات الذكاء الاصطناعي في التعليم", t3Org: "جامعة الملك خالد",
+            t4Title: "مبادرة مليون سعودي في الذكاء الاصطناعي", t4Org: "سدايا SDAIA",
+            t5Title: "مسابقة بيبراس موهبة للتفكير الحاسوبي", t5Org: "مؤسسة موهبة",
+            t6Title: "التقويم الذاتي للمدرسة", t6Org: "المركز الوطني للتقويم والتميز المدرسي",
+
+            hubSectionTitle: "المختبر التعليمي والمقررات",
+            hubSectionSub: "جدول الحصص الأسبوعي والموارد الدراسية للتخصصات التقنية",
+            timetableTitle: "<i class='fa-solid fa-calendar-days accent-text'></i> جدول الحصص الأسبوعي — ثانوية الملك عبدالله بن عبدالعزيز ببيشة (مسارات 1448هـ)",
+            dayCol: "اليوم", p1Col: "الحصة 1", p2Col: "الحصة 2", p3Col: "الحصة 3", p4Col: "الحصة 4", p5Col: "الحصة 5", p6Col: "الحصة 6",
+            sunday: "الأحد", monday: "الإثنين", tuesday: "الثلاثاء", wednesday: "الأربعاء", thursday: "الخميس",
+            tSubAi: "الذكاء الاصطناعي (ثالث 4)", tSubTech1: "التقنية الرقمية 1 (أول 5)", tSubDesign: "التصميم الهندسي (ثالث 4)", tSubCyber: "الأمن السيبراني (ثالث 4)",
+            tSupport: "المساندة الصفية", tCoverage: "تغطية الشواغر", tSustainability: "استدامة رقمية", tCheck: "فحص البنية",
+            tLabPrep: "جاهزية المعامل", tCalibrate: "معايرة وتجهيز", tEmpower: "التمكين الرقمي", tDev: "التطوير المهني",
+            tInsight: "استبصار تقني", tSpecial: "جلسة خاصة", tGuidance: "التوجيه العرفي", tEnrich: "جلسة إثراء",
+            tCodeLab: "المختبر البرمجي", tTest: "تطوير واختبار", tMonitor: "الرصد والتحليل", tWeekly: "أعمال الأسبوع",
+
+            cardTech1Title: "التقنية الرقمية (1)", cardTech1Desc: "أساسيات الحاسب، المستندات الرقمية، والمعالجة البرمجية الأولية.",
+            cardTech2Title: "التقنية الرقمية (2)", cardTech2Desc: "مفاهيم الشبكات، أدوات الاتصال والتصميم الرقمي.",
+            cardTech3Title: "التقنية الرقمية (3)", cardTech3Desc: "التطبيقات المتقدمة والمشاريع البرمجية التفاعلية.",
+            cardDataTitle: "علم البيانات", cardDataDesc: "جمع وتعديل البيانات، النمذجة والتحليل الإحصائي الرقمي.",
+            cardAi1Title: "الذكاء الاصطناعي (1)", cardAi1Desc: "خوارزميات التعلم الآلي، هندسة التلقين ونماذج الرؤية.",
+            cardAi2Title: "الذكاء الاصطناعي (2)", cardAi2Desc: "التطبيقات المتقدمة والشبكات العصبية الاصطناعية.",
+            cardDesignTitle: "التصميم الهندسي", cardDesignDesc: "النمذجة ثلاثية الأبعاد والتصميمات الميكانيكية والهندسية.",
+            cardCyberTitle: "الأمن السيبراني", cardCyberDesc: "أنظمة التشفير، حماية البيانات والوقاية من الاحتيال.",
+            cardIotTitle: "إنترنت الأشياء", cardIotDesc: "ربط الحساسات والمتحكمات الدقيقة بالشبكات.",
+            cardSweTitle: "هندسة البرمجيات", cardSweDesc: "دورة حياة تطوير الأنظمة البرمجية واختبار الكود.",
+            resourcesBtn: "المصادر والعروض",
+
+            evidenceSectionTitle: "الشواهد والأداء الوظيفي",
+            evidenceSectionSub: "ملفات ومحاور الأداء الوظيفي المعتمدة (محمية بكلمة مرور) والاستوديو الرقمي",
+            evidenceListHeader: "<i class='fa-solid fa-user-shield accent-text'></i> محاور الأداء الوظيفي المعتمدة",
+            protectedText: "محمي بكلمة مرور",
+            ev1: "1. أداء الواجبات الوظيفية", ev2: "2. إعداد وتنفيذ خطة التعلم", ev3: "3. الإدارة الصفية",
+            ev4: "4. التفاعل مع المجتمع المهني", ev5: "5. التفاعل مع أولياء الأمور", ev6: "6. التنوع في استراتيجيات التدريس",
+            ev7: "7. تحسين نتائج المتعلمين", ev8: "8. تحليل نتائج المتعلمين وتشخيص مستوياتهم", ev9: "9. تنوع أساليب التقويم",
+            ev10: "10. تهيئة البيئة التعليمية", ev11: "11. توظيف التقنيات ووسائل التعلم المناسبة",
+            galleryHeader: "<i class='fa-solid fa-images accent-text'></i> الاستوديو الرقمي للشهادات (تتحدث عشوائياً)",
+            gallerySub: "استعراض بصري ديناميكي للشهادات الـ 16 المعتمدة.",
+
+            postalLabel: "الرمز البريدي", addressLabel: "العنوان الوطني / المختصر", emailLabel: "البريد الإلكتروني", phoneLabel: "التواصل المباشر",
+            footerBrand: "يوسف آل حامد | Vanta Voids", footerLocation: "بيشة، المملكة العربية السعودية",
+            modalTitle: "اختيار المظهر (الثيمات)", modalSubTitle: "حدد ثيمك المفضل لتخصيص الألوان والواجهة", saveModalBtn: "حفظ",
+            passModalTitle: "الملف محمي بكلمة مرور", passModalBtn: "عرض الملف", alertTitle: "تنبيه أمني فاخر", alertDesc: "عذراً، الرقم السري غير مطابق. يرجى إعادة المحاولة.",
+            adminModalTitle: "لوحة التحكم | Command Center", adminLoginBtn: "دخول اللوحة", adminErrorDesc: "بيانات الاعتماد غير صحيحة. يرجى التحقق والتجربة مرة أخرى.",
+
             thRoyalGold: "الملكي الأسود والذهبي", thRoyalNavy: "الملكي الكحلي والذهبي", thNational: "اللون الوطني", thBurgundy: "البورغندي الفاخر",
             thPink: "الوردي الأنيق", thSky: "السماوي الناعم", thFantasy: "الفانتازي الساحر", thPortrait: "بورتريه",
             thRoyalIvory: "الملكي العاجي", thCalmCloud: "الغيمة الساكنة", thSpring: "الربيع", thSummer: "الصيف", thWinter: "الشتاء", thAutumn: "الخريف"
@@ -1394,7 +1531,8 @@
             statusActive: "Available",
             jobBadge: "High School CS Teacher • Instructional Designer",
             fullName: "Youssef Hamed Al-Hamed",
-            headlineSub: "High school Computer Science & IT educator, passionate about digital development.",
+            headlineSub: "High school Computer Science & IT educator, passionate about digital development, educational innovation, and interactive design.",
+            
             infoNationalityLabel: "Nationality",
             infoNationalityVal: "<i class='fa-solid fa-flag accent-text text-xs'></i> Saudi",
             infoLocationLabel: "Location",
@@ -1402,30 +1540,88 @@
             infoStatusLabel: "Civil Status",
             infoStatusVal: "<i class='fa-solid fa-users accent-text text-xs'></i> Married (5)",
             infoPhoneLabel: "Phone",
-            cvSectionTitle: "Curriculum Vitae",
-            cvSectionSub: "Documentation of qualifications and experience",
+
+            cvSectionTitle: "Curriculum Vitae & Career",
+            cvSectionSub: "Documentation of certified academic, technical, and educational qualifications",
             careerObjectiveTitle: "Career Objective",
-            careerObjectiveText: "Seeking to build a conscious and creative generation capable of critical thinking.",
-            corePillarsTitle: "Executive Competencies",
-            corePillarsSub: "Pillars of specialized expertise",
+            careerObjectiveText: "Striving to build a conscious and innovative generation capable of critical and creative thinking through a stimulating educational environment. Committed to preparing minds that transform knowledge into practical capabilities.",
+            corePillarsTitle: "Key Executive Competencies",
+            corePillarsSub: "Pillars of specialized expertise and digital development",
+            
+            p1Tag: "Pillar 1", p1Title: "Digital Learning Solutions Design & Dev", p1Desc: "Focus: Building interactive educational lessons and web pages that transform abstract concepts into practical, engaging experiences.", p1ToolsLabel: "Tools & Technologies:",
+            p2Tag: "Pillar 2", p2Title: "Instructional Design & Teaching Strategies", p2Desc: "Focus: Applying modern strategies (project-based learning, problem solving, flipped classroom, collaborative learning, digital brainstorming).", p2ImpactLabel: "Impact & Results:", p2ImpactText: "Raising participation rates, developing critical thinking skills, and fostering teamwork among students.",
+            p3Tag: "Pillar 3", p3Title: "Digital Learning Environment Management", p3Desc: "Focus: Planning and organizing educational processes, managing academic content and tasks, tracking student progress via cloud technologies.", p3ToolsLabel: "Platforms & Tools:",
+            p4Tag: "Pillar 4", p4Title: "AI Integration in Education", p4Desc: "Focus: Employing AI tools in instructional design, content production, and creating effective interactive activities.", p4ImpactLabel: "Impact & Results:", p4ImpactText: "Crafting personalized learning experiences that account for individual differences and elevate smart learning outcomes.",
+
             experienceTitle: "Professional Experience",
-            experienceSub: "Continuous journey over 17+ years",
-            educationTitle: "Education",
+            experienceSub: "A continuous journey of giving and development for over 17 years",
+            job1Title: "High School Computer Science & IT Teacher", job1Year: "2010 - Present", job1Org: "Ministry of Education - Bisha Education Department", job1Desc: "Teaching computer and digital technology curricula, developing interactive educational environments, training students in programming and national competitions.",
+            job2Title: "Computer Science Teacher", job2Year: "2009 - 2010", job2Org: "Ministry of Education - Tabuk Education Department", job2Desc: "Teaching core computer concepts and developing student skills in digital labs and interactive learning strategies.",
+            job3Title: "Banking Operations & Financial Services", job3Year: "2008 - 2009", job3Org: "Al Rajhi Bank - Abha Regional Administration", job3Desc: "Executing and monitoring advanced banking operations and financial services, gaining high expertise in accuracy, digital systems, and customer service.",
+            job4Title: "Computer Teacher & Office Administrator", job4Year: "2007 - 2008", job4Org: "Ministry of Education - Sarat Ubaida Education Dept", job4Desc: "The beginning of educational career and administrative work at the Director's office.",
+
+            educationTitle: "Education & Qualifications",
             educationSub: "Academic Pathway",
-            languagesSectionTitle: "Languages",
-            languagesSectionSub: "Proficiency levels",
+            degreeMaster: "Master", edu1Year: "2017", edu1Title: "Master's Degree", edu1Univ: "Al Baha University",
+            degreeBachelor: "Bachelor", edu2Year: "2007", edu2Title: "Bachelor's Degree", edu2Univ: "King Khalid University",
+            degreeHighSchool: "High School", edu3Year: "2003", edu3Title: "High School Diploma", edu3School: "Abu Musa Al-Ash'ari High School",
+
+            languagesSectionTitle: "Languages & Communication",
+            languagesSectionSub: "Language proficiency levels and communication skills",
             langAr: "Arabic", langEn: "English", langEs: "Spanish",
             philosophyHeader: "Educational Philosophy",
-            trainingTitle: "Professional Development",
-            trainingSub: "Over 500 specialized training hours",
+            philosophyText: "«Knowledge is not merely the collection of facts, but the light shining in learners' minds to create awareness. Technology is our vehicle to embody this thought into an immortal human experience.»",
+
+            trainingTitle: "Professional Development & Training",
+            trainingSub: "Over 500 specialized training hours in tech and education",
             hoursBadge: "+500 Hours",
-            postalLabel: "Postal Code",
-            addressLabel: "National Address",
-            emailLabel: "Email",
-            phoneLabel: "Direct Phone",
-            modalTitle: "Appearance & Themes",
-            modalSubTitle: "Choose your preferred theme palette",
-            saveModalBtn: "Save",
+            t1Title: "IOI Informatics Teachers Training", t1Org: "Mawhiba in collaboration with Ministry of Education",
+            t2Title: "Modern Teaching Strategies", t2Org: "Bisha Educational Training Center",
+            t3Title: "AI Applications in Education", t3Org: "King Khalid University",
+            t4Title: "One Million Saudi in AI Initiative", t4Org: "SDAIA",
+            t5Title: "Bebras Mawhiba Computational Thinking", t5Org: "Mawhiba Foundation",
+            t6Title: "School Self-Evaluation", t6Org: "National Center for School Evaluation and Excellence",
+
+            hubSectionTitle: "Teaching Lab & Courses",
+            hubSectionSub: "Weekly schedule and learning resources for technical specializations",
+            timetableTitle: "<i class='fa-solid fa-calendar-days accent-text'></i> Weekly Schedule — King Abdullah Secondary School, Bisha (Tracks 1448 AH)",
+            dayCol: "Day", p1Col: "Period 1", p2Col: "Period 2", p3Col: "Period 3", p4Col: "Period 4", p5Col: "Period 5", p6Col: "Period 6",
+            sunday: "Sunday", monday: "Monday", tuesday: "Tuesday", wednesday: "Wednesday", thursday: "Thursday",
+            tSubAi: "Artificial Intelligence (3-4)", tSubTech1: "Digital Tech 1 (1-5)", tSubDesign: "Engineering Design (3-4)", tSubCyber: "Cybersecurity (3-4)",
+            tSupport: "Class Support", tCoverage: "Coverage", tSustainability: "Digital Sustainability", tCheck: "Infrastructure Check",
+            tLabPrep: "Lab Readiness", tCalibrate: "Calibration & Setup", tEmpower: "Digital Empowerment", tDev: "Professional Dev",
+            tInsight: "Tech Insight", tSpecial: "Special Session", tGuidance: "Custom Guidance", tEnrich: "Enrichment Session",
+            tCodeLab: "Coding Lab", tTest: "Dev & Test", tMonitor: "Monitoring & Analysis", tWeekly: "Weekly Tasks",
+
+            cardTech1Title: "Digital Technology (1)", cardTech1Desc: "Computer basics, digital documents, and preliminary programming processing.",
+            cardTech2Title: "Digital Technology (2)", cardTech2Desc: "Networking concepts, communication tools, and digital design.",
+            cardTech3Title: "Digital Technology (3)", cardTech3Desc: "Advanced applications and interactive programming projects.",
+            cardDataTitle: "Data Science", cardDataDesc: "Data collection and modification, modeling, and digital statistical analysis.",
+            cardAi1Title: "Artificial Intelligence (1)", cardAi1Desc: "Machine learning algorithms, prompt engineering, and vision models.",
+            cardAi2Title: "Artificial Intelligence (2)", cardAi2Desc: "Advanced applications and artificial neural networks.",
+            cardDesignTitle: "Engineering Design", cardDesignDesc: "3D modeling and mechanical and engineering designs.",
+            cardCyberTitle: "Cybersecurity", cardCyberDesc: "Encryption systems, data protection, and fraud prevention.",
+            cardIotTitle: "Internet of Things", cardIotDesc: "Connecting sensors and microcontrollers to networks.",
+            cardSweTitle: "Software Engineering", cardSweDesc: "Software systems development lifecycle and code testing.",
+            resourcesBtn: "Resources & Slides",
+
+            evidenceSectionTitle: "Evidence & Job Performance",
+            evidenceSectionSub: "Certified job performance files and axes (Password Protected) & Digital Studio",
+            evidenceListHeader: "<i class='fa-solid fa-user-shield accent-text'></i> Certified Performance Axes",
+            protectedText: "Password Protected",
+            ev1: "1. Job Duties Performance", ev2: "2. Learning Plan Preparation & Execution", ev3: "3. Class Management",
+            ev4: "4. Professional Community Interaction", ev5: "5. Parent Interaction", ev6: "6. Teaching Strategies Diversity",
+            ev7: "7. Improving Learner Results", ev8: "8. Analyzing & Diagnosing Learner Results", ev9: "9. Assessment Methods Diversity",
+            ev10: "10. Learning Environment Preparation", ev11: "11. Employing Appropriate Technologies",
+            galleryHeader: "<i class='fa-solid fa-images accent-text'></i> Digital Certificate Studio (Randomized)",
+            gallerySub: "Dynamic visual preview of 16 certified certificates.",
+
+            postalLabel: "Postal Code", addressLabel: "National Address", emailLabel: "Email", phoneLabel: "Direct Contact",
+            footerBrand: "Youssef Al-Hamed | Vanta Voids", footerLocation: "Bisha, Kingdom of Saudi Arabia",
+            modalTitle: "Appearance & Themes", modalSubTitle: "Choose your preferred theme palette", saveModalBtn: "Save",
+            passModalTitle: "Password Protected File", passModalBtn: "View File", alertTitle: "Luxury Security Alert", alertDesc: "Sorry, the password is incorrect. Please try again.",
+            adminModalTitle: "Command Center", adminLoginBtn: "Login", adminErrorDesc: "Invalid credentials. Please verify and try again.",
+
             thRoyalGold: "Royal Dark & Gold", thRoyalNavy: "Royal Navy & Gold", thNational: "National Color", thBurgundy: "Luxury Burgundy",
             thPink: "Elegant Pink", thSky: "Soft Sky", thFantasy: "Fantasy Void", thPortrait: "Portrait",
             thRoyalIvory: "Royal Ivory", thCalmCloud: "Calm Cloud", thSpring: "Spring", thSummer: "Summer", thWinter: "Winter", thAutumn: "Autumn"
