@@ -1478,22 +1478,24 @@
         }
 
         async function verifyPassword() {
-            const input = document.getElementById('passInput').value;
-            try {
-                const doc = await db.collection('settings').doc('siteConfig').get();
-                const correctPin = (doc.exists && doc.data().evidencePin) ? doc.data().evidencePin : '1234';
-                
-                if (input === correctPin) {
-                    document.getElementById('passwordModal').style.display = 'none';
-                    const targetUrl = (siteData.evidence && siteData.evidence[currentEvidenceIndex]) ? siteData.evidence[currentEvidenceIndex] : 'https://onedrive.live.com';
-                    window.open(targetUrl, '_blank');
-                } else {
-                    document.getElementById('evidenceErrorAlert').style.display = 'block';
-                }
-            } catch (error) {
-                document.getElementById('evidenceErrorAlert').style.display = 'block';
-            }
+    const input = document.getElementById('passInput').value;
+    try {
+        const doc = await db.collection('settings').doc('siteConfig').get();
+        const correctPin = (doc.exists && doc.data().evidencePin) ? doc.data().evidencePin : '1234';
+        
+        if (input === correctPin) {
+            document.getElementById('passwordModal').style.display = 'none';
+            const targetUrl = (siteData.evidence && siteData.evidence[currentEvidenceIndex]) ? siteData.evidence[currentEvidenceIndex] : 'https://onedrive.live.com';
+            
+            // فتح الرابط في نفس التبويب لتفادي حظر سفاري للنوافذ المنبثقة
+            window.location.href = targetUrl;
+        } else {
+            document.getElementById('evidenceErrorAlert').style.display = 'block';
         }
+    } catch (error) {
+        document.getElementById('evidenceErrorAlert').style.display = 'block';
+    }
+}
 
         function verifyAdminLogin() {
             const email = document.getElementById('adminUser').value.trim();
