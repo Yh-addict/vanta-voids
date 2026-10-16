@@ -645,14 +645,14 @@
 </head>
 <body class="selection:bg-cyan-500 selection:text-black">
 
-    <!-- Header Navigation -->
+<!-- Header Navigation -->
     <header class="theme-transition" style="border-color: var(--border-color); background-color: var(--header-bg);">
-        <div class="nav-container">
+        <div class="nav-container" style="padding: 0.8rem 1rem;">
             <a href="#hero" class="brand-logo">
                 <img src="my-photo.jpg" alt="يوسف الحامد" class="profile-avatar-thumb dynamic-avatar" onerror="this.src='https://via.placeholder.com/150/0B1457/00E5FF?text=YH'">
                 <div class="brand-text">
-                    <h1 data-key="headerName">يوسف الحامد</h1>
-                    <span>YH DIGITAL EDUCATOR</span>
+                    <h1 data-key="headerName" class="text-sm sm:text-base">يوسف الحامد</h1>
+                    <span class="text-[10px] sm:text-xs">YH DIGITAL EDUCATOR</span>
                 </div>
             </a>
             
@@ -663,7 +663,8 @@
                 <li><a href="#evidence" class="nav-link" data-key="navEvidence">الشواهد والأداء</a></li>
             </ul>
 
-            <div class="header-controls">
+            <!-- Desktop Controls (Hidden on Mobile) -->
+            <div class="header-controls hidden md:flex">
                 <button id="langToggleBtn" onclick="toggleLanguage()" class="px-3.5 py-2 rounded-xl text-sm font-semibold border transition-all duration-300 flex items-center space-x-2 rtl:space-x-reverse hover:scale-105 active:scale-95 shadow-sm" style="border-color: var(--border-color); background-color: var(--bg-secondary); color: var(--text-main);">
                   <i class="fa-solid fa-globe text-cyan-400"></i>
                   <span id="langBtnText" data-key="langBtnText">English</span>
@@ -677,10 +678,12 @@
                 <div class="admin-gear" id="openAdminModal" title="لوحة التحكم">
                     <i class="fa-solid fa-gear"></i>
                 </div>
+            </div>
 
-                <!-- Hamburger Button for Mobile -->
-                <button class="mobile-hamburger-btn" onclick="toggleMobileMenu()" aria-label="قائمة التصفح">
-                    <i class="fa-solid fa-bars"></i>
+            <!-- Mobile Hamburger Button Only -->
+            <div class="flex md:hidden items-center gap-2">
+                <button class="mobile-hamburger-btn flex items-center justify-center w-10 h-10 rounded-xl border bg-secondary text-cyan-400" style="border-color: var(--border-color); background: var(--bg-secondary);" onclick="toggleMobileMenu()" aria-label="قائمة التصفح">
+                    <i class="fa-solid fa-bars text-lg"></i>
                 </button>
             </div>
         </div>
@@ -688,7 +691,42 @@
 
     <!-- Mobile Menu Backdrop & Drawer -->
     <div class="mobile-overlay-backdrop" id="mobileBackdrop" onclick="toggleMobileMenu()"></div>
+    <!-- Mobile Menu Drawer (Includes Language, Theme & Admin Controls) -->
+    <div class="mobile-overlay-backdrop" id="mobileBackdrop" onclick="toggleMobileMenu()"></div>
     <div class="mobile-menu-drawer" id="mobileDrawer">
+        <div class="flex items-center justify-between pb-6 mb-6 border-b" style="border-color: var(--border-color);">
+            <div class="flex items-center gap-3">
+                <img src="my-photo.jpg" alt="يوسف الحامد" class="w-10 h-10 rounded-xl border border-cyan-400 object-cover dynamic-avatar">
+                <span class="font-bold text-sm text-white" data-key="headerName">يوسف الحامد</span>
+            </div>
+            <button onclick="toggleMobileMenu()" class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-cyan-400">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+
+        <!-- Quick Controls inside Mobile Drawer -->
+        <div class="grid grid-cols-2 gap-2 mb-6 pb-6 border-b" style="border-color: var(--border-color);">
+            <button onclick="toggleLanguage(); toggleMobileMenu();" class="py-2.5 px-3 rounded-xl text-xs font-semibold border flex items-center justify-center gap-2" style="border-color: var(--border-color); background-color: var(--bg-secondary); color: var(--text-main);">
+                <i class="fa-solid fa-globe text-cyan-400"></i>
+                <span id="mobileLangBtnText" data-key="langBtnText">English</span>
+            </button>
+            <button onclick="openThemeModal(); toggleMobileMenu();" class="py-2.5 px-3 rounded-xl text-xs font-bold border flex items-center justify-center gap-2" style="border-color: var(--border-color); background-color: #2755C6; color: #FFFFFF;">
+                <i class="fa-solid fa-palette text-cyan-300"></i>
+                <span data-key="themeBtnText">المظهر</span>
+            </button>
+        </div>
+
+        <ul class="flex flex-col space-y-4">
+            <li><a href="#cv" onclick="toggleMobileMenu()" class="flex items-center gap-3 text-base font-semibold py-2 px-3 rounded-xl hover:bg-cyan-500/10 accent-text" data-key="navCv"><i class="fa-solid fa-id-card-clip"></i> السيرة الذاتية</a></li>
+            <li><a href="#teaching-hub" onclick="toggleMobileMenu()" class="flex items-center gap-3 text-base font-semibold py-2 px-3 rounded-xl hover:bg-cyan-500/10 accent-text" data-key="navHub"><i class="fa-solid fa-flask"></i> المختبر التعليمي</a></li>
+            <li><a href="#evidence" onclick="toggleMobileMenu()" class="flex items-center gap-3 text-base font-semibold py-2 px-3 rounded-xl hover:bg-cyan-500/10 accent-text" data-key="navEvidence"><i class="fa-solid fa-award"></i> الشواهد والأداء</a></li>
+            <li><a href="#" onclick="document.getElementById('adminModal').style.display='flex'; toggleMobileMenu();" class="flex items-center gap-3 text-base font-semibold py-2 px-3 rounded-xl hover:bg-cyan-500/10 text-cyan-300"><i class="fa-solid fa-gear"></i> لوحة التحكم</a></li>
+        </ul>
+
+        <div class="mt-auto pt-6 border-t" style="border-color: var(--border-color);">
+            <div class="text-xs text-center text-slate-400">Vanta Voids Studio © 2026</div>
+        </div>
+    </div>
         <div class="flex items-center justify-between pb-6 mb-6 border-b" style="border-color: var(--border-color);">
             <div class="flex items-center gap-3">
                 <img src="my-photo.jpg" alt="يوسف الحامد" class="w-10 h-10 rounded-xl border border-cyan-400 object-cover dynamic-avatar">
