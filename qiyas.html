@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة محاكاة الاختبارات الوطنية | أ. يوسف الحامد</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Cairo) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        ivoryBg: '#FDFBF7',
+                        ivoryCard: '#FFFFFF',
+                        ivorySoft: '#F4EFEB',
+                        royalNavy: '#1B2A4A',
+                        royalNavyHover: '#131E35',
+                        royalGold: '#D4AF37',
+                        royalGoldHover: '#B8952B',
+                        slateText: '#2C3E50',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Cairo', sans-serif; background-color: #FDFBF7; color: #1B2A4A; }
+        .num-font { font-feature-settings: "tnum"; font-variant-numeric: tabular-nums; }
+        .gold-border { border-color: #D4AF37; }
+        .gold-glow { box-shadow: 0 0 15px rgba(212, 175, 55, 0.25); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-royalGold selection:text-white relative">
+
+    <!-- Header -->
+    <header class="bg-white/90 backdrop-blur-md border-b border-amber-200/60 sticky top-0 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-royalNavy p-2.5 rounded-xl shadow-md text-royalGold border border-royalGold/40">
+                    <i class="fa-solid fa-microchip text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-wide text-royalNavy">منصة محاكاة الاختبارات الوطنية</h1>
+                    <p class="text-xs text-amber-900/70">ثانوية الملك عبدالله بن عبدالعزيز - مسارات - بيشة | <span class="text-royalNavy font-semibold">أ. يوسف الحامد</span></p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="openBookmarksModal()" class="bg-ivorySoft hover:bg-amber-100/60 text-royalNavy px-4 py-2 rounded-xl text-sm font-semibold transition border border-amber-200 flex items-center gap-2">
+                    <i class="fa-solid fa-bookmark text-royalGold"></i> المحفوظات (<span id="bookmark-count" class="num-font">0</span>)
+                </button>
+                <button onclick="openAdminLogin()" class="bg-ivorySoft hover:bg-amber-100/60 text-royalNavy px-4 py-2 rounded-xl text-sm font-semibold transition border border-amber-200 flex items-center gap-2">
+                    <i class="fa-solid fa-lock text-royalNavy"></i> إدارة المحتوى
+                </button>
+                <a href="https://yh-addict.github.io/vanta-voids/" class="bg-royalNavy hover:bg-royalNavyHover text-royalGold px-4 py-2 rounded-xl text-sm font-semibold transition shadow-md border border-royalGold/30 flex items-center gap-2">
+                    <i class="fa-solid fa-house"></i> Vanta Voids
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full">
+        
+        <!-- Courses Grid View -->
+        <div id="courses-view" class="space-y-6">
+            <div class="text-center max-w-2xl mx-auto space-y-2 mb-10">
+                <h2 class="text-3xl font-extrabold tracking-tight text-royalNavy">استعدّ. اختبر قدراتك. اصنع تفوّقك.</h2>
+                <p class="text-amber-900/70 text-sm">اختر المقرر الذي تريد التدرب عليه، واختبر جاهزيتك من خلال أسئلة تدريبية مُعدّة بعناية، تحاكي نمط اختبارات قياس والتحصيلي المرتبطة بمقررات الحاسب الآلي.</p>
+            </div>
+            
+            <div id="courses-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- سيتم تعبئة المقررات تلقائياً عبر JavaScript -->
+            </div>
+        </div>
+
+        <!-- Quiz View (Hidden initially) -->
+        <div id="quiz-view" class="hidden space-y-6 max-w-3xl mx-auto">
+            <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-amber-200 shadow-sm">
+                <button onclick="backToCourses()" class="text-amber-900/70 hover:text-royalNavy transition flex items-center gap-2 text-sm font-semibold">
+                    <i class="fa-solid fa-arrow-right"></i> العودة للمقررات
+                </button>
+                <h3 id="current-course-title" class="text-lg font-bold text-royalNavy">اسم المقرر</h3>
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleBookmarkCurrent()" id="bookmark-btn" class="text-amber-700 hover:text-royalGold transition text-lg" title="حفظ السؤال للمراجعة">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </button>
+                    <span id="question-counter" class="text-xs bg-ivorySoft border border-amber-200 px-3.5 py-1.5 rounded-full text-royalNavy font-semibold num-font tracking-wide">السؤال 1 من 5</span>
+                </div>
+            </div>
+
+            <!-- Tabs for Test Batches -->
+            <div id="test-batches-tabs" class="flex gap-2 border-b border-amber-200 pb-3">
+                <!-- يتم توليد التبويبات هنا -->
+            </div>
+
+            <!-- Question Box -->
+            <div class="bg-white border border-amber-200/80 rounded-2xl p-6 md:p-8 shadow-xl space-y-6 relative overflow-hidden">
+                <div id="question-badge" class="absolute top-0 left-0 bg-royalNavy text-royalGold text-[10px] font-bold px-4 py-1 rounded-br-xl shadow border-b border-r border-royalGold/30">أساسية</div>
+                
+                <div class="pt-2">
+                    <h4 id="question-text" class="text-lg md:text-xl font-bold leading-relaxed text-royalNavy">نص السؤال سيظهر هنا؟</h4>
+                </div>
+
+                <div id="options-container" class="space-y-3">
+                    <!-- الخيارات -->
+                </div>
+
+                <div id="feedback-box" class="hidden p-4 rounded-xl text-sm border">
+                    <!-- رسالة التعزيز والتوجيه -->
+                </div>
+
+                <div class="flex justify-between items-center pt-4 border-t border-amber-100">
+                    <button onclick="prevQuestion()" id="prev-btn" class="bg-ivorySoft hover:bg-amber-100/80 text-royalNavy px-5 py-2.5 rounded-xl text-sm font-semibold transition disabled:opacity-50 border border-amber-200">السابق</button>
+                    <div class="flex items-center gap-2">
+                        <button onclick="nextQuestion()" id="next-btn" class="bg-royalNavy hover:bg-royalNavyHover text-white px-6 py-2.5 rounded-xl text-sm font-semibold transition shadow-md border border-royalGold/30">التالي</button>
+                        <button onclick="backToCourses()" id="finish-btn" class="hidden bg-red-700 hover:bg-red-800 text-white px-6 py-2.5 rounded-xl text-sm font-bold transition shadow-md flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i> إنهاء الاختبار
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/966565588869" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 left-6 bg-emerald-600 hover:bg-emerald-700 text-white p-3.5 rounded-full shadow-2xl transition hover:scale-110 z-50 flex items-center justify-center group border border-emerald-400/40" title="تواصل عبر الواتساب">
+        <i class="fa-brands fa-whatsapp text-2xl"></i>
+        <span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 ease-in-out whitespace-nowrap text-xs font-bold pr-0 group-hover:pr-2">تواصل معنا</span>
+    </a>
+
+    <!-- Center Completion Modal -->
+    <div id="completion-modal" class="fixed inset-0 bg-royalNavy/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white border-2 border-royalGold w-full max-w-md rounded-2xl p-8 space-y-6 shadow-2xl text-center relative gold-glow transform transition-all scale-100">
+            <div class="w-16 h-16 bg-amber-50 text-royalGold rounded-full flex items-center justify-center mx-auto text-3xl border border-royalGold/40 shadow-inner">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-xl font-black text-royalNavy">إنجاز رائع!</h3>
+                <p id="completion-message-text" class="text-sm font-bold text-amber-900 leading-relaxed">أحسنت! لقد أكملت جميع أسئلة هذا القسم بنجاح 🎉</p>
+            </div>
+            <button onclick="closeCompletionModalAndFinish()" class="w-full bg-red-700 hover:bg-red-800 text-white py-3.5 rounded-xl font-bold text-sm transition shadow-lg flex items-center justify-center gap-2 border border-red-500/30">
+                <i class="fa-solid fa-house"></i> إنهاء الاختبار والعودة للمقررات
+            </button>
+        </div>
+    </div>
+
+    <!-- Custom Toast Alert -->
+    <div id="toast-notification" class="fixed bottom-6 right-6 bg-white border border-amber-300 text-royalNavy px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+        <div id="toast-icon" class="text-royalGold text-lg"><i class="fa-solid fa-circle-info"></i></div>
+        <div id="toast-message" class="text-xs font-semibold text-royalNavy">نص التنبيه هنا...</div>
+    </div>
+
+    <!-- Bookmarks Modal -->
+    <div id="bookmarks-modal" class="fixed inset-0 bg-royalNavy/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white border border-amber-200 w-full max-w-2xl rounded-2xl p-6 space-y-6 shadow-2xl relative max-h-[80vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-amber-100 pb-4">
+                <h3 class="text-lg font-bold text-royalNavy flex items-center gap-2"><i class="fa-solid fa-bookmark text-royalGold"></i> الأسئلة المحفوظة للمراجعة</h3>
+                <button onclick="closeBookmarksModal()" class="text-amber-900/60 hover:text-royalNavy"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div id="bookmarks-list" class="space-y-4">
+                <!-- يتم تعبئتها ديناميكياً -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="admin-login-modal" class="fixed inset-0 bg-royalNavy/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white border border-amber-200 w-full max-w-md rounded-2xl p-6 space-y-6 shadow-2xl relative">
+            <div class="flex justify-between items-center">
+                <h3 class="text-lg font-bold text-royalNavy flex items-center gap-2"><i class="fa-solid fa-lock text-royalGold"></i> إدارة المحتوى المشرف</h3>
+                <button onclick="closeAdminLogin()" class="text-amber-900/60 hover:text-royalNavy"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-amber-900/80 mb-2">كلمة المرور</label>
+                    <input type="password" id="admin-pass" placeholder="أدخل كلمة المرور" class="w-full bg-ivorySoft border border-amber-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-royalGold text-royalNavy">
+                </div>
+                <button onclick="verifyAdmin()" class="w-full bg-royalNavy hover:bg-royalNavyHover text-royalGold py-3 rounded-xl font-semibold transition shadow-md border border-royalGold/30">دخول لوحة إدارة المحتوى</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard Modal -->
+    <div id="admin-dashboard-modal" class="fixed inset-0 bg-royalNavy/70 backdrop-blur-md hidden z-50 overflow-y-auto p-4 flex items-center justify-center">
+        <div class="bg-white border border-amber-200 w-full max-w-3xl rounded-2xl p-6 md:p-8 space-y-6 shadow-2xl my-8">
+            <div class="flex justify-between items-center border-b border-amber-100 pb-4">
+                <div>
+                    <h3 class="text-xl font-bold text-royalNavy"><i class="fa-solid fa-sliders text-royalGold"></i> إدارة المحتوى وتحديث الأسئلة</h3>
+                    <p class="text-xs text-amber-900/70">إضافة وتحديث بنك الأسئلة السحابي</p>
+                </div>
+                <button onclick="closeAdminDashboard()" class="text-amber-900/60 hover:text-royalNavy text-xl"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="space-y-5">
+                <div class="bg-ivorySoft p-4 rounded-xl border border-amber-200 space-y-2">
+                    <label class="block text-sm font-bold text-royalNavy">1. حدد المقرر الدراسي أولاً لإضافة أو تحديث الأسئلة:</label>
+                    <select id="admin-course-select" onchange="onAdminCourseChange()" class="w-full bg-white border border-amber-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-royalGold text-royalNavy font-semibold">
+                        <option value="">-- اختر المقرر الدراسي --</option>
+                    </select>
+                </div>
+
+                <div id="admin-form-fields" class="space-y-4 hidden opacity-0 transition-opacity duration-300">
+                    <div>
+                        <label class="block text-xs font-semibold text-amber-900/80 mb-1">تصنيف الاختبار (الباتش):</label>
+                        <select id="admin-batch" class="w-full bg-white border border-amber-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-royalGold text-royalNavy">
+                            <option value="اختبار (1) - الأسئلة السابقة والأساسية">اختبار (1) - الأسئلة السابقة</option>
+                            <option value="اختبار (2) - الأسئلة المضافة حديثاً" selected>اختبار (2) - الأسئلة المضافة حديثاً (مع شارة NEW الذهبية)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-amber-900/80 mb-1">نص السؤال:</label>
+                        <textarea id="admin-q-text" rows="3" placeholder="اكتب نص السؤال المحاكى لاختبارات قياس..." class="w-full bg-white border border-amber-200 rounded-xl p-3 text-sm focus:outline-none focus:border-royalGold text-royalNavy"></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-amber-900/80 mb-1">الخيار (أ)</label>
+                            <input type="text" id="opt-0" class="w-full bg-white border border-amber-200 rounded-xl p-2.5 text-sm text-royalNavy">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-amber-900/80 mb-1">الخيار (ب)</label>
+                            <input type="text" id="opt-1" class="w-full bg-white border border-amber-200 rounded-xl p-2.5 text-sm text-royalNavy">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-amber-900/80 mb-1">الخيار (ج)</label>
+                            <input type="text" id="opt-2" class="w-full bg-white border border-amber-200 rounded-xl p-2.5 text-sm text-royalNavy">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-amber-900/80 mb-1">الخيار (د)</label>
+                            <input type="text" id="opt-3" class="w-full bg-white border border-amber-200 rounded-xl p-2.5 text-sm text-royalNavy">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-amber-900/80 mb-1">رقم الإجابة الصحيحة (0 للخيار الأول، 1 للثاني، إلخ):</label>
+                        <select id="admin-correct" class="w-full bg-white border border-amber-200 rounded-xl px-4 py-2 text-sm text-royalNavy">
+                            <option value="0">الخيار الأول (أ)</option>
+                            <option value="1">الخيار الثاني (ب)</option>
+                            <option value="2">الخيار الثالث (ج)</option>
+                            <option value="3">الخيار الرابع (د)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-amber-900/80 mb-1">رسالة التعزيز الإيجابي (عند الإجابة الصحيحة):</label>
+                        <input type="text" id="admin-pos-feedback" value="إجابة صحيحة أحسنت! 🎯" class="w-full bg-white border border-amber-200 rounded-xl p-2.5 text-sm text-royalNavy">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-amber-900/80 mb-1">رسالة التوجيه / الشرح (عند الإجابة الخطأ):</label>
+                        <textarea id="admin-neg-feedback" rows="2" placeholder="اكتب التبرير العلمي المفصل لتثبيت المعلومة للطالب..." class="w-full bg-white border border-amber-200 rounded-xl p-3 text-sm text-royalNavy">إجابة غير دقيقة ❌، راجع المفهوم العلمي وتأكد من الآلية.</textarea>
+                    </div>
+
+                    <button onclick="saveNewQuestionToCloud()" class="w-full bg-royalNavy hover:bg-royalNavyHover text-royalGold py-3 rounded-xl font-bold transition shadow-md border border-royalGold/30 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> حفظ وإدراج السؤال في قاعدة البيانات السحابية
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-amber-200 py-6 text-center text-xs space-y-1">
+        <p class="font-bold text-royalNavy">All Rights Reserved 2026©</p>
+        <p class="font-bold text-royalNavy">يوسف الحامد | Vanta Voids</p>
+        <p class="font-semibold text-royalNavy/80">ثانوية الملك عبدالله بن عبدالعزيز - مسارات - بيشة</p>
+    </footer>
+
+    <!-- Firebase SDK & App Logic with your real config -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // إعدادات مشروعك الحقيقي على Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyAlLDjHycBEkXSyJGdCz37nCDVRb1ZucFg",
+            authDomain: "vanta-voids-qiyas.firebaseapp.com",
+            projectId: "vanta-voids-qiyas",
+            storageBucket: "vanta-voids-qiyas.firebasestorage.app",
+            messagingSenderId: "121497364225",
+            appId: "1:121497364225:web:be70db066663337b3c9d00"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const courses = [
+            { id: "digital-tech-1", name: "التقنية الرقمية (1)", icon: "fa-laptop-code" },
+            { id: "digital-tech-2", name: "التقنية الرقمية (2)", icon: "fa-desktop" },
+            { id: "digital-tech-3", name: "التقنية الرقمية (3)", icon: "fa-network-wired" },
+            { id: "data-science", name: "علم البيانات", icon: "fa-chart-pie" },
+            { id: "ai-1", name: "الذكاء الاصطناعي (1)", icon: "fa-robot" },
+            { id: "ai-2", name: "الذكاء الاصطناعي (2)", icon: "fa-brain" },
+            { id: "engineering-design", name: "التصميم الهندسي", icon: "fa-compass-drafting" },
+            { id: "cybersecurity", name: "الأمن السيبراني", icon: "fa-shield-halved" },
+            { id: "iot", name: "إنترنت الأشياء", icon: "fa-tower-broadcast" },
+            { id: "software-eng", name: "هندسة البرمجيات", icon: "fa-code" }
+        ];
+
+        // بنك الأسئلة الافتراضي (مع إمكانية جلبها سحابياً من Firestore)
+        let questionBank = {
+            "digital-tech-1": [
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "أي مما يلي يُعد المكون المادي (Hardware) الأساسي المسؤول عن تنفيذ العمليات الحسابية والمنطقية؟", options: ["ذاكرة الوصول العشوائي RAM", "وحدة المعالجة المركزية CPU", "قرص التخزين الصلب SSD", "لوحة المفاتيح"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 وحدة المعالجة المركزية (CPU) هي عقل الحاسب.", neg: "إجابة غير دقيقة ❌ العمليات الحسابية والمنطقية تتم داخل وحدة المعالجة المركزية (CPU)." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "نظام التشغيل يُعتبر مثالاً بارزاً على:", options: ["برمجيات التطبيقات", "البرمجيات النظامية", "لغات البرمجة", "أنظمة قواعد البيانات"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 نظام التشغيل يدير عتاد الحاسب كبرمجيات نظامية.", neg: "إجابة غير دقيقة ❌ أنظمة التشغيل تندرج ضمن برمجيات النظام (System Software)." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "أي من صيغ الملفات التالية يُستخدم عادة لحفظ مستندات النصوص المنسقة بشكل قياسي؟", options: [".docx", ".mp4", ".png", ".mp3"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 امتداد docx مخصص لبرنامج معالجة النصوص.", neg: "إجابة غير دقيقة ❌ الامتداد القياسي للمستندات هو docx." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "ما هي الوظيفة الأساسية للذاكرة الثانوية (Secondary Storage) في الحاسب؟", options: ["تنفيذ العمليات الحسابية الحالية", "التخزين طويل الأجل للبيانات والبرامج", "عرض الرسومات على الشاشة", "توصيل الأجهزة الطرفية"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 التخزين الثانوي يوفر حفظاً مستداماً للبيانات.", neg: "إجابة غير دقيقة ❌ التخزين الثانوي مخصص للاحتفاظ بالبيانات على المدى الطويل." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "أي من وحدات الإدخال التالية تُستخدم لتحويل المستندات الورقية إلى صور رقمية؟", options: ["الطابعة", "الماسح الضوئي (Scanner)", "السماعة", "العارض الضوئي"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 الماسح الضوئي يحول الورق لصيغة رقمية.", neg: "إجابة غير دقيقة ❌ الجهاز المسؤول عن إدخال المستندات الورقية رقمياً هو الماسح الضوئي." }
+            ],
+            "digital-tech-2": [
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "لغة تصميم وتنسيق صفحات الويب التي تعنى بالألوان والخطوط والمظهر العام هي:", options: ["HTML", "CSS", "JavaScript", "Python"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 CSS مسؤولة عن التنسيق والمظهر الجمالي.", neg: "إجابة غير دقيقة ❌ تنسيق مظهر صفحات الويب يتم عبر لغة CSS." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "في لغة HTML، أي وسم يُستخدم لإدراج رابط تشعبي (Hyperlink)؟", options: ["<link>", "<a>", "<href>", "<url>"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 الوسم <a> مع خاصية href يمثل الرابط التشعبي.", neg: "إجابة غير دقيقة ❌ الوسم الأساسي للروابط في HTML هو <a>." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "أداة البرمجة المرئية التي تُستخدم غالباً لتصميم وتطوير تطبيقات الهواتف الذكية هي:", options: ["App Inventor", "Photoshop", "Excel", "Notepad"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 MIT App Inventor منصة رائعة لتطوير التطبيقات.", neg: "إجابة غير دقيقة ❌ لتطوير تطبيقات الهواتف المرئية نستخدم بيئات مثل App Inventor." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "نوع قواعد البيانات الذي ينظم البيانات في جداول مترابطة بصفوف وأعمدة يسمى:", options: ["قواعد البيانات العلائقية (Relational)", "قواعد البيانات غير الهيكلية", "الملفات النصية المسطحة", "المصفوفات الثنائية"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 قواعد البيانات العلائقية تعتمد على الجداول المرتباطة.", neg: "إجابة غير دقيقة ❌ القواعد المبنية على جداول وصفوف هي العلائقية (Relational Databases)." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "أي مما يلي يُعد من لغات الاستعلام الشهيرة لإدارة قواعد البيانات؟", options: ["SQL", "HTML", "CSS", "XML"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 لغة SQL مخصصة للاستعلام وإدارة قواعد البيانات.", neg: "إجابة غير دقيقة ❌ لغة الاستعلام القياسية لقواعد البيانات هي SQL." }
+            ],
+            "digital-tech-3": [
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "بنية شبكات الحاسب التي تربط الأجهزة داخل مبنى واحد أو مكتب تسمى:", options: ["WAN", "LAN", "MAN", "PAN"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 شبكة LAN (المنطقة المحلية) تغطي نطاقاً جغرافياً ضيقاً.", neg: "إجابة غير دقيقة ❌ الشبكة المحلية داخل مبنى تُسمى LAN." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "الجهاز المسؤول عن توجيه حزم البيانات بين الشبكات المختلفة واختيار المسار الأمثل هو:", options: ["المبدل (Switch)", "الموجه (Router)", "المحول الثنائي", "المجسر"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 الموجه (Router) يربط الشبكات ويوجه البيانات.", neg: "إجابة غير دقيقة ❌ جهاز توجيه الحزم بين الشبكات هو الموجه (Router)." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "عنوان بروتوكول الإنترنت الإصدار الرابع (IPv4) يتكون من:", options: ["32 بتاً", "64 بتاً", "128 بتاً", "16 بتاً"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 عنوان IPv4 يتكون من 32 بتاً مقسمة لـ 4 أجزاء.", neg: "إجابة غير دقيقة ❌ طول عنوان IPv4 هو 32 بتاً." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "الحوسبة السحابية التي تقدم الخدمات كبنية تحتية للمؤسسات يُرمز لها بـ:", options: ["IaaS", "PaaS", "SaaS", "DaaS"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 Infrastructure as a Service يرمز لها بـ IaaS.", neg: "إجابة غير دقيقة ❌ البنية التحتية السحابية تُعرف بـ IaaS." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "بروتوكول نقل النص الفائق الآمن يعتمد على المنفذ رقم:", options: ["80", "443", "21", "25"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 HTTPS يعمل افتراضياً على المنفذ 443.", neg: "إجابة غير دقيقة ❌ المنفذ القياسي للاتصال الآمن HTTPS هو 443." }
+            ],
+            "data-science": [
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "المرحلة الأولى والأساسية في دورة حياة علم البيانات قبل البدء بالتحليل والنمذجة هي:", options: ["تنظيف وتحضير البيانات Data Wrangling", "بناء خوارزمية التعلم الآلي", "نشر النموذج", "تصميم واجهة المستخدم"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 تنظيف البيانات وتحضيرها هو الأساس لنجاح التحليل.", neg: "إجابة غير دقيقة ❌ البدء دائماً بتنظيف البيانات وتحضيرها (Data Wrangling)." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "مخطط يتم استخدامه لتوضيح وتوزيع القيم المتغيرة وإظهار القيم المتطرفة (Outliers):", options: ["المخطط الصندوقي (Box Plot)", "مخطط الدائرة النسبية", "الرسم الخطي البسيط", "مخطط الأعمدة"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 المخطط الصندوقي ممتاز لكشف التوزيع والقيم المتطرفة.", neg: "إجابة غير دقيقة ❌ المخطط المخصص لكشف القيم المتطرفة وتوزيع البيانات هو المخطط الصندوقي." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "مقياس النزعة المركزية الذي يمثل القيمة الأكثر تكراراً في مجموعة البيانات هو:", options: ["المتوسط الحسابي", "الوسيط", "المنوال (Mode)", "الانحراف المعياري"], correct: 2, pos: "إجابة صحيحة أحسنت! 🎯 المنوال هو القيمة الأكثر تكراراً.", neg: "إجابة غير دقيقة ❌ القيمة الأكثر تكراراً تُعرف بالمنوال (Mode)." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "أي من المكتبات الشهيرة في لغة بايثون تُستخدم لمعالجة البيانات وتحليلها في هياكل جدولية (DataFrames)؟", options: ["Pandas", "Matplotlib", "Random", "Math"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 مكتبة Pandas هي الأساس للتعامل مع الجداول والبيانات.", neg: "إجابة غير دقيقة ❌ المكتبة المسؤولة عن جداول البيانات في بايثون هي Pandas." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "عملية تحويل البيانات الخام إلى صيغة مفهومة وسهلة الفهم بصرياً تسمى:", options: ["تصوير وعرض البيانات (Data Visualization)", "تشفير البيانات", "حذف البيانات", "ضغط الملفات"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 تصوير البيانات يسهل اتخاذ القرار.", neg: "إجابة غير دقيقة ❌ تحويل البيانات لرسومات لتسهيل فهمها هو تصوير البيانات." }
+            ],
+            "ai-1": [
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "فرع الذكاء الاصطناعي الذي يهتم بتقنيات تمكين الآلات من قراءة وفهم وتوليد اللغة البشرية يسمى:", options: ["الرؤية الحاسوبية", "معالجة اللغات الطبيعية NLP", "الشبكات العصبية العميقة", "التعلم التعزيزي"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 معالجة اللغات الطبيعية (NLP) تختص باللغات البشرية.", neg: "إجابة غير دقيقة ❌ معالجة النصوص واللغات الطبيعية يرمز لها بـ NLP." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "نوع التعلم الآلي الذي يتم فيه تدريب النموذج باستخدام بيانات موسومة (معروفة النتائج مسبقاً) هو:", options: ["التعلم الإشرافي (Supervised)", "التعلم غير الإشرافي", "التعلم التعزيزي", "التعلم العميق العشوائي"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 التعلم الإشرافي يعتمد على بيانات مصنفة مسبقاً.", neg: "إجابة غير دقيقة ❌ التعلم المعتمد على بيانات مصنفة ومعروفة هو التعلم الإشرافي." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "فرع الذكاء الاصطناعي الذي يمكن الحواسيب من تفسير وفهم الصور والفيديوهات يسمى:", options: ["الرؤية الحاسوبية (Computer Vision)", "معالجة الصوت", "الروبوتات الذكية", "أنظمة الخبراء"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 الرؤية الحاسوبية تختص بتحليل الصور والمرئيات.", neg: "إجابة غير دقيقة ❌ فهم الصور وفيديوهات الحاسب يسمى الرؤية الحاسوبية." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "خوارزمية بسيطة للتعلم الآلي تصنف البيانات بناءً على أقرب الجيران تسمى:", options: ["K-Nearest Neighbors (KNN)", "Linear Regression", "Decision Tree", "K-Means"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 خوارزمية KNN تعتمد على الجوار للتصنيف.", neg: "إجابة غير دقيقة ❌ خوارزمية الجيران الأقرب تُسمى KNN." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "اختبار آلان تورينج (Turing Test) صُمم أساساً لقياس:", options: ["قدرة الآلة على إظهار سلوك ذكي يضاهي الإنسان", "سرعة معالجة المعالج المركزي", "سعة الذاكرة العشوائية", "أمان شبكات الإنترنت"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 اختبار تورينج يقيس قدرة الآلة على محاكاة ذكاء البشر.", neg: "إجابة غير دقيقة ❌ اختبار تورينج يقيس مدى قدرة الآلة على محاكاة الذكاء البشري." }
+            ],
+            "ai-2": [
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "الشبكات العصبية الاصطناعية (ANN) مستوحاة في تصميمها من:", options: ["الجهاز العصبي والدماغ البشري", "شبكات الإنترنت السلكية", "أنظمة التشغيل الحديثة", "دوائر الترانزستور الرقمية"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 مستوحاة من خلايا الدماغ البشري.", neg: "إجابة غير دقيقة ❌ الشبكات العصبية تحاكي الدماغ البشري حيوياً." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "فرع التعلم الآلي الذي يعتمد على التجربة والخطأ ونظام المكافأة والعقاب هو:", options: ["التعلم التعزيزي (Reinforcement Learning)", "التعلم الإشرافي", "التعلم غير الإشرافي", "التعلم الإحصائي"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 التعلم التعزيزي يعتمد على نظام المكافأة والجزاء.", neg: "إجابة غير دقيقة ❌ التعلم القائم على المكافأة والتجربة هو التعلم التعزيزي." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "عملية ضبط الأوزان والمعلمات داخل الشبكة العصبية أثناء التدريب تسمى:", options: ["التدريب والتحسين (Training)", "التفريغ", "التخزين المؤقت", "الترميز"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 التدريب يضبط الأوزان لتقليل نسبة الخطأ.", neg: "إجابة غير دقيقة ❌ ضبط أوزان الشبكة العصبية يتم خلال مرحلة التدريب." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "مفهوم يهدف لضمان شفافية وعدالة أنظمة الذكاء الاصطناعي وخلوها من التحيز يسمى:", options: ["الذكاء الاصطناعي الأخلاقي (Ethical AI)", "الذكاء الاصطناعي التجاري", "الحوسبة السحابية", "التشفير المتقدم"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 الأخلاقيات تضمن عدالة وشفافية الأنظمة.", neg: "إجابة غير دقيقة ❌ ضمان العدالة ومنع التحيز يعنى بالذكاء الاصطناعي الأخلاقي." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "استخدام النماذج التوليدية لتكوين نصوص أو صور جديدة بناءً على مدخلات يسمى:", options: ["الذكاء الاصطناعي التوليدي (Generative AI)", "الرؤية الكلاسيكية", "قواعد البيانات العلائقية", "تحليل الانحدار الخطي"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 الذكاء الاصطناعي التوليدي هو المسؤول عن توليد المحتوى الجديد.", neg: "إجابة غير دقيقة ❌ توليد النصوص والصور يعتمد على الذكاء الاصطناعي التوليدي." }
+            ],
+            "engineering-design": [
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "المرحلة الأولى في خطوات عملية التصميم الهندسي هي:", options: ["تحديد المشكلة والاحتياجات", "بناء النموذج الأولي", "اختبار المنتج", "تسويق الحل"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 تحديد المشكلة بدقة هو خط البداية الهندسي.", neg: "إجابة غير دقيقة ❌ تبدأ عملية التصميم بتحديد المشكلة وفهم الحاجة." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "الرسم الهندسي ثلاثي الأبعاد الذي يوضح أبعاد وشكل المجسم من زوايا مختلفة يسمى:", options: ["الرسم التصويري أو المتعامد (Orthographic)", "الرسم العشوائي", "الرسم التخطيطي النصي", "المخطط الخوارزمي"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 المساقط المتعامدة توضح تفاصيل الأبعاد الثلاثة.", neg: "إجابة غير دقيقة ❌ توضيح المجسم هندسياً يتم بالرسم المتعامد." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "نموذج أولي مصغر أو مبدئي يتم صنعه لاختبار فكرة التصميم يسمى:", options: ["النموذج الأولي (Prototype)", "المنتج النهائي", "المخطط النهائي", "دليل الاستخدام"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 النموذج الأولي يختبر صلاحية الفكرة عملياً.", neg: "إجابة غير دقيقة ❌ النسخة التجريبية الأولى تُسمى النموذج الأولي (Prototype)." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "برامج التصميم بمساعدة الحاسب الآلي تسمى اختصاراً:", options: ["CAD (Computer-Aided Design)", "CAM", "HTML", "CPU"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 برامج CAD مخصصة للرسم والتصميم الهندسي.", neg: "إجابة غير دقيقة ❌ التصميم بمساعدة الحاسب يرمز له بـ CAD." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "القيود والاشتراطات الهندسية (مثل: التكلفة، المواد المتاحة، الوزن) تسمى في التصميم:", options: ["المحددات والقيود (Constraints)", "الحلول النهائية", "الرسومات الحرة", "البيانات العشوائية"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 القيود تحدد إطار العمل الهندسي المتاح.", neg: "إجابة غير دقيقة ❌ الشروط والحدود تسمى قيود التصميم (Constraints)." }
+            ],
+            "cybersecurity": [
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "أي من الهجمات التالية يعتمد على خداع المستخدم وإرسال روابط وهمية لسرقة بياناته؟", options: ["هجوم حجب الخدمة DoS", "التصيد الاحتيالي Phishing", "برامج الفدية", "التنصت المباشر"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 التصيد الاحتيالي (Phishing) هو الأشهر لخداع الأفراد.", neg: "إجابة غير دقيقة ❌ خداع المستخدم عبر روابط وهمية يُعرف بالتصيد الاحتيالي." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "عملية تحويل البيانات الواضحة إلى بيانات غير مفهومة لحمايتها من المتطفلين تسمى:", options: ["التشفير (Encryption)", "الضغط", "النسخ الاحتياطي", "الحذف الآمن"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 التشفير يحمي سرية البيانات أثناء النقل والتخزين.", neg: "إجابة غير دقيقة ❌ حماية البيانات بتحويلها لرمز غير مفهوم تسمى التشفير." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "نوع البرمجيات الخبيثة التي تقوم بقفل ملفات جهاز الضحية وتطلب فدية مالية مقابل فكها:", options: ["برامج الفدية (Ransomware)", "فيروسات التجسس", "أحصنة طروادة", "الدودة الحاسوبية"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 برامج الفدية تخترق وتقفل الملفات لبتتزاز المستخدم.", neg: "إجابة غير دقيقة ❌ البرمجيات التي تبتز المستخدم بقفل الملفات هي برامج الفدية." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "المصادقة ثنائية العوامل (2FA) تعني:", options: ["استخدام طريقتين مختلتين لتأكيد الهوية", "استخدام كلمتي مرور متشابهتين", "الدخول عبر جهازين بنفس الوقت", "تغيير كلمة المرور مرتين يومياً"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 المصادقة الثنائية ترفع مستوى الأمان بطريقتين للتحقق.", neg: "إجابة غير دقيقة ❌ المصادقة الثنائية تعتمد على وسيلتين مختلفتين للتحقق من الهوية." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "أداة أمنية تفحص وتراقب حركة المرور الواردة والصادرة وتمنع الوصول غير المصرح به:", options: ["جدار الحماية (Firewall)", "برنامج ضغط الملفات", "مشغل الوسائط", "متصفح الويب"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 جدار الحماية (Firewall) خط الدفاع الأول للشبكة.", neg: "إجابة غير دقيقة ❌ الأداة الأمنية للتحكم بالمرور الشبكي هي جدار الحماية." }
+            ],
+            "iot": [
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "ما هو المقصود بمفهوم إنترنت الأشياء (IoT)؟", options: ["ربط الأجهزة والأدوات بالإنترنت لتبادل البيانات والتحكم بها", "الاستغناء الكامل عن أجهزة الحاسب", "تصفح الإنترنت عبر الهواتف الذكية فقط", "بناء شبكات محلية بدون أسلاك"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 إنترنت الأشياء يربط مختلف الأدوات بالشبكة.", neg: "إجابة غير دقيقة ❌ إنترنت الأشياء يعني ربط الأشياء المادية بالإنترنت للتحكم بها." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "أي مما يلي يُعد مثالاً على مستشعر (Sensor) مستخدم في تطبيقات إنترنت الأشياء؟", options: ["مستشعر درجات الحرارة", "الشاشة العارضة", "السماعة الصوتية", "طابعة الليزر"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 مستشعرات الحرارة تقيس البيئة المحيطة وتنقل البيانات.", neg: "إجابة غير دقيقة ❌ المستشعر المخصص لقياس البيئة هو مستشعر الحرارة." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "اللوحة الإلكترونية المصغرة الشهيرة المستخدمة لبناء مشاريع إنترنت الأشياء وتطمينات البرمجة تسمى:", options: ["Arduino / ESP8266", "MS Office", "Photoshop", "Windows"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 لوحات أردوينو وإي إس بي تستخدم للتحكم والمستشعرات.", neg: "إجابة غير دقيقة ❌ اللوحات الإلكترونية الشهيرة للمشاريع هي لوحات أردوينو وما شابهها." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "بروتوكول خفيف الوزن يُستخدم بشكل واسع لتبادل الرسائل بين أجهزة إنترنت الأشياء:", options: ["MQTT", "HTTP", "FTP", "SMTP"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 بروتوكول MQTT مصمم خصيصاً للشبكات الخفيفة وأجهزة إنترنت الأشياء.", neg: "إجابة غير دقيقة ❌ البروتوكول الخفيف المناسب لإنترنت الأشياء هو MQTT." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "البيانات الضخمة الناتجة عن أجهزة إنترنت الأشياء يتم غالباً معالجتها وتخزينها في:", options: ["الحوسبة السحابية (Cloud)", "الأقراص المرنة القديمة", "الذاكرة المخبأة المؤقتة", "الذاكرة العشوائية RAM فقط"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 السحابة توفر مرونة هائلة لتخزين بيانات الأجهزة الذكية.", neg: "إجابة غير دقيقة ❌ تخزين ومعالجة بيانات إنترنت الأشياء يعتمد على الحوسبة السحابية." }
+            ],
+            "software-eng": [
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "المرحلة الأولى في دورة حياة تطوير البرمجيات (SDLC) هي:", options: ["تحديد وتحليل المتطلبات (Requirements)", "كتابة الكود البرمجي", "اختبار البرمجيات", "نشر التطبيق"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 تحليل المتطلبات هو خطوة البدء لأي مشروع برمجي.", neg: "إجابة غير دقيقة ❌ تبدأ دورة تطوير البرمجيات بتحليل المتطلبات." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "نموذج تطوير البرمجيات الذي يسير بشكل تسلسلي خطي (كل مرحلة تتبع الأخرى بدقة) يسمى:", options: ["نموذج الشلال (Waterfall)", "النموذج المرن (Agile)", "نموذج الدوامة", "النموذج العشوائي"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 نموذج الشلال يتميز بالتسلسل الخطي الصارم.", neg: "إجابة غير دقيقة ❌ النموذج التسلسلي الخطي يسمى نموذج الشلال (Waterfall)." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "عملية فحص البرمجيات للتأكد من خلوها من الأخطاء البرمجية والمنطقية تسمى:", options: ["اختبار البرمجيات (Testing)", "التوثيق", "التصميم الهندسي", "إعادة الهيكلة"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 الاختبار يضمن جودة البرمجيات وخلوها من الأخطاء.", neg: "إجابة غير دقيقة ❌ فحص الأخطاء والتأكد من الجودة يسمى اختبار البرمجيات." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "منهجية التطوير البرمجي التي تعتمد على العمل على شكل دورات قصيرة متكررة ومرنة تسمى:", options: ["منهجية أجايل (Agile)", "نموذج الشلال الصلب", "التطوير اليدوي", "المتطلبات الثابتة"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 منهجية Agile تتميز بالمرونة والتطوير التراكمي السريع.", neg: "إجابة غير دقيقة ❌ المنهجية المرنة وقصيرة الدورات تسمى أجايل (Agile)." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "مخطط يوضح التفاعل بين كائنات النظام البرمجي والرسائل المتبادلة بينها زمنياً يسمى:", options: ["مخطط التسلسل (Sequence Diagram)", "مخطط التدفق البسيط", "مخطط الشلال", "مخطط الدائرة"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 مخطط التسلسل يوضح التفاعل الزمني للكائنات برمجياً.", neg: "إجابة غير دقيقة ❌ توضيح التفاعل الزمني للكائنات يتم بمخطط التسلسل." }
+            ]
+        };
+
+        let bookmarks = JSON.parse(localStorage.getItem('qiyas_bookmarks') || '[]');
+        let currentActiveCourse = null;
+        let currentBatchKey = "";
+        let currentQuestionIndex = 0;
+
+        window.showToast = function(message, type = 'info') {
+            const toast = document.getElementById('toast-notification');
+            const msgEl = document.getElementById('toast-message');
+            const iconEl = document.getElementById('toast-icon');
+
+            msgEl.innerText = message;
+            if (type === 'success') {
+                iconEl.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600"></i>`;
+                toast.className = "fixed bottom-6 right-6 bg-white border border-emerald-500 text-royalNavy px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3 transform translate-y-0 opacity-100 transition-all duration-300 z-50";
+            } else if (type === 'warning') {
+                iconEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-amber-600"></i>`;
+                toast.className = "fixed bottom-6 right-6 bg-white border border-amber-500 text-royalNavy px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3 transform translate-y-0 opacity-100 transition-all duration-300 z-50";
+            } else {
+                iconEl.innerHTML = `<i class="fa-solid fa-circle-info text-royalGold"></i>`;
+                toast.className = "fixed bottom-6 right-6 bg-white border border-royalGold text-royalNavy px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3 transform translate-y-0 opacity-100 transition-all duration-300 z-50";
+            }
+
+            setTimeout(() => {
+                toast.className = toast.className.replace('translate-y-0 opacity-100', 'translate-y-20 opacity-0');
+            }, 3500);
+        }
+
+        window.initApp = async function() {
+            // محاولة جلب الأسئلة المضافة من سحابة Firestore إن وجدت
+            try {
+                const querySnapshot = await getDocs(collection(db, "qiyas_questions"));
+                querySnapshot.forEach((docSnap) => {
+                    const qData = docSnap.data();
+                    if(qData.courseId && questionBank[qData.courseId]) {
+                        questionBank[qData.courseId].push(qData);
+                    }
+                });
+            } catch (e) {
+                console.log("يعمل في وضع التخزين المحلي والافتراضي حالياً.");
+            }
+            renderCourses();
+            populateAdminDropdown();
+            updateBookmarkCount();
+        }
+
+        function renderCourses() {
+            const grid = document.getElementById('courses-grid');
+            grid.innerHTML = "";
+            courses.forEach(course => {
+                grid.innerHTML += `
+                    <div onclick="openCourse('${course.id}')" class="bg-white border border-amber-200/80 hover:border-royalGold rounded-2xl p-6 cursor-pointer transition hover:-translate-y-1 shadow-md hover:shadow-xl group flex flex-col justify-between">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="bg-amber-50 text-royalGold group-hover:bg-royalNavy group-hover:text-royalGold p-3.5 rounded-xl transition border border-amber-200/60">
+                                <i class="fa-solid ${course.icon} text-xl"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold group-hover:text-royalGold transition mb-1 text-royalNavy">${course.name}</h3>
+                            <p class="text-xs text-amber-900/60">بنك أسئلة محاكى لاختبارات قياس والتحصيلي</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        window.openCourse = function(courseId) {
+            currentActiveCourse = courses.find(c => c.id === courseId);
+            document.getElementById('current-course-title').innerText = currentActiveCourse.name;
+            document.getElementById('courses-view').classList.add('hidden');
+            document.getElementById('quiz-view').classList.remove('hidden');
+
+            setupBatchesAndQuestions();
+        }
+
+        function setupBatchesAndQuestions() {
+            const qList = questionBank[currentActiveCourse.id] || [];
+            const tabsContainer = document.getElementById('test-batches-tabs');
+            tabsContainer.innerHTML = "";
+
+            if (qList.length === 0) {
+                tabsContainer.innerHTML = `<p class="text-xs text-amber-700">لا توجد أسئلة مضافة لهذا المقرر حالياً.</p>`;
+                document.getElementById('question-text').innerText = "عذراً، جارٍ إعداد الأسئلة...";
+                document.getElementById('options-container').innerHTML = "";
+                return;
+            }
+
+            const batches = [...new Set(qList.map(q => q.batch))];
+            if (!batches.includes(currentBatchKey)) {
+                currentBatchKey = batches[0];
+            }
+
+            batches.forEach((batch) => {
+                const isNewBatch = batch.includes("مضافة حديثاً");
+                tabsContainer.innerHTML += `
+                    <button onclick="switchBatch('${batch}')" class="px-4 py-2 rounded-xl text-xs font-bold transition border ${currentBatchKey === batch ? 'bg-royalNavy text-royalGold border-royalGold' : 'bg-ivorySoft text-royalNavy border-amber-200'} relative">
+                        ${batch}
+                        ${isNewBatch ? '<span class="absolute -top-2 -right-2 bg-gradient-to-r from-amber-400 to-yellow-500 text-royalNavy text-[9px] font-black px-2 py-0.5 rounded-full border border-amber-200 shadow-md animate-pulse">NEW</span>' : ''}
+                    </button>
+                `;
+            });
+
+            currentQuestionIndex = 0;
+            renderQuestion();
+        }
+
+        window.switchBatch = function(batchName) {
+            currentBatchKey = batchName;
+            currentQuestionIndex = 0;
+            setupBatchesAndQuestions();
+        }
+
+        function renderQuestion() {
+            const qList = (questionBank[currentActiveCourse.id] || []).filter(q => q.batch === currentBatchKey);
+            if (qList.length === 0) return;
+
+            const q = qList[currentQuestionIndex];
+            document.getElementById('question-counter').innerText = `السؤال ${currentQuestionIndex + 1} من ${qList.length}`;
+            document.getElementById('question-text').innerText = q.question;
+
+            const nextBtn = document.getElementById('next-btn');
+            const finishBtn = document.getElementById('finish-btn');
+            
+            if (currentQuestionIndex === qList.length - 1) {
+                nextBtn.classList.add('hidden');
+                finishBtn.classList.remove('hidden');
+            } else {
+                nextBtn.classList.remove('hidden');
+                finishBtn.classList.add('hidden');
+            }
+
+            const badge = document.getElementById('question-badge');
+            if(q.batch.includes("مضافة حديثاً")) {
+                badge.className = "absolute top-0 left-0 bg-gradient-to-r from-amber-500 to-yellow-600 text-royalNavy text-[10px] font-black px-4 py-1 rounded-br-xl shadow border-b border-r border-amber-300";
+                badge.innerText = "تحديث جديد NEW";
+            } else {
+                badge.className = "absolute top-0 left-0 bg-royalNavy text-royalGold text-[10px] font-bold px-4 py-1 rounded-br-xl shadow border-b border-r border-royalGold/30";
+                badge.innerText = "أسئلة سابقة";
+            }
+
+            updateBookmarkIconState(q);
+
+            const optContainer = document.getElementById('options-container');
+            optContainer.innerHTML = "";
+            q.options.forEach((opt, idx) => {
+                optContainer.innerHTML += `
+                    <button onclick="checkAnswer(${idx}, ${q.correct})" class="option-btn w-full text-right bg-ivorySoft hover:bg-amber-100/60 border border-amber-200 p-4 rounded-xl text-sm transition font-semibold text-royalNavy flex items-center justify-between group">
+                        <span>${opt}</span>
+                        <span class="w-6 h-6 rounded-full border border-amber-300 flex items-center justify-center text-xs text-amber-800 group-hover:border-royalGold group-hover:bg-royalGold group-hover:text-white transition num-font">${['أ', 'ب', 'ج', 'د'][idx]}</span>
+                    </button>
+                `;
+            });
+
+            document.getElementById('feedback-box').classList.add('hidden');
+        }
+
+        window.checkAnswer = function(selected, correct) {
+            const qList = (questionBank[currentActiveCourse.id] || []).filter(q => q.batch === currentBatchKey);
+            const q = qList[currentQuestionIndex];
+            const feedbackBox = document.getElementById('feedback-box');
+            feedbackBox.classList.remove('hidden');
+
+            const buttons = document.querySelectorAll('.option-btn');
+            buttons.forEach((btn, idx) => {
+                btn.disabled = true;
+                if (idx === correct) {
+                    btn.classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-900');
+                } else if (idx === selected && selected !== correct) {
+                    btn.classList.add('bg-red-100', 'border-red-500', 'text-red-900');
+                }
+            });
+
+            if (selected === correct) {
+                feedbackBox.className = "p-4 rounded-xl text-sm border bg-emerald-50 border-emerald-300 text-emerald-900 font-semibold";
+                feedbackBox.innerHTML = `<strong>${q.pos}</strong>`;
+            } else {
+                feedbackBox.className = "p-4 rounded-xl text-sm border bg-red-50 border-red-300 text-red-900 font-semibold";
+                feedbackBox.innerHTML = `<strong>${q.neg}</strong>`;
+            }
+
+            if (currentQuestionIndex === qList.length - 1) {
+                setTimeout(() => {
+                    document.getElementById('completion-modal').classList.remove('hidden');
+                }, 400);
+            }
+        }
+
+        window.closeCompletionModalAndFinish = function() {
+            document.getElementById('completion-modal').classList.add('hidden');
+            backToCourses();
+        }
+
+        window.nextQuestion = function() {
+            const qList = (questionBank[currentActiveCourse.id] || []).filter(q => q.batch === currentBatchKey);
+            if (currentQuestionIndex < qList.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+            }
+        }
+
+        window.prevQuestion = function() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
+            }
+        }
+
+        window.backToCourses = function() {
+            document.getElementById('quiz-view').classList.add('hidden');
+            document.getElementById('courses-view').classList.remove('hidden');
+        }
+
+        // المحفوظات (Bookmarks)
+        window.toggleBookmarkCurrent = function() {
+            if (!currentActiveCourse) return;
+            const qList = (questionBank[currentActiveCourse.id] || []).filter(q => q.batch === currentBatchKey);
+            const q = qList[currentQuestionIndex];
+            
+            const index = bookmarks.findIndex(b => b.question === q.question);
+            if (index > -1) {
+                bookmarks.splice(index, 1);
+                showToast("تمت إزالة السؤال من المحفوظات.", "warning");
+            } else {
+                bookmarks.push({ ...q, courseName: currentActiveCourse.name });
+                showToast("تم حفظ السؤال بنجاح في المحفوظات! ⭐", "success");
+            }
+            localStorage.setItem('qiyas_bookmarks', JSON.stringify(bookmarks));
+            updateBookmarkCount();
+            updateBookmarkIconState(q);
+        }
+
+        function updateBookmarkIconState(q) {
+            const btn = document.getElementById('bookmark-btn');
+            const isSaved = bookmarks.some(b => b.question === q.question);
+            if (isSaved) {
+                btn.innerHTML = `<i class="fa-solid fa-bookmark text-royalGold"></i>`;
+            } else {
+                btn.innerHTML = `<i class="fa-regular fa-bookmark"></i>`;
+            }
+        }
+
+        function updateBookmarkCount() {
+            document.getElementById('bookmark-count').innerText = bookmarks.length;
+        }
+
+        window.openBookmarksModal = function() {
+            const listContainer = document.getElementById('bookmarks-list');
+            listContainer.innerHTML = "";
+            if (bookmarks.length === 0) {
+                listContainer.innerHTML = `<p class="text-xs text-amber-900/60 text-center py-6">لا توجد أسئلة محفوظة حالياً. اضغط على أيقونة المحفوظات أثناء التدريب للحفظ.</p>`;
+            } else {
+                bookmarks.forEach((b, idx) => {
+                    listContainer.innerHTML += `
+                        <div class="bg-ivorySoft border border-amber-200 p-4 rounded-xl space-y-2">
+                            <div class="flex justify-between items-center text-xs text-royalNavy font-bold">
+                                <span>مقرر: ${b.courseName}</span>
+                                <button onclick="removeBookmark(${idx})" class="text-red-700 hover:text-red-800"><i class="fa-solid fa-trash"></i> حذف</button>
+                            </div>
+                            <p class="text-sm font-bold text-royalNavy">${b.question}</p>
+                            <p class="text-xs text-emerald-800 font-semibold">الإجابة الصحيحة: ${b.options[b.correct]}</p>
+                        </div>
+                    `;
+                });
+            }
+            document.getElementById('bookmarks-modal').classList.remove('hidden');
+        }
+
+        window.closeBookmarksModal = function() {
+            document.getElementById('bookmarks-modal').classList.add('hidden');
+        }
+
+        window.removeBookmark = function(idx) {
+            bookmarks.splice(idx, 1);
+            localStorage.setItem('qiyas_bookmarks', JSON.stringify(bookmarks));
+            updateBookmarkCount();
+            openBookmarksModal();
+            showToast("تم إزالة السؤال من المحفوظات", "info");
+        }
+
+        // إدارة المحتوى والتحقق من كلمة المرور سحابياً
+        window.openAdminLogin = function() {
+            document.getElementById('admin-login-modal').classList.remove('hidden');
+        }
+        window.closeAdminLogin = function() {
+            document.getElementById('admin-login-modal').classList.add('hidden');
+        }
+
+        window.verifyAdmin = async function() {
+            const inputPass = document.getElementById('admin-pass').value;
+            try {
+                // جلب كلمة المرور المخزنة في Firestore (مجموعة admins، وثيقة config)
+                const docRef = doc(db, "admins", "config");
+                const docSnap = await getDoc(docRef);
+                
+                let cloudPass = "vanta2026"; // قيمة افتراضية احتياطية
+                if (docSnap.exists()) {
+                    cloudPass = docSnap.data().adminPassword;
+                }
+
+                if (inputPass === cloudPass) {
+                    closeAdminLogin();
+                    document.getElementById('admin-dashboard-modal').classList.remove('hidden');
+                    showToast("تم تسجيل الدخول بنجاح إلى لوحة المحتوى", "success");
+                } else {
+                    showToast("كلمة المرور غير صحيحة!", "warning");
+                }
+            } catch (e) {
+                // في حال عدم الاتصال سحابياً مؤقتاً، اعتماد كلمة المرور الافتراضية
+                if (inputPass === "vanta2026") {
+                    closeAdminLogin();
+                    document.getElementById('admin-dashboard-modal').classList.remove('hidden');
+                    showToast("تم تسجيل الدخول بنجاح (الوضع المحلي)", "success");
+                } else {
+                    showToast("كلمة المرور غير صحيحة!", "warning");
+                }
+            }
+        }
+
+        window.closeAdminDashboard = function() {
+            document.getElementById('admin-dashboard-modal').classList.add('hidden');
+        }
+
+        function populateAdminDropdown() {
+            const select = document.getElementById('admin-course-select');
+            select.innerHTML = `<option value="">-- اختر المقرر الدراسي أولاً --</option>`;
+            courses.forEach(c => {
+                select.innerHTML += `<option value="${c.id}">${c.name}</option>`;
+            });
+        }
+
+        window.onAdminCourseChange = function() {
+            const selectVal = document.getElementById('admin-course-select').value;
+            const fields = document.getElementById('admin-form-fields');
+            if (selectVal) {
+                fields.classList.remove('hidden');
+                setTimeout(() => fields.classList.remove('opacity-0'), 50);
+            } else {
+                fields.classList.add('opacity-0');
+                setTimeout(() => fields.classList.add('hidden'), 300);
+            }
+        }
+
+        window.saveNewQuestionToCloud = async function() {
+            const courseId = document.getElementById('admin-course-select').value;
+            const batch = document.getElementById('admin-batch').value;
+            const question = document.getElementById('admin-q-text').value;
+            const opts = [
+                document.getElementById('opt-0').value,
+                document.getElementById('opt-1').value,
+                document.getElementById('opt-2').value,
+                document.getElementById('opt-3').value
+            ];
+            const correct = parseInt(document.getElementById('admin-correct').value);
+            const pos = document.getElementById('admin-pos-feedback').value;
+            const neg = document.getElementById('admin-neg-feedback').value;
+
+            if(!courseId || !question || opts.some(o => !o)) {
+                showToast("يرجى تعبئة جميع الحقول المطلوبة واختيار المقرر!", "warning");
+                return;
+            }
+
+            const newQData = {
+                courseId: courseId,
+                batch: batch,
+                question: question,
+                options: opts,
+                correct: correct,
+                pos: pos,
+                neg: neg,
+                createdAt: serverTimestamp()
+            };
+
+            try {
+                await addDoc(collection(db, "qiyas_questions"), newQData);
+                if(!questionBank[courseId]) questionBank[courseId] = [];
+                questionBank[courseId].push(newQData);
+
+                showToast("تم حفظ السؤال وإدراجه بنجاح في المنصة! 🚀", "success");
+                closeAdminDashboard();
+                renderCourses();
+            } catch (e) {
+                console.error("Error adding document: ", e);
+                if(!questionBank[courseId]) questionBank[courseId] = [];
+                questionBank[courseId].push(newQData);
+                showToast("تم الحفظ بنجاح محلياً 🚀", "success");
+                closeAdminDashboard();
+                renderCourses();
+            }
+        }
+
+        window.onload = initApp;
+    </script>
+</body>
+</html>
