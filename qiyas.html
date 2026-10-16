@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة محاكاة الاختبارات الوطنية (قياس) | أ. يوسف الحامد</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Cairo & Tajawal) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'Tajawal', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+          --bg-primary: #010317;
+          --bg-secondary: #0B1457;
+          --bg-card: rgba(11, 20, 87, 0.75);
+          --border-color: rgba(0, 229, 255, 0.25);
+          --accent-color: #00E5FF;
+          --accent-hover: #7dd3fc;
+          --text-main: #FFFFFF;
+          --text-muted: #C1E4FB;
+          --header-bg: rgba(1, 3, 23, 0.88);
+          --btn-primary-bg: #2755C6;
+          --btn-primary-hover: #1e429f;
+          --icon-box-bg: rgba(0, 229, 255, 0.15);
+          --icon-box-border: rgba(0, 229, 255, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+          background-color: var(--bg-primary);
+          color: var(--text-main);
+          font-family: 'Cairo', 'Tajawal', sans-serif;
+          transition: background-color 0.4s ease, color 0.4s ease;
+          overflow-x: hidden;
+          line-height: 1.8;
+        }
+
+        .glass-card {
+          background: var(--bg-card);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border: 1px solid var(--border-color);
+          box-shadow: 0 8px 32px 0 rgba(1, 3, 23, 0.4);
+        }
+
+        .accent-gradient-text {
+          background: linear-gradient(135deg, var(--text-main) 30%, var(--accent-color) 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .accent-text { color: var(--accent-color); }
+        .num-font { font-feature-settings: "tnum"; font-variant-numeric: tabular-nums; }
+
+        /* Header Navigation Fixed */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: var(--header-bg);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .profile-avatar-thumb {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            border: 2px solid var(--accent-color);
+            object-fit: cover;
+        }
+
+        /* Mobile Menu Drawer & Backdrop */
+        .mobile-overlay-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(1, 3, 23, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .mobile-overlay-backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mobile-menu-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 290px;
+            height: 100vh;
+            background-color: var(--bg-primary);
+            border-left: 1px solid var(--border-color);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.5rem;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.8);
+            visibility: hidden;
+        }
+        .mobile-menu-drawer.open {
+            right: 0;
+            visibility: visible;
+        }
+
+        .mobile-hamburger-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+            .mobile-hamburger-btn { display: none !important; }
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(1, 3, 23, 0.88);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .modal-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(1, 3, 23, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 0.95rem;
+            margin: 0.6rem 0;
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: var(--btn-primary-bg);
+            color: #FFFFFF;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: var(--accent-color);
+            color: var(--bg-primary);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-cyan-500 selection:text-black relative">
+
+<!-- Header Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="brand-logo">
+                <!-- الأيقونة الجديدة الواضحة والمضيئة مع كل الثيمات -->
+                <div class="w-10 h-10 rounded-xl border flex items-center justify-center text-lg font-bold shadow-md transition-all duration-300" 
+                     style="background: var(--icon-box-bg); border-color: var(--accent-color); color: var(--accent-color);">
+                    <i class="fa-solid fa-microchip"></i>
+                </div>
+                <div>
+                    <h1 class="text-sm sm:text-base font-bold" style="color: var(--text-main);">منصة محاكاة الاختبارات الوطنية</h1>
+                    <p class="text-[10px] sm:text-xs block accent-text font-semibold">أ. يوسف الحامد | Vanta Voids</p>
+                </div>
+            </a>
+            
+            <!-- Desktop Controls (Hidden strictly on Mobile) -->
+            <div class="hidden md:flex items-center gap-3">
+                <button onclick="openBookmarksModal()" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border transition hover:scale-105 flex items-center gap-2" style="border-color: var(--border-color); background-color: var(--bg-card); color: var(--text-main);">
+                    <i class="fa-solid fa-bookmark accent-text"></i> المحفوظات (<span id="bookmark-count" class="num-font">0</span>)
+                </button>
+
+                <button onclick="openThemeModal()" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold border transition flex items-center gap-2" style="border-color: var(--border-color); background-color: var(--btn-primary-bg); color: #FFFFFF;">
+                    <i class="fa-solid fa-palette accent-text"></i>
+                    <span>المظهر</span>
+                </button>
+
+                <button onclick="openAdminLogin()" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border transition flex items-center gap-2" style="border-color: var(--border-color); background: var(--bg-card); color: var(--text-main);" title="إدارة المحتوى">
+                    <i class="fa-solid fa-lock accent-text"></i> إدارة المحتوى
+                </button>
+
+                <a href="https://yh-addict.github.io/vanta-voids/" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold border transition hover:scale-105 flex items-center gap-2" style="border-color: var(--border-color); background-color: var(--btn-primary-bg); color: #FFFFFF;">
+                    <i class="fa-solid fa-house"></i> Vanta Voids
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Button Only -->
+            <button class="mobile-hamburger-btn" onclick="toggleMobileMenu()" aria-label="قائمة التصفح">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Backdrop & Drawer -->
+    <div class="mobile-overlay-backdrop" id="mobileBackdrop" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-menu-drawer" id="mobileDrawer">
+        <div class="flex items-center justify-between pb-6 mb-6 border-b" style="border-color: var(--border-color);">
+            <div class="flex items-center gap-3">
+                <img src="my-photo.jpg" alt="يوسف الحامد" class="w-10 h-10 rounded-xl border object-cover" style="border-color: var(--accent-color);">
+                <span class="font-bold text-sm" style="color: var(--text-main);">منصة قياس</span>
+            </div>
+            <button onclick="toggleMobileMenu()" class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center accent-text">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Options -->
+        <ul class="flex flex-col space-y-4">
+            <li>
+                <button onclick="openBookmarksModal(); toggleMobileMenu();" class="w-full flex items-center gap-3 text-sm font-semibold py-2.5 px-3 rounded-xl hover:bg-white/5 text-right border" style="border-color: var(--border-color); color: var(--text-main);">
+                    <i class="fa-solid fa-bookmark accent-text"></i> الأسئلة المحفوظة (<span id="mobile-bookmark-count" class="num-font">0</span>)
+                </button>
+            </li>
+            <li>
+                <button onclick="openThemeModal(); toggleMobileMenu();" class="w-full flex items-center gap-3 text-sm font-semibold py-2.5 px-3 rounded-xl hover:bg-white/5 text-right border" style="border-color: var(--border-color); color: var(--text-main);">
+                    <i class="fa-solid fa-palette accent-text"></i> تخصيص المظهر (الثيمات)
+                </button>
+            </li>
+            <li>
+                <button onclick="openAdminLogin(); toggleMobileMenu();" class="w-full flex items-center gap-3 text-sm font-semibold py-2.5 px-3 rounded-xl hover:bg-white/5 text-right border" style="border-color: var(--border-color); color: var(--text-main);">
+                    <i class="fa-solid fa-lock accent-text"></i> إدارة المحتوى المشرف
+                </button>
+            </li>
+            <li class="pt-2 border-t" style="border-color: var(--border-color);">
+                <a href="https://yh-addict.github.io/vanta-voids/" class="flex items-center gap-3 text-sm font-semibold py-2.5 px-3 rounded-xl hover:bg-white/5 accent-text border" style="border-color: var(--border-color);">
+                    <i class="fa-solid fa-house"></i> العودة للموقع الرئيسي Vanta Voids
+                </a>
+            </li>
+        </ul>
+
+        <div class="mt-auto pt-6 border-t text-xs text-center opacity-75" style="border-color: var(--border-color); color: var(--text-muted);">
+            منصة محاكاة الاختبارات الوطنية © 2026
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 pt-28 pb-12 flex-grow w-full">
+        
+        <!-- Courses Grid View -->
+        <div id="courses-view" class="space-y-6">
+            <div class="text-center max-w-2xl mx-auto space-y-2 mb-10">
+                <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight accent-gradient-text">استعدّ. اختبر قدراتك. اصنع تفوّقك.</h2>
+                <p class="text-xs sm:text-sm" style="color: var(--text-muted);">اختر المقرر الذي تريد التدرب عليه، واختبر جاهزيتك من خلال أسئلة تدريبية مُعدّة بعناية، تحاكي نمط اختبارات قياس والتحصيلي المرتبطة بمقررات الحاسب الآلي.</p>
+            </div>
+            
+            <div id="courses-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- سيتم تعبئة المقررات تلقائياً عبر JavaScript -->
+            </div>
+        </div>
+
+        <!-- Quiz View (Hidden initially) -->
+        <div id="quiz-view" class="hidden space-y-6 max-w-3xl mx-auto">
+            <div class="flex justify-between items-center glass-card p-4 rounded-2xl">
+                <button onclick="backToCourses()" class="transition flex items-center gap-2 text-xs sm:text-sm font-semibold" style="color: var(--text-muted);">
+                    <i class="fa-solid fa-arrow-right"></i> العودة للمقررات
+                </button>
+                <h3 id="current-course-title" class="text-base sm:text-lg font-bold" style="color: var(--text-main);">اسم المقرر</h3>
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleBookmarkCurrent()" id="bookmark-btn" class="accent-text text-lg" title="حفظ السؤال للمراجعة">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </button>
+                    <span id="question-counter" class="text-xs border px-3 py-1 rounded-full font-semibold num-font" style="border-color: var(--border-color); background: var(--bg-card); color: var(--text-main);">السؤال 1 من 5</span>
+                </div>
+            </div>
+
+            <!-- Tabs for Test Batches -->
+            <div id="test-batches-tabs" class="flex gap-2 border-b pb-3 overflow-x-auto" style="border-color: var(--border-color);">
+                <!-- يتم توليد التبويبات هنا -->
+            </div>
+
+            <!-- Question Box -->
+            <div class="glass-card rounded-2xl p-6 md:p-8 space-y-6 relative overflow-hidden shadow-2xl">
+                <div id="question-badge" class="absolute top-0 left-0 text-[10px] font-bold px-4 py-1 rounded-br-xl shadow border-b border-r" style="background: var(--btn-primary-bg); color: #FFF; border-color: var(--border-color);">أساسية</div>
+                
+                <div class="pt-2">
+                    <h4 id="question-text" class="text-base md:text-xl font-bold leading-relaxed" style="color: var(--text-main);">نص السؤال سيظهر هنا؟</h4>
+                </div>
+
+                <div id="options-container" class="space-y-3">
+                    <!-- الخيارات -->
+                </div>
+
+                <div id="feedback-box" class="hidden p-4 rounded-xl text-xs sm:text-sm border">
+                    <!-- رسالة التعزيز والتوجيه -->
+                </div>
+
+                <div class="flex justify-between items-center pt-4 border-t" style="border-color: var(--border-color);">
+                    <button onclick="prevQuestion()" id="prev-btn" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition border" style="border-color: var(--border-color); background: var(--bg-card); color: var(--text-main);">السابق</button>
+                    <div class="flex items-center gap-2">
+                        <button onclick="nextQuestion()" id="next-btn" class="px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition shadow-md border" style="background-color: var(--btn-primary-bg); border-color: var(--border-color); color: #FFF;">التالي</button>
+                        <button onclick="backToCourses()" id="finish-btn" class="hidden bg-red-700 hover:bg-red-800 text-white px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition shadow-md flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i> إنهاء الاختبار
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/966565588869" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 left-6 bg-emerald-600 hover:bg-emerald-700 text-white p-3.5 rounded-full shadow-2xl transition hover:scale-110 z-50 flex items-center justify-center group border border-emerald-400/40" title="تواصل عبر الواتساب">
+        <i class="fa-brands fa-whatsapp text-2xl"></i>
+        <span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 ease-in-out whitespace-nowrap text-xs font-bold pr-0 group-hover:pr-2">تواصل معنا</span>
+    </a>
+
+    <!-- Theme Selection Modal -->
+    <div class="modal-overlay" id="themeModal">
+        <div class="modal-card">
+            <div class="flex items-center justify-between pb-4 mb-4 border-b" style="border-color: var(--border-color);">
+                <h3 class="font-bold text-lg flex items-center gap-2" style="color: var(--text-main);">
+                    <i class="fa-solid fa-palette accent-text"></i> اختيار المظهر (الثيمات)
+                </h3>
+                <button onclick="closeThemeModal()" style="color: var(--text-muted);">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 mb-6">
+                <!-- 1. Vanta Voids -->
+                <button onclick="selectTheme('vanta-voids')" class="p-3 rounded-2xl border flex flex-col items-center gap-2 transition hover:scale-105" style="border-color: var(--border-color); background: var(--bg-card);">
+                    <div class="w-8 h-8 rounded-full border-2 border-cyan-400" style="background: linear-gradient(135deg, #010317 50%, #00E5FF 50%);"></div>
+                    <span class="text-xs font-bold text-cyan-300">Vanta Voids (الأساسي)</span>
+                </button>
+
+                <!-- 2. Royal Ivory -->
+                <button onclick="selectTheme('royal-ivory')" class="p-3 rounded-2xl border flex flex-col items-center gap-2 transition hover:scale-105" style="border-color: var(--border-color); background: var(--bg-card);">
+                    <div class="w-8 h-8 rounded-full border-2 border-amber-600" style="background: linear-gradient(135deg, #f8f6f0 50%, #b45309 50%);"></div>
+                    <span class="text-xs font-bold" style="color: var(--accent-color);">العاجي الملكي</span>
+                </button>
+
+                <!-- 3. Calm Cloud -->
+                <button onclick="selectTheme('calm-cloud')" class="p-3 rounded-2xl border flex flex-col items-center gap-2 transition hover:scale-105" style="border-color: var(--border-color); background: var(--bg-card);">
+                    <div class="w-8 h-8 rounded-full border-2 border-blue-500" style="background: linear-gradient(135deg, #f1f5f9 50%, #2563eb 50%);"></div>
+                    <span class="text-xs font-bold" style="color: var(--accent-color);">الغيمة الساكنة</span>
+                </button>
+
+                <!-- 4. Royal Navy -->
+                <button onclick="selectTheme('royal-navy')" class="p-3 rounded-2xl border flex flex-col items-center gap-2 transition hover:scale-105" style="border-color: var(--border-color); background: var(--bg-card);">
+                    <div class="w-8 h-8 rounded-full border-2 border-yellow-500" style="background: linear-gradient(135deg, #0f172a 50%, #e5c158 50%);"></div>
+                    <span class="text-xs font-bold" style="color: var(--accent-color);">الكحلي الذهبي الملكي</span>
+                </button>
+            </div>
+
+            <button onclick="closeThemeModal()" class="btn-primary">حفظ المظهر</button>
+        </div>
+    </div>
+
+    <!-- Center Completion Modal -->
+    <div id="completion-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+        <div class="glass-card border-2 w-full max-w-md rounded-2xl p-8 space-y-6 text-center relative shadow-2xl" style="border-color: var(--accent-color);">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto text-3xl border" style="background: var(--icon-box-bg); color: var(--accent-color); border-color: var(--accent-color);">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-xl font-black" style="color: var(--text-main);">إنجاز رائع!</h3>
+                <p id="completion-message-text" class="text-sm font-bold leading-relaxed" style="color: var(--text-muted);">أحسنت! لقد أكملت جميع أسئلة هذا القسم بنجاح 🎉</p>
+            </div>
+            <button onclick="closeCompletionModalAndFinish()" class="w-full bg-red-700 hover:bg-red-800 text-white py-3.5 rounded-xl font-bold text-sm transition shadow-lg flex items-center justify-center gap-2 border border-red-500/30">
+                <i class="fa-solid fa-house"></i> إنهاء الاختبار والعودة للمقررات
+            </button>
+        </div>
+    </div>
+
+    <!-- Custom Toast Alert -->
+    <div id="toast-notification" class="fixed bottom-6 right-6 glass-card border px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3 transform translate-y-20 opacity-0 transition-all duration-300 z-50" style="color: var(--text-main); border-color: var(--border-color);">
+        <div id="toast-icon" class="accent-text text-lg"><i class="fa-solid fa-circle-info"></i></div>
+        <div id="toast-message" class="text-xs font-semibold">نص التنبيه هنا...</div>
+    </div>
+
+    <!-- Bookmarks Modal -->
+    <div id="bookmarks-modal" class="modal-overlay">
+        <div class="modal-card max-w-2xl max-h-[80vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b pb-4" style="border-color: var(--border-color);">
+                <h3 class="text-lg font-bold flex items-center gap-2" style="color: var(--text-main);"><i class="fa-solid fa-bookmark accent-text"></i> الأسئلة المحفوظة للمراجعة</h3>
+                <button onclick="closeBookmarksModal()" style="color: var(--text-muted);"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div id="bookmarks-list" class="space-y-4 pt-4">
+                <!-- يتم تعبئتها ديناميكياً -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="admin-login-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="flex justify-between items-center pb-4 mb-2 border-b" style="border-color: var(--border-color);">
+                <h3 class="text-lg font-bold flex items-center gap-2" style="color: var(--text-main);"><i class="fa-solid fa-lock accent-text"></i> إدارة المحتوى المشرف</h3>
+                <button onclick="closeAdminLogin()" style="color: var(--text-muted);"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold mb-2" style="color: var(--text-muted);">كلمة المرور</label>
+                    <input type="password" id="admin-pass" placeholder="أدخل كلمة المرور" class="form-control">
+                </div>
+                <button onclick="verifyAdmin()" class="btn-primary">دخول لوحة إدارة المحتوى</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard Modal -->
+    <div id="admin-dashboard-modal" class="modal-overlay overflow-y-auto p-4">
+        <div class="modal-card max-w-3xl my-8">
+            <div class="flex justify-between items-center border-b pb-4" style="border-color: var(--border-color);">
+                <div>
+                    <h3 class="text-xl font-bold" style="color: var(--text-main);"><i class="fa-solid fa-sliders accent-text"></i> إدارة المحتوى وتحديث الأسئلة</h3>
+                    <p class="text-xs" style="color: var(--text-muted);">إضافة وتحديث بنك الأسئلة السحابي</p>
+                </div>
+                <button onclick="closeAdminDashboard()" style="color: var(--text-muted);" class="text-xl"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="space-y-5 pt-4">
+                <div class="p-4 rounded-xl border space-y-2" style="background: var(--bg-primary); border-color: var(--border-color);">
+                    <label class="block text-sm font-bold" style="color: var(--text-main);">1. حدد المقرر الدراسي أولاً لإضافة أو تحديث الأسئلة:</label>
+                    <select id="admin-course-select" onchange="onAdminCourseChange()" class="form-control font-semibold">
+                        <option value="">-- اختر المقرر الدراسي --</option>
+                    </select>
+                </div>
+
+                <div id="admin-form-fields" class="space-y-4 hidden opacity-0 transition-opacity duration-300">
+                    <div>
+                        <label class="block text-xs font-semibold mb-1" style="color: var(--text-muted);">تصنيف الاختبار (الباتش):</label>
+                        <select id="admin-batch" class="form-control">
+                            <option value="اختبار (1) - الأسئلة السابقة والأساسية">اختبار (1) - الأسئلة السابقة</option>
+                            <option value="اختبار (2) - الأسئلة المضافة حديثاً" selected>اختبار (2) - الأسئلة المضافة حديثاً (مع شارة NEW)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold mb-1" style="color: var(--text-muted);">نص السؤال:</label>
+                        <textarea id="admin-q-text" rows="3" placeholder="اكتب نص السؤال المحاكى لاختبارات قياس..." class="form-control"></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold mb-1" style="color: var(--text-muted);">الخيار (أ)</label>
+                            <input type="text" id="opt-0" class="form-control">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold mb-1" style="color: var(--text-muted);">الخيار (ب)</label>
+                            <input type="text" id="opt-1" class="form-control">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold mb-1" style="color: var(--text-muted);">الخيار (ج)</label>
+                            <input type="text" id="opt-2" class="form-control">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold mb-1" style="color: var(--text-muted);">الخيار (د)</label>
+                            <input type="text" id="opt-3" class="form-control">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold mb-1" style="color: var(--text-muted);">رقم الإجابة الصحيحة:</label>
+                        <select id="admin-correct" class="form-control">
+                            <option value="0">الخيار الأول (أ)</option>
+                            <option value="1">الخيار الثاني (ب)</option>
+                            <option value="2">الخيار الثالث (ج)</option>
+                            <option value="3">الخيار الرابع (د)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold mb-1" style="color: var(--text-muted);">رسالة التعزيز الإيجابي (عند الإجابة الصحيحة):</label>
+                        <input type="text" id="admin-pos-feedback" value="إجابة صحيحة أحسنت! 🎯" class="form-control">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold mb-1" style="color: var(--text-muted);">رسالة التوجيه / الشرح (عند الإجابة الخطأ):</label>
+                        <textarea id="admin-neg-feedback" rows="2" placeholder="اكتب التبرير العلمي المفصل لتثبيت المعلومة للطالب..." class="form-control">إجابة غير دقيقة ❌، راجع المفهوم العلمي وتأكد من الآلية.</textarea>
+                    </div>
+
+                    <button onclick="saveNewQuestionToCloud()" class="btn-primary flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> حفظ وإدراج السؤال سحابياً
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="glass-card border-t py-6 text-center text-xs space-y-1 mt-12" style="border-color: var(--border-color);">
+        <p class="font-bold" style="color: var(--text-main);">All Rights Reserved 2026©</p>
+        <p class="font-bold accent-text">يوسف الحامد | Vanta Voids</p>
+        <p class="font-semibold" style="color: var(--text-muted);">ثانوية الملك عبدالله بن عبدالعزيز - مسارات - بيشة</p>
+    </footer>
+
+    <!-- Firebase SDK & App Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAlLDjHycBEkXSyJGdCz37nCDVRb1ZucFg",
+            authDomain: "vanta-voids-qiyas.firebaseapp.com",
+            projectId: "vanta-voids-qiyas",
+            storageBucket: "vanta-voids-qiyas.firebasestorage.app",
+            messagingSenderId: "121497364225",
+            appId: "1:121497364225:web:be70db066663337b3c9d00"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Mobile Drawer Toggle Function
+        window.toggleMobileMenu = function() {
+            const drawer = document.getElementById('mobileDrawer');
+            const backdrop = document.getElementById('mobileBackdrop');
+            drawer.classList.toggle('open');
+            backdrop.classList.toggle('open');
+        }
+
+        // Selected Theme Management with Dynamic Icon Colors per Theme
+        const themes = {
+          'vanta-voids': { 
+              '--bg-primary': '#010317', '--bg-secondary': '#0B1457', '--bg-card': 'rgba(11, 20, 87, 0.75)', '--border-color': 'rgba(0, 229, 255, 0.25)', '--accent-color': '#00E5FF', '--text-main': '#FFFFFF', '--text-muted': '#C1E4FB', '--header-bg': 'rgba(1, 3, 23, 0.88)', '--btn-primary-bg': '#2755C6',
+              '--icon-box-bg': 'rgba(0, 229, 255, 0.15)', '--icon-box-border': 'rgba(0, 229, 255, 0.3)'
+          },
+          'royal-ivory': { 
+              '--bg-primary': '#f8f6f0', '--bg-secondary': '#ffffff', '--bg-card': 'rgba(255, 255, 255, 0.9)', '--border-color': 'rgba(180, 83, 9, 0.25)', '--accent-color': '#b45309', '--text-main': '#1c1917', '--text-muted': '#78350f', '--header-bg': 'rgba(248, 246, 240, 0.9)', '--btn-primary-bg': '#b45309',
+              '--icon-box-bg': 'rgba(180, 83, 9, 0.1)', '--icon-box-border': 'rgba(180, 83, 9, 0.3)'
+          },
+          'calm-cloud': { 
+              '--bg-primary': '#f1f5f9', '--bg-secondary': '#ffffff', '--bg-card': 'rgba(255, 255, 255, 0.9)', '--border-color': 'rgba(37, 99, 235, 0.25)', '--accent-color': '#2563eb', '--text-main': '#0f172a', '--text-muted': '#475569', '--header-bg': 'rgba(241, 245, 249, 0.9)', '--btn-primary-bg': '#2563eb',
+              '--icon-box-bg': 'rgba(37, 99, 235, 0.1)', '--icon-box-border': 'rgba(37, 99, 235, 0.3)'
+          },
+          'royal-navy': { 
+              '--bg-primary': '#080d1a', '--bg-secondary': '#0f172a', '--bg-card': 'rgba(30, 41, 59, 0.75)', '--border-color': 'rgba(229, 193, 88, 0.3)', '--accent-color': '#e5c158', '--text-main': '#f8fafc', '--text-muted': '#94a3b8', '--header-bg': 'rgba(8, 13, 26, 0.85)', '--btn-primary-bg': '#1e293b',
+              '--icon-box-bg': 'rgba(229, 193, 88, 0.15)', '--icon-box-border': 'rgba(229, 193, 88, 0.4)'
+          }
+        };
+
+        window.selectTheme = function(themeKey) {
+            if (!themes[themeKey]) return;
+            localStorage.setItem('vanta_cv_theme', themeKey);
+            const root = document.documentElement;
+            const selected = themes[themeKey];
+            for (let varName in selected) {
+                root.style.setProperty(varName, selected[varName]);
+            }
+        }
+
+        window.openThemeModal = function() { document.getElementById('themeModal').style.display = 'flex'; }
+        window.closeThemeModal = function() { document.getElementById('themeModal').style.display = 'none'; }
+
+        const courses = [
+            { id: "digital-tech-1", name: "التقنية الرقمية (1)", icon: "fa-laptop-code" },
+            { id: "digital-tech-2", name: "التقنية الرقمية (2)", icon: "fa-desktop" },
+            { id: "digital-tech-3", name: "التقنية الرقمية (3)", icon: "fa-network-wired" },
+            { id: "data-science", name: "علم البيانات", icon: "fa-chart-pie" },
+            { id: "ai-1", name: "الذكاء الاصطناعي (1)", icon: "fa-robot" },
+            { id: "ai-2", name: "الذكاء الاصطناعي (2)", icon: "fa-brain" },
+            { id: "engineering-design", name: "التصميم الهندسي", icon: "fa-compass-drafting" },
+            { id: "cybersecurity", name: "الأمن السيبراني", icon: "fa-shield-halved" },
+            { id: "iot", name: "إنترنت الأشياء", icon: "fa-tower-broadcast" },
+            { id: "software-eng", name: "هندسة البرمجيات", icon: "fa-code" }
+        ];
+
+        let questionBank = {
+            "digital-tech-1": [
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "أي مما يلي يُعد المكون المادي (Hardware) الأساسي المسؤول عن تنفيذ العمليات الحسابية والمنطقية؟", options: ["ذاكرة الوصول العشوائي RAM", "وحدة المعالجة المركزية CPU", "قرص التخزين الصلب SSD", "لوحة المفاتيح"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 وحدة المعالجة المركزية (CPU) هي عقل الحاسب.", neg: "إجابة غير دقيقة ❌ العمليات الحسابية والمنطقية تتم داخل وحدة المعالجة المركزية (CPU)." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "نظام التشغيل يُعتبر مثالاً بارزاً على:", options: ["برمجيات التطبيقات", "البرمجيات النظامية", "لغات البرمجة", "أنظمة قواعد البيانات"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 نظام التشغيل يدير عتاد الحاسب كبرمجيات نظامية.", neg: "إجابة غير دقيقة ❌ أنظمة التشغيل تندرج ضمن برمجيات النظام (System Software)." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "أي من صيغ الملفات التالية يُستخدم عادة لحفظ مستندات النصوص المنسقة بشكل قياسي؟", options: [".docx", ".mp4", ".png", ".mp3"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 امتداد docx مخصص لبرنامج معالجة النصوص.", neg: "إجابة غير دقيقة ❌ الامتداد القياسي للمستندات هو docx." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "ما هي الوظيفة الأساسية للذاكرة الثانوية (Secondary Storage) في الحاسب؟", options: ["تنفيذ العمليات الحسابية الحالية", "التخزين طويل الأجل للبيانات والبرامج", "عرض الرسومات على الشاشة", "توصيل الأجهزة الطرفية"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 التخزين الثانوي يوفر حفظاً مستداماً للبيانات.", neg: "إجابة غير دقيقة ❌ التخزين الثانوي مخصص للاحتفاظ بالبيانات على المدى الطويل." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "أي من وحدات الإدخال التالية تُستخدم لتحويل المستندات الورقية إلى صور رقمية؟", options: ["الطابعة", "الماسح الضوئي (Scanner)", "السماعة", "العارض الضوئي"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 الماسح الضوئي يحول الورق لصيغة رقمية.", neg: "إجابة غير دقيقة ❌ الجهاز المسؤول عن إدخال المستندات الورقية رقمياً هو الماسح الضوئي." }
+            ],
+            "digital-tech-2": [
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "لغة تصميم وتنسيق صفحات الويب التي تعنى بالألوان والخطوط والمظهر العام هي:", options: ["HTML", "CSS", "JavaScript", "Python"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 CSS مسؤولة عن التنسيق والمظهر الجمالي.", neg: "إجابة غير دقيقة ❌ تنسيق مظهر صفحات الويب يتم عبر لغة CSS." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "في لغة HTML، أي وسم يُستخدم لإدراج رابط تشعبي (Hyperlink)؟", options: ["<link>", "<a>", "<href>", "<url>"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 الوسم <a> مع خاصية href يمثل الرابط التشعبي.", neg: "إجابة غير دقيقة ❌ الوسم الأساسي للروابط في HTML هو <a>." },
+                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "أداة البرمجة المرئية التي تُستخدم غالباً لتصميم وتطوير تطبيقات الهواتف الذكية هي:", options: ["App Inventor", "Photoshop", "Excel", "Notepad"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 MIT App Inventor منصة رائعة لتطوير التطبيقات.", neg: "إجابة غير دقيقة ❌ لتطوير تطبيقات الهواتف المرئية نستخدم بيئات مثل App Inventor." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "نوع قواعد البيانات الذي ينظم البيانات في جداول مترابطة بصفوف وأعمدة يسمى:", options: ["قواعد البيانات العلائقية (Relational)", "قواعد البيانات غير الهيكلية", "الملفات النصية المسطحة", "المصفوفات الثنائية"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 قواعد البيانات العلائقية تعتمد على الجداول المرتباطة.", neg: "إجابة غير دقيقة ❌ القواعد المبنية على جداول وصفوف هي العلائقية (Relational Databases)." },
+                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "أي مما يلي يُعد من لغات الاستعلام الشهيرة لإدارة قواعد البيانات؟", options: ["SQL", "HTML", "CSS", "XML"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 لغة SQL مخصصة للاستعلام وإدارة قواعد البيانات.", neg: "إجابة غير دقيقة ❌ لغة الاستعلام القياسية لقواعد البيانات هي SQL." }
+            ]
+        };
+
+        let bookmarks = JSON.parse(localStorage.getItem('qiyas_bookmarks') || '[]');
+        let currentActiveCourse = null;
+        let currentBatchKey = "";
+        let currentQuestionIndex = 0;
+
+        window.showToast = function(message, type = 'info') {
+            const toast = document.getElementById('toast-notification');
+            const msgEl = document.getElementById('toast-message');
+            const iconEl = document.getElementById('toast-icon');
+
+            msgEl.innerText = message;
+            if (type === 'success') {
+                iconEl.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i>`;
+            } else if (type === 'warning') {
+                iconEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-amber-400"></i>`;
+            } else {
+                iconEl.innerHTML = `<i class="fa-solid fa-circle-info accent-text"></i>`;
+            }
+
+            toast.className = "fixed bottom-6 right-6 glass-card border px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3 transform translate-y-0 opacity-100 transition-all duration-300 z-50";
+
+            setTimeout(() => {
+                toast.className = toast.className.replace('translate-y-0 opacity-100', 'translate-y-20 opacity-0');
+            }, 3500);
+        }
+
+        window.initApp = async function() {
+            const savedTheme = localStorage.getItem('vanta_cv_theme') || 'vanta-voids';
+            selectTheme(savedTheme);
+
+            try {
+                const querySnapshot = await getDocs(collection(db, "qiyas_questions"));
+                querySnapshot.forEach((docSnap) => {
+                    const qData = docSnap.data();
+                    if(qData.courseId && questionBank[qData.courseId]) {
+                        questionBank[qData.courseId].push(qData);
+                    }
+                });
+            } catch (e) {
+                console.log("يعمل في وضع التخزين المحلي والافتراضي حالياً.");
+            }
+            renderCourses();
+            populateAdminDropdown();
+            updateBookmarkCount();
+        }
+
+        function renderCourses() {
+            const grid = document.getElementById('courses-grid');
+            grid.innerHTML = "";
+            courses.forEach(course => {
+                grid.innerHTML += `
+                    <div onclick="openCourse('${course.id}')" class="glass-card rounded-2xl p-6 cursor-pointer transition hover:-translate-y-1 shadow-md group flex flex-col justify-between">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="p-3.5 rounded-xl transition border" style="background: var(--icon-box-bg); color: var(--accent-color); border-color: var(--icon-box-border);">
+                                <i class="fa-solid ${course.icon} text-xl"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold transition mb-1" style="color: var(--text-main);">${course.name}</h3>
+                            <p class="text-xs" style="color: var(--text-muted);">بنك أسئلة محاكى لاختبارات قياس والتحصيلي</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        window.openCourse = function(courseId) {
+            currentActiveCourse = courses.find(c => c.id === courseId);
+            document.getElementById('current-course-title').innerText = currentActiveCourse.name;
+            document.getElementById('courses-view').classList.add('hidden');
+            document.getElementById('quiz-view').classList.remove('hidden');
+
+            setupBatchesAndQuestions();
+        }
+
+        function setupBatchesAndQuestions() {
+            const qList = questionBank[currentActiveCourse.id] || [];
+            const tabsContainer = document.getElementById('test-batches-tabs');
+            tabsContainer.innerHTML = "";
+
+            if (qList.length === 0) {
+                tabsContainer.innerHTML = `<p class="text-xs" style="color: var(--text-muted);">لا توجد أسئلة مضافة لهذا المقرر حالياً.</p>`;
+                document.getElementById('question-text').innerText = "عذراً، جارٍ إعداد الأسئلة...";
+                document.getElementById('options-container').innerHTML = "";
+                return;
+            }
+
+            const batches = [...new Set(qList.map(q => q.batch))];
+            if (!batches.includes(currentBatchKey)) {
+                currentBatchKey = batches[0];
+            }
+
+            batches.forEach((batch) => {
+                const isNewBatch = batch.includes("مضافة حديثاً");
+                tabsContainer.innerHTML += `
+                    <button onclick="switchBatch('${batch}')" class="px-4 py-2 rounded-xl text-xs font-bold transition border ${currentBatchKey === batch ? 'font-black' : 'glass-card'}" style="${currentBatchKey === batch ? 'background: var(--accent-color); color: var(--bg-primary); border-color: var(--accent-color);' : 'color: var(--text-main); border-color: var(--border-color);'} relative">
+                        ${batch}
+                        ${isNewBatch ? '<span class="absolute -top-2 -right-2 bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 text-[9px] font-black px-2 py-0.5 rounded-full shadow-md animate-pulse">NEW</span>' : ''}
+                    </button>
+                `;
+            });
+
+            currentQuestionIndex = 0;
+            renderQuestion();
+        }
+
+        window.switchBatch = function(batchName) {
+            currentBatchKey = batchName;
+            currentQuestionIndex = 0;
+            setupBatchesAndQuestions();
+        }
+
+        function renderQuestion() {
+            const qList = (questionBank[currentActiveCourse.id] || []).filter(q => q.batch === currentBatchKey);
+            if (qList.length === 0) return;
+
+            const q = qList[currentQuestionIndex];
+            document.getElementById('question-counter').innerText = `السؤال ${currentQuestionIndex + 1} من ${qList.length}`;
+            document.getElementById('question-text').innerText = q.question;
+
+            const nextBtn = document.getElementById('next-btn');
+            const finishBtn = document.getElementById('finish-btn');
+            
+            if (currentQuestionIndex === qList.length - 1) {
+                nextBtn.classList.add('hidden');
+                finishBtn.classList.remove('hidden');
+            } else {
+                nextBtn.classList.remove('hidden');
+                finishBtn.classList.add('hidden');
+            }
+
+            const badge = document.getElementById('question-badge');
+            if(q.batch.includes("مضافة حديثاً")) {
+                badge.className = "absolute top-0 left-0 bg-amber-500 text-slate-950 text-[10px] font-black px-4 py-1 rounded-br-xl shadow border-b border-r border-amber-300";
+                badge.innerText = "تحديث جديد NEW";
+            } else {
+                badge.className = "absolute top-0 left-0 text-[10px] font-bold px-4 py-1 rounded-br-xl shadow border-b border-r";
+                badge.style.background = "var(--btn-primary-bg)";
+                badge.style.borderColor = "var(--border-color)";
+                badge.innerText = "أسئلة سابقة";
+            }
+
+            updateBookmarkIconState(q);
+
+            const optContainer = document.getElementById('options-container');
+            optContainer.innerHTML = "";
+            q.options.forEach((opt, idx) => {
+                optContainer.innerHTML += `
+                    <button onclick="checkAnswer(${idx}, ${q.correct})" class="option-btn w-full text-right glass-card border p-4 rounded-xl text-xs sm:text-sm transition font-semibold flex items-center justify-between group" style="border-color: var(--border-color); color: var(--text-main);">
+                        <span>${opt}</span>
+                        <span class="w-6 h-6 rounded-full border flex items-center justify-center text-xs accent-text num-font" style="border-color: var(--border-color); background: var(--icon-box-bg);">${['أ', 'ب', 'ج', 'د'][idx]}</span>
+                    </button>
+                `;
+            });
+
+            document.getElementById('feedback-box').classList.add('hidden');
+        }
+
+        window.checkAnswer = function(selected, correct) {
+            const qList = (questionBank[currentActiveCourse.id] || []).filter(q => q.batch === currentBatchKey);
+            const q = qList[currentQuestionIndex];
+            const feedbackBox = document.getElementById('feedback-box');
+            feedbackBox.classList.remove('hidden');
+
+            const buttons = document.querySelectorAll('.option-btn');
+            buttons.forEach((btn, idx) => {
+                btn.disabled = true;
+                if (idx === correct) {
+                    btn.classList.add('bg-emerald-500/20', 'border-emerald-400', 'text-emerald-200');
+                } else if (idx === selected && selected !== correct) {
+                    btn.classList.add('bg-red-500/20', 'border-red-400', 'text-red-200');
+                }
+            });
+
+            if (selected === correct) {
+                feedbackBox.className = "p-4 rounded-xl text-xs sm:text-sm border bg-emerald-500/10 border-emerald-400 text-emerald-200 font-semibold";
+                feedbackBox.innerHTML = `<strong>${q.pos}</strong>`;
+            } else {
+                feedbackBox.className = "p-4 rounded-xl text-xs sm:text-sm border bg-red-500/10 border-red-400 text-red-200 font-semibold";
+                feedbackBox.innerHTML = `<strong>${q.neg}</strong>`;
+            }
+
+            if (currentQuestionIndex === qList.length - 1) {
+                setTimeout(() => {
+                    document.getElementById('completion-modal').classList.remove('hidden');
+                }, 400);
+            }
+        }
+
+        window.closeCompletionModalAndFinish = function() {
+            document.getElementById('completion-modal').classList.add('hidden');
+            backToCourses();
+        }
+
+        window.nextQuestion = function() {
+            const qList = (questionBank[currentActiveCourse.id] || []).filter(q => q.batch === currentBatchKey);
+            if (currentQuestionIndex < qList.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+            }
+        }
+
+        window.prevQuestion = function() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
+            }
+        }
+
+        window.backToCourses = function() {
+            document.getElementById('quiz-view').classList.add('hidden');
+            document.getElementById('courses-view').classList.remove('hidden');
+        }
+
+        // Bookmarks
+        window.toggleBookmarkCurrent = function() {
+            if (!currentActiveCourse) return;
+            const qList = (questionBank[currentActiveCourse.id] || []).filter(q => q.batch === currentBatchKey);
+            const q = qList[currentQuestionIndex];
+            
+            const index = bookmarks.findIndex(b => b.question === q.question);
+            if (index > -1) {
+                bookmarks.splice(index, 1);
+                showToast("تمت إزالة السؤال من المحفوظات.", "warning");
+            } else {
+                bookmarks.push({ ...q, courseName: currentActiveCourse.name });
+                showToast("تم حفظ السؤال بنجاح في المحفوظات! ⭐", "success");
+            }
+            localStorage.setItem('qiyas_bookmarks', JSON.stringify(bookmarks));
+            updateBookmarkCount();
+            updateBookmarkIconState(q);
+        }
+
+        function updateBookmarkIconState(q) {
+            const btn = document.getElementById('bookmark-btn');
+            const isSaved = bookmarks.some(b => b.question === q.question);
+            if (isSaved) {
+                btn.innerHTML = `<i class="fa-solid fa-bookmark accent-text"></i>`;
+            } else {
+                btn.innerHTML = `<i class="fa-regular fa-bookmark"></i>`;
+            }
+        }
+
+        function updateBookmarkCount() {
+            document.getElementById('bookmark-count').innerText = bookmarks.length;
+            document.getElementById('mobile-bookmark-count').innerText = bookmarks.length;
+        }
+
+        window.openBookmarksModal = function() {
+            const listContainer = document.getElementById('bookmarks-list');
+            listContainer.innerHTML = "";
+            if (bookmarks.length === 0) {
+                listContainer.innerHTML = `<p class="text-xs text-center py-6" style="color: var(--text-muted);">لا توجد أسئلة محفوظة حالياً. اضغط على أيقونة المحفوظات أثناء التدريب للحفظ.</p>`;
+            } else {
+                bookmarks.forEach((b, idx) => {
+                    listContainer.innerHTML += `
+                        <div class="glass-card border p-4 rounded-xl space-y-2" style="border-color: var(--border-color);">
+                            <div class="flex justify-between items-center text-xs font-bold" style="color: var(--text-main);">
+                                <span>مقرر: ${b.courseName}</span>
+                                <button onclick="removeBookmark(${idx})" class="text-red-400 hover:text-red-300"><i class="fa-solid fa-trash"></i> حذف</button>
+                            </div>
+                            <p class="text-xs sm:text-sm font-bold" style="color: var(--text-main);">${b.question}</p>
+                            <p class="text-xs text-emerald-300 font-semibold">الإجابة الصحيحة: ${b.options[b.correct]}</p>
+                        </div>
+                    `;
+                });
+            }
+            document.getElementById('bookmarks-modal').style.display = 'flex';
+        }
+
+        window.closeBookmarksModal = function() {
+            document.getElementById('bookmarks-modal').style.display = 'none';
+        }
+
+        window.removeBookmark = function(idx) {
+            bookmarks.splice(idx, 1);
+            localStorage.setItem('qiyas_bookmarks', JSON.stringify(bookmarks));
+            updateBookmarkCount();
+            openBookmarksModal();
+            showToast("تم إزالة السؤال من المحفوظات", "info");
+        }
+
+        // Admin Management
+        window.openAdminLogin = function() {
+            document.getElementById('admin-login-modal').style.display = 'flex';
+        }
+        window.closeAdminLogin = function() {
+            document.getElementById('admin-login-modal').style.display = 'none';
+        }
+
+        window.verifyAdmin = async function() {
+            const inputPass = document.getElementById('admin-pass').value;
+            try {
+                const docRef = doc(db, "admins", "config");
+                const docSnap = await getDoc(docRef);
+                
+                let cloudPass = "vanta2026";
+                if (docSnap.exists()) {
+                    cloudPass = docSnap.data().adminPassword;
+                }
+
+                if (inputPass === cloudPass) {
+                    closeAdminLogin();
+                    document.getElementById('admin-dashboard-modal').style.display = 'flex';
+                    showToast("تم تسجيل الدخول بنجاح إلى لوحة المحتوى", "success");
+                } else {
+                    showToast("كلمة المرور غير صحيحة!", "warning");
+                }
+            } catch (e) {
+                if (inputPass === "vanta2026") {
+                    closeAdminLogin();
+                    document.getElementById('admin-dashboard-modal').style.display = 'flex';
+                    showToast("تم تسجيل الدخول بنجاح (الوضع المحلي)", "success");
+                } else {
+                    showToast("كلمة المرور غير صحيحة!", "warning");
+                }
+            }
+        }
+
+        window.closeAdminDashboard = function() {
+            document.getElementById('admin-dashboard-modal').style.display = 'none';
+        }
+
+        function populateAdminDropdown() {
+            const select = document.getElementById('admin-course-select');
+            select.innerHTML = `<option value="">-- اختر المقرر الدراسي أولاً --</option>`;
+            courses.forEach(c => {
+                select.innerHTML += `<option value="${c.id}">${c.name}</option>`;
+            });
+        }
+
+        window.onAdminCourseChange = function() {
+            const selectVal = document.getElementById('admin-course-select').value;
+            const fields = document.getElementById('admin-form-fields');
+            if (selectVal) {
+                fields.classList.remove('hidden');
+                setTimeout(() => fields.classList.remove('opacity-0'), 50);
+            } else {
+                fields.classList.add('opacity-0');
+                setTimeout(() => fields.classList.add('hidden'), 300);
+            }
+        }
+
+        window.saveNewQuestionToCloud = async function() {
+            const courseId = document.getElementById('admin-course-select').value;
+            const batch = document.getElementById('admin-batch').value;
+            const question = document.getElementById('admin-q-text').value;
+            const opts = [
+                document.getElementById('opt-0').value,
+                document.getElementById('opt-1').value,
+                document.getElementById('opt-2').value,
+                document.getElementById('opt-3').value
+            ];
+            const correct = parseInt(document.getElementById('admin-correct').value);
+            const pos = document.getElementById('admin-pos-feedback').value;
+            const neg = document.getElementById('admin-neg-feedback').value;
+
+            if(!courseId || !question || opts.some(o => !o)) {
+                showToast("يرجى تعبئة جميع الحقول المطلوبة واختيار المقرر!", "warning");
+                return;
+            }
+
+            const newQData = {
+                courseId: courseId,
+                batch: batch,
+                question: question,
+                options: opts,
+                correct: correct,
+                pos: pos,
+                neg: neg,
+                createdAt: serverTimestamp()
+            };
+
+            try {
+                await addDoc(collection(db, "qiyas_questions"), newQData);
+                if(!questionBank[courseId]) questionBank[courseId] = [];
+                questionBank[courseId].push(newQData);
+
+                showToast("تم حفظ السؤال وإدراجه بنجاح في المنصة! 🚀", "success");
+                closeAdminDashboard();
+                renderCourses();
+            } catch (e) {
+                if(!questionBank[courseId]) questionBank[courseId] = [];
+                questionBank[courseId].push(newQData);
+                showToast("تم الحفظ بنجاح محلياً 🚀", "success");
+                closeAdminDashboard();
+                renderCourses();
+            }
+        }
+
+        window.onload = initApp;
+    </script>
+</body>
+</html>
