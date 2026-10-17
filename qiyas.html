@@ -38,6 +38,18 @@
           --btn-primary-hover: #1e429f;
           --icon-box-bg: rgba(0, 229, 255, 0.15);
           --icon-box-border: rgba(0, 229, 255, 0.3);
+          /* متغيرات خاصة ببوكس التأملات لكي تتبع الثيم بدقة */
+          --daily-box-bg: linear-gradient(135deg, rgba(11, 20, 87, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%);
+          --daily-border: rgba(0, 229, 255, 0.4);
+          --daily-border-hover: rgba(0, 229, 255, 0.8);
+          --daily-title-color: #00E5FF;
+          --daily-date-color: rgba(193, 228, 251, 0.7);
+          --daily-text-color: #FFFFFF;
+          --daily-bar-gradient: linear-gradient(to bottom, #00E5FF, #2755C6);
+          --daily-icon-bg: rgba(0, 229, 255, 0.15);
+          --daily-icon-border: rgba(0, 229, 255, 0.4);
+          --daily-icon-color: #00E5FF;
+          --daily-line-border: rgba(0, 229, 255, 0.2);
         }
 
         * {
@@ -98,14 +110,7 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
-        }
-
-        .profile-avatar-thumb {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            border: 2px solid var(--accent-color);
-            object-fit: cover;
+            cursor: default;
         }
 
         /* Mobile Menu Drawer & Backdrop */
@@ -220,26 +225,45 @@
             background: var(--accent-color);
             color: var(--bg-primary);
         }
+
+        /* Daily Message Dynamic Themed Box Styling */
+        .daily-message-box {
+            background: var(--daily-box-bg);
+            border: 2px solid var(--daily-border);
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        .daily-message-box:hover {
+            border-color: var(--daily-border-hover);
+            transform: translateY(-2px);
+        }
+        .daily-message-box::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; width: 4px; height: 100%;
+            background: var(--daily-bar-gradient);
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-cyan-500 selection:text-black relative">
 
-<!-- Header Navigation -->
+    <!-- Header Navigation -->
     <header>
         <div class="nav-container">
-            <a href="index.html" class="brand-logo">
-                <!-- الأيقونة الجديدة الواضحة والمضيئة مع كل الثيمات -->
+            <div class="brand-logo cursor-default">
                 <div class="w-10 h-10 rounded-xl border flex items-center justify-center text-lg font-bold shadow-md transition-all duration-300" 
                      style="background: var(--icon-box-bg); border-color: var(--accent-color); color: var(--accent-color);">
                     <i class="fa-solid fa-microchip"></i>
                 </div>
                 <div>
-                    <h1 class="text-sm sm:text-base font-bold" style="color: var(--text-main);">منصة محاكاة الاختبارات الوطنية</h1>
-                    <p class="text-[10px] sm:text-xs block accent-text font-semibold">أ. يوسف الحامد | Vanta Voids</p>
+                    <h1 class="text-sm sm:text-base font-bold select-none" style="color: var(--text-main);">منصة محاكاة الاختبارات الوطنية</h1>
+                    <p class="text-[10px] sm:text-xs block accent-text font-semibold select-none">أ. يوسف الحامد | Vanta Voids</p>
                 </div>
-            </a>
+            </div>
             
-            <!-- Desktop Controls (Hidden strictly on Mobile) -->
+            <!-- Desktop Controls -->
             <div class="hidden md:flex items-center gap-3">
                 <button onclick="openBookmarksModal()" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border transition hover:scale-105 flex items-center gap-2" style="border-color: var(--border-color); background-color: var(--bg-card); color: var(--text-main);">
                     <i class="fa-solid fa-bookmark accent-text"></i> المحفوظات (<span id="bookmark-count" class="num-font">0</span>)
@@ -259,7 +283,7 @@
                 </a>
             </div>
 
-            <!-- Mobile Hamburger Button Only -->
+            <!-- Mobile Hamburger Button -->
             <button class="mobile-hamburger-btn" onclick="toggleMobileMenu()" aria-label="قائمة التصفح">
                 <i class="fa-solid fa-bars"></i>
             </button>
@@ -271,7 +295,9 @@
     <div class="mobile-menu-drawer" id="mobileDrawer">
         <div class="flex items-center justify-between pb-6 mb-6 border-b" style="border-color: var(--border-color);">
             <div class="flex items-center gap-3">
-                <img src="my-photo.jpg" alt="يوسف الحامد" class="w-10 h-10 rounded-xl border object-cover" style="border-color: var(--accent-color);">
+                <div class="w-10 h-10 rounded-xl border flex items-center justify-center text-lg font-bold" style="background: var(--icon-box-bg); border-color: var(--accent-color); color: var(--accent-color);">
+                    <i class="fa-solid fa-microchip"></i>
+                </div>
                 <span class="font-bold text-sm" style="color: var(--text-main);">منصة قياس</span>
             </div>
             <button onclick="toggleMobileMenu()" class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center accent-text">
@@ -279,7 +305,6 @@
             </button>
         </div>
 
-        <!-- Mobile Drawer Options -->
         <ul class="flex flex-col space-y-4">
             <li>
                 <button onclick="openBookmarksModal(); toggleMobileMenu();" class="w-full flex items-center gap-3 text-sm font-semibold py-2.5 px-3 rounded-xl hover:bg-white/5 text-right border" style="border-color: var(--border-color); color: var(--text-main);">
@@ -314,12 +339,39 @@
         <!-- Courses Grid View -->
         <div id="courses-view" class="space-y-6">
             <div class="text-center max-w-2xl mx-auto space-y-2 mb-10">
-                <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight accent-gradient-text">استعدّ. اختبر قدراتك. اصنع تفوّقك.</h2>
+                <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight accent-gradient-text">استعدّ .. اختبر قدراتك .. اصنع تفوّقك !!</h2>
                 <p class="text-xs sm:text-sm" style="color: var(--text-muted);">اختر المقرر الذي تريد التدرب عليه، واختبر جاهزيتك من خلال أسئلة تدريبية مُعدّة بعناية، تحاكي نمط اختبارات قياس والتحصيلي المرتبطة بمقررات الحاسب الآلي.</p>
             </div>
             
             <div id="courses-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- سيتم تعبئة المقررات تلقائياً عبر JavaScript -->
+            </div>
+
+            <!-- بوكس رسالة اليوم المتوافق تلقائياً مع الثيمات -->
+            <div class="mt-12">
+                <div class="daily-message-box rounded-2xl p-6 md:p-8 relative group">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl border flex items-center justify-center text-lg shadow-inner" style="background: var(--daily-icon-bg); border-color: var(--daily-icon-border); color: var(--daily-icon-color);">
+                                <i class="fa-solid fa-quote-right"></i>
+                            </div>
+                            <div>
+                                <h3 id="daily-msg-header" class="text-base sm:text-lg font-black tracking-wide" style="color: var(--daily-title-color);">تأملات | ومضة إلى الروح ...</h3>
+                                <p id="daily-msg-date" class="text-[11px] font-semibold num-font" style="color: var(--daily-date-color);">October, 17 | في أعماق النفس</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="py-3">
+                        <p id="daily-message-text" class="text-sm md:text-base font-bold leading-relaxed min-h-[50px] flex items-center" style="color: var(--daily-text-color);">
+                            جاري تحميل الرسالة...
+                        </p>
+                    </div>
+
+                    <div class="flex justify-end items-center pt-3 border-t text-xs font-bold" style="border-color: var(--daily-line-border);">
+                        <span class="tracking-wider font-extrabold" style="color: var(--daily-title-color);" id="daily-msg-signature">أ.يوسف الحامد</span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -334,20 +386,21 @@
                     <button onclick="toggleBookmarkCurrent()" id="bookmark-btn" class="accent-text text-lg" title="حفظ السؤال للمراجعة">
                         <i class="fa-regular fa-bookmark"></i>
                     </button>
-                    <span id="question-counter" class="text-xs border px-3 py-1 rounded-full font-semibold num-font" style="border-color: var(--border-color); background: var(--bg-card); color: var(--text-main);">السؤال 1 من 5</span>
+                    <span id="question-counter" class="text-xs border px-3 py-1 rounded-full font-semibold num-font" style="border-color: var(--border-color); background: var(--bg-card); color: var(--text-main);">السؤال 1 من 3</span>
                 </div>
             </div>
 
-            <!-- Tabs for Test Batches -->
-            <div id="test-batches-tabs" class="flex gap-2 border-b pb-3 overflow-x-auto" style="border-color: var(--border-color);">
+            <!-- Tabs for Test Batches with increased padding and top space for NEW badge visibility -->
+            <div id="test-batches-tabs" class="flex gap-4 pt-3 pb-3 overflow-x-auto" style="border-color: var(--border-color);">
                 <!-- يتم توليد التبويبات هنا -->
             </div>
 
             <!-- Question Box -->
             <div class="glass-card rounded-2xl p-6 md:p-8 space-y-6 relative overflow-hidden shadow-2xl">
-                <div id="question-badge" class="absolute top-0 left-0 text-[10px] font-bold px-4 py-1 rounded-br-xl shadow border-b border-r" style="background: var(--btn-primary-bg); color: #FFF; border-color: var(--border-color);">أساسية</div>
+                <!-- شارة NEW داخل حاوية الأسئلة باللون الذهبي الوميض الثابت -->
+                <div id="question-badge" class="absolute top-0 left-0 bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 text-[10px] font-black px-4 py-1 rounded-br-xl shadow border-b border-r border-amber-300 animate-pulse">اختبار (2) - NEW</div>
                 
-                <div class="pt-2">
+                <div class="pt-4">
                     <h4 id="question-text" class="text-base md:text-xl font-bold leading-relaxed" style="color: var(--text-main);">نص السؤال سيظهر هنا؟</h4>
                 </div>
 
@@ -359,11 +412,17 @@
                     <!-- رسالة التعزيز والتوجيه -->
                 </div>
 
+                <!-- أزرار التنقل بين الأسئلة -->
                 <div class="flex justify-between items-center pt-4 border-t" style="border-color: var(--border-color);">
                     <button onclick="prevQuestion()" id="prev-btn" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition border" style="border-color: var(--border-color); background: var(--bg-card); color: var(--text-main);">السابق</button>
+                    
+                    <button onclick="backToCourses()" class="w-10 h-10 rounded-xl border flex items-center justify-center transition hover:scale-110 shadow-md" style="border-color: var(--accent-color); background: var(--icon-box-bg); color: var(--accent-color);" title="العودة للصفحة الرئيسية">
+                        <i class="fa-solid fa-house text-sm"></i>
+                    </button>
+
                     <div class="flex items-center gap-2">
                         <button onclick="nextQuestion()" id="next-btn" class="px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition shadow-md border" style="background-color: var(--btn-primary-bg); border-color: var(--border-color); color: #FFF;">التالي</button>
-                        <button onclick="backToCourses()" id="finish-btn" class="hidden bg-red-700 hover:bg-red-800 text-white px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition shadow-md flex items-center gap-2">
+                        <button onclick="finishQuizAction()" id="finish-btn" class="hidden bg-red-700 hover:bg-red-800 text-white px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition shadow-md flex items-center gap-2">
                             <i class="fa-solid fa-circle-check"></i> إنهاء الاختبار
                         </button>
                     </div>
@@ -392,25 +451,18 @@
             </div>
 
             <div class="grid grid-cols-2 gap-3 mb-6">
-                <!-- 1. Vanta Voids -->
                 <button onclick="selectTheme('vanta-voids')" class="p-3 rounded-2xl border flex flex-col items-center gap-2 transition hover:scale-105" style="border-color: var(--border-color); background: var(--bg-card);">
                     <div class="w-8 h-8 rounded-full border-2 border-cyan-400" style="background: linear-gradient(135deg, #010317 50%, #00E5FF 50%);"></div>
                     <span class="text-xs font-bold text-cyan-300">Vanta Voids (الأساسي)</span>
                 </button>
-
-                <!-- 2. Royal Ivory -->
                 <button onclick="selectTheme('royal-ivory')" class="p-3 rounded-2xl border flex flex-col items-center gap-2 transition hover:scale-105" style="border-color: var(--border-color); background: var(--bg-card);">
                     <div class="w-8 h-8 rounded-full border-2 border-amber-600" style="background: linear-gradient(135deg, #f8f6f0 50%, #b45309 50%);"></div>
                     <span class="text-xs font-bold" style="color: var(--accent-color);">العاجي الملكي</span>
                 </button>
-
-                <!-- 3. Calm Cloud -->
                 <button onclick="selectTheme('calm-cloud')" class="p-3 rounded-2xl border flex flex-col items-center gap-2 transition hover:scale-105" style="border-color: var(--border-color); background: var(--bg-card);">
                     <div class="w-8 h-8 rounded-full border-2 border-blue-500" style="background: linear-gradient(135deg, #f1f5f9 50%, #2563eb 50%);"></div>
                     <span class="text-xs font-bold" style="color: var(--accent-color);">الغيمة الساكنة</span>
                 </button>
-
-                <!-- 4. Royal Navy -->
                 <button onclick="selectTheme('royal-navy')" class="p-3 rounded-2xl border flex flex-col items-center gap-2 transition hover:scale-105" style="border-color: var(--border-color); background: var(--bg-card);">
                     <div class="w-8 h-8 rounded-full border-2 border-yellow-500" style="background: linear-gradient(135deg, #0f172a 50%, #e5c158 50%);"></div>
                     <span class="text-xs font-bold" style="color: var(--accent-color);">الكحلي الذهبي الملكي</span>
@@ -429,10 +481,10 @@
             </div>
             <div class="space-y-2">
                 <h3 class="text-xl font-black" style="color: var(--text-main);">إنجاز رائع!</h3>
-                <p id="completion-message-text" class="text-sm font-bold leading-relaxed" style="color: var(--text-muted);">أحسنت! لقد أكملت جميع أسئلة هذا القسم بنجاح 🎉</p>
+                <p id="completion-message-text" class="text-sm font-bold leading-relaxed" style="color: var(--text-muted);">أحسنت! لقد أكملت جميع أسئلة هذا الاختبار بنجاح 🎉 يمكنك الانتقال للاختبار الثاني أو المراجعة.</p>
             </div>
-            <button onclick="closeCompletionModalAndFinish()" class="w-full bg-red-700 hover:bg-red-800 text-white py-3.5 rounded-xl font-bold text-sm transition shadow-lg flex items-center justify-center gap-2 border border-red-500/30">
-                <i class="fa-solid fa-house"></i> إنهاء الاختبار والعودة للمقررات
+            <button onclick="closeCompletionModalOnly()" class="w-full bg-btn-primary-bg hover:bg-cyan-600 text-white py-3.5 rounded-xl font-bold text-sm transition shadow-lg flex items-center justify-center gap-2 border border-cyan-400/30" style="background: var(--btn-primary-bg);">
+                <i class="fa-solid fa-check"></i> حسناً، مواصلة التدريب
             </button>
         </div>
     </div>
@@ -486,7 +538,7 @@
 
             <div class="space-y-5 pt-4">
                 <div class="p-4 rounded-xl border space-y-2" style="background: var(--bg-primary); border-color: var(--border-color);">
-                    <label class="block text-sm font-bold" style="color: var(--text-main);">1. حدد المقرر الدراسي أولاً لإضافة أو تحديث الأسئلة:</label>
+                    <label class="block text-sm font-bold" style="color: var(--text-main);">1. حدد المقرر الدراسي أولاً لإضافة الأسئلة:</label>
                     <select id="admin-course-select" onchange="onAdminCourseChange()" class="form-control font-semibold">
                         <option value="">-- اختر المقرر الدراسي --</option>
                     </select>
@@ -496,8 +548,8 @@
                     <div>
                         <label class="block text-xs font-semibold mb-1" style="color: var(--text-muted);">تصنيف الاختبار (الباتش):</label>
                         <select id="admin-batch" class="form-control">
-                            <option value="اختبار (1) - الأسئلة السابقة والأساسية">اختبار (1) - الأسئلة السابقة</option>
-                            <option value="اختبار (2) - الأسئلة المضافة حديثاً" selected>اختبار (2) - الأسئلة المضافة حديثاً (مع شارة NEW)</option>
+                            <option value="اختبار (1)">اختبار (1)</option>
+                            <option value="اختبار (2)">اختبار (2) (يضيف شارة NEW تلقائياً)</option>
                         </select>
                     </div>
 
@@ -546,7 +598,7 @@
                     </div>
 
                     <button onclick="saveNewQuestionToCloud()" class="btn-primary flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-cloud-arrow-up"></i> حفظ وإدراج السؤال سحابياً
+                        <i class="fa-solid fa-cloud-arrow-up"></i> حفظ وإدراج السؤال سحابياً وتطبيق شارة NEW
                     </button>
                 </div>
             </div>
@@ -577,7 +629,6 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Mobile Drawer Toggle Function
         window.toggleMobileMenu = function() {
             const drawer = document.getElementById('mobileDrawer');
             const backdrop = document.getElementById('mobileBackdrop');
@@ -585,23 +636,46 @@
             backdrop.classList.toggle('open');
         }
 
-        // Selected Theme Management with Dynamic Icon Colors per Theme
         const themes = {
           'vanta-voids': { 
               '--bg-primary': '#010317', '--bg-secondary': '#0B1457', '--bg-card': 'rgba(11, 20, 87, 0.75)', '--border-color': 'rgba(0, 229, 255, 0.25)', '--accent-color': '#00E5FF', '--text-main': '#FFFFFF', '--text-muted': '#C1E4FB', '--header-bg': 'rgba(1, 3, 23, 0.88)', '--btn-primary-bg': '#2755C6',
-              '--icon-box-bg': 'rgba(0, 229, 255, 0.15)', '--icon-box-border': 'rgba(0, 229, 255, 0.3)'
+              '--icon-box-bg': 'rgba(0, 229, 255, 0.15)', '--icon-box-border': 'rgba(0, 229, 255, 0.3)',
+              '--daily-box-bg': 'linear-gradient(135deg, rgba(11, 20, 87, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%)',
+              '--daily-border': 'rgba(0, 229, 255, 0.4)', '--daily-border-hover': 'rgba(0, 229, 255, 0.8)',
+              '--daily-title-color': '#00E5FF', '--daily-date-color': 'rgba(193, 228, 251, 0.7)', '--daily-text-color': '#FFFFFF',
+              '--daily-bar-gradient': 'linear-gradient(to bottom, #00E5FF, #2755C6)',
+              '--daily-icon-bg': 'rgba(0, 229, 255, 0.15)', '--daily-icon-border': 'rgba(0, 229, 255, 0.4)', '--daily-icon-color': '#00E5FF',
+              '--daily-line-border': 'rgba(0, 229, 255, 0.2)'
           },
           'royal-ivory': { 
               '--bg-primary': '#f8f6f0', '--bg-secondary': '#ffffff', '--bg-card': 'rgba(255, 255, 255, 0.9)', '--border-color': 'rgba(180, 83, 9, 0.25)', '--accent-color': '#b45309', '--text-main': '#1c1917', '--text-muted': '#78350f', '--header-bg': 'rgba(248, 246, 240, 0.9)', '--btn-primary-bg': '#b45309',
-              '--icon-box-bg': 'rgba(180, 83, 9, 0.1)', '--icon-box-border': 'rgba(180, 83, 9, 0.3)'
+              '--icon-box-bg': 'rgba(180, 83, 9, 0.1)', '--icon-box-border': 'rgba(180, 83, 9, 0.3)',
+              '--daily-box-bg': 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(254, 243, 199, 0.5) 100%)',
+              '--daily-border': 'rgba(180, 83, 9, 0.35)', '--daily-border-hover': 'rgba(180, 83, 9, 0.7)',
+              '--daily-title-color': '#b45309', '--daily-date-color': 'rgba(120, 53, 15, 0.7)', '--daily-text-color': '#1c1917',
+              '--daily-bar-gradient': 'linear-gradient(to bottom, #b45309, #d97706)',
+              '--daily-icon-bg': 'rgba(180, 83, 9, 0.1)', '--daily-icon-border': 'rgba(180, 83, 9, 0.3)', '--daily-icon-color': '#b45309',
+              '--daily-line-border': 'rgba(180, 83, 9, 0.2)'
           },
           'calm-cloud': { 
               '--bg-primary': '#f1f5f9', '--bg-secondary': '#ffffff', '--bg-card': 'rgba(255, 255, 255, 0.9)', '--border-color': 'rgba(37, 99, 235, 0.25)', '--accent-color': '#2563eb', '--text-main': '#0f172a', '--text-muted': '#475569', '--header-bg': 'rgba(241, 245, 249, 0.9)', '--btn-primary-bg': '#2563eb',
-              '--icon-box-bg': 'rgba(37, 99, 235, 0.1)', '--icon-box-border': 'rgba(37, 99, 235, 0.3)'
+              '--icon-box-bg': 'rgba(37, 99, 235, 0.1)', '--icon-box-border': 'rgba(37, 99, 235, 0.3)',
+              '--daily-box-bg': 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(224, 242, 254, 0.6) 100%)',
+              '--daily-border': 'rgba(37, 99, 235, 0.35)', '--daily-border-hover': 'rgba(37, 99, 235, 0.7)',
+              '--daily-title-color': '#2563eb', '--daily-date-color': 'rgba(71, 85, 105, 0.8)', '--daily-text-color': '#0f172a',
+              '--daily-bar-gradient': 'linear-gradient(to bottom, #2563eb, #3b82f6)',
+              '--daily-icon-bg': 'rgba(37, 99, 235, 0.1)', '--daily-icon-border': 'rgba(37, 99, 235, 0.3)', '--daily-icon-color': '#2563eb',
+              '--daily-line-border': 'rgba(37, 99, 235, 0.2)'
           },
           'royal-navy': { 
               '--bg-primary': '#080d1a', '--bg-secondary': '#0f172a', '--bg-card': 'rgba(30, 41, 59, 0.75)', '--border-color': 'rgba(229, 193, 88, 0.3)', '--accent-color': '#e5c158', '--text-main': '#f8fafc', '--text-muted': '#94a3b8', '--header-bg': 'rgba(8, 13, 26, 0.85)', '--btn-primary-bg': '#1e293b',
-              '--icon-box-bg': 'rgba(229, 193, 88, 0.15)', '--icon-box-border': 'rgba(229, 193, 88, 0.4)'
+              '--icon-box-bg': 'rgba(229, 193, 88, 0.15)', '--icon-box-border': 'rgba(229, 193, 88, 0.4)',
+              '--daily-box-bg': 'linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%)',
+              '--daily-border': 'rgba(229, 193, 88, 0.4)', '--daily-border-hover': 'rgba(229, 193, 88, 0.8)',
+              '--daily-title-color': '#e5c158', '--daily-date-color': 'rgba(229, 193, 88, 0.7)', '--daily-text-color': '#f8fafc',
+              '--daily-bar-gradient': 'linear-gradient(to bottom, #e5c158, #ca8a04)',
+              '--daily-icon-bg': 'rgba(229, 193, 88, 0.15)', '--daily-icon-border': 'rgba(229, 193, 88, 0.4)', '--daily-icon-color': '#e5c158',
+              '--daily-line-border': 'rgba(229, 193, 88, 0.25)'
           }
         };
 
@@ -628,23 +702,138 @@
             { id: "engineering-design", name: "التصميم الهندسي", icon: "fa-compass-drafting" },
             { id: "cybersecurity", name: "الأمن السيبراني", icon: "fa-shield-halved" },
             { id: "iot", name: "إنترنت الأشياء", icon: "fa-tower-broadcast" },
-            { id: "software-eng", name: "هندسة البرمجيات", icon: "fa-code" }
+            { id: "software-eng", name: "هندسة البرمجيات", icon: "fa-code" },
+            { id: "coming-soon", name: "قريباً مقررات جديدة", icon: "fa-hourglass-start", isComingSoon: true }
         ];
+
+        // مصفوفة رسائل اليوم والمقالات كاملة بتأملات أ. يوسف الحامد
+        const dailyMessagesData = [
+            { header: "تأملات | ومضة إلى الروح ...", date: "October, 17 | في أعماق النفس", text: "ليست كل الحروب التي نخوضها مرئية؛ فبعض الانتصارات تحدث في أعماقنا حين نختار النهوض رغم كل ما يدعونا للسقوط." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "October, 18 | كرامة الروح", text: "لا تخسر نفسك في سبيل أن يحبك الآخرون؛ فثمة خسارات تبدو في أعين الناس انتصارًا، لكنها في أعماقك هزيمة لا تُنسى." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "October, 19 | عزلة نبيلة", text: "أحيانًا تكون الوحدة أرحم من صحبةٍ تجعلك غريبًا عن ذاتك، ويكون الصمت أصدق من ألف كلمة لا تشبه ما في قلبك." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "October, 20 | ما وراء الألم", text: "لا تسأل دائمًا لماذا تألمت؛ بل تأمل ما الذي أيقظه الألم فيك، فربما كانت ندبتك بابًا إلى بصيرة لم تكن لتبلغها بسلامتك." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "October, 21 | حرية الاختيار", text: "لا تمنح العالم سلطة تشكيل روحك وفق أهوائه؛ كن لينًا حين تستدعي الرحمة، صلبًا حين تستدعي الكرامة، وحرًّا في الحالتين." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "October, 22 | صمت الجبال", text: "تعلّم من الجبال كيف تواجه العواصف دون أن تفقد هيبتها، ومن السماء كيف تتسع للغيوم دون أن تنسى زرقتها." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "October, 23 | الحقيقة المرة", text: "أشد الحقائق إيلامًا ليست تلك التي نكتشفها في الآخرين، بل تلك التي نكتشفها في أنفسنا بعد أن تنقشع أوهامنا القديمة." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "October, 24 | النهوض", text: "ليس النبيل من لم يسقط يومًا، بل من نهض دون أن يجعل سقوطه عذرًا للقسوة، أو يسمح لانكساره أن يسرق منه إنسانيته." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "October, 25 | لا تشبه سواك", text: "لا تعتذر عن اختلافك ما دام نابعًا من صدقك؛ فالأزهار لا تتنافس في ألوانها، ولكل زهرةٍ جمالها الذي لا يستعيره غيرها." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "October, 26 | حكمة الانتظار", text: "ليست كل الأبواب المغلقة نهاية الطريق؛ بعضها يحميك من وجهة لم تكن تناسب روحك، وبعضها يعلّمك أن تصنع طريقك بنفسك." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "October, 27 | ثمن النقاء", text: "قد تدفع من راحة قلبك ثمنًا باهظًا لأنك اخترت الصدق في عالمٍ يتقن الأقنعة، لكن لا شيء أثمن من أن تنام متصالحًا مع نفسك." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "October, 28 | عواصف الداخل", text: "في داخل كل إنسان بحر لا يعرف الآخرون عمقه؛ فلا تحكم على هدوئه بأنه خلوٌّ من العواصف، فقد تكون روحه تعلّمت الصمود بصمت." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "October, 29 | قيمة الذات", text: "لا تجعل تجاهل أحدهم لك مقياسًا لقيمتك؛ فالشمس لا تفقد نورها حين يعجز الأعمى عن رؤيتها، ولا يستمد النور شرعيته من أعين الآخرين." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "October, 30 | شجاعة الرحيل", text: "بعض الرحيل ليس هروبًا، بل شجاعة متأخرة أدركت أن البقاء في المكان الخطأ استنزافٌ للعمر، وأن للروح حقًّا في النجاة." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "October, 31 | اتساع الأفق", text: "لا تسجن أحلامك داخل حدود ما اعتاده الناس؛ فالآفاق الواسعة لا تُكتشف من النوافذ الضيقة، والروح التي تطلب المعنى لا تكفيها العادة." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "November, 01 | فن التجاوز", text: "النضج أن تتذكر ما حدث دون أن تسكنه، وأن تفهم من خذلك دون أن تمنحه حقًّا دائمًا في تشكيل مستقبلك." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "November, 02 | جمال الغموض", text: "ليس من الضروري أن تشرح أعماقك لكل عابر؛ فبعض الجمال يفقد سحره حين يُكشف كله، وبعض الأرواح لا تُقرأ إلا بالتأمل الطويل." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "November, 03 | مواجهة الذات", text: "أصعب الطرق ليس ذاك الذي تعترضه الجبال، بل ذاك الذي يقودك إلى مواجهة حقيقتك؛ فهناك تسقط الحجج، وتبدأ رحلة التغيير الحقيقية." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "November, 04 | كرامة الصمت", text: "لا تدخل كل معركة لمجرد أنك تستطيع الانتصار فيها؛ فبعض المعارك تنتصر فيها حين تترفع عنها، وتحفظ لروحك ما تبقى من سلامها." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "November, 05 | عبور الزمن", text: "سيمضي هذا الفصل بما حمله من وجعٍ ودهشة، وستكتشف يومًا أن ما ظننته نهاية حياتك لم يكن إلا نهاية نسخةٍ قديمة منك." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "November, 06 | روح لا تُروّض", text: "كن حرًّا كريح البراري، لا أسيرًا لتوقعات الآخرين؛ فالحياة التي تُعاش لإرضاء الجميع قد تمر كاملة، دون أن تشعر أنك عشتها حقًّا." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "November, 07 | درس الخيبة", text: "لا تندم على قلبٍ أحسن الظن؛ فالخيبة تكشف حقيقة الآخرين، لكنها لا ينبغي أن تنتزع منك فضيلة النقاء، ولا قدرتك على المحبة." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "November, 08 | المعنى الخفي", text: "قد لا تمنحك الحياة ما تمنيت، لكنها تمنحك أحيانًا عينًا ترى ما وراء الأشياء؛ وحين تتغير رؤيتك، تتغير قيمة ما تملكه." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "November, 09 | حين يشتد الليل", text: "لا تخشَ الليالي التي تطول فيها الأسئلة؛ ففي سكونها تتضح أصواتٌ عجز ضجيج النهار عن إسماعك إياها، وتولد أحيانًا أشد البدايات صدقًا." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "November, 10 | قوة اللين", text: "ليس اللين ضعفًا، ولا الرحمة عجزًا؛ إنما القوة أن تستطيع القسوة فتختار الرفق، وأن تملك الرد فتختار ما يليق بمقامك." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "November, 11 | لا تؤجل الحياة", text: "لا تنتظر أن تخلو الحياة من القلق كي تبدأ، ولا أن يكتمل الطريق كي تخطو؛ فالعمر لا ينتظر اكتمال ظروفنا حتى يمضي." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "November, 12 | أثر العابرين", text: "سيمرّ بك أناسٌ كالفصول؛ منهم من يزهر بك، ومنهم من يعلّمك الصبر، ومنهم من يرحل ليترك لك مساحةً تستعيد فيها نفسك." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "November, 13 | سلام الداخل", text: "حين تكفّ عن محاكمة نفسك على كل ما مضى، ستدرك أن السلام لا يعني نسيان أخطائك، بل أن تتعلم منها دون أن تبقى أسيرًا لها." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "November, 14 | أفق جديد", text: "لا تسمح للماضي أن يختصر مستقبلك، ولا للخوف أن يختار نيابةً عنك؛ فما زالت في روحك مساحاتٌ لم تطأها أحلامك بعد." },
+            { header: "تأملات | ومضة إلى الروح ...", date: "November, 15 | كن كما خُلقت", text: "عش عميقًا، وامضِ كريمًا، ولا تخن صوتك الداخلي من أجل تصفيقٍ عابر؛ فأجمل ما تتركه خلفك أن تكون قد عشت حياةً تشبه حقيقتك." }
+        ];
+
+        // التحديث التلقائي لرسائل اليوم استناداً إلى التاريخ الفعلي مع إعادة التدوير
+        function initDailyMessage() {
+            const now = new Date();
+            const startDay = new Date(2026, 9, 17).getTime(); // 17 أكتوبر 2026 نقطة البداية
+            const diffDays = Math.floor((now.getTime() - startDay) / (1000 * 60 * 60 * 24));
+            const msgIndex = Math.max(0, diffDays) % dailyMessagesData.length;
+            
+            const currentItem = dailyMessagesData[msgIndex];
+            document.getElementById('daily-msg-header').innerText = currentItem.header;
+            document.getElementById('daily-msg-date').innerText = currentItem.date;
+            document.getElementById('daily-message-text').innerText = `"${currentItem.text}"`;
+            document.getElementById('daily-msg-signature').innerText = "أ.يوسف الحامد";
+        }
 
         let questionBank = {
             "digital-tech-1": [
-                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "أي مما يلي يُعد المكون المادي (Hardware) الأساسي المسؤول عن تنفيذ العمليات الحسابية والمنطقية؟", options: ["ذاكرة الوصول العشوائي RAM", "وحدة المعالجة المركزية CPU", "قرص التخزين الصلب SSD", "لوحة المفاتيح"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 وحدة المعالجة المركزية (CPU) هي عقل الحاسب.", neg: "إجابة غير دقيقة ❌ العمليات الحسابية والمنطقية تتم داخل وحدة المعالجة المركزية (CPU)." },
-                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "نظام التشغيل يُعتبر مثالاً بارزاً على:", options: ["برمجيات التطبيقات", "البرمجيات النظامية", "لغات البرمجة", "أنظمة قواعد البيانات"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 نظام التشغيل يدير عتاد الحاسب كبرمجيات نظامية.", neg: "إجابة غير دقيقة ❌ أنظمة التشغيل تندرج ضمن برمجيات النظام (System Software)." },
-                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "أي من صيغ الملفات التالية يُستخدم عادة لحفظ مستندات النصوص المنسقة بشكل قياسي؟", options: [".docx", ".mp4", ".png", ".mp3"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 امتداد docx مخصص لبرنامج معالجة النصوص.", neg: "إجابة غير دقيقة ❌ الامتداد القياسي للمستندات هو docx." },
-                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "ما هي الوظيفة الأساسية للذاكرة الثانوية (Secondary Storage) في الحاسب؟", options: ["تنفيذ العمليات الحسابية الحالية", "التخزين طويل الأجل للبيانات والبرامج", "عرض الرسومات على الشاشة", "توصيل الأجهزة الطرفية"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 التخزين الثانوي يوفر حفظاً مستداماً للبيانات.", neg: "إجابة غير دقيقة ❌ التخزين الثانوي مخصص للاحتفاظ بالبيانات على المدى الطويل." },
-                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "أي من وحدات الإدخال التالية تُستخدم لتحويل المستندات الورقية إلى صور رقمية؟", options: ["الطابعة", "الماسح الضوئي (Scanner)", "السماعة", "العارض الضوئي"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 الماسح الضوئي يحول الورق لصيغة رقمية.", neg: "إجابة غير دقيقة ❌ الجهاز المسؤول عن إدخال المستندات الورقية رقمياً هو الماسح الضوئي." }
+                { batch: "اختبار (1)", question: "أي مما يلي يُعد المكون المادي (Hardware) الأساسي المسؤول عن تنفيذ العمليات الحسابية والمنطقية في الحاسب؟", options: ["ذاكرة الوصول العشوائي (RAM)", "وحدة المعالجة المركزية (CPU)", "قرص التخزين الصلب (SSD)", "لوحة المفاتيح"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 وحدة المعالجة المركزية هي عقل الحاسب والمسؤولة عن تنفيذ العمليات.", neg: "إجابة غير دقيقة ❌ وحدة المعالجة المركزية هي المسؤولة عن تنفيذ العمليات." },
+                { batch: "اختبار (1)", question: "نظام التشغيل يُعتبر مثالاً بارزاً على أي نوع من البرمجيات؟", options: ["برمجيات التطبيقات المكتبية", "البرمجيات النظامية (System Software)", "لغات البرمجة المتقدمة", "أنظمة إدارة القواعد"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 أنظمة التشغيل تدير عتاد الجهاز وتُصنف ضمن برمجيات النظام.", neg: "إجابة غير دقيقة ❌ أنظمة التشغيل تصنف ضمن برمجيات النظام." },
+                { batch: "اختبار (1)", question: "ما هو الامتداد القياسي الأكثر استخداماً لحفظ مستندات النصوص المنسقة؟", options: [".docx", ".mp4", ".png", ".mp3"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 الامتداد .docx مخصص لملفات معالجة النصوص.", neg: "إجابة غير دقيقة ❌ الامتداد الصحيح هو .docx." },
+                { batch: "اختبار (2)", isNew: true, question: "ما هي الوظيفة الأساسية للذاكرة الثانوية (Secondary Storage)؟", options: ["تنفيذ العمليات المؤقتة واللحظية", "التخزين طويل الأجل للبيانات والبرامج حتى بعد انقطاع التيار", "عرض الرسومات بدقة عالية", "توصيل الأجهزة لاسلكياً"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 التخزين الثانوي يوفر حفظاً مستداماً على المدى الطويل.", neg: "إجابة غير دقيقة ❌ الذاكرة الثانوية مخصصة للتخزين طويل الأجل." },
+                { batch: "اختبار (2)", isNew: true, question: "أي من وحدات الإدخال التالية تُستخدم لتحويل المستندات الورقية إلى صور رقمية؟", options: ["الطابعة الليزرية", "الماسح الضوئي (Scanner)", "السماعة الرقمية", "العارض الضوئي"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 الماسح الضوئي يحول الورق لصيغة رقمية.", neg: "إجابة غير دقيقة ❌ الماسح الضوئي يحول المستندات لصور رقمية." },
+                { batch: "اختبار (2)", isNew: true, question: "شبكة حاسوبية محلية لربط الأجهزة داخل مبنى واحد تُعرف بـ:", options: ["WAN", "LAN", "MAN", "VPN"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 شبكة LAN هي الشبكة المحلية المحدودة جغرافياً.", neg: "إجابة غير دقيقة ❌ الشبكة المحلية داخل مبنى هي LAN." }
             ],
             "digital-tech-2": [
-                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "لغة تصميم وتنسيق صفحات الويب التي تعنى بالألوان والخطوط والمظهر العام هي:", options: ["HTML", "CSS", "JavaScript", "Python"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 CSS مسؤولة عن التنسيق والمظهر الجمالي.", neg: "إجابة غير دقيقة ❌ تنسيق مظهر صفحات الويب يتم عبر لغة CSS." },
-                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "في لغة HTML، أي وسم يُستخدم لإدراج رابط تشعبي (Hyperlink)؟", options: ["<link>", "<a>", "<href>", "<url>"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 الوسم <a> مع خاصية href يمثل الرابط التشعبي.", neg: "إجابة غير دقيقة ❌ الوسم الأساسي للروابط في HTML هو <a>." },
-                { batch: "اختبار (1) - الأسئلة السابقة والأساسية", question: "أداة البرمجة المرئية التي تُستخدم غالباً لتصميم وتطوير تطبيقات الهواتف الذكية هي:", options: ["App Inventor", "Photoshop", "Excel", "Notepad"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 MIT App Inventor منصة رائعة لتطوير التطبيقات.", neg: "إجابة غير دقيقة ❌ لتطوير تطبيقات الهواتف المرئية نستخدم بيئات مثل App Inventor." },
-                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "نوع قواعد البيانات الذي ينظم البيانات في جداول مترابطة بصفوف وأعمدة يسمى:", options: ["قواعد البيانات العلائقية (Relational)", "قواعد البيانات غير الهيكلية", "الملفات النصية المسطحة", "المصفوفات الثنائية"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 قواعد البيانات العلائقية تعتمد على الجداول المرتباطة.", neg: "إجابة غير دقيقة ❌ القواعد المبنية على جداول وصفوف هي العلائقية (Relational Databases)." },
-                { batch: "اختبار (2) - الأسئلة المضافة حديثاً", isNew: true, question: "أي مما يلي يُعد من لغات الاستعلام الشهيرة لإدارة قواعد البيانات؟", options: ["SQL", "HTML", "CSS", "XML"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 لغة SQL مخصصة للاستعلام وإدارة قواعد البيانات.", neg: "إجابة غير دقيقة ❌ لغة الاستعلام القياسية لقواعد البيانات هي SQL." }
+                { batch: "اختبار (1)", question: "لغة تنسيق صفحات الويب التي تعنى بالألوان والخطوط والمظهر العام هي:", options: ["HTML", "CSS", "JavaScript", "Python"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 CSS مسؤولة عن التصميم والتنسيق الجمالي للصفحات.", neg: "إجابة غير دقيقة ❌ CSS هي المسؤولة عن التنسيق والمظهر." },
+                { batch: "اختبار (1)", question: "في لغة HTML، أي وسم يُستخدم لإدراج رابط تشعبي (Hyperlink)؟", options: ["<link>", "<a>", "<href>", "<url>"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 الوسم الأساسي للروابط في HTML هو <a>.", neg: "إجابة غير دقيقة ❌ الوسم المستخدم هو <a>." },
+                { batch: "اختبار (1)", question: "أداة البرمجة المرئية التي تُستخدم غالباً لتصميم وتطوير تطبيقات الهواتف الذكية هي:", options: ["App Inventor", "Photoshop", "Excel", "Notepad"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 MIT App Inventor منصة مرئية لتطوير تطبيقات الأندرويد.", neg: "إجابة غير دقيقة ❌ الأداة هي App Inventor." },
+                { batch: "اختبار (2)", isNew: true, question: "نوع قواعد البيانات الذي ينظم البيانات في جداول مترابطة بصفوف وأعمدة يسمى:", options: ["قواعد البيانات العلائقية (Relational)", "قواعد البيانات غير الهيكلية", "الملفات النصية المسطحة", "المصفوفات الثنائية"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 القواعد المبنية على جداول وصفوف مرتبطة هي العلائقية.", neg: "إجابة غير دقيقة ❌ تسمى قواعد البيانات العلائقية." },
+                { batch: "اختبار (2)", isNew: true, question: "أي مما يلي يُعد من لغات الاستعلام الشهيرة لإدارة قواعد البيانات؟", options: ["SQL", "HTML", "CSS", "XML"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 لغة SQL مخصصة للاستعلام وإدارة قواعد البيانات.", neg: "إجابة غير دقيقة ❌ لغة الاستعلام هي SQL." },
+                { batch: "اختبار (2)", isNew: true, question: "الخاصية المسؤولة عن تغيير لون خلفية العناصر في تنسيقات CSS هي:", options: ["color", "background-color", "font-size", "text-align"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 الخاصية المسؤولة عن الخلفية هي background-color.", neg: "إجابة غير دقيقة ❌ الخاصية هي background-color." }
+            ],
+            "digital-tech-3": [
+                { batch: "اختبار (1)", question: "نظام إدارة قواعد البيانات (DBMS) يُستخدم أساساً من أجل:", options: ["تصميم واجهات المستخدم الرسومية للويب", "إنشاء وتخزين وإدارة واسترجاع البيانات بكفاءة وأمان", "تسريع سرعة تصفح الإنترنت", "معالجة الفيديوهات وملفات الصوت"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 نظم إدارة قواعد البيانات تضمن التنظيم والاسترجاع الآمن للبيانات.", neg: "إجابة غير دقيقة ❌ DBMS تستخدم لإدارة واسترجاع البيانات بكفاءة وأمان." },
+                { batch: "اختبار (1)", question: "في قواعد البيانات، المفتاح الأساسي (Primary Key) يُستخدم لـ:", options: ["تكرار البيانات لتسريع البحث", "تمثيل معرف فريد لكل سجل بحيث لا يتكرر ولا يقبل القيم الفارغة", "تشفير الحقول السرية فقط", "ربط الجداول بعلاقة متعدد لمتعدد"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 المفتاح الأساسي يضمن فريدية كل سجل داخل الجدول.", neg: "إجابة غير دقيقة ❌ المفتاح الأساسي يمثل معرفاً فريداً للسجل." },
+                { batch: "اختبار (1)", question: "لغة برمجة تُستخدم على نطاق واسع في خوادم الويب وتطوير الواجهات الخلفية (Backend):", options: ["HTML", "CSS", "Python / PHP", "XML"], correct: 2, pos: "إجابة صحيحة أحسنت! 🎯 لغات مثل Python أو PHP تُستعمل لمعالجة منطق الخادم.", neg: "إجابة غير دقيقة ❌ اللغات المستخدمة هي Python أو PHP." },
+                { batch: "اختبار (2)", isNew: true, question: "مفهوم \"النسخ الاحتياطي\" (Backup) للبيانات يعني:", options: ["حذف الملفات القديمة لتوفير مساحة", "إنشاء نسخة ثانية إضافية من البيانات وحفظها في مكان آمن لاسترجاعها عند الطوارئ", "ضغط الملفات لتصغير حجمها", "نقل الملفات بين جهازين محليين"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 النسخ الاحتياطي إجراء أساسي لمنع فقدان البيانات.", neg: "إجابة غير دقيقة ❌ النسخ الاحتياطي هو إنشاء نسخة إضافية آمنة." },
+                { batch: "اختبار (2)", isNew: true, question: "البروتوكول الآمن لنقل صفحات الويب وتشفير الاتصال بين المتصفح والخادم هو:", options: ["HTTP", "HTTPS", "FTP", "SMTP"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 بروتوكول HTTPS يضيف طبقة تشفير أمنية (SSL/TLS).", neg: "إجابة غير دقيقة ❌ البروتوكول الآمن هو HTTPS." },
+                { batch: "اختبار (2)", isNew: true, question: "ماذا يُقصد بمصطلح \"الحوسبة السحابية\" (Cloud Computing)؟", options: ["تخزين الملفات محلياً على القرص الصلب للحاسب", "توفير خدمات الحوسبة والتخزين عبر الإنترنت حسب الطلب من مراكز بيانات بعيدة", "شبكة محلية لاسلكية داخل المنزل", "نظام تشغيل خاص بالهواتف فقط"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 الحوسبة السحابية تتيح الوصول للموارد عبر الإنترنت مرناً وشاملاً.", neg: "إجابة غير دقيقة ❌ الحوسبة السحابية توفر الخدمات عبر الإنترنت حسب الطلب." }
+            ],
+            "data-science": [
+                { batch: "اختبار (1)", question: "ما هي المراحل الأساسية لدورة حياة علم البيانات (Data Science Lifecycle)؟", options: ["التصميم فقط", "جمع البيانات، تنظيفها، تحليلها، نمذجتها، ثم تصوّر النتائج", "الطباعة والنشر الورقي", "برمجة واجهات التطبيقات فقط"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 علم البيانات يمر بخطوات متكاملة تبدأ بالجمع وتنتهي باتخاذ القرار.", neg: "إجابة غير دقيقة ❌ المراحل تبدأ بالجمع وتنتهي بتصور النتائج." },
+                { batch: "اختبار (1)", question: "عملية إزالة أو تصحيح البيانات التالفة أو المفقودة من مجموعة البيانات تسمى:", options: ["استخراج البيانات", "تنظيف البيانات (Data Cleaning)", "تشفير البيانات", "ضغط الملفات"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 تنظيف البيانات خطوة حرجة لضمان دقة التحليلات.", neg: "إجابة غير دقيقة ❌ تسمى عملية تنظيف البيانات." },
+                { batch: "اختبار (1)", question: "المخطط البياني الأكثر ملاءمة لعرض توزع بيانات عددية متصلة هو:", options: ["المخطط الدائري (Pie Chart)", "المدرج التكراري (Histogram)", "الرسم الخطي الزمني البسيط", "جدول النصوص"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 المدرج التكراري مصمم خصيصاً لتوزيع المتغيرات العددية.", neg: "إجابة غير دقيقة ❌ المخطط المناسب هو المدرج التكراري." },
+                { batch: "اختبار (2)", isNew: true, question: "ماذا يُقصد بمصطلح \"التنقيب عن البيانات\" (Data Mining)؟", options: ["حذف البيانات غير الهامة نهائياً", "استخراج أنماط ومعلومات مفيدة وغير مخفية من مجموعات البيانات الكبيرة", "إنشاء قواعد بيانات جديدة من الصفر", "توثيق قواعد البيانات ورقياً"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 التنقيب يكشف عن علاقات وأنماط قيّمة داخل البيانات الضخمة.", neg: "إجابة غير دقيقة ❌ التنقيب هو استخراج أنماط مفيدة من البيانات." },
+                { batch: "اختبار (2)", isNew: true, question: "ما هو الفرق الرئيسي بين البيانات المهيكلة (Structured) وغير المهيكلة (Unstructured)؟", options: ["المهيكلة أكبر حجماً بكثير", "المهيكلة منظمة في جداول وصفوف، بينما غير المهيكلة كالصور والنصوص الحرة بلا تنظيم جدول قياسي", "غير المهيكلة تستخدم في قواعد SQL فقط", "لا توجد فروقات جوهرية"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 التنظيم الجدولي يحدد البيانات المهيكلة.", neg: "إجابة غير دقيقة ❌ المهيكلة منظمة بجداول بخلاف غير المهيكلة." },
+                { batch: "اختبار (2)", isNew: true, question: "لغة البرمجة الأكثر شيوعاً واستخداماً في مجالات علم البيانات وتحليل البيانات والذكاء الاصطناعي هي:", options: ["HTML", "Python", "CSS", "Assembly"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 لغة بايثون تمتلك مكتبات ضخمة مخصصة لعلم البيانات (Pandas, NumPy).", neg: "إجابة غير دقيقة ❌ لغة البرمجة الأكثر استخداماً هي Python." }
+            ],
+            "ai-1": [
+                { batch: "اختبار (1)", question: "ما هو التعريف الأبسط للذكاء الاصطناعي (AI)؟", options: ["محاكاة الأنظمة الحاسوبية للعمليات العقلية البشرية وقدرتها على التعلم واتخاذ القرار", "زيادة سرعة المعالجة المركزية", "ربط الأجهزة ببعضها عبر الألياف", "تصميم الواجهات الرسومية"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 الذكاء الاصطناعي يجعل الآلات قادرة على التفكير وحل المشكلات.", neg: "إجابة غير دقيقة ❌ الذكاء الاصطناعي يحاكي العمليات العقلية البشرية." },
+                { batch: "اختبار (1)", question: "فرع الذكاء الاصطناعي الذي يتيح للأنظمة التعلم تلقائياً من التجربة دون برمجة صريحة يسمى:", options: ["هندسة البرمجيات الكلاسيكية", "تعلم الآلة (Machine Learning)", "شبكات التخزين", "أمن الشبكات"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 تعلم الآلة يعتمد على خوارزميات تستخلص الأنماط من البيانات.", neg: "إجابة غير دقيقة ❌ يسمى تعلم الآلة." },
+                { batch: "اختبار (1)", question: "أي من التطبيقات التالية يُعتبر مثالاً مباشراً على معالجة اللغة الطبيعية (NLP)؟", options: ["الروبوتات الصناعية الآلية", "أنظمة القيادة الذاتية", "المساعدات الصوتية الذكية وبرامج الترجمة الفورية", "كاميرات المراقبة الحرارية"], correct: 2, pos: "إجابة صحيحة أحسنت! 🎯 معالجة اللغة الطبيعية تختص بفهم اللغات البشرية نصاً وصوتاً.", neg: "إجابة غير دقيقة ❌ الأمثلة تشمل المساعدات الصوتية والترجمة الفورية." },
+                { batch: "اختبار (2)", isNew: true, question: "ماذا يُقصد بمفهوم \"رؤية الحاسوب\" (Computer Vision)؟", options: ["قدرة الحاسوب على إصدار أصوات بشرية", "تمكين الحاسوب من استخلاص وفهم المعلومات من الصور والفيديو الرقمي", "قياس سرعة استجابة الشاشة لللمس", "تصميم النماذج ثلاثية الأبعاد هندسياً"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 رؤية الحاسوب تمنح الآلات القدرة على تحليل الصور والتعرف على الأجسام.", neg: "إجابة غير دقيقة ❌ رؤية الحاسوب تعنى بفهم وتحليل الصور والفيديو." },
+                { batch: "اختبار (2)", isNew: true, question: "الشبكات العصبية الاصطناعية مستوحاة أساساً من:", options: ["بنية الإنترنت العالمية وتوزيع خوادمها", "الجهاز العصبي البيولوجي وخلايا الدماغ البشري", "دوائر المعالجة الثنائية", "أنظمة قواعد البيانات"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 الشبكات العصبية تحاكي خلايا الدماغ البشري لمعالجة البيانات المعقدة.", neg: "إجابة غير دقيقة ❌ الشبكات العصبية مستوحاة من الدماغ البشري." },
+                { batch: "اختبار (2)", isNew: true, question: "أي مما يلي يُعد من أبرز التحديات والأخلاقيات المرتبطة بالذكاء الاصطناعي؟", options: ["زيادة سرعة الإنترنت", "توفير مساحات تخزين أكبر", "التحيز في البيانات، الخصوصية، وتأثيره على سوق العمل", "انخفاض تكلفة قطع الأجهزة"], correct: 2, pos: "إجابة صحيحة أحسنت! 🎯 الأخلاقيات والتحيز واحتمالية فقدان الوظائف تعد تحديات رئيسية للذكاء الاصطناعي.", neg: "إجابة غير دقيقة ❌ التحديات تشمل التحيز والخصوصية وسوق العمل." }
+            ],
+            "ai-2": [
+                { batch: "اختبار (1)", question: "ما هو المقصود بـ \"التعلم العميق\" (Deep Learning)؟", options: ["تخزين الملفات في أعماق السحابة الرقمية", "نوع متقدم من تعلم الآلة يستخدم شبكات عصبية ذات طبقات متعددة لتحليل الأنماط المعقدة", "خوارزميات بحث تقليدية في الجداول", "أداة لضغط البيانات الكبيرة"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 التعلم العميق يعتمد على شبكات عصبية عميقة لمعالجة البيانات الضخمة.", neg: "إجابة غير دقيقة ❌ التعلم العميق يستخدم شبكات عصبية متعددة الطبقات." },
+                { batch: "اختبار (1)", question: "في خوارزميات التعلم العميق، ماذا تعني كلمة \"الطبقات الخفية\" (Hidden Layers)؟", options: ["الملفات المخفية في النظام", "الطبقات الواقعة بين المدخلات والمخرجات والتي تقوم باستخراج الميزات المعقدة", "كلمات المرور المشفرة للذكاء الاصطناعي", "كابلات التوصيل الداخلية للسيرفر"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 الطبقات الخفية هي جوهر الشبكات العصبية العميقة لمعالجة السمات.", neg: "إجابة غير دقيقة ❌ الطبقات الخفية تستخراج الميزات المعقدة." },
+                { batch: "اختبار (1)", question: "أي من المجالات التالية يستفيد بشكل كبير من تقنيات التعلم العميق ورؤية الحاسوب؟", options: ["التشخيص الطبي المتقدم وتحليل الأشعة السينية", "القيادة الذاتية للمركبات", "التعرف على الوجوه والنص الآلي", "جميع ما ذكر"], correct: 3, pos: "إجابة صحيحة أحسنت! 🎯 التعلم العميق ورؤية الحاسوب يدخلان في كافة هذه التطبيقات الحيوية.", neg: "إجابة غير دقيقة ❌ الإجابة الصحيحة هي جميع ما ذكر." },
+                { batch: "اختبار (2)", isNew: true, question: "ما هي الشبكات العصبية التلافيفية (CNN) وغالباً أين تُستخدم؟", options: ["شبكات متخصصة في معالجة وتحليل الصور والتعرف البصري", "شبكات مخصصة لضغط ملفات النصوص", "شبكات لتأمين جدار الحماية للشبكات", "بروتوكولات نقل الملفات السريعة"], correct: 0, pos: "إجابة صحيحة أحسنت! 🎯 CNN هي المعيار الذهبي في تطبيقات رؤية الحاسوب ومعالجة الصور.", neg: "إجابة غير دقيقة ❌ شبكات CNN متخصصة في معالجة وتحليل الصور." },
+                { batch: "اختبار (2)", isNew: true, question: "ماذا يُقصد بتوليد المحتوى بالذكاء الاصطناعي (Generative AI)؟", options: ["حذف البيانات المكررة تلقائياً", "الأنظمة القادرة على إنشاء محتوى جديد كلياً (نصوص، صور، أكواد، أصوات) بناءً على التدريب", "قياس سرعة معالجة الرسوميات", "أنظمة حماية خوادم الشركات"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 الذكاء الاصطناعي التوليدي ينتج وسائط ومحتوى جديداً إبداعياً.", neg: "إجابة غير دقيقة ❌ الذكاء الاصطناعي التوليدي ينشئ محتوى جديداً كلياً." },
+                { batch: "اختبار (2)", isNew: true, question: "ما هو دور \"وظيفة الخسارة\" (Loss Function) في تدريب نماذج الذكاء الاصطناعي؟", options: ["حساب تكلفة شراء الخوادم السحابية", "قياس مدى خطأ توقعات النموذج مقارنة بالقيم الحقيقية لتوجيه عملية التعلم والتعديل", "قياس سرعة الإنترنت أثناء التدريب", "حذف النماذج الفاشلة تلقائياً"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 وظيفة الخسارة تقيس نسبة الخطأ لتحسين دقة النموذج عبر التكرار.", neg: "إجابة غير دقيقة ❌ وظيفة الخسارة تقيس خطأ توقعات النموذج للتحسين." }
+            ],
+            "engineering-design": [
+                { batch: "اختبار (1)", question: "ما هي الخطوة الأولى في خطوات عملية التصميم الهندسي (Engineering Design Process)؟", options: ["بناء النموذج الأولي واختباره", "رسم مخططات التفاصيل النهائية", "تحديد المشكلة أو الاحتياج وتحديد القيود والمعايير", "تسويق المنتج للجمهور"], correct: 2, pos: "إجابة صحيحة أحسنت! 🎯 تبدأ أي عملية هندسية بفهم وتحديد المشكلة بدقة.", neg: "إجابة غير دقيقة ❌ الخطوة الأولى هي تحديد المشكلة أو الاحتياج." },
+                { batch: "اختبار (1)", question: "ماذا يُقصد بـ \"النموذج الأولي\" (Prototype) في التصميم الهندسي؟", options: ["الرسم التخطيطي الأول على الورق", "نموذج تجريبي مبدئي للمنتج لاختبار وتقييم كفاءته ووظائفه", "الإعلان التجاري للمنتج النهائي", "قائمة أسعار المواد الخام"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 النموذج الأولي يمكن المهندسين من فحص الفكرة واقعياً وتطويرها.", neg: "إجابة غير دقيقة ❌ النموذج الأولي هو نموذج تجريبي مبدئي لاختبار الكفاءة." },
+                { batch: "اختبار (1)", question: "برامج التصميم بمساعدة الحاسب (CAD) تُستخدم أساساً في:", options: ["كتابة الأكواد البرمجية للويب", "إنشاء الجداول الحسابية وإدارة القواعد", "تصميم ونمذجة الأجزاء والمنتجات الهندسية بدقة ثنائية أو ثلاثية الأبعاد", "أمن المعلومات والشبكات"], correct: 2, pos: "إجابة صحيحة أحسنت! 🎯 برامج CAD مخصصة للرسم والنمذجة الهندسي المتقدم.", neg: "إجابة غير دقيقة ❌ برامج CAD تستخدم لنمذجة المنتجات الهندسية." },
+                { batch: "اختبار (2)", isNew: true, question: "في التصميم الهندسي، ماذا تعني \"معايير التصميم\" (Design Criteria)؟", options: ["المشكلات والعيوب المتوقعة للمنتج", "المتطلبات والمواصفات الإيجابية التي يجب أن يحققها التصميم ليكون ناجحاً", "تكلفة شراء المعدات المكتبية", "أسماء المصممين والمهندسين المشاركين"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 المعايير تحدد الأهداف والمواصفات الواجب توافرها في المنتج.", neg: "إجابة غير دقيقة ❌ معايير التصميم هي المتطلبات والمواصفات الإيجابية." },
+                { batch: "اختبار (2)", isNew: true, question: "ماذا يُقصد بـ \"قيود التصميم\" (Design Constraints)؟", options: ["الأهداف الطموحة للمشروع", "الحدود والمحددات المفروضة على التصميم مثل الميزانية، الوقت، أو توفر المواد", "الألوان المفضل استخدامها في الواجهات", "آراء العملاء الإيجابية"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 القيود تفرض حدوداً واقعية يجب الالتزام بها أثناء التصميم.", neg: "إجابة غير دقيقة ❌ القيود هي المحددات المفروضة مثل الميزانية والوقت." },
+                { batch: "اختبار (2)", isNew: true, question: "الطباعة ثلاثية الأبعاد (3D Printing) تُعتبر تقنية أساسية في مرحلة:", options: ["كتابة التقرير النهائي", "النمذجة السريعة وإنتاج النماذج الأولية المادية", "التسويق الرقمي", "صيانة الأجهزة البرمجية"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 الطباعة ثلاثية الأبعاد ثورت النمذجة السريعة للأجزاء الهندسية.", neg: "إجابة غير دقيقة ❌ تقنية الطباعة 3D تستخدم في النمذجة السريعة." }
+            ],
+            "cybersecurity": [
+                { batch: "اختبار (1)", question: "ما هو مصطلح \"التصيد الاحتيالي\" (Phishing) في أمن المعلومات؟", options: ["تحديث أنظمة التشغيل تلقائياً", "محاولة خداع المستخدم للكشف عن معلوماته الحساسة ككلمات المرور", "فحص الملفات بحثاً عن الفيروسات", "تشفير قواعد البيانات الكبرى"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 التصيد الاحتيالي هجوم هندسة اجتماعية لسرقة البيانات.", neg: "إجابة غير دقيقة ❌ التصيد الاحتيالي هو خداع المستخدم لسرقة معلوماته." },
+                { batch: "اختبار (1)", question: "أي من عناصر مثلث أمن المعلومات (CIA Triad) يضمن عدم تعديل البيانات أو العبث بها؟", options: ["السرية (Confidentiality)", "التوافر (Availability)", "السلامة / التكامل (Integrity)", "المصادقة (Authentication)"], correct: 2, pos: "إجابة صحيحة أحسنت! 🎯 السلامة تحمي البيانات من التعديل غير المرخص لتظل موثوقة.", neg: "إجابة غير دقيقة ❌ العنصر المسؤول هو السلامة (Integrity)." },
+                { batch: "اختبار (1)", question: "ما هي أفضل ممارسة لإنشاء كلمة مرور قوية وآمنة؟", options: ["استخدام تاريخ الميلاد لسهولة تذكره", "استخدام أرقام متسلسلة مثل (123456)", "استخدام مزيج عشوائي من الحروف الكبيرة والصغيرة والأرقام والرموز", "استخدام اسمك الأول متبوعاً برقم صفك"], correct: 2, pos: "إجابة صحيحة أحسنت! 🎯 كلمات المرور القوية تتطلب تنوعاً رمزياً يصعب تخمينه.", neg: "إجابة غير دقيقة ❌ الممارسة الصحيحة هي استخدام مزيج عشوائي متنوع." },
+                { batch: "اختبار (2)", isNew: true, question: "ما هو الغرض الأساسي من استخدام المصادقة الثنائية (2FA)؟", options: ["تسريع تصفح الإنترنت", "إضافة طبقة حماية أمان إضافية تتطلب وسيلتي تحقق قبل الدخول", "تقليص حجم الملفات المخزنة", "إلغاء الحاجة لكلمات المرور نهائياً"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 المصادقة الثنائية تحمي الحساب حتى لو سُرقت كلمة المرور.", neg: "إجابة غير دقيقة ❌ المصادقة الثنائية تضيف طبقة حماية أمان إضافية." },
+                { batch: "اختبار (2)", isNew: true, question: "ماذا يُقصد ببرمجيات الفدية (Ransomware)؟", options: ["برامج مجانية لتحسين الألعاب", "برمجيات خبيثة تقوم بتشفير ملفات الضحية وطلب فدية مالية مقابل فك التشفير", "أدوات لتصميم جدار الحماية", "برامج لإنشاء نسخ احتياطية"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 برمجيات الفدية تهديد سيبراني خطير يبتز الأفراد والشركات.", neg: "إجابة غير دقيقة ❌ برمجيات الفدية تشفر الملفات وتطلب فدية مالية." },
+                { batch: "اختبار (2)", isNew: true, question: "ما هي الوظيفة الأساسية لجدار الحماية (Firewall) في الشبكات؟", options: ["تبريد المعالج والقطع الداخلية", "تقوية إشارة الواي فاي المنزلية", "مراقبة حركة المرور الواردة والصادرة وتصفيتها بناءً على قواعد الأمان", "تسريع تحميل الملفات"], correct: 2, pos: "إجابة صحيحة أحسنت! 🎯 جدار الحماية يراقب ويصفي الحزم ويمنع الاتصالات الخبيثة.", neg: "إجابة غير دقيقة ❌ جدار الحماية يراقب ويصفي حركة المرور." }
+            ],
+            "iot": [
+                { batch: "اختبار (1)", question: "ما هو المقصود بمصطلح \"إنترنت الأشياء\" (IoT)؟", options: ["شبكة الإنترنت العالمية المخصصة لأجهزة الحاسب فقط", "شبكة تربط الأشياء والأجهزة المختلفة بالإنترنت لتبادل البيانات واتخاذ إجراءات ذكية", "لغة برمجة خاصة بتطوير الهواتف المحمولة", "نظام تشغيل خاص بالروبوتات"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 إنترنت الأشياء يربط الأجهزة اليومية بالشبكة لتصبح ذكية ومترابطة.", neg: "إجابة غير دقيقة ❌ إنترنت الأشياء يربط الأجهزة المختلفة بالإنترنت." },
+                { batch: "اختبار (1)", question: "ماذا تسمى الأجهزة التي تجمع البيانات من البيئة المحيطة (مثل الحرارة أو الضوء) وترسلها للنظام؟", options: ["المشغلات (Actuators)", "المستشعرات (Sensors)", "خوادم الويب (Web Servers)", "جدران الحماية (Firewalls)"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 المستشعرات مسؤولة عن استشعار وجمع البيانات البيئية.", neg: "إجابة غير دقيقة ❌ الأجهزة هي المستشعرات (Sensors)." },
+                { batch: "اختبار (1)", question: "أي مما يلي يُعد مثالاً عملياً شائعاً على نظام إنترنت الأشياء المنزلي؟", options: ["طابعة ليزر عادية غير متصلة", "نظام الإضاءة الذكي الذي يمكن التحكم به عن بعد عبر تطبيق الهاتف", "كتاب إلكتروني مقروء", "آلة حاسبة علمية يدوية"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 الأجهزة الذكية المنزلية الموصولة بالتطبيقات تمثل IoT بوضوح.", neg: "إجابة غير دقيقة ❌ المثال هو نظام الإضاءة الذكي." },
+                { batch: "اختبار (2)", isNew: true, question: "ما هو دور \"المشغلات\" (Actuators) في أنظمة إنترنت الأشياء؟", options: ["قراءة درجة الحرارة والرطوبة", "تحويل الإشارات الرقمية إلى أفعال مادية في البيئة المحيطة (مثل فتح صمام أو إدارة محرك)", "تخزين البيانات في السحابة", "تشفير الاتصال بين الأجهزة"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 المشغلات تنفذ الأفعال المادية بناءً على أوامر النظام.", neg: "إجابة غير دقيقة ❌ المشغلات تحول الإشارات لأفعال مادية." },
+                { batch: "اختبار (2)", isNew: true, question: "ما هو البروتوكول اللاسلكي الشهير ومنخفض الاستهلاك للطاقة المستخدم بكثرة في ربط أجهزة إنترنت الأشياء؟", options: ["بروتوكول البث الإذاعي التقليدي", "بروتوكول MQTT أو Zigbee / Bluetooth Low Energy", "كابلات الألياف الضوئية البحرية", "شبكات الاتصال الأرضية القديمة"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 بروتوكولات مثل MQTT مصممة خصيصاً للشبكات مقيدة الموارد والطاقة.", neg: "إجابة غير دقيقة ❌ البروتوكول هو MQTT أو Zigbee." },
+                { batch: "اختبار (2)", isNew: true, question: "من أبرز التحديات الأمنية والتقنية في أنظمة إنترنت الأشياء (IoT):", options: ["كبر حجم أجهزة الاستشعار", "كثرة الأجهزة المتصلة وضعف حمايتها الافتراضية مما يسهل اختراقها", "بطء سرعة الضوء", "عدم توفر لغات برمجة لها"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 ثغرات الأمان وكثرة نقاط الضعف تعد أبرز تحديات أمن إنترنت الأشياء.", neg: "إجابة غير دقيقة ❌ التحدي الأبرز هو كثرة الأجهزة وضعف حمايتها." }
+            ],
+            "software-eng": [
+                { batch: "اختبار (1)", question: "ما هو الهدف الأساسي من \"هندسة البرمجيات\"؟", options: ["كتابة أكواد معقدة وصعبة الفهم", "تطبيق المبادئ الهندسية لإنتاج برمجيات عالية الجودة، موثوقة، وقابلة للصيانة بفعالية", "إصلاح أعطال عتاد الحاسب الآلي", "تسريع الألعاب الإلكترونية فقط"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 هندسة البرمجيات تضمن بناء أنظمة برمجية منظمة واحترافية.", neg: "إجابة غير دقيقة ❌ الهدف هو إنتاج برمجيات عالية الجودة وموثوقة." },
+                { batch: "اختبار (1)", question: "ماذا تُقصد بـ \"دورة حياة تطوير البرمجيات\" (SDLC)؟", options: ["عمر الحاسب الافتراضي", "المراحل المنظمة لتطوير البرمجيات بدءاً من التحليل والتصميم ثم البرمجة والاختبار وصولاً للنشر والصيانة", "وقت تشغيل البرنامج على السيرفر", "سرعة الإنترنت أثناء رفع الملفات"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 SDLC هي الإطار المنهجي لتنفيذ المشاريع البرمجية.", neg: "إجابة غير دقيقة ❌ SDLC تعني المراحل المنظمة لتطوير البرمجيات." },
+                { batch: "اختبار (1)", question: "مرحلة \"اختبار البرمجيات\" (Software Testing) تهدف إلى:", options: ["زيادة حجم ملفات المشروع", "اكتشاف الأخطاء والثغرات البرمجية والتأكد من توافق النظام مع المتطلبات المحددة", "تسويق التطبيق للمستخدمين", "كتابة دليل الاستخدام الورقي"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 الاختبار يضمن خلو المنتج من الأخطاء وجودته العالية قبل إطلاقه.", neg: "إجابة غير دقيقة ❌ الاختبار يهدف لاكتشاف الأخطاء والتأكد من توافق النظام." },
+                { batch: "اختبار (2)", isNew: true, question: "ما هو نموذج التطوير البرمجي \"الرشيق\" (Agile Methodology)؟", options: ["نموذج بطيء يتطلب سنوات لإنجاز المشروع كاملاً", "نموذج تكراري مرن يركز على تسليم أجزاء برمجية عاملة بشكل دوري والتكيف السريع مع متطلبات العميل", "نموذج يعتمد على إخفاء الكود عن المطورين", "نموذج كلاسيكي متسلسل لا يقبل التغيير"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 نموذج Agile يتميز بالمرونة العالية والتسليم السريع والمستمر.", neg: "إجابة غير دقيقة ❌ نموذج Agile هو نموذج تكراري مرن للتسليم الدوري." },
+                { batch: "اختبار (2)", isNew: true, question: "في هندسة البرمجيات، ماذا تعني \"صيانة البرمجيات\" (Software Maintenance)؟", options: ["شراء أجهزة جديدة للشركة", "تعديل وتحديث البرمجيات بعد تسليمها لإصلاح الأخطاء أو تحسين الأداء أو مواكبة التغيرات", "حذف البرنامج نهائياً بعد انتهاء عقده", "إعادة كتابة الكود من الصفر شهرياً"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 الصيانة مرحلة حيوية لضمان استدامة وكفاءة النظام البرمجي بمرور الوقت.", neg: "إجابة غير دقيقة ❌ صيانة البرمجيات تعني تعديلها وتحديثها بعد تسليمها." },
+                { batch: "اختبار (2)", isNew: true, question: "ماذا يُقصد بـ \"متطلبات النظام\" (System Requirements) في بداية المشروع البرمجي؟", options: ["أسماء المبرمجين المشاركين", "الوظائف والخصائص والقيود التي يجب أن يوفرها النظام البرمجي تلبية لاحتياجات المستفيد", "تكلفة شراء السيرفرات فقط", "نوع لغة التصميم المستخدمة للواجهات"], correct: 1, pos: "إجابة صحيحة أحسنت! 🎯 المتطلبات تحدد بدقة ما المطلوب من البرمجيات تنفيذه قبل البدء بالتصميم.", neg: "إجابة غير دقيقة ❌ متطلبات النظام تحدد الوظائف والخصائص المطلوبة." }
             ]
         };
 
@@ -677,6 +866,7 @@
         window.initApp = async function() {
             const savedTheme = localStorage.getItem('vanta_cv_theme') || 'vanta-voids';
             selectTheme(savedTheme);
+            initDailyMessage();
 
             try {
                 const querySnapshot = await getDocs(collection(db, "qiyas_questions"));
@@ -698,19 +888,36 @@
             const grid = document.getElementById('courses-grid');
             grid.innerHTML = "";
             courses.forEach(course => {
-                grid.innerHTML += `
-                    <div onclick="openCourse('${course.id}')" class="glass-card rounded-2xl p-6 cursor-pointer transition hover:-translate-y-1 shadow-md group flex flex-col justify-between">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="p-3.5 rounded-xl transition border" style="background: var(--icon-box-bg); color: var(--accent-color); border-color: var(--icon-box-border);">
-                                <i class="fa-solid ${course.icon} text-xl"></i>
+                if (course.isComingSoon) {
+                    grid.innerHTML += `
+                        <div class="glass-card rounded-2xl p-6 border-dashed border-2 border-cyan-500/40 flex flex-col justify-between shadow-md relative overflow-hidden group">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="p-3.5 rounded-xl transition border bg-cyan-500/10 text-cyan-400 border-cyan-500/30">
+                                    <i class="fa-solid ${course.icon} text-xl animate-spin" style="animation-duration: 6s;"></i>
+                                </div>
+                                <span class="text-[10px] font-black px-2.5 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/30">قريباً</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold mb-1 text-cyan-300">${course.name}</h3>
+                                <p class="text-xs text-cyan-200/70">ترقبوا إطلاق المزيد من المقررات الإثرائية قريباً</p>
                             </div>
                         </div>
-                        <div>
-                            <h3 class="text-lg font-bold transition mb-1" style="color: var(--text-main);">${course.name}</h3>
-                            <p class="text-xs" style="color: var(--text-muted);">بنك أسئلة محاكى لاختبارات قياس والتحصيلي</p>
+                    `;
+                } else {
+                    grid.innerHTML += `
+                        <div onclick="openCourse('${course.id}')" class="glass-card rounded-2xl p-6 cursor-pointer transition hover:-translate-y-1 shadow-md group flex flex-col justify-between">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="p-3.5 rounded-xl transition border" style="background: var(--icon-box-bg); color: var(--accent-color); border-color: var(--icon-box-border);">
+                                    <i class="fa-solid ${course.icon} text-xl"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold transition mb-1" style="color: var(--text-main);">${course.name}</h3>
+                                <p class="text-xs" style="color: var(--text-muted);">بنك أسئلة محاكى لاختبارات قياس (اختبار 1 واختبار 2)</p>
+                            </div>
                         </div>
-                    </div>
-                `;
+                    `;
+                }
             });
         }
 
@@ -724,28 +931,29 @@
         }
 
         function setupBatchesAndQuestions() {
+            if (!questionBank[currentActiveCourse.id]) {
+                questionBank[currentActiveCourse.id] = [
+                    { batch: "اختبار (1)", question: `السؤال الأول التجريبي لمقرر ${currentActiveCourse.name}؟`, options: ["الخيار الأول", "الخيار الثاني", "الخيار الثالث", "الخيار الرابع"], correct: 0, pos: "إجابة صحيحة! أحسنت.", neg: "إجابة خاطئة، راجع المنهج." }
+                ];
+            }
+
             const qList = questionBank[currentActiveCourse.id] || [];
             const tabsContainer = document.getElementById('test-batches-tabs');
             tabsContainer.innerHTML = "";
 
-            if (qList.length === 0) {
-                tabsContainer.innerHTML = `<p class="text-xs" style="color: var(--text-muted);">لا توجد أسئلة مضافة لهذا المقرر حالياً.</p>`;
-                document.getElementById('question-text').innerText = "عذراً، جارٍ إعداد الأسئلة...";
-                document.getElementById('options-container').innerHTML = "";
-                return;
-            }
-
-            const batches = [...new Set(qList.map(q => q.batch))];
+            const batches = ["اختبار (1)", "اختبار (2)"];
             if (!batches.includes(currentBatchKey)) {
                 currentBatchKey = batches[0];
             }
 
             batches.forEach((batch) => {
-                const isNewBatch = batch.includes("مضافة حديثاً");
+                const batchQuestions = qList.filter(q => q.batch === batch);
+                const hasNew = batchQuestions.some(q => q.isNew);
+                
                 tabsContainer.innerHTML += `
-                    <button onclick="switchBatch('${batch}')" class="px-4 py-2 rounded-xl text-xs font-bold transition border ${currentBatchKey === batch ? 'font-black' : 'glass-card'}" style="${currentBatchKey === batch ? 'background: var(--accent-color); color: var(--bg-primary); border-color: var(--accent-color);' : 'color: var(--text-main); border-color: var(--border-color);'} relative">
+                    <button onclick="switchBatch('${batch}')" class="px-4 py-2 pt-3 rounded-xl text-xs font-bold transition border ${currentBatchKey === batch ? 'font-black' : 'glass-card'}" style="${currentBatchKey === batch ? 'background: var(--accent-color); color: var(--bg-primary); border-color: var(--accent-color);' : 'color: var(--text-main); border-color: var(--border-color);'} relative">
                         ${batch}
-                        ${isNewBatch ? '<span class="absolute -top-2 -right-2 bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 text-[9px] font-black px-2 py-0.5 rounded-full shadow-md animate-pulse">NEW</span>' : ''}
+                        ${hasNew ? '<span class="absolute -top-3 -right-2 bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 text-[9px] font-black px-2 py-0.5 rounded-full shadow-md animate-pulse">NEW</span>' : ''}
                     </button>
                 `;
             });
@@ -780,14 +988,12 @@
             }
 
             const badge = document.getElementById('question-badge');
-            if(q.batch.includes("مضافة حديثاً")) {
-                badge.className = "absolute top-0 left-0 bg-amber-500 text-slate-950 text-[10px] font-black px-4 py-1 rounded-br-xl shadow border-b border-r border-amber-300";
-                badge.innerText = "تحديث جديد NEW";
+            if(q.isNew) {
+                badge.className = "absolute top-0 left-0 bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 text-[10px] font-black px-4 py-1 rounded-br-xl shadow border-b border-r border-amber-300 animate-pulse";
+                badge.innerText = "اختبار (2) - NEW";
+                badge.style.display = "block";
             } else {
-                badge.className = "absolute top-0 left-0 text-[10px] font-bold px-4 py-1 rounded-br-xl shadow border-b border-r";
-                badge.style.background = "var(--btn-primary-bg)";
-                badge.style.borderColor = "var(--border-color)";
-                badge.innerText = "أسئلة سابقة";
+                badge.style.display = "none";
             }
 
             updateBookmarkIconState(q);
@@ -837,7 +1043,11 @@
             }
         }
 
-        window.closeCompletionModalAndFinish = function() {
+        window.closeCompletionModalOnly = function() {
+            document.getElementById('completion-modal').classList.add('hidden');
+        }
+
+        window.finishQuizAction = function() {
             document.getElementById('completion-modal').classList.add('hidden');
             backToCourses();
         }
@@ -862,7 +1072,6 @@
             document.getElementById('courses-view').classList.remove('hidden');
         }
 
-        // Bookmarks
         window.toggleBookmarkCurrent = function() {
             if (!currentActiveCourse) return;
             const qList = (questionBank[currentActiveCourse.id] || []).filter(q => q.batch === currentBatchKey);
@@ -930,7 +1139,6 @@
             showToast("تم إزالة السؤال من المحفوظات", "info");
         }
 
-        // Admin Management
         window.openAdminLogin = function() {
             document.getElementById('admin-login-modal').style.display = 'flex';
         }
@@ -975,7 +1183,9 @@
             const select = document.getElementById('admin-course-select');
             select.innerHTML = `<option value="">-- اختر المقرر الدراسي أولاً --</option>`;
             courses.forEach(c => {
-                select.innerHTML += `<option value="${c.id}">${c.name}</option>`;
+                if(!c.isComingSoon) {
+                    select.innerHTML += `<option value="${c.id}">${c.name}</option>`;
+                }
             });
         }
 
@@ -1010,6 +1220,14 @@
                 return;
             }
 
+            if (questionBank[courseId]) {
+                questionBank[courseId].forEach(q => {
+                    if (q.batch === batch) {
+                        q.isNew = false;
+                    }
+                });
+            }
+
             const newQData = {
                 courseId: courseId,
                 batch: batch,
@@ -1018,6 +1236,7 @@
                 correct: correct,
                 pos: pos,
                 neg: neg,
+                isNew: true,
                 createdAt: serverTimestamp()
             };
 
@@ -1026,13 +1245,13 @@
                 if(!questionBank[courseId]) questionBank[courseId] = [];
                 questionBank[courseId].push(newQData);
 
-                showToast("تم حفظ السؤال وإدراجه بنجاح في المنصة! 🚀", "success");
+                showToast("تم حفظ السؤال وإدراجه بنجاح وتحديث شارة NEW للمحتوى المضاف!", "success");
                 closeAdminDashboard();
                 renderCourses();
             } catch (e) {
                 if(!questionBank[courseId]) questionBank[courseId] = [];
                 questionBank[courseId].push(newQData);
-                showToast("تم الحفظ بنجاح محلياً 🚀", "success");
+                showToast("تم الحفظ بنجاح وتحديث شارة NEW 🚀", "success");
                 closeAdminDashboard();
                 renderCourses();
             }
