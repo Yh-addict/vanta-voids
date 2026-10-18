@@ -4,9 +4,9 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./vanta-voids-apple-touch-icon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>يوسف الحامد - الموقع الشخصي والسيرة الذاتية التفاعلية | Vanta Voids</title>
+    <title>Vanta Voids</title>
     
-    <!-- Open Graph Meta Tags للواتساب ووسائل التواصل -->
+    <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="يوسف الحامد | Vanta Voids">
     <meta property="og:description" content="YH DIGITAL EDUCATOR - المعلم الرقمي ومصمم تجارب التعلم المستدام">
     <meta property="og:image" content="https://yh-addict.github.io/vanta-voids/my-photo.jpg">
@@ -35,19 +35,6 @@
               fontFamily: {
                 sans: ['Tajawal', 'Inter', 'sans-serif'],
                 en: ['Inter', 'Tajawal', 'sans-serif'],
-              },
-              colors: {
-                brand: {
-                  spaceBlack: '#010317',
-                  cosmicNavy: '#0B1457',
-                  electricBlue: '#2755C6',
-                  neonCyan: '#00E5FF',
-                  cosmicViolet: '#4630C3',
-                  luminousViolet: '#7159E3',
-                  lightLavender: '#9591E9',
-                  iceBlue: '#C1E4FB',
-                  pureWhite: '#FFFFFF'
-                }
               }
             }
           }
@@ -106,11 +93,11 @@
         }
 
         .glass-card {
-          background: linear-gradient(145deg, rgba(11, 20, 87, 0.8) 0%, rgba(1, 3, 23, 0.9) 100%);
+          background: var(--bg-card);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
           border: 1px solid var(--border-color);
-          box-shadow: 0 8px 32px 0 rgba(1, 3, 23, 0.6);
+          box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
         .glass-card:hover {
@@ -119,7 +106,8 @@
         }
 
         .accent-gradient-text {
-          background: linear-gradient(135deg, #FFFFFF 30%, #00E5FF 100%);
+          color: var(--text-main);
+          background: linear-gradient(135deg, var(--text-main) 30%, var(--accent-color) 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
@@ -138,8 +126,8 @@
 
         /* تأثير إحاطة وتوهج الكارت عند الوصول إليه عبر الرابط */
         .subject-card:target {
-            border-color: #00E5FF !important;
-            box-shadow: 0 0 25px rgba(0, 229, 255, 0.4), inset 0 0 15px rgba(0, 229, 255, 0.15);
+            border-color: var(--accent-color) !important;
+            box-shadow: 0 0 25px var(--card-glow);
             transform: scale(1.02);
             transition: all 0.4s ease;
         }
@@ -213,7 +201,7 @@
 
         .nav-link:hover, .nav-link.active {
             color: var(--accent-color);
-            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+            text-shadow: 0 0 10px var(--card-glow);
         }
 
         .header-controls {
@@ -229,12 +217,12 @@
             transition: transform 0.4s ease;
             padding: 0.5rem;
             border-radius: 50%;
-            background: rgba(0, 229, 255, 0.1);
+            background: var(--border-color);
         }
 
         .admin-gear:hover {
             transform: rotate(90deg);
-            background: rgba(0, 229, 255, 0.2);
+            background: var(--card-glow);
         }
 
         /* Mobile Menu Drawer Fixed */
@@ -244,7 +232,7 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background: rgba(1, 3, 23, 0.85);
+            background: rgba(0, 0, 0, 0.75);
             backdrop-filter: blur(8px);
             z-index: 1999;
             opacity: 0;
@@ -262,7 +250,7 @@
             right: -100%;
             width: 290px;
             height: 100vh;
-            background-color: #010317;
+            background-color: var(--bg-primary);
             border-left: 1px solid var(--border-color);
             z-index: 2000;
             display: flex;
@@ -349,13 +337,13 @@
         }
 
         .timetable-table th {
-            background: rgba(11, 20, 87, 0.8);
+            background: var(--bg-secondary);
             color: var(--accent-color);
             font-weight: 700;
         }
 
         .table-subject-btn {
-            background: rgba(39, 85, 198, 0.2);
+            background: var(--border-color);
             color: var(--accent-color);
             border: 1px solid var(--border-color);
             padding: 8px 12px;
@@ -369,9 +357,9 @@
         }
 
         .table-subject-btn:hover {
-            background: #2755C6;
-            color: #FFFFFF;
-            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+            background: var(--btn-primary-bg);
+            color: var(--text-main);
+            box-shadow: 0 0 15px var(--card-glow);
         }
 
         .table-static-cell {
@@ -380,7 +368,7 @@
             align-items: center;
             justify-content: center;
             padding: 6px 8px;
-            background: rgba(1, 3, 23, 0.4);
+            background: var(--bg-primary);
             border: 1px dashed var(--border-color);
             border-radius: 8px;
         }
@@ -418,7 +406,7 @@
         .subject-card:hover {
             border-color: var(--accent-color);
             transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.15);
+            box-shadow: 0 10px 30px var(--card-glow);
         }
 
         .subject-header {
@@ -436,6 +424,7 @@
         .subject-header h3 {
             font-size: 1.2rem;
             font-weight: 700;
+            color: var(--text-main);
         }
 
         .resource-badge {
@@ -444,7 +433,7 @@
             gap: 8px;
             margin-top: 1.2rem;
             padding: 6px 14px;
-            background: rgba(39, 85, 198, 0.2);
+            background: var(--border-color);
             border: 1px dashed var(--border-color);
             border-radius: 8px;
             color: var(--accent-color);
@@ -458,8 +447,8 @@
 
         .resource-badge:hover {
             background: var(--btn-primary-bg);
-            color: #FFFFFF;
-            box-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
+            color: var(--text-main);
+            box-shadow: 0 0 15px var(--card-glow);
         }
 
         .evidence-card {
@@ -476,7 +465,7 @@
         .evidence-card:hover {
             border-color: var(--accent-color);
             transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(70, 48, 195, 0.25);
+            box-shadow: 0 10px 30px var(--card-glow);
         }
 
         .lock-icon {
@@ -503,6 +492,7 @@
             height: 250px;
             cursor: pointer;
             transition: all 0.3s ease;
+            background: var(--bg-secondary);
         }
 
         .gallery-item img {
@@ -546,7 +536,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(1, 3, 23, 0.88);
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(10px);
             z-index: 2000;
             display: none;
@@ -557,13 +547,13 @@
         }
 
         .modal-card {
-            background: #0B1457;
+            background: var(--bg-secondary);
             border: 1px solid var(--border-color);
             border-radius: 20px;
             padding: 2.5rem;
             width: 90%;
             max-width: 480px;
-            box-shadow: 0 0 50px rgba(0, 229, 255, 0.25);
+            box-shadow: 0 0 50px var(--card-glow);
             position: relative;
             text-align: center;
         }
@@ -580,7 +570,7 @@
         .form-control {
             width: 100%;
             padding: 0.8rem 1rem;
-            background: rgba(1, 3, 23, 0.6);
+            background: var(--bg-primary);
             border: 1px solid var(--border-color);
             border-radius: 8px;
             color: var(--text-main);
@@ -593,7 +583,7 @@
         .form-control:focus {
             outline: none;
             border-color: var(--accent-color);
-            box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+            box-shadow: 0 0 10px var(--card-glow);
         }
 
         .form-group-label {
@@ -608,7 +598,7 @@
         .btn-gold {
             width: 100%;
             background: var(--btn-primary-bg);
-            color: #FFFFFF;
+            color: var(--text-main);
             padding: 0.8rem;
             border: 1px solid var(--border-color);
             border-radius: 8px;
@@ -620,13 +610,13 @@
 
         .btn-gold:hover {
             background: var(--accent-color);
-            color: #010317;
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+            color: var(--bg-primary);
+            box-shadow: 0 0 20px var(--card-glow);
         }
 
         .luxury-alert {
             display: none;
-            background: rgba(1, 3, 23, 0.6);
+            background: var(--bg-primary);
             border: 1px solid var(--accent-color);
             border-radius: 14px;
             padding: 1.2rem;
@@ -635,7 +625,7 @@
         }
 
         footer {
-            background: #010317;
+            background: var(--bg-primary);
             border-top: 1px solid var(--border-color);
             padding: 3rem 2rem;
             text-align: center;
@@ -658,12 +648,18 @@
             font-size: 1.2rem;
             cursor: pointer;
         }
+        
+        .pill-tag {
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            color: var(--accent-color);
+        }
     </style>
 </head>
-<body class="selection:bg-cyan-500 selection:text-black">
+<body class="theme-transition">
 
     <!-- Header Navigation -->
-    <header class="theme-transition" style="border-color: var(--border-color); background-color: var(--header-bg);">
+    <header class="theme-transition">
         <div class="nav-container" style="padding: 0.8rem 1rem;">
             <a href="#hero" class="brand-logo">
                 <img src="my-photo.jpg" alt="يوسف الحامد" class="profile-avatar-thumb dynamic-avatar" onerror="this.src='https://via.placeholder.com/150/0B1457/00E5FF?text=YH'">
@@ -683,12 +679,12 @@
             <!-- Desktop Controls (Hidden on Mobile) -->
             <div class="header-controls hidden md:flex">
                 <button id="langToggleBtn" onclick="toggleLanguage()" class="px-3.5 py-2 rounded-xl text-sm font-semibold border transition-all duration-300 flex items-center space-x-2 rtl:space-x-reverse hover:scale-105 active:scale-95 shadow-sm" style="border-color: var(--border-color); background-color: var(--bg-secondary); color: var(--text-main);">
-                  <i class="fa-solid fa-globe text-cyan-400"></i>
+                  <i class="fa-solid fa-globe accent-text"></i>
                   <span id="langBtnText" data-key="langBtnText">English</span>
                 </button>
 
-                <button onclick="openThemeModal()" class="px-4 py-2 rounded-xl text-sm font-bold border transition-all duration-300 flex items-center space-x-2 rtl:space-x-reverse hover:scale-105 active:scale-95 shadow-md" style="border-color: var(--border-color); background-color: #2755C6; color: #FFFFFF;">
-                  <i class="fa-solid fa-palette text-cyan-300"></i>
+                <button onclick="openThemeModal()" class="px-4 py-2 rounded-xl text-sm font-bold border transition-all duration-300 flex items-center space-x-2 rtl:space-x-reverse hover:scale-105 active:scale-95 shadow-md" style="border-color: var(--border-color); background-color: var(--btn-primary-bg); color: var(--text-main);">
+                  <i class="fa-solid fa-palette text-sm"></i>
                   <span data-key="themeBtnText">المظهر</span>
                 </button>
 
@@ -699,7 +695,7 @@
 
             <!-- Mobile Hamburger Button Only -->
             <div class="flex md:hidden items-center gap-2">
-                <button class="mobile-hamburger-btn flex items-center justify-center w-10 h-10 rounded-xl border bg-secondary text-cyan-400" style="border-color: var(--border-color); background: var(--bg-secondary);" onclick="toggleMobileMenu()" aria-label="قائمة التصفح">
+                <button class="mobile-hamburger-btn flex items-center justify-center w-10 h-10 rounded-xl border" style="border-color: var(--border-color); background: var(--bg-secondary); color: var(--accent-color);" onclick="toggleMobileMenu()" aria-label="قائمة التصفح">
                     <i class="fa-solid fa-bars text-lg"></i>
                 </button>
             </div>
@@ -711,35 +707,35 @@
     <div class="mobile-menu-drawer" id="mobileDrawer">
         <div class="flex items-center justify-between pb-6 mb-6 border-b" style="border-color: var(--border-color);">
             <div class="flex items-center gap-3">
-                <img src="my-photo.jpg" alt="يوسف الحامد" class="w-10 h-10 rounded-xl border border-cyan-400 object-cover dynamic-avatar">
-                <span class="font-bold text-sm text-white" data-key="headerName">يوسف الحامد</span>
+                <img src="my-photo.jpg" alt="يوسف الحامد" class="w-10 h-10 rounded-xl border object-cover dynamic-avatar" style="border-color: var(--accent-color);">
+                <span class="font-bold text-sm" style="color: var(--text-main);" data-key="headerName">يوسف الحامد</span>
             </div>
-            <button onclick="toggleMobileMenu()" class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-cyan-400">
-                <i class="fa-solid fa-xmark text-lg"></i>
+            <button onclick="toggleMobileMenu()" class="w-9 h-9 rounded-full flex items-center justify-center text-lg" style="background: var(--border-color); color: var(--accent-color);">
+                <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
 
         <!-- Quick Controls inside Mobile Drawer -->
         <div class="grid grid-cols-2 gap-2 mb-6 pb-6 border-b" style="border-color: var(--border-color);">
             <button onclick="toggleLanguage(); toggleMobileMenu();" class="py-2.5 px-3 rounded-xl text-xs font-semibold border flex items-center justify-center gap-2" style="border-color: var(--border-color); background-color: var(--bg-secondary); color: var(--text-main);">
-                <i class="fa-solid fa-globe text-cyan-400"></i>
+                <i class="fa-solid fa-globe accent-text"></i>
                 <span id="mobileLangBtnText" data-key="langBtnText">English</span>
             </button>
-            <button onclick="openThemeModal(); toggleMobileMenu();" class="py-2.5 px-3 rounded-xl text-xs font-bold border flex items-center justify-center gap-2" style="border-color: var(--border-color); background-color: #2755C6; color: #FFFFFF;">
-                <i class="fa-solid fa-palette text-cyan-300"></i>
+            <button onclick="openThemeModal(); toggleMobileMenu();" class="py-2.5 px-3 rounded-xl text-xs font-bold border flex items-center justify-center gap-2" style="border-color: var(--border-color); background-color: var(--btn-primary-bg); color: var(--text-main);">
+                <i class="fa-solid fa-palette text-xs"></i>
                 <span data-key="themeBtnText">المظهر</span>
             </button>
         </div>
 
         <ul class="flex flex-col space-y-4">
-            <li><a href="#cv" onclick="toggleMobileMenu()" class="flex items-center gap-3 text-base font-semibold py-2 px-3 rounded-xl hover:bg-cyan-500/10 accent-text" data-key="navCv"><i class="fa-solid fa-id-card-clip"></i> السيرة الذاتية</a></li>
-            <li><a href="#teaching-hub" onclick="toggleMobileMenu()" class="flex items-center gap-3 text-base font-semibold py-2 px-3 rounded-xl hover:bg-cyan-500/10 accent-text" data-key="navHub"><i class="fa-solid fa-flask"></i> المختبر التعليمي</a></li>
-            <li><a href="#evidence" onclick="toggleMobileMenu()" class="flex items-center gap-3 text-base font-semibold py-2 px-3 rounded-xl hover:bg-cyan-500/10 accent-text" data-key="navEvidence"><i class="fa-solid fa-award"></i> الشواهد والأداء</a></li>
-            <li><a href="#" onclick="document.getElementById('adminModal').style.display='flex'; toggleMobileMenu();" class="flex items-center gap-3 text-base font-semibold py-2 px-3 rounded-xl hover:bg-cyan-500/10 text-cyan-300"><i class="fa-solid fa-gear"></i> لوحة التحكم</a></li>
+            <li><a href="#cv" onclick="toggleMobileMenu()" class="flex items-center gap-3 text-base font-semibold py-2 px-3 rounded-xl accent-text" data-key="navCv"><i class="fa-solid fa-id-card-clip"></i> السيرة الذاتية</a></li>
+            <li><a href="#teaching-hub" onclick="toggleMobileMenu()" class="flex items-center gap-3 text-base font-semibold py-2 px-3 rounded-xl accent-text" data-key="navHub"><i class="fa-solid fa-flask"></i> المختبر التعليمي</a></li>
+            <li><a href="#evidence" onclick="toggleMobileMenu()" class="flex items-center gap-3 text-base font-semibold py-2 px-3 rounded-xl accent-text" data-key="navEvidence"><i class="fa-solid fa-award"></i> الشواهد والأداء</a></li>
+            <li><a href="#" onclick="document.getElementById('adminModal').style.display='flex'; toggleMobileMenu();" class="flex items-center gap-3 text-base font-semibold py-2 px-3 rounded-xl accent-text"><i class="fa-solid fa-gear"></i> لوحة التحكم</a></li>
         </ul>
 
         <div class="mt-auto pt-6 border-t" style="border-color: var(--border-color);">
-            <div class="text-xs text-center text-slate-400">Vanta Voids Studio © 2026</div>
+            <div class="text-xs text-center" style="color: var(--text-muted);">Vanta Voids Studio © 2026</div>
         </div>
     </div>
 
@@ -754,8 +750,8 @@
               <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-3xl border-2 flex flex-col items-center justify-center p-2 shadow-2xl relative overflow-hidden theme-transition" style="border-color: var(--accent-color); background-color: var(--bg-secondary);">
                 <img src="my-photo.jpg" alt="يوسف حامد آل حامد القرني" class="w-full h-full rounded-2xl object-cover dynamic-avatar" onerror="this.src='https://via.placeholder.com/300/0B1457/00E5FF?text=Youssef'">
               </div>
-              <span class="absolute -bottom-2 right-1/2 translate-x-1/2 md:translate-x-0 md:right-2 bg-cyan-400 text-slate-950 text-[10px] font-black px-3 py-1 rounded-full uppercase shadow-md flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-slate-950 animate-ping"></span>
+              <span class="absolute -bottom-2 right-1/2 translate-x-1/2 md:translate-x-0 md:right-2 text-[10px] font-black px-3 py-1 rounded-full uppercase shadow-md flex items-center gap-1" style="background-color: var(--accent-color); color: var(--bg-primary);">
+                <span class="w-1.5 h-1.5 rounded-full animate-ping" style="background-color: var(--bg-primary);"></span>
                 <span>Vanta Voids</span>
               </span>
             </div>
@@ -763,7 +759,7 @@
             <!-- Details Header -->
             <div class="flex-1 text-center md:text-right rtl:md:text-right ltr:md:text-left space-y-4">
               <div>
-                <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold mb-3 border" style="border-color: var(--border-color); background-color: rgba(39,85,198,0.2); color: var(--accent-color);" data-key="jobBadge">
+                <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold mb-3 border" style="border-color: var(--border-color); background-color: var(--border-color); color: var(--accent-color);" data-key="jobBadge">
                   معلم حاسب آلي وتكنولوجيا • مصمم تعليمي ومطور حلول رقمية
                 </div>
                 <h1 class="text-3xl sm:text-5xl font-black tracking-tight accent-gradient-text mb-2" data-key="fullName">
@@ -776,28 +772,28 @@
 
               <!-- Quick Personal Info Grid -->
               <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 text-xs sm:text-sm">
-                <div class="p-3 rounded-2xl border theme-transition" style="border-color: var(--border-color); background-color: rgba(11,20,87,0.4);">
+                <div class="p-3 rounded-2xl border theme-transition" style="border-color: var(--border-color); background-color: var(--bg-secondary);">
                   <span class="block text-xs mb-1" style="color: var(--text-muted);" data-key="infoNationalityLabel">الجنسية</span>
                   <span class="font-bold flex items-center gap-1.5 justify-center md:justify-start" data-key="infoNationalityVal">
                     <i class="fa-solid fa-flag accent-text text-xs"></i> سعودي
                   </span>
                 </div>
 
-                <div class="p-3 rounded-2xl border theme-transition" style="border-color: var(--border-color); background-color: rgba(11,20,87,0.4);">
+                <div class="p-3 rounded-2xl border theme-transition" style="border-color: var(--border-color); background-color: var(--bg-secondary);">
                   <span class="block text-xs mb-1" style="color: var(--text-muted);" data-key="infoLocationLabel">الإقامة</span>
                   <span class="font-bold flex items-center gap-1.5 justify-center md:justify-start" data-key="infoLocationVal">
                     <i class="fa-solid fa-location-dot accent-text text-xs"></i> السعودية - عسير - بيشة
                   </span>
                 </div>
 
-                <div class="p-3 rounded-2xl border theme-transition" style="border-color: var(--border-color); background-color: rgba(11,20,87,0.4);">
+                <div class="p-3 rounded-2xl border theme-transition" style="border-color: var(--border-color); background-color: var(--bg-secondary);">
                   <span class="block text-xs mb-1" style="color: var(--text-muted);" data-key="infoStatusLabel">الحالة الاجتماعية</span>
                   <span class="font-bold flex items-center gap-1.5 justify-center md:justify-start" data-key="infoStatusVal">
                     <i class="fa-solid fa-users accent-text text-xs"></i> متزوج 
                   </span>
                 </div>
 
-                <div class="p-3 rounded-2xl border theme-transition" style="border-color: var(--border-color); background-color: rgba(11,20,87,0.4);">
+                <div class="p-3 rounded-2xl border theme-transition" style="border-color: var(--border-color); background-color: var(--bg-secondary);">
                   <span class="block text-xs mb-1" style="color: var(--text-muted);" data-key="infoPhoneLabel">الجوال</span>
                   <a href="tel:+966565588869" dir="ltr" class="font-bold flex items-center gap-1.5 justify-center md:justify-start hover:underline accent-text">
                     <i class="fa-solid fa-phone text-xs"></i> +966565588869
@@ -820,14 +816,14 @@
             <!-- CAREER OBJECTIVE SECTION -->
             <section class="glass-card rounded-3xl p-6 sm:p-8 theme-transition">
               <div class="flex items-center space-x-3 rtl:space-x-reverse mb-4">
-                <div class="w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-lg" style="background-color: rgba(39,85,198,0.3); color: var(--accent-color);">
+                <div class="w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-lg" style="background-color: var(--border-color); color: var(--accent-color);">
                   <i class="fa-solid fa-bullseye"></i>
                 </div>
                 <h2 class="text-xl sm:text-2xl font-bold accent-gradient-text" data-key="careerObjectiveTitle">
                   الهدف المهني
                 </h2>
               </div>
-              <p class="text-base sm:text-lg leading-relaxed font-medium text-justify text-slate-100" data-key="careerObjectiveText">
+              <p class="text-base sm:text-lg leading-relaxed font-medium text-justify" style="color: var(--text-main);" data-key="careerObjectiveText">
                 أسعي لبناء جيل واعٍ ومبتكر قادر على التفكير النقدي والإبداعي من خلال بيئة تعليمية محفزة تدعم الطلاب أكاديمياً وأخلاقياً. ملتزم بإعداد جيل يحول المعرفة إلى قدرات عملية واقعية، ويلهم العقول ويصنع المستقبل.
               </p>
             </section>
@@ -835,7 +831,7 @@
             <!-- 4 CORE PILLARS -->
             <section class="space-y-6">
               <div class="flex items-center space-x-3 rtl:space-x-reverse">
-                <div class="w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-lg" style="background-color: rgba(39,85,198,0.3); color: var(--accent-color);">
+                <div class="w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-lg" style="background-color: var(--border-color); color: var(--accent-color);">
                   <i class="fa-solid fa-cubes"></i>
                 </div>
                 <div>
@@ -853,18 +849,18 @@
                 <div class="glass-card rounded-3xl p-6 hover:translate-y-1 transition-all duration-300 flex flex-col justify-between">
                   <div class="space-y-4">
                     <div class="flex items-center justify-between">
-                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); background-color: rgba(39,85,198,0.2); color: var(--accent-color);" data-key="p1Tag">المحور الأول</span>
+                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); background-color: var(--border-color); color: var(--accent-color);" data-key="p1Tag">المحور الأول</span>
                       <i class="fa-solid fa-laptop-code text-2xl accent-text"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-white" data-key="p1Title">تصميم وتطوير الحلول التعليمية الرقمية</h3>
+                    <h3 class="text-lg font-bold" style="color: var(--text-main);" data-key="p1Title">تصميم وتطوير الحلول التعليمية الرقمية</h3>
                     <p class="text-sm leading-relaxed" style="color: var(--text-muted);" data-key="p1Desc">التركيز: بناء دروس وصفحات ويب تعليمية تفاعلية تحول المفاهيم المجردة إلى تجارب تطبيقية عملية بأسلوب جذاب ومبتكر.</p>
                   </div>
-                  <div class="mt-6 pt-4 border-t" style="border-color: rgba(0,229,255,0.15);">
+                  <div class="mt-6 pt-4 border-t" style="border-color: var(--border-color);">
                     <span class="text-xs font-semibold block mb-2" style="color: var(--accent-color);" data-key="p1ToolsLabel">الأدوات والتقنيات:</span>
                     <div class="flex flex-wrap gap-2 text-xs">
-                      <span class="px-2.5 py-1 rounded-lg bg-[#010317] border border-cyan-500/30 text-cyan-200">HTML5 / CSS3 / JS</span>
-                      <span class="px-2.5 py-1 rounded-lg bg-[#010317] border border-cyan-500/30 text-cyan-200">Modern Web Frameworks</span>
-                      <span class="px-2.5 py-1 rounded-lg bg-[#010317] border border-cyan-500/30 text-cyan-200">GitHub Pages / Firebase</span>
+                      <span class="px-2.5 py-1 rounded-lg pill-tag">HTML5 / CSS3 / JS</span>
+                      <span class="px-2.5 py-1 rounded-lg pill-tag">Modern Web Frameworks</span>
+                      <span class="px-2.5 py-1 rounded-lg pill-tag">GitHub Pages / Firebase</span>
                     </div>
                   </div>
                 </div>
@@ -873,13 +869,13 @@
                 <div class="glass-card rounded-3xl p-6 hover:translate-y-1 transition-all duration-300 flex flex-col justify-between">
                   <div class="space-y-4">
                     <div class="flex items-center justify-between">
-                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); background-color: rgba(39,85,198,0.2); color: var(--accent-color);" data-key="p2Tag">المحور الثاني</span>
+                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); background-color: var(--border-color); color: var(--accent-color);" data-key="p2Tag">المحور الثاني</span>
                       <i class="fa-solid fa-chalkboard-user text-2xl accent-text"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-white" data-key="p2Title">التصميم التعليمي واستراتيجيات التدريس</h3>
+                    <h3 class="text-lg font-bold" style="color: var(--text-main);" data-key="p2Title">التصميم التعليمي واستراتيجيات التدريس</h3>
                     <p class="text-sm leading-relaxed" style="color: var(--text-muted);" data-key="p2Desc">التركيز: تطبيق استراتيجيات حديثة (التعلم القائم على المشاريع، حل المشكلات، الصف المقلوب، التعلم التعاوني، العصف الذهني الرقمي).</p>
                   </div>
-                  <div class="mt-6 pt-4 border-t" style="border-color: rgba(0,229,255,0.15);">
+                  <div class="mt-6 pt-4 border-t" style="border-color: var(--border-color);">
                     <span class="text-xs font-semibold block mb-2" style="color: var(--accent-color);" data-key="p2ImpactLabel">الأثر والنتائج:</span>
                     <p class="text-xs" style="color: var(--text-muted);" data-key="p2ImpactText">رفع معدل المشاركة والتفاعل، تنمية مهارات التفكير النقدي والإبداعي، وتعزيز روح العمل الجماعي لدى الطلاب.</p>
                   </div>
@@ -889,18 +885,18 @@
                 <div class="glass-card rounded-3xl p-6 hover:translate-y-1 transition-all duration-300 flex flex-col justify-between">
                   <div class="space-y-4">
                     <div class="flex items-center justify-between">
-                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); background-color: rgba(39,85,198,0.2); color: var(--accent-color);" data-key="p3Tag">المحور الثالث</span>
+                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); background-color: var(--border-color); color: var(--accent-color);" data-key="p3Tag">المحور الثالث</span>
                       <i class="fa-solid fa-network-wired text-2xl accent-text"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-white" data-key="p3Title">إدارة البيئة التعليمية الرقمية</h3>
+                    <h3 class="text-lg font-bold" style="color: var(--text-main);" data-key="p3Title">إدارة البيئة التعليمية الرقمية</h3>
                     <p class="text-sm leading-relaxed" style="color: var(--text-muted);" data-key="p3Desc">التركيز: تخطيط وتنظيم العمليات التعليمية، إدارة المحتوى والمهام الأكاديمية، ومتابعة تقدم الطلاب بتقنيات سحابية منظمة.</p>
                   </div>
-                  <div class="mt-6 pt-4 border-t" style="border-color: rgba(0,229,255,0.15);">
+                  <div class="mt-6 pt-4 border-t" style="border-color: var(--border-color);">
                     <span class="text-xs font-semibold block mb-2" style="color: var(--accent-color);" data-key="p3ToolsLabel">المنصات والأدوات:</span>
                     <div class="flex flex-wrap gap-2 text-xs">
-                      <span class="px-2.5 py-1 rounded-lg bg-[#010317] border border-cyan-500/30 text-cyan-200">LMS Platforms</span>
-                      <span class="px-2.5 py-1 rounded-lg bg-[#010317] border border-cyan-500/30 text-cyan-200">Google Workspace</span>
-                      <span class="px-2.5 py-1 rounded-lg bg-[#010317] border border-cyan-500/30 text-cyan-200">Microsoft 365 Education</span>
+                      <span class="px-2.5 py-1 rounded-lg pill-tag">LMS Platforms</span>
+                      <span class="px-2.5 py-1 rounded-lg pill-tag">Google Workspace</span>
+                      <span class="px-2.5 py-1 rounded-lg pill-tag">Microsoft 365 Education</span>
                     </div>
                   </div>
                 </div>
@@ -909,13 +905,13 @@
                 <div class="glass-card rounded-3xl p-6 hover:translate-y-1 transition-all duration-300 flex flex-col justify-between">
                   <div class="space-y-4">
                     <div class="flex items-center justify-between">
-                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); background-color: rgba(39,85,198,0.2); color: var(--accent-color);" data-key="p4Tag">المحور الرابع</span>
+                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); background-color: var(--border-color); color: var(--accent-color);" data-key="p4Tag">المحور الرابع</span>
                       <i class="fa-solid fa-robot text-2xl accent-text"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-white" data-key="p4Title">دمج الذكاء الاصطناعي في التعليم</h3>
+                    <h3 class="text-lg font-bold" style="color: var(--text-main);" data-key="p4Title">دمج الذكاء الاصطناعي في التعليم</h3>
                     <p class="text-sm leading-relaxed" style="color: var(--text-muted);" data-key="p4Desc">التركيز: توظيف أدوات الذكاء الاصطناعي في التصميم التعليمي وإنتاج المحتوى وإنشاء الأنشطة التفاعلية الفعالة.</p>
                   </div>
-                  <div class="mt-6 pt-4 border-t" style="border-color: rgba(0,229,255,0.15);">
+                  <div class="mt-6 pt-4 border-t" style="border-color: var(--border-color);">
                     <span class="text-xs font-semibold block mb-2" style="color: var(--accent-color);" data-key="p4ImpactLabel">الأثر والنتائج:</span>
                     <p class="text-xs" style="color: var(--text-muted);" data-key="p4ImpactText">صياغة تجارب تعلم مخصصة تراعي الفروق الفردية وترفع من جودة وكفاءة نواتج التعلم الذكي.</p>
                   </div>
@@ -926,7 +922,7 @@
             <!-- WORK EXPERIENCE TIMELINE -->
             <section class="glass-card rounded-3xl p-6 sm:p-8 space-y-6 theme-transition">
               <div class="flex items-center space-x-3 rtl:space-x-reverse">
-                <div class="w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-lg" style="background-color: rgba(39,85,198,0.3); color: var(--accent-color);">
+                <div class="w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-lg" style="background-color: var(--border-color); color: var(--accent-color);">
                   <i class="fa-solid fa-briefcase"></i>
                 </div>
                 <div>
@@ -938,10 +934,10 @@
               <div class="relative border-r-2 rtl:border-r-2 ltr:border-l-2 space-y-8 pr-6 rtl:pr-6 ltr:pl-6 my-4" style="border-color: var(--border-color);">
                 <div class="relative group">
                   <div class="absolute top-1 -right-[31px] rtl:-right-[31px] ltr:-left-[31px] w-4 h-4 rounded-full border-2 theme-transition" style="border-color: var(--accent-color); background-color: var(--bg-primary);"></div>
-                  <div class="bg-[#010317]/60 p-5 rounded-2xl border theme-transition space-y-2" style="border-color: rgba(0,229,255,0.2);">
+                  <div class="p-5 rounded-2xl border theme-transition space-y-2" style="border-color: var(--border-color); background-color: var(--bg-secondary);">
                     <div class="flex flex-wrap items-center justify-between gap-2">
-                      <h3 class="text-base sm:text-lg font-bold text-white" data-key="job1Title">معلم حاسب آلي وتقنية معلومات (المرحلة الثانوية)</h3>
-                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); color: var(--accent-color); background: rgba(39,85,198,0.2);" data-key="job1Year">2010 - حتى الآن</span>
+                      <h3 class="text-base sm:text-lg font-bold" style="color: var(--text-main);" data-key="job1Title">معلم حاسب آلي وتقنية معلومات (المرحلة الثانوية)</h3>
+                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); color: var(--accent-color); background: var(--border-color);" data-key="job1Year">2010 - حتى الآن</span>
                     </div>
                     <p class="text-xs sm:text-sm font-semibold accent-text" data-key="job1Org">وزارة التعليم - إدارة التعليم بمحافظة بيشة</p>
                     <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);" data-key="job1Desc">تدريس مناهج الحاسب والتقنية الرقمية، إعداد وتطوير البيئات التعليمية التفاعلية، تدريب الطلاب على المشاريع البرمجية والمسابقات الوطنية.</p>
@@ -950,10 +946,10 @@
 
                 <div class="relative group">
                   <div class="absolute top-1 -right-[31px] rtl:-right-[31px] ltr:-left-[31px] w-4 h-4 rounded-full border-2 theme-transition" style="border-color: var(--accent-color); background-color: var(--bg-primary);"></div>
-                  <div class="bg-[#010317]/60 p-5 rounded-2xl border theme-transition space-y-2" style="border-color: rgba(0,229,255,0.2);">
+                  <div class="p-5 rounded-2xl border theme-transition space-y-2" style="border-color: var(--border-color); background-color: var(--bg-secondary);">
                     <div class="flex flex-wrap items-center justify-between gap-2">
-                      <h3 class="text-base sm:text-lg font-bold text-white" data-key="job2Title">معلم حاسب آلي</h3>
-                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); color: var(--accent-color); background: rgba(39,85,198,0.2);" data-key="job2Year">2009 - 2010</span>
+                      <h3 class="text-base sm:text-lg font-bold" style="color: var(--text-main);" data-key="job2Title">معلم حاسب آلي</h3>
+                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); color: var(--accent-color); background: var(--border-color);" data-key="job2Year">2009 - 2010</span>
                     </div>
                     <p class="text-xs sm:text-sm font-semibold accent-text" data-key="job2Org">وزارة التعليم - الإدارة العامة للتعليم بمنطقة تبوك</p>
                     <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);" data-key="job2Desc">تدريس مفاهيم الحاسب الأساسية وتطوير مهارات الطلاب في المعامل الرقمية واستراتيجيات التعلم التفاعلي.</p>
@@ -962,10 +958,10 @@
 
                 <div class="relative group">
                   <div class="absolute top-1 -right-[31px] rtl:-right-[31px] ltr:-left-[31px] w-4 h-4 rounded-full border-2 theme-transition" style="border-color: var(--accent-color); background-color: var(--bg-primary);"></div>
-                  <div class="bg-[#010317]/60 p-5 rounded-2xl border theme-transition space-y-2" style="border-color: rgba(0,229,255,0.2);">
+                  <div class="p-5 rounded-2xl border theme-transition space-y-2" style="border-color: var(--border-color); background-color: var(--bg-secondary);">
                     <div class="flex flex-wrap items-center justify-between gap-2">
-                      <h3 class="text-base sm:text-lg font-bold text-white" data-key="job3Title">قطاع العمليات المصرفية والخدمات المالية</h3>
-                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); color: var(--accent-color); background: rgba(39,85,198,0.2);" data-key="job3Year">2008 - 2009</span>
+                      <h3 class="text-base sm:text-lg font-bold" style="color: var(--text-main);" data-key="job3Title">قطاع العمليات المصرفية والخدمات المالية</h3>
+                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); color: var(--accent-color); background: var(--border-color);" data-key="job3Year">2008 - 2009</span>
                     </div>
                     <p class="text-xs sm:text-sm font-semibold accent-text" data-key="job3Org">مصرف الراجحي - الإدارة الإقليمية بأبها</p>
                     <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);" data-key="job3Desc">تنفيذ ومتابعة العمليات المصرفية والخدمات المالية المتقدمة، اكتساب خبرة عالية في الدقة والأنظمة الرقمية وخدمة العملاء.</p>
@@ -974,10 +970,10 @@
 
                 <div class="relative group">
                   <div class="absolute top-1 -right-[31px] rtl:-right-[31px] ltr:-left-[31px] w-4 h-4 rounded-full border-2 theme-transition" style="border-color: var(--accent-color); background-color: var(--bg-primary);"></div>
-                  <div class="bg-[#010317]/60 p-5 rounded-2xl border theme-transition space-y-2" style="border-color: rgba(0,229,255,0.2);">
+                  <div class="p-5 rounded-2xl border theme-transition space-y-2" style="border-color: var(--border-color); background-color: var(--bg-secondary);">
                     <div class="flex flex-wrap items-center justify-between gap-2">
-                      <h3 class="text-base sm:text-lg font-bold text-white" data-key="job4Title">معلم حاسب آلي وإداري مكتب</h3>
-                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); color: var(--accent-color); background: rgba(39,85,198,0.2);" data-key="job4Year">2007 - 2008</span>
+                      <h3 class="text-base sm:text-lg font-bold" style="color: var(--text-main);" data-key="job4Title">معلم حاسب آلي وإداري مكتب</h3>
+                      <span class="text-xs font-bold px-3 py-1 rounded-full border" style="border-color: var(--border-color); color: var(--accent-color); background: var(--border-color);" data-key="job4Year">2007 - 2008</span>
                     </div>
                     <p class="text-xs sm:text-sm font-semibold accent-text" data-key="job4Org">وزارة التعليم - إدارة التعليم بسراة عبيدة (مكتب مدير الإدارة)</p>
                     <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);" data-key="job4Desc">بداية المسيرة التعليمية والعمل الإداري بمكتب مدير إدارة التعليم؛ حيث تشرفت بتشرب أدبيات العمل التعليمي.</p>
@@ -990,7 +986,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <section class="glass-card rounded-3xl p-6 sm:p-8 space-y-6 theme-transition">
                 <div class="flex items-center space-x-3 rtl:space-x-reverse">
-                  <div class="w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-lg" style="background-color: rgba(39,85,198,0.3); color: var(--accent-color);">
+                  <div class="w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-lg" style="background-color: var(--border-color); color: var(--accent-color);">
                     <i class="fa-solid fa-graduation-cap"></i>
                   </div>
                   <div>
@@ -1000,30 +996,30 @@
                 </div>
 
                 <div class="space-y-4">
-                  <div class="p-4 rounded-2xl border theme-transition space-y-1" style="border-color: rgba(0,229,255,0.2); background-color: rgba(1,3,23,0.5);">
+                  <div class="p-4 rounded-2xl border theme-transition space-y-1" style="border-color: var(--border-color); background-color: var(--bg-secondary);">
                     <div class="flex justify-between items-center">
                       <span class="text-xs font-bold accent-text" data-key="edu1Year">2017 م</span>
-                      <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/20" data-key="degreeMaster">ماجستير</span>
+                      <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded border" style="background: var(--border-color); color: var(--accent-color); border-color: var(--border-color);" data-key="degreeMaster">ماجستير</span>
                     </div>
-                    <h3 class="text-base font-bold text-white" data-key="edu1Title">درجة الماجستير</h3>
+                    <h3 class="text-base font-bold" style="color: var(--text-main);" data-key="edu1Title">درجة الماجستير</h3>
                     <p class="text-xs text-muted" style="color: var(--text-muted);" data-key="edu1Univ">جامعة الباحة</p>
                   </div>
 
-                  <div class="p-4 rounded-2xl border theme-transition space-y-1" style="border-color: rgba(0,229,255,0.2); background-color: rgba(1,3,23,0.5);">
+                  <div class="p-4 rounded-2xl border theme-transition space-y-1" style="border-color: var(--border-color); background-color: var(--bg-secondary);">
                     <div class="flex justify-between items-center">
                       <span class="text-xs font-bold accent-text" data-key="edu2Year">2007 م</span>
-                      <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-blue-500/10 text-blue-300 border border-blue-500/20" data-key="degreeBachelor">بكالوريوس</span>
+                      <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded border" style="background: var(--border-color); color: var(--accent-color); border-color: var(--border-color);" data-key="degreeBachelor">بكالوريوس</span>
                     </div>
-                    <h3 class="text-base font-bold text-white" data-key="edu2Title">درجة البكالوريوس</h3>
+                    <h3 class="text-base font-bold" style="color: var(--text-main);" data-key="edu2Title">درجة البكالوريوس</h3>
                     <p class="text-xs text-muted" style="color: var(--text-muted);" data-key="edu2Univ">جامعة الملك خالد</p>
                   </div>
 
-                  <div class="p-4 rounded-2xl border theme-transition space-y-1" style="border-color: rgba(0,229,255,0.2); background-color: rgba(1,3,23,0.5);">
+                  <div class="p-4 rounded-2xl border theme-transition space-y-1" style="border-color: var(--border-color); background-color: var(--bg-secondary);">
                     <div class="flex justify-between items-center">
                       <span class="text-xs font-bold accent-text" data-key="edu3Year">2003 م</span>
-                      <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-violet-500/10 text-violet-300 border border-violet-500/20" data-key="degreeHighSchool">ثانوية عامة</span>
+                      <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded border" style="background: var(--border-color); color: var(--accent-color); border-color: var(--border-color);" data-key="degreeHighSchool">ثانوية عامة</span>
                     </div>
-                    <h3 class="text-base font-bold text-white" data-key="edu3Title">شهادة الثانوية العامة</h3>
+                    <h3 class="text-base font-bold" style="color: var(--text-main);" data-key="edu3Title">شهادة الثانوية العامة</h3>
                     <p class="text-xs text-muted" style="color: var(--text-muted);" data-key="edu3School">ثانوية أبو موسى الأشعري</p>
                   </div>
                 </div>
@@ -1032,7 +1028,7 @@
               <section class="glass-card rounded-3xl p-6 sm:p-8 space-y-6 theme-transition flex flex-col justify-between">
                 <div>
                   <div class="flex items-center space-x-3 rtl:space-x-reverse mb-6">
-                    <div class="w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-lg" style="background-color: rgba(39,85,198,0.3); color: var(--accent-color);">
+                    <div class="w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-lg" style="background-color: var(--border-color); color: var(--accent-color);">
                       <i class="fa-solid fa-language"></i>
                     </div>
                     <div>
@@ -1043,25 +1039,25 @@
 
                   <div class="space-y-4 mb-6">
                     <div class="space-y-1.5">
-                      <div class="flex justify-between text-xs font-bold text-white"><span data-key="langAr">العربية</span><span class="accent-text">100%</span></div>
-                      <div class="w-full h-2.5 rounded-full bg-[#010317] border border-cyan-500/30 overflow-hidden"><div class="h-full rounded-full accent-bg" style="width: 100%;"></div></div>
+                      <div class="flex justify-between text-xs font-bold" style="color: var(--text-main);"><span data-key="langAr">العربية</span><span class="accent-text">100%</span></div>
+                      <div class="w-full h-2.5 rounded-full border overflow-hidden" style="background-color: var(--bg-primary); border-color: var(--border-color);"><div class="h-full rounded-full accent-bg" style="width: 100%;"></div></div>
                     </div>
                     <div class="space-y-1.5">
-                      <div class="flex justify-between text-xs font-bold text-white"><span data-key="langEn">الإنجليزية</span><span class="accent-text">80%</span></div>
-                      <div class="w-full h-2.5 rounded-full bg-[#010317] border border-cyan-500/30 overflow-hidden"><div class="h-full rounded-full accent-bg" style="width: 80%;"></div></div>
+                      <div class="flex justify-between text-xs font-bold" style="color: var(--text-main);"><span data-key="langEn">الإنجليزية</span><span class="accent-text">80%</span></div>
+                      <div class="w-full h-2.5 rounded-full border overflow-hidden" style="background-color: var(--bg-primary); border-color: var(--border-color);"><div class="h-full rounded-full accent-bg" style="width: 80%;"></div></div>
                     </div>
                     <div class="space-y-1.5">
-                      <div class="flex justify-between text-xs font-bold text-white"><span data-key="langEs">الإسبانية</span><span class="accent-text">30%</span></div>
-                      <div class="w-full h-2.5 rounded-full bg-[#010317] border border-cyan-500/30 overflow-hidden"><div class="h-full rounded-full accent-bg" style="width: 30%;"></div></div>
+                      <div class="flex justify-between text-xs font-bold" style="color: var(--text-main);"><span data-key="langEs">الإسبانية</span><span class="accent-text">30%</span></div>
+                      <div class="w-full h-2.5 rounded-full border overflow-hidden" style="background-color: var(--bg-primary); border-color: var(--border-color);"><div class="h-full rounded-full accent-bg" style="width: 30%;"></div></div>
                     </div>
                   </div>
                 </div>
 
                 <!-- فلسفتي في التعليم -->
-                <div class="p-4 rounded-2xl border theme-transition relative" style="border-color: var(--border-color); background-color: rgba(1,3,23,0.5);">
+                <div class="p-4 rounded-2xl border theme-transition relative" style="border-color: var(--border-color); background-color: var(--bg-secondary);">
                   <i class="fa-solid fa-quote-right text-2xl absolute top-3 left-3 opacity-10 accent-text"></i>
                   <h3 class="text-xs font-bold uppercase tracking-wider accent-text mb-2" data-key="philosophyHeader">فلسفتي في التعليم</h3>
-                  <p class="text-xs sm:text-sm leading-relaxed italic text-justify text-slate-200" data-key="philosophyText">
+                  <p class="text-xs sm:text-sm leading-relaxed italic text-justify" style="color: var(--text-main);" data-key="philosophyText">
                     «إن المعرفة ليست مجرد تحصيل للحقائق، بل هي الضياء الذي يسطع في نفوس المتعلمين ليصنع الفكر والوعي. التقنية وسيلتنا لتجسيد هذا الفكر وتحويله إلى تجربة إنسانية خالدة.»
                   </p>
                 </div>
@@ -1072,7 +1068,7 @@
             <section class="glass-card rounded-3xl p-6 sm:p-8 space-y-6 theme-transition">
               <div class="flex flex-wrap items-center justify-between gap-4">
                 <div class="flex items-center space-x-3 rtl:space-x-reverse">
-                  <div class="w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-lg" style="background-color: rgba(39,85,198,0.3); color: var(--accent-color);">
+                  <div class="w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-lg" style="background-color: var(--border-color); color: var(--accent-color);">
                     <i class="fa-solid fa-award"></i>
                   </div>
                   <div>
@@ -1080,35 +1076,35 @@
                     <p class="text-xs sm:text-sm text-muted" style="color: var(--text-muted);" data-key="trainingSub">أكثر من 500 ساعة تدريبية متخصصة في مجالات التقنية والتعليم</p>
                   </div>
                 </div>
-                <div class="px-4 py-1.5 rounded-full text-xs font-black border uppercase tracking-wider" style="border-color: var(--border-color); background-color: rgba(39,85,198,0.2); color: var(--accent-color);" data-key="hoursBadge">
+                <div class="px-4 py-1.5 rounded-full text-xs font-black border uppercase tracking-wider" style="border-color: var(--border-color); background-color: var(--border-color); color: var(--accent-color);" data-key="hoursBadge">
                   +500 ساعة تدريبية
                 </div>
               </div>
 
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="p-4 rounded-2xl border theme-transition flex items-start gap-3" style="border-color: rgba(0,229,255,0.2); background-color: rgba(1,3,23,0.5);">
+                <div class="p-4 rounded-2xl border theme-transition flex items-start gap-3" style="border-color: var(--border-color); background-color: var(--bg-secondary);">
                   <i class="fa-solid fa-code text-lg accent-text mt-1"></i>
-                  <div><h3 class="text-sm font-bold text-white" data-key="t1Title">تدريب معلمي المعلوماتية IOI</h3><p class="text-xs text-muted" style="color: var(--text-muted);" data-key="t1Org">موهبة بالتعاون مع وزارة التعليم</p></div>
+                  <div><h3 class="text-sm font-bold" style="color: var(--text-main);" data-key="t1Title">تدريب معلمي المعلوماتية IOI</h3><p class="text-xs text-muted" style="color: var(--text-muted);" data-key="t1Org">موهبة بالتعاون مع وزارة التعليم</p></div>
                 </div>
-                <div class="p-4 rounded-2xl border theme-transition flex items-start gap-3" style="border-color: rgba(0,229,255,0.2); background-color: rgba(1,3,23,0.5);">
+                <div class="p-4 rounded-2xl border theme-transition flex items-start gap-3" style="border-color: var(--border-color); background-color: var(--bg-secondary);">
                   <i class="fa-solid fa-lightbulb text-lg accent-text mt-1"></i>
-                  <div><h3 class="text-sm font-bold text-white" data-key="t2Title">استراتيجيات التدريس الحديثة</h3><p class="text-xs text-muted" style="color: var(--text-muted);" data-key="t2Org">مركز التدريب التربوي ببيشة</p></div>
+                  <div><h3 class="text-sm font-bold" style="color: var(--text-main);" data-key="t2Title">استراتيجيات التدريس الحديثة</h3><p class="text-xs text-muted" style="color: var(--text-muted);" data-key="t2Org">مركز التدريب التربوي ببيشة</p></div>
                 </div>
-                <div class="p-4 rounded-2xl border theme-transition flex items-start gap-3" style="border-color: rgba(0,229,255,0.2); background-color: rgba(1,3,23,0.5);">
+                <div class="p-4 rounded-2xl border theme-transition flex items-start gap-3" style="border-color: var(--border-color); background-color: var(--bg-secondary);">
                   <i class="fa-solid fa-brain text-lg accent-text mt-1"></i>
-                  <div><h3 class="text-sm font-bold text-white" data-key="t3Title">تطبيقات الذكاء الاصطناعي في التعليم</h3><p class="text-xs text-muted" style="color: var(--text-muted);" data-key="t3Org">جامعة الملك خالد</p></div>
+                  <div><h3 class="text-sm font-bold" style="color: var(--text-main);" data-key="t3Title">تطبيقات الذكاء الاصطناعي في التعليم</h3><p class="text-xs text-muted" style="color: var(--text-muted);" data-key="t3Org">جامعة الملك خالد</p></div>
                 </div>
-                <div class="p-4 rounded-2xl border theme-transition flex items-start gap-3" style="border-color: rgba(0,229,255,0.2); background-color: rgba(1,3,23,0.5);">
+                <div class="p-4 rounded-2xl border theme-transition flex items-start gap-3" style="border-color: var(--border-color); background-color: var(--bg-secondary);">
                   <i class="fa-solid fa-microchip text-lg accent-text mt-1"></i>
-                  <div><h3 class="text-sm font-bold text-white" data-key="t4Title">مبادرة مليون سعودي في الذكاء الاصطناعي</h3><p class="text-xs text-muted" style="color: var(--text-muted);" data-key="t4Org">سدايا SDAIA</p></div>
+                  <div><h3 class="text-sm font-bold" style="color: var(--text-main);" data-key="t4Title">مبادرة مليون سعودي في الذكاء الاصطناعي</h3><p class="text-xs text-muted" style="color: var(--text-muted);" data-key="t4Org">سدايا SDAIA</p></div>
                 </div>
-                <div class="p-4 rounded-2xl border theme-transition flex items-start gap-3" style="border-color: rgba(0,229,255,0.2); background-color: rgba(1,3,23,0.5);">
+                <div class="p-4 rounded-2xl border theme-transition flex items-start gap-3" style="border-color: var(--border-color); background-color: var(--bg-secondary);">
                   <i class="fa-solid fa-puzzle-piece text-lg accent-text mt-1"></i>
-                  <div><h3 class="text-sm font-bold text-white" data-key="t5Title">مسابقة بيبراس موهبة للتفكير الحاسوبي</h3><p class="text-xs text-muted" style="color: var(--text-muted);" data-key="t5Org">مؤسسة موهبة</p></div>
+                  <div><h3 class="text-sm font-bold" style="color: var(--text-main);" data-key="t5Title">مسابقة بيبراس موهبة للتفكير الحاسوبي</h3><p class="text-xs text-muted" style="color: var(--text-muted);" data-key="t5Org">مؤسسة موهبة</p></div>
                 </div>
-                <div class="p-4 rounded-2xl border theme-transition flex items-start gap-3" style="border-color: rgba(0,229,255,0.2); background-color: rgba(1,3,23,0.5);">
+                <div class="p-4 rounded-2xl border theme-transition flex items-start gap-3" style="border-color: var(--border-color); background-color: var(--bg-secondary);">
                   <i class="fa-solid fa-square-poll-vertical text-lg accent-text mt-1"></i>
-                  <div><h3 class="text-sm font-bold text-white" data-key="t6Title">التقويم الذاتي للمدرسة</h3><p class="text-xs text-muted" style="color: var(--text-muted);" data-key="t6Org">المركز الوطني للتقويم والتميز المدرسي</p></div>
+                  <div><h3 class="text-sm font-bold" style="color: var(--text-main);" data-key="t6Title">التقويم الذاتي للمدرسة</h3><p class="text-xs text-muted" style="color: var(--text-muted);" data-key="t6Org">المركز الوطني للتقويم والتميز المدرسي</p></div>
                 </div>
               </div>
             </section>
@@ -1192,87 +1188,87 @@
         <div class="cards-grid">
             <div class="subject-card theme-transition" id="sub-tech1">
                 <div>
-                    <div class="subject-header"><i class="fa-solid fa-desktop"></i><h3 class="text-white" data-key="cardTech1Title">التقنية الرقمية (1)</h3></div>
+                    <div class="subject-header"><i class="fa-solid fa-desktop"></i><h3 data-key="cardTech1Title">التقنية الرقمية (1)</h3></div>
                     <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardTech1Desc">أساسيات الحاسب، المستندات الرقمية، والمعالجة البرمجية الأولية.</p>
                 </div>
                 <a href="#" class="resource-badge sub-link" data-id="tech1" target="_blank"><i class="fa-solid fa-folder-open"></i><span data-key="resourcesBtn">المصادر والعروض</span></a>
             </div>
             <div class="subject-card theme-transition" id="sub-tech2">
                 <div>
-                    <div class="subject-header"><i class="fa-solid fa-laptop"></i><h3 class="text-white" data-key="cardTech2Title">التقنية الرقمية (2)</h3></div>
+                    <div class="subject-header"><i class="fa-solid fa-laptop"></i><h3 data-key="cardTech2Title">التقنية الرقمية (2)</h3></div>
                     <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardTech2Desc">مفاهيم الشبكات، أدوات الاتصال والتصميم الرقمي.</p>
                 </div>
                 <a href="#" class="resource-badge sub-link" data-id="tech2" target="_blank"><i class="fa-solid fa-folder-open"></i><span data-key="resourcesBtn">المصادر والعروض</span></a>
             </div>
             <div class="subject-card theme-transition" id="sub-tech3">
                 <div>
-                    <div class="subject-header"><i class="fa-solid fa-code"></i><h3 class="text-white" data-key="cardTech3Title">التقنية الرقمية (3)</h3></div>
+                    <div class="subject-header"><i class="fa-solid fa-code"></i><h3 data-key="cardTech3Title">التقنية الرقمية (3)</h3></div>
                     <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardTech3Desc">التطبيقات المتقدمة والمشاريع البرمجية التفاعلية.</p>
                 </div>
                 <a href="#" class="resource-badge sub-link" data-id="tech3" target="_blank"><i class="fa-solid fa-folder-open"></i><span data-key="resourcesBtn">المصادر والعروض</span></a>
             </div>
             <div class="subject-card theme-transition" id="sub-data">
                 <div>
-                    <div class="subject-header"><i class="fa-solid fa-database"></i><h3 class="text-white" data-key="cardDataTitle">علم البيانات</h3></div>
+                    <div class="subject-header"><i class="fa-solid fa-database"></i><h3 data-key="cardDataTitle">علم البيانات</h3></div>
                     <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardDataDesc">جمع وتعديل البيانات، النمذجة والتحليل الإحصائي الرقمي.</p>
                 </div>
                 <a href="#" class="resource-badge sub-link" data-id="data" target="_blank"><i class="fa-solid fa-folder-open"></i><span data-key="resourcesBtn">المصادر والعروض</span></a>
             </div>
             <div class="subject-card theme-transition" id="sub-ai1">
                 <div>
-                    <div class="subject-header"><i class="fa-solid fa-brain"></i><h3 class="text-white" data-key="cardAi1Title">الذكاء الاصطناعي (1)</h3></div>
+                    <div class="subject-header"><i class="fa-solid fa-brain"></i><h3 data-key="cardAi1Title">الذكاء الاصطناعي (1)</h3></div>
                     <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardAi1Desc">خوارزميات التعلم الآلي، هندسة التلقين ونماذج الرؤية.</p>
                 </div>
                 <a href="#" class="resource-badge sub-link" data-id="ai1" target="_blank"><i class="fa-solid fa-folder-open"></i><span data-key="resourcesBtn">المصادر والعروض</span></a>
             </div>
             <div class="subject-card theme-transition" id="sub-ai2">
                 <div>
-                    <div class="subject-header"><i class="fa-solid fa-robot"></i><h3 class="text-white" data-key="cardAi2Title">الذكاء الاصطناعي (2)</h3></div>
+                    <div class="subject-header"><i class="fa-solid fa-robot"></i><h3 data-key="cardAi2Title">الذكاء الاصطناعي (2)</h3></div>
                     <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardAi2Desc">التطبيقات المتقدمة والشبكات العصبية الاصطناعية.</p>
                 </div>
                 <a href="#" class="resource-badge sub-link" data-id="ai2" target="_blank"><i class="fa-solid fa-folder-open"></i><span data-key="resourcesBtn">المصادر والعروض</span></a>
             </div>
             <div class="subject-card theme-transition" id="sub-design">
                 <div>
-                    <div class="subject-header"><i class="fa-solid fa-compass-drafting"></i><h3 class="text-white" data-key="cardDesignTitle">التصميم الهندسي</h3></div>
+                    <div class="subject-header"><i class="fa-solid fa-compass-drafting"></i><h3 data-key="cardDesignTitle">التصميم الهندسي</h3></div>
                     <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardDesignDesc">النمذجة ثلاثية الأبعاد والتصميمات الميكانيكية والهندسية.</p>
                 </div>
                 <a href="#" class="resource-badge sub-link" data-id="design" target="_blank"><i class="fa-solid fa-folder-open"></i><span data-key="resourcesBtn">المصادر والعروض</span></a>
             </div>
             <div class="subject-card theme-transition" id="sub-cyber">
                 <div>
-                    <div class="subject-header"><i class="fa-solid fa-shield-halved"></i><h3 class="text-white" data-key="cardCyberTitle">الأمن السيبراني</h3></div>
+                    <div class="subject-header"><i class="fa-solid fa-shield-halved"></i><h3 data-key="cardCyberTitle">الأمن السيبراني</h3></div>
                     <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardCyberDesc">أنظمة التشفير، حماية البيانات والوقاية من الاحتيال.</p>
                 </div>
                 <a href="#" class="resource-badge sub-link" data-id="cyber" target="_blank"><i class="fa-solid fa-folder-open"></i><span data-key="resourcesBtn">المصادر والعروض</span></a>
             </div>
             <div class="subject-card theme-transition" id="sub-iot">
                 <div>
-                    <div class="subject-header"><i class="fa-solid fa-network-wired"></i><h3 class="text-white" data-key="cardIotTitle">إنترنت الأشياء</h3></div>
+                    <div class="subject-header"><i class="fa-solid fa-network-wired"></i><h3 data-key="cardIotTitle">إنترنت الأشياء</h3></div>
                     <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardIotDesc">ربط الحساسات والمتحكمات الدقيقة بالشبكات.</p>
                 </div>
                 <a href="#" class="resource-badge sub-link" data-id="iot" target="_blank"><i class="fa-solid fa-folder-open"></i><span data-key="resourcesBtn">المصادر والعروض</span></a>
             </div>
             <div class="subject-card theme-transition" id="sub-swe">
                 <div>
-                    <div class="subject-header"><i class="fa-solid fa-layer-group"></i><h3 class="text-white" data-key="cardSweTitle">هندسة البرمجيات</h3></div>
+                    <div class="subject-header"><i class="fa-solid fa-layer-group"></i><h3 data-key="cardSweTitle">هندسة البرمجيات</h3></div>
                     <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardSweDesc">دورة حياة تطوير الأنظمة البرمجية واختبار الكود.</p>
                 </div>
                 <a href="#" class="resource-badge sub-link" data-id="swe" target="_blank"><i class="fa-solid fa-folder-open"></i><span data-key="resourcesBtn">المصادر والعروض</span></a>
             </div>
             <!-- بطاقة منصة محاكاة الاختبارات الوطنية الجديدة -->
-            <div class="subject-card theme-transition border-cyan-400/50 shadow-lg" id="sub-qiyas">
+            <div class="subject-card theme-transition shadow-lg" id="sub-qiyas">
                 <div>
                     <div class="subject-header">
-                        <i class="fa-solid fa-graduation-cap text-cyan-400"></i>
-                        <h3 class="text-white" data-key="cardQiyasTitle">منصة محاكاة الاختبارات الوطنية</h3>
+                        <i class="fa-solid fa-graduation-cap accent-text"></i>
+                        <h3 data-key="cardQiyasTitle">منصة محاكاة الاختبارات الوطنية</h3>
                     </div>
                     <p style="font-size: 0.85rem; color: var(--text-muted);" data-key="cardQiyasDesc">بنك أسئلة تدريبي تفاعلي محاكى لاختبارات قياس والتحصيلي لمقررات الحاسب.</p>
                 </div>
-<a href="https://yh-addict.github.io/vanta-voids/qiyas.html" class="resource-badge sub-link bg-cyan-500/20 border-cyan-400/40 text-cyan-300 hover:bg-cyan-400 hover:text-slate-950 transition" target="_blank">
-    <i class="fa-solid fa-arrow-up-right-from-square"></i>
-    <span data-key="openPlatformBtn">دخول المنصة</span>
-</a>
+                <a href="https://yh-addict.github.io/vanta-voids/qiyas.html" class="resource-badge sub-link transition" target="_blank">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <span data-key="openPlatformBtn">دخول المنصة</span>
+                </a>
             </div>
         </div>
     </section>
@@ -1363,59 +1359,59 @@
         <!-- المنصات التعليمية المضافة فوق بوكس العنوان الوطني -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
             <a href="https://www.moe.gov.sa/" target="_blank" class="glass-card rounded-2xl p-4 flex flex-col items-center justify-center text-center gap-2 hover:scale-105 transition-all duration-300 theme-transition group">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl border transition-all duration-300" style="border-color: var(--border-color); background-color: rgba(1,3,23,0.5); color: var(--accent-color);">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl border transition-all duration-300" style="border-color: var(--border-color); background-color: var(--bg-secondary); color: var(--accent-color);">
                     <i class="fa-solid fa-building-columns group-hover:scale-110 transition-transform"></i>
                 </div>
-                <span class="font-bold text-sm text-white group-hover:text-[var(--accent-color)] transition-colors" data-key="moeLink">وزارة التعليم</span>
+                <span class="font-bold text-sm style='color: var(--text-main);' transition-colors" data-key="moeLink">وزارة التعليم</span>
             </a>
 
             <a href="https://schools.madrasati.sa/" target="_blank" class="glass-card rounded-2xl p-4 flex flex-col items-center justify-center text-center gap-2 hover:scale-105 transition-all duration-300 theme-transition group">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl border transition-all duration-300" style="border-color: var(--border-color); background-color: rgba(1,3,23,0.5); color: var(--accent-color);">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl border transition-all duration-300" style="border-color: var(--border-color); background-color: var(--bg-secondary); color: var(--accent-color);">
                     <i class="fa-solid fa-school group-hover:scale-110 transition-transform"></i>
                 </div>
-                <span class="font-bold text-sm text-white group-hover:text-[var(--accent-color)] transition-colors" data-key="madrasatiLink">مدرستي</span>
+                <span class="font-bold text-sm style='color: var(--text-main);' transition-colors" data-key="madrasatiLink">مدرستي</span>
             </a>
 
             <a href="https://noor.moe.gov.sa/" target="_blank" class="glass-card rounded-2xl p-4 flex flex-col items-center justify-center text-center gap-2 hover:scale-105 transition-all duration-300 theme-transition group">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl border transition-all duration-300" style="border-color: var(--border-color); background-color: rgba(1,3,23,0.5); color: var(--accent-color);">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl border transition-all duration-300" style="border-color: var(--border-color); background-color: var(--bg-secondary); color: var(--accent-color);">
                     <i class="fa-solid fa-graduation-cap group-hover:scale-110 transition-transform"></i>
                 </div>
-                <span class="font-bold text-sm text-white group-hover:text-[var(--accent-color)] transition-colors" data-key="noorLink">نور</span>
+                <span class="font-bold text-sm style='color: var(--text-main);' transition-colors" data-key="noorLink">نور</span>
             </a>
 
             <a href="https://sshr.moe.gov.sa/" target="_blank" class="glass-card rounded-2xl p-4 flex flex-col items-center justify-center text-center gap-2 hover:scale-105 transition-all duration-300 theme-transition group">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl border transition-all duration-300" style="border-color: var(--border-color); background-color: rgba(1,3,23,0.5); color: var(--accent-color);">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl border transition-all duration-300" style="border-color: var(--border-color); background-color: var(--bg-secondary); color: var(--accent-color);">
                     <i class="fa-solid fa-id-card group-hover:scale-110 transition-transform"></i>
                 </div>
-                <span class="font-bold text-sm text-white group-hover:text-[var(--accent-color)] transition-colors" data-key="farisLink">فارس</span>
+                <span class="font-bold text-sm style='color: var(--text-main);' transition-colors" data-key="farisLink">فارس</span>
             </a>
         </div>
 
         <div class="glass-card rounded-3xl p-6 sm:p-8 theme-transition">
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center md:text-right rtl:md:text-right">
             <div class="flex items-center gap-4 justify-center md:justify-start">
-             <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0 border" style="border-color: var(--border-color); background-color: rgba(1,3,23,0.5); color: var(--accent-color);">
+             <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0 border" style="border-color: var(--border-color); background-color: var(--bg-secondary); color: var(--accent-color);">
                 <i class="fa-solid fa-inbox"></i>
              </div>
               <div>
                 <span class="block text-xs" style="color: var(--text-muted);" data-key="postalLabel">الرمز البريدي</span>
-                <span class="font-bold text-sm text-white" dir="ltr">67713-7492</span>
+                <span class="font-bold text-sm" style="color: var(--text-main);" dir="ltr">67713-7492</span>
               </div>
             </div>
 
             <div class="flex items-center gap-4 justify-center md:justify-start">
-              <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0 border" style="border-color: var(--border-color); background-color: rgba(1,3,23,0.5); color: var(--accent-color);">
+              <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0 border" style="border-color: var(--border-color); background-color: var(--bg-secondary); color: var(--accent-color);">
                 <i class="fa-solid fa-map-location-dot"></i>
               </div>
               <div>
                 <span class="block text-xs" style="color: var(--text-muted);" data-key="addressLabel">العنوان الوطني</span>
-                <span class="font-bold text-sm block text-white" dir="ltr">ALAC3159</span>
+                <span class="font-bold text-sm block" style="color: var(--text-main);" dir="ltr">ALAC3159</span>
                 <span class="text-xs" style="color: var(--text-muted);">King Abdullah District - Bishah</span>
               </div>
             </div>
 
             <div class="flex items-center gap-4 justify-center md:justify-start">
-              <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0 border" style="border-color: var(--border-color); background-color: rgba(1,3,23,0.5); color: var(--accent-color);">
+              <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0 border" style="border-color: var(--border-color); background-color: var(--bg-secondary); color: var(--accent-color);">
                 <i class="fa-solid fa-envelope"></i>
               </div>
               <div>
@@ -1425,7 +1421,7 @@
             </div>
 
             <div class="flex items-center gap-4 justify-center md:justify-start">
-              <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0 border" style="border-color: var(--border-color); background-color: rgba(1,3,23,0.5); color: var(--accent-color);">
+              <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0 border" style="border-color: var(--border-color); background-color: var(--bg-secondary); color: var(--accent-color);">
                 <i class="fa-solid fa-phone-volume"></i>
               </div>
               <div>
@@ -1454,7 +1450,7 @@
             <input type="password" id="passInput" class="form-control" placeholder="أدخل الرقم السري">
             <button class="btn-gold" onclick="verifyPassword()" data-key="passModalBtn">عرض الملف</button>
             <div id="evidenceErrorAlert" class="luxury-alert">
-                <span style="color: var(--accent-color); font-weight: 700; display: block; margin-bottom: 4px;" data-key="alertTitle">تنبيه أمني فاخر</span>
+                <span style="color: var(--accent-color); font-weight: 700; display: block; margin-bottom: 4px;" data-key="alertTitle">تنبيه أمني</span>
                 <span style="font-size: 0.85rem; color: var(--text-muted);" data-key="alertDesc">عذراً، الرقم السري غير مطابق. يرجى إعادة المحاولة.</span>
             </div>
         </div>
@@ -1494,7 +1490,7 @@
     <div class="modal-overlay" id="successModal">
         <div class="modal-card">
             <i class="fa-solid fa-xmark close-modal" onclick="document.getElementById('successModal').style.display='none'"></i>
-            <div style="color: #00E5FF; font-size: 2.5rem; margin-bottom: 0.8rem;"><i class="fa-solid fa-circle-check"></i></div>
+            <div style="color: var(--accent-color); font-size: 2.5rem; margin-bottom: 0.8rem;"><i class="fa-solid fa-circle-check"></i></div>
             <h3 style="color: var(--accent-color); margin-bottom: 0.5rem; font-weight: 700;">تمت العملية بنجاح</h3>
             <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">تم حفظ التعديلات بنجاح.</p>
             <button class="btn-gold" onclick="document.getElementById('successModal').style.display='none'">حسناً</button>
@@ -1508,9 +1504,9 @@
     </div>
 
     <!-- THEME SELECTOR MODAL -->
-    <div id="themeModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#010317]/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+    <div id="themeModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300" style="background-color: rgba(0, 0, 0, 0.75);">
         <div class="glass-card max-w-2xl w-full rounded-3xl p-6 sm:p-8 space-y-6 transform scale-95 transition-all duration-300 relative border shadow-2xl" style="border-color: var(--border-color); background-color: var(--bg-secondary);">
-          <div class="flex items-center justify-between border-b pb-4" style="border-color: rgba(0,229,255,0.2);">
+          <div class="flex items-center justify-between border-b pb-4" style="border-color: var(--border-color);">
             <div class="flex items-center space-x-3 rtl:space-x-reverse">
               <i class="fa-solid fa-palette text-2xl accent-text"></i>
               <div>
@@ -1518,77 +1514,77 @@
                 <p class="text-xs text-muted" style="color: var(--text-muted);" data-key="modalSubTitle">حدد ثيمك المفضل لتخصيص الألوان والواجهة</p>
               </div>
             </div>
-            <button onclick="closeThemeModal()" class="w-9 h-9 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-lg transition-all text-white">
+            <button onclick="closeThemeModal()" class="w-9 h-9 rounded-full flex items-center justify-center text-lg transition-all" style="background: var(--border-color); color: var(--text-main);">
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
 
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 max-h-[60vh] overflow-y-auto p-1 pr-2">
-            <!-- Vanta Voids Theme -->
-            <button onclick="selectTheme('vanta-voids')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all border-cyan-400 bg-cyan-500/10" style="border-color: var(--accent-color)">
+            <!-- Themes List -->
+            <button onclick="selectTheme('vanta-voids')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: var(--border-color); background: var(--bg-primary);">
               <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #010317 50%, #00E5FF 50%); border: 2px solid #00E5FF;"></div>
-              <span class="text-xs font-bold text-cyan-300">Vanta Voids</span>
+              <span class="text-xs font-bold" style="color: var(--text-main);">Vanta Voids</span>
             </button>
-            <button onclick="selectTheme('royal-gold')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+            <button onclick="selectTheme('royal-gold')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1); background: var(--bg-primary);">
               <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #0a0b0e 50%, #d4af37 50%); border: 2px solid #d4af37;"></div>
-              <span class="text-xs font-bold text-white" data-key="thRoyalGold">الملكي الأسود والذهبي</span>
+              <span class="text-xs font-bold" style="color: var(--text-main);" data-key="thRoyalGold">الملكي الأسود والذهبي</span>
             </button>
-            <button onclick="selectTheme('royal-navy')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+            <button onclick="selectTheme('royal-navy')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1); background: var(--bg-primary);">
               <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #0f172a 50%, #e5c158 50%); border: 2px solid #38bdf8;"></div>
-              <span class="text-xs font-bold text-white" data-key="thRoyalNavy">الملكي الكحلي والذهبي</span>
+              <span class="text-xs font-bold" style="color: var(--text-main);" data-key="thRoyalNavy">الملكي الكحلي والذهبي</span>
             </button>
-            <button onclick="selectTheme('national')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+            <button onclick="selectTheme('national')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1); background: var(--bg-primary);">
               <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #021a12 50%, #eab308 50%); border: 2px solid #22c55e;"></div>
-              <span class="text-xs font-bold text-white" data-key="thNational">اللون الوطني</span>
+              <span class="text-xs font-bold" style="color: var(--text-main);" data-key="thNational">اللون الوطني</span>
             </button>
-            <button onclick="selectTheme('burgundy')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+            <button onclick="selectTheme('burgundy')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1); background: var(--bg-primary);">
               <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #140508 50%, #fbbf24 50%); border: 2px solid #9f1239;"></div>
-              <span class="text-xs font-bold text-white" data-key="thBurgundy">البورغندي الفاخر</span>
+              <span class="text-xs font-bold" style="color: var(--text-main);" data-key="thBurgundy">البورغندي الفاخر</span>
             </button>
-            <button onclick="selectTheme('pink')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+            <button onclick="selectTheme('pink')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1); background: var(--bg-primary);">
               <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #1a0f14 50%, #f472b6 50%); border: 2px solid #f472b6;"></div>
-              <span class="text-xs font-bold text-white" data-key="thPink">الوردي الأنيق</span>
+              <span class="text-xs font-bold" style="color: var(--text-main);" data-key="thPink">الوردي الأنيق</span>
             </button>
-            <button onclick="selectTheme('sky')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+            <button onclick="selectTheme('sky')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1); background: var(--bg-primary);">
               <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #0f172a 50%, #38bdf8 50%); border: 2px solid #38bdf8;"></div>
-              <span class="text-xs font-bold text-white" data-key="thSky">السماوي الناعم</span>
+              <span class="text-xs font-bold" style="color: var(--text-main);" data-key="thSky">السماوي الناعم</span>
             </button>
-            <button onclick="selectTheme('fantasy')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+            <button onclick="selectTheme('fantasy')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1); background: var(--bg-primary);">
               <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #0c0714 50%, #e879f9 50%); border: 2px solid #c084fc;"></div>
-              <span class="text-xs font-bold text-white" data-key="thFantasy">الفانتازي الساحر</span>
+              <span class="text-xs font-bold" style="color: var(--text-main);" data-key="thFantasy">الفانتازي الساحر</span>
             </button>
-            <button onclick="selectTheme('portrait')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+            <button onclick="selectTheme('portrait')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1); background: var(--bg-primary);">
               <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #1c130e 50%, #e0a96d 50%); border: 2px solid #c68b59;"></div>
-              <span class="text-xs font-bold text-white" data-key="thPortrait">بورتريه</span>
+              <span class="text-xs font-bold" style="color: var(--text-main);" data-key="thPortrait">بورتريه</span>
             </button>
-            <button onclick="selectTheme('royal-ivory')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+            <button onclick="selectTheme('royal-ivory')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1); background: var(--bg-primary);">
               <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #f8f6f0 50%, #b45309 50%); border: 2px solid #d97706;"></div>
-              <span class="text-xs font-bold text-white" data-key="thRoyalIvory">الملكي العاجي</span>
+              <span class="text-xs font-bold" style="color: var(--text-main);" data-key="thRoyalIvory">الملكي العاجي</span>
             </button>
-            <button onclick="selectTheme('calm-cloud')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+            <button onclick="selectTheme('calm-cloud')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1); background: var(--bg-primary);">
               <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #f1f5f9 50%, #2563eb 50%); border: 2px solid #3b82f6;"></div>
-              <span class="text-xs font-bold text-white" data-key="thCalmCloud">الغيمة الساكنة</span>
+              <span class="text-xs font-bold" style="color: var(--text-main);" data-key="thCalmCloud">الغيمة الساكنة</span>
             </button>
-            <button onclick="selectTheme('spring')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+            <button onclick="selectTheme('spring')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1); background: var(--bg-primary);">
               <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #052e16 50%, #4ade80 50%); border: 2px solid #4ade80;"></div>
-              <span class="text-xs font-bold text-white" data-key="thSpring">الربيع</span>
+              <span class="text-xs font-bold" style="color: var(--text-main);" data-key="thSpring">الربيع</span>
             </button>
-            <button onclick="selectTheme('summer')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+            <button onclick="selectTheme('summer')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1); background: var(--bg-primary);">
               <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #0c2a38 50%, #f59e0b 50%); border: 2px solid #f59e0b;"></div>
-              <span class="text-xs font-bold text-white" data-key="thSummer">الصيف</span>
+              <span class="text-xs font-bold" style="color: var(--text-main);" data-key="thSummer">الصيف</span>
             </button>
-            <button onclick="selectTheme('winter')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+            <button onclick="selectTheme('winter')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1); background: var(--bg-primary);">
               <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #03131e 50%, #22d3ee 50%); border: 2px solid #22d3ee;"></div>
-              <span class="text-xs font-bold text-white" data-key="thWinter">الشتاء</span>
+              <span class="text-xs font-bold" style="color: var(--text-main);" data-key="thWinter">الشتاء</span>
             </button>
-            <button onclick="selectTheme('autumn')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1)">
+            <button onclick="selectTheme('autumn')" class="p-3 rounded-2xl border flex flex-col items-center text-center space-y-2 hover:scale-105 transition-all" style="border-color: rgba(255,255,255,0.1); background: var(--bg-primary);">
               <div class="w-10 h-10 rounded-full shadow-md" style="background: linear-gradient(135deg, #200e08 50%, #f97316 50%); border: 2px solid #f97316;"></div>
-              <span class="text-xs font-bold text-white" data-key="thAutumn">الخريف</span>
+              <span class="text-xs font-bold" style="color: var(--text-main);" data-key="thAutumn">الخريف</span>
             </button>
           </div>
 
-          <div class="pt-2 border-t flex justify-end" style="border-color: rgba(0,229,255,0.2);">
-            <button onclick="closeThemeModal()" class="px-6 py-2.5 rounded-xl font-bold text-sm shadow-lg hover:scale-105 active:scale-95 transition-all" style="background-color: var(--accent-color); color: #010317;" data-key="saveModalBtn">
+          <div class="pt-2 border-t flex justify-end" style="border-color: var(--border-color);">
+            <button onclick="closeThemeModal()" class="px-6 py-2.5 rounded-xl font-bold text-sm shadow-lg hover:scale-105 active:scale-95 transition-all" style="background-color: var(--accent-color); color: var(--bg-primary);" data-key="saveModalBtn">
               حفظ
             </button>
           </div>
@@ -1702,7 +1698,7 @@
             postalLabel: "الرمز البريدي", addressLabel: "العنوان الوطني", emailLabel: "البريد الإلكتروني", phoneLabel: "التواصل المباشر",
             footerBrand: "يوسف الحامد | Vanta Voids", footerLocation: "بيشة - المملكة العربية السعودية",
             modalTitle: "اختيار المظهر (الثيمات)", modalSubTitle: "حدد ثيمك المفضل لتخصيص الألوان والواجهة", saveModalBtn: "حفظ",
-            passModalTitle: "الملف محمي بكلمة مرور", passModalBtn: "عرض الملف", alertTitle: "تنبيه أمني فاخر", alertDesc: "عذراً، الرقم السري غير مطابق. يرجى إعادة المحاولة.",
+            passModalTitle: "الملف محمي بكلمة مرور", passModalBtn: "عرض الملف", alertTitle: "تنبيه أمني", alertDesc: "عذراً، الرقم السري غير مطابق. يرجى إعادة المحاولة.",
             adminModalTitle: "لوحة التحكم | Command Center", adminLoginBtn: "دخول اللوحة", adminErrorDesc: "بيانات الاعتماد غير صحيحة. يرجى التحقق والتجربة مرة أخرى.",
 
             thRoyalGold: "الملكي الأسود والذهبي", thRoyalNavy: "الملكي الكحلي والذهبي", thNational: "اللون الوطني", thBurgundy: "البورغندي الفاخر",
@@ -1744,7 +1740,7 @@
             experienceSub: "A continuous journey of contribution and development for over 19 years",
             job1Title: "High School Computer Science & IT Teacher", job1Year: "2010 - Present", job1Org: "Ministry of Education - Bisha Education Department", job1Desc: "Teaching computer science and digital technology curricula, developing interactive learning environments, and training students in programming projects and national competitions.",
             job2Title: "Computer Science Teacher", job2Year: "2009 - 2010", job2Org: "Ministry of Education - Tabuk Education Department", job2Desc: "Teaching core computer concepts and developing student skills in digital labs and interactive learning strategies.",
-            job3Title: "Banking Operations & Financial Services Sector", job3Year: "2008 - 2009", job3Org: "Al Rajhi Bank - Abha Regional Administration", job3Desc: "Executing and monitoring advanced banking operations and financial services, gaining high expertise in accuracy, digital s, and customer service.",
+            job3Title: "Banking Operations & Financial Services Sector", job3Year: "2008 - 2009", job3Org: "Al Rajhi Bank - Abha Regional Administration", job3Desc: "Executing and monitoring advanced banking operations and financial services, gaining high expertise in accuracy, digital systems, and customer service.",
             job4Title: "Computer Teacher & Office Administrator", job4Year: "2007 - 2008", job4Org: "Ministry of Education - Sarat Ubaida Education Dept (Director's Office)", job4Desc: "The beginning of the educational career and administrative work at the Director of Education's office, where I was honored to absorb educational work ethics.",
 
             educationTitle: "Education & Qualifications",
@@ -1787,9 +1783,9 @@
             cardAi1Title: "Artificial Intelligence (1)", cardAi1Desc: "Machine learning algorithms, prompt engineering, and vision models.",
             cardAi2Title: "Artificial Intelligence (2)", cardAi2Desc: "Advanced applications and artificial neural networks.",
             cardDesignTitle: "Engineering Design", cardDesignDesc: "3D modeling and mechanical and engineering designs.",
-            cardCyberTitle: "Cybersecurity", cardCyberDesc: "Encryption s, data protection, and fraud prevention.",
+            cardCyberTitle: "Cybersecurity", cardCyberDesc: "Encryption systems, data protection, and fraud prevention.",
             cardIotTitle: "Internet of Things", cardIotDesc: "Connecting sensors and microcontrollers to networks.",
-            cardSweTitle: "Software Engineering", cardSweDesc: "Software s development lifecycle and code testing.",
+            cardSweTitle: "Software Engineering", cardSweDesc: "Software systems development lifecycle and code testing.",
             cardQiyasTitle: "National Exam Simulation Platform", cardQiyasDesc: "Interactive training question bank simulating Qiyas and Tahsili exams for CS.",
             resourcesBtn: "Resources & Slides",
             openPlatformBtn: "Open Platform",
@@ -1809,7 +1805,7 @@
             postalLabel: "Postal Code", addressLabel: "National Address", emailLabel: "Email", phoneLabel: "Direct Contact",
             footerBrand: "Youssef Alhamed | Vanta Voids", footerLocation: "Bisha, Kingdom of Saudi Arabia",
             modalTitle: "Appearance & Themes", modalSubTitle: "Choose your preferred theme palette", saveModalBtn: "Save",
-            passModalTitle: "Password Protected File", passModalBtn: "View File", alertTitle: "Luxury Security Alert", alertDesc: "Sorry, the password is incorrect. Please try again.",
+            passModalTitle: "Password Protected File", passModalBtn: "View File", alertTitle: "Security Alert", alertDesc: "Sorry, the password is incorrect. Please try again.",
             adminModalTitle: "Command Center", adminLoginBtn: "Login", adminErrorDesc: "Invalid credentials. Please verify and try again.",
 
             thRoyalGold: "Royal Dark & Gold", thRoyalNavy: "Royal Navy & Gold", thNational: "National Color", thBurgundy: "Luxury Burgundy",
@@ -1823,9 +1819,9 @@
 
         const themes = {
           'vanta-voids': { '--bg-primary': '#010317', '--bg-secondary': '#0B1457', '--bg-card': 'rgba(11, 20, 87, 0.75)', '--border-color': 'rgba(0, 229, 255, 0.25)', '--accent-color': '#00E5FF', '--accent-hover': '#7dd3fc', '--text-main': '#FFFFFF', '--text-muted': '#C1E4FB', '--card-glow': 'rgba(0, 229, 255, 0.2)', '--header-bg': 'rgba(1, 3, 23, 0.88)', '--btn-primary-bg': '#2755C6' },
-          'royal-gold': { '--bg-primary': '#0a0b0e', '--bg-secondary': '#12151c', '--bg-card': 'rgba(22, 27, 38, 0.7)', '--border-color': 'rgba(212, 175, 55, 0.25)', '--accent-color': '#d4af37', '--accent-hover': '#f3e5ab', '--text-main': '#f3f4f6', '--text-muted': '#9ca3af', '--card-glow': 'rgba(212, 175, 55, 0.15)', '--header-bg': 'rgba(10, 11, 14, 0.85)', '--btn-primary-bg': '#d4af37' },
+          'royal-gold': { '--bg-primary': '#0a0b0e', '--bg-secondary': '#12151c', '--bg-card': 'rgba(22, 27, 38, 0.75)', '--border-color': 'rgba(212, 175, 55, 0.25)', '--accent-color': '#d4af37', '--accent-hover': '#f3e5ab', '--text-main': '#f3f4f6', '--text-muted': '#9ca3af', '--card-glow': 'rgba(212, 175, 55, 0.15)', '--header-bg': 'rgba(10, 11, 14, 0.85)', '--btn-primary-bg': '#d4af37' },
           'royal-navy': { '--bg-primary': '#080d1a', '--bg-secondary': '#0f172a', '--bg-card': 'rgba(30, 41, 59, 0.75)', '--border-color': 'rgba(229, 193, 88, 0.3)', '--accent-color': '#e5c158', '--accent-hover': '#fef08a', '--text-main': '#f8fafc', '--text-muted': '#94a3b8', '--card-glow': 'rgba(56, 189, 248, 0.2)', '--header-bg': 'rgba(8, 13, 26, 0.85)', '--btn-primary-bg': '#e5c158' },
-          'national': { '--bg-primary': '#02120d', '--bg-secondary': '#062b1e', '--bg-card': 'rgba(10, 54, 38, 0.7)', '--border-color': 'rgba(234, 179, 8, 0.3)', '--accent-color': '#eab308', '--accent-hover': '#fde047', '--text-main': '#f0fdf4', '--text-muted': '#86efac', '--card-glow': 'rgba(34, 197, 94, 0.2)', '--header-bg': 'rgba(2, 18, 13, 0.85)', '--btn-primary-bg': '#eab308' },
+          'national': { '--bg-primary': '#02120d', '--bg-secondary': '#062b1e', '--bg-card': 'rgba(10, 54, 38, 0.75)', '--border-color': 'rgba(234, 179, 8, 0.3)', '--accent-color': '#eab308', '--accent-hover': '#fde047', '--text-main': '#f0fdf4', '--text-muted': '#86efac', '--card-glow': 'rgba(34, 197, 94, 0.2)', '--header-bg': 'rgba(2, 18, 13, 0.85)', '--btn-primary-bg': '#eab308' },
           'burgundy': { '--bg-primary': '#0d0305', '--bg-secondary': '#1a080c', '--bg-card': 'rgba(48, 14, 22, 0.75)', '--border-color': 'rgba(251, 191, 36, 0.3)', '--accent-color': '#fbbf24', '--accent-hover': '#fde68a', '--text-main': '#fff1f2', '--text-muted': '#fda4af', '--card-glow': 'rgba(244, 63, 94, 0.2)', '--header-bg': 'rgba(13, 3, 5, 0.85)', '--btn-primary-bg': '#fbbf24' },
           'pink': { '--bg-primary': '#120a0e', '--bg-secondary': '#1f1219', '--bg-card': 'rgba(43, 23, 34, 0.75)', '--border-color': 'rgba(244, 114, 182, 0.3)', '--accent-color': '#f472b6', '--accent-hover': '#fbcfe8', '--text-main': '#fdf2f8', '--text-muted': '#fbcfe8', '--card-glow': 'rgba(244, 114, 182, 0.2)', '--header-bg': 'rgba(18, 10, 14, 0.85)', '--btn-primary-bg': '#f472b6' },
           'sky': { '--bg-primary': '#070c14', '--bg-secondary': '#0f172a', '--bg-card': 'rgba(30, 41, 59, 0.75)', '--border-color': 'rgba(56, 189, 248, 0.3)', '--accent-color': '#38bdf8', '--accent-hover': '#bae6fd', '--text-main': '#f0f9ff', '--text-muted': '#bae6fd', '--card-glow': 'rgba(56, 189, 248, 0.2)', '--header-bg': 'rgba(7, 12, 20, 0.85)', '--btn-primary-bg': '#38bdf8' },
