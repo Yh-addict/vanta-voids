@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#010317"><title>سجل التطوير المهني والدورات التدريبية</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800&family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
+<style>*{font-family:'Tajawal',sans-serif}
+body{background:#010317;color:#eaf7ff}
+.hero{background:radial-gradient(circle at 80% 0%,rgba(0,229,255,.18),transparent 34%),linear-gradient(125deg,#010317,#0B1457 68%,#07102e);border-bottom:1px solid rgba(0,229,255,.28)}
+.glass{background:rgba(7,18,55,.62);border:1px solid rgba(0,229,255,.24);box-shadow:0 0 24px rgba(0,229,255,.07)}
+.metric{background:#07102b!important;color:#eaf7ff;box-shadow:0 12px 32px rgba(0,0,0,.28);border:1px solid rgba(0,229,255,.16)}
+.metric .text-slate-500,.metric .text-slate-400{color:#a8c5dd!important}
+.metric .text-slate-800{color:#f4fbff!important}
+.metric [class*="text-"]{--tw-text-opacity:1}
+.btn{transition:.2s}.btn:hover{transform:translateY(-1px);box-shadow:0 0 18px rgba(0,229,255,.22)}
+.table-wrap{overflow:auto}th{white-space:nowrap}td{vertical-align:middle}
+.pill{border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700}
+.modal-bg{background:rgba(0,3,20,.82);backdrop-filter:blur(8px)}
+#adminModal>div{background:#07102b;color:#eaf7ff;border:1px solid rgba(0,229,255,.25)}
+#adminModal input,#adminModal select,#adminModal textarea{background:#0b1740;color:#effaff;border-color:#23416a}
+input,select,textarea{outline:none}
+input:focus,select:focus,textarea:focus{border-color:#00e5ff!important;box-shadow:0 0 0 3px rgba(0,229,255,.16)}
+.year-btn.active{background:#00e5ff;color:#010317;border-color:#00e5ff}.year-btn{white-space:nowrap}
+.bar{height:9px;border-radius:20px;background:#14254a;overflow:hidden}.bar>span{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,#2755c6,#00e5ff)}
+.vanta-brand{font-family:'Cinzel Decorative',serif!important;letter-spacing:.035em;text-decoration:none!important}
+.admin-year-filter{background:#0b1740;color:#eaf7ff;border:1px solid #23416a;border-radius:10px;padding:9px 12px;width:100%}
+.whatsapp{box-shadow:0 0 24px rgba(0,229,255,.22)}
+@media print{.no-print,header .actions,.filters,.whatsapp{display:none!important}body{background:white;color:#111}.metric{background:white!important;color:#111;box-shadow:none;border:1px solid #ddd}main{max-width:none!important;padding:0!important}}
+
+/* ===== VANTA VOIDS / LUXURY INTERFACE OVERRIDES ===== */
+:root{
+ --vv-bg:#070914; --vv-panel:#101426; --vv-panel-2:#151b31;
+ --vv-line:rgba(198,174,125,.22); --vv-gold:#d8bd83; --vv-gold-soft:#f0dfb5;
+ --vv-cyan:#78dce5; --vv-text:#f4f1e9; --vv-muted:#b9bfd0;
+ --vv-glow:rgba(120,220,229,.16); --vv-shadow:0 22px 60px rgba(0,0,0,.34);
+}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{
+ background:
+  radial-gradient(ellipse at 12% 8%,rgba(83,72,132,.20),transparent 32%),
+  radial-gradient(ellipse at 88% 35%,rgba(43,133,145,.11),transparent 30%),
+  linear-gradient(145deg,#070914 0%,#0b1020 48%,#080b17 100%)!important;
+ color:var(--vv-text)!important;
+}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.16;
+ background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:54px 54px}
+::selection{background:rgba(120,220,229,.32);color:#fff}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:#090d1b}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--vv-gold),#637e91);border:2px solid #090d1b;border-radius:20px}
+.hero{
+ background:
+  radial-gradient(ellipse at 78% -8%,rgba(120,220,229,.20),transparent 35%),
+  radial-gradient(ellipse at 8% 90%,rgba(216,189,131,.12),transparent 34%),
+  linear-gradient(125deg,#080b19 0%,#11172c 55%,#101c2b 100%)!important;
+ border-bottom:1px solid var(--vv-line)!important;
+ box-shadow:0 18px 60px rgba(0,0,0,.22);
+ position:relative;overflow:hidden
+}
+.hero:after{content:"";position:absolute;inset:auto -10% -85% 35%;height:360px;border:1px solid rgba(216,189,131,.12);border-radius:50%;box-shadow:0 0 90px rgba(120,220,229,.08);pointer-events:none}
+.glass{background:linear-gradient(135deg,rgba(26,35,59,.82),rgba(12,18,35,.72))!important;border:1px solid rgba(216,189,131,.25)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.045),0 12px 36px rgba(0,0,0,.18),0 0 28px rgba(120,220,229,.045)!important;backdrop-filter:blur(16px)}
+.metric,.metric.bg-white,.bg-white.metric{
+ background:linear-gradient(145deg,rgba(22,29,49,.96),rgba(13,19,35,.97))!important;
+ color:var(--vv-text)!important;border:1px solid rgba(216,189,131,.19)!important;
+ border-radius:20px!important;box-shadow:var(--vv-shadow),inset 0 1px 0 rgba(255,255,255,.035)!important;
+ transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease;
+}
+.metric:hover{transform:translateY(-3px);border-color:rgba(120,220,229,.42)!important;box-shadow:0 26px 65px rgba(0,0,0,.4),0 0 26px rgba(120,220,229,.09)!important}
+.metric .text-slate-500,.metric .text-slate-400,.text-slate-500,.text-slate-400{color:var(--vv-muted)!important}
+.metric .text-slate-800,.text-slate-800{color:var(--vv-text)!important}
+h1,h2,h3,.font-extrabold,.font-bold{letter-spacing:-.018em}
+h2{color:#f3e8d0}
+p{line-height:1.8}
+button,a,input,select,textarea{ -webkit-tap-highlight-color:transparent}
+button,.btn,a{transition:color .25s ease,background .25s ease,border-color .25s ease,box-shadow .25s ease,transform .25s ease}
+.btn{border:1px solid rgba(216,189,131,.28)!important;color:#f6f0e4!important}
+.btn:hover{transform:translateY(-2px);border-color:rgba(120,220,229,.65)!important;box-shadow:0 0 0 1px rgba(120,220,229,.12),0 0 25px rgba(120,220,229,.17)!important}
+.actions .bg-white{background:linear-gradient(135deg,#e8d7ad,#c5a96f)!important;color:#171827!important;border:1px solid #f0dfb5!important}
+.actions .bg-white:hover{background:linear-gradient(135deg,#f4e8c9,#d9bd83)!important;box-shadow:0 0 24px rgba(216,189,131,.24)!important}
+.year-btn{background:rgba(255,255,255,.035)!important;color:#d8dfeb!important;border-color:rgba(216,189,131,.22)!important}
+.year-btn:hover{background:rgba(120,220,229,.12)!important;color:#fff!important;border-color:var(--vv-cyan)!important;box-shadow:0 0 18px rgba(120,220,229,.12)}
+.year-btn.active{background:linear-gradient(135deg,#d9c18d,#a98d59)!important;color:#101522!important;border-color:#ead8ac!important;box-shadow:0 0 22px rgba(216,189,131,.22)}
+.bar{background:#252d43!important;border:1px solid rgba(255,255,255,.04)}
+.bar>span{background:linear-gradient(90deg,#9d8050,#d8bd83 48%,#78dce5)!important;box-shadow:0 0 14px rgba(120,220,229,.28)}
+/* Table: deliberate contrast in normal, hover and keyboard states */
+.table-wrap{border:1px solid rgba(216,189,131,.17)!important;border-radius:16px!important;background:rgba(7,11,23,.42)}
+table{color:#e9edf5!important}
+thead,.table-wrap thead,.table-wrap thead tr{background:#1b2338!important;color:#e8d7ad!important}
+thead th{color:#e8d7ad!important;border-bottom:1px solid rgba(216,189,131,.22)}
+tbody tr{background:rgba(15,21,39,.72)!important;border-color:rgba(255,255,255,.055)!important;transition:background .22s ease,box-shadow .22s ease}
+tbody tr:nth-child(even){background:rgba(21,28,48,.72)!important}
+tbody tr:hover{background:linear-gradient(90deg,rgba(120,220,229,.13),rgba(216,189,131,.09))!important;box-shadow:inset 3px 0 0 var(--vv-cyan);color:#fff!important}
+tbody tr:hover td,tbody tr:hover td div,tbody tr:hover td span{color:#fff!important}
+tbody td{color:#e2e7f0!important;border-color:rgba(255,255,255,.06)!important}
+tbody td .text-slate-800{color:#fff!important}
+tbody td .text-slate-400{color:#b8c4d4!important}
+tbody td button{color:#83e2e9!important}
+tbody td button:hover{color:#f1dba9!important;text-shadow:0 0 12px rgba(216,189,131,.3)}
+.pill{border:1px solid currentColor;background:rgba(255,255,255,.055)!important}
+.pill.bg-emerald-50{color:#8de0c1!important;border-color:rgba(141,224,193,.25)}
+.pill.bg-blue-50{color:#9cc9ff!important;border-color:rgba(156,201,255,.25)}
+.pill.bg-amber-50{color:#f0ce8c!important;border-color:rgba(240,206,140,.25)}
+/* Filters and admin fields */
+input,select,textarea,.admin-year-filter{
+ background:#0c1428!important;color:#f4f1e9!important;border:1px solid rgba(178,192,216,.23)!important;
+ border-radius:12px!important;caret-color:var(--vv-cyan)
+}
+input::placeholder,textarea::placeholder{color:#8793a9!important;opacity:1}
+select option{background:#111a30!important;color:#f4f1e9!important}
+input:focus,select:focus,textarea:focus{border-color:var(--vv-cyan)!important;box-shadow:0 0 0 3px rgba(120,220,229,.14),0 0 20px rgba(120,220,229,.08)!important}
+button:focus-visible,a:focus-visible{outline:2px solid var(--vv-cyan)!important;outline-offset:3px}
+#adminModal>div{background:linear-gradient(145deg,#171e34,#0d1428)!important;color:var(--vv-text)!important;border:1px solid rgba(216,189,131,.34)!important;box-shadow:0 30px 100px rgba(0,0,0,.62)!important;border-radius:24px!important}
+#adminModal .bg-slate-100{background:#202a40!important;color:#e6eaf2!important}
+#adminModal .bg-teal-800{background:linear-gradient(135deg,#987b4d,#c5a96f)!important;color:#101522!important}
+#adminModal .text-slate-500,#adminModal .text-slate-400{color:#b9bfd0!important}
+#adminModal .text-red-600{color:#ff9c9c!important}
+#adminModal .bg-amber-50{background:rgba(240,190,105,.10)!important;color:#f1d49d!important;border:1px solid rgba(240,190,105,.22)}
+#adminModal .divide-y>*{border-color:rgba(255,255,255,.09)!important}
+#adminModal label{color:#e6eaf2}
+#adminModal .text-cyan-600{color:#83e2e9!important}
+#adminModal .text-red-400{color:#ff9b9b!important}
+.modal-bg{background:rgba(2,5,15,.84)!important;backdrop-filter:blur(14px)!important}
+footer{background:linear-gradient(120deg,#080b18,#11182a)!important;border-color:#b99b63!important}
+footer .text-white{color:#f4e8d0!important}
+.vanta-brand{color:#8ce4e9!important;text-shadow:0 0 18px rgba(120,220,229,.22)}
+.vanta-brand:hover{color:#f0dcae!important;text-shadow:0 0 20px rgba(216,189,131,.4)}
+.whatsapp{background:linear-gradient(145deg,#287d78,#174e59)!important;border:1px solid rgba(120,220,229,.4);box-shadow:0 0 28px rgba(65,196,185,.22)!important}
+.whatsapp:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 0 34px rgba(120,220,229,.38)!important}
+#empty{color:#c0c8d8!important}
+@media(max-width:640px){.metric:hover{transform:none}.hero:after{display:none}.table-wrap{border-radius:12px!important}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+@media print{
+ body{background:#fff!important;color:#111!important}
+ .metric,.metric.bg-white{background:#fff!important;color:#111!important;box-shadow:none!important;border:1px solid #ddd!important}
+ tbody tr,thead{background:#fff!important;color:#111!important}
+ tbody td,thead th{color:#111!important}
+}
+
+
+/* Champagne-gold icon system */
+svg.lucide,i[data-lucide]{color:#d8bd83!important;stroke:#d8bd83!important}
+.text-\\[\\#0B1457\\],.text-blue-600,.text-blue-700,.text-indigo-600{color:#d8bd83!important}
+[class*="text-[#0B1457]"]{color:#d8bd83!important}
+</style></head>
+<body>
+<header class="hero text-white">
+ <div class="max-w-7xl mx-auto px-4 sm:px-6 py-5">
+  <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+   <div class="flex items-center gap-3"><div class="w-12 h-12 rounded-2xl glass flex items-center justify-center border border-[#00E5FF]/50"><i data-lucide="landmark" class="w-7 h-7"></i></div><div><div class="text-sm text-white/75">المملكة العربية السعودية</div><div class="font-bold text-lg">وزارة التعليم</div><div class="text-xs text-white/70">إدارة التعليم بمنطقة عسير</div></div></div>
+   <div class="actions flex gap-2 flex-wrap"><button onclick="window.print()" class="btn glass rounded-xl px-4 py-2 text-sm flex items-center gap-2"><i data-lucide="printer" class="w-4 h-4"></i>طباعة التقرير</button><button onclick="exportCSV()" class="btn glass rounded-xl px-4 py-2 text-sm flex items-center gap-2"><i data-lucide="download" class="w-4 h-4"></i>تصدير CSV</button><button onclick="openAdmin()" class="btn bg-white text-slate-800 rounded-xl px-4 py-2 text-sm font-bold flex items-center gap-2"><i data-lucide="settings" class="w-4 h-4"></i>إدارة السجل</button></div>
+  </div>
+  <div class="mt-8 mb-3"><div class="text-sm text-white/70 mb-2">التقرير المهني</div><h1 class="text-2xl sm:text-4xl font-extrabold leading-tight">تقرير سجل التطوير المهني<br class="sm:hidden"> والدورات التدريبية</h1><p class="text-white/75 mt-3 max-w-2xl">لوحة تفاعلية لاستعراض البرامج التدريبية، الساعات، التوزيع الزمني، وحالة الاعتماد.</p></div>
+  <div class="glass rounded-2xl p-4 mt-6 grid sm:grid-cols-3 gap-4">
+   <div><div class="text-xs text-white/65">اسم صاحب السجل</div><div id="teacherName" class="font-bold text-lg mt-1">يوسف حامد عبدالله القرني</div></div>
+   <div><div class="text-xs text-white/65">المسمى الوظيفي والرتبة</div><div class="font-bold mt-1">معلم متقدم</div></div>
+   <div><div class="text-xs text-white/65">جهة العمل</div><div class="font-bold mt-1">إدارة التعليم بمنطقة عسير</div></div>
+  </div>
+ </div>
+</header>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 py-7">
+ <section class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4" id="metrics">
+  <div class="metric bg-white rounded-2xl p-4 sm:p-5"><div class="flex justify-between items-center text-slate-500 text-sm"><span>إجمالي البرامج</span><i data-lucide="book-open" class="w-5 h-5 text-[#0B1457]"></i></div><div id="mCount" class="text-3xl font-extrabold mt-3">80</div><div class="text-xs text-slate-400 mt-1">سجل تدريبي</div></div>
+  <div class="metric bg-white rounded-2xl p-4 sm:p-5"><div class="flex justify-between items-center text-slate-500 text-sm"><span>الساعات التدريبية</span><i data-lucide="clock-3" class="w-5 h-5 text-[#0B1457]"></i></div><div id="mHours" class="text-3xl font-extrabold mt-3">887</div><div class="text-xs text-slate-400 mt-1">ساعة مسجلة</div></div>
+  <div class="metric bg-white rounded-2xl p-4 sm:p-5"><div class="flex justify-between items-center text-slate-500 text-sm"><span>البرامج المعتمدة</span><i data-lucide="badge-check" class="w-5 h-5 text-[#0B1457]"></i></div><div id="mApproved" class="text-3xl font-extrabold mt-3">71</div><div id="mApprovedHours" class="text-xs text-slate-400 mt-1">804 ساعة معتمدة</div></div>
+  <div class="metric bg-white rounded-2xl p-4 sm:p-5"><div class="flex justify-between items-center text-slate-500 text-sm"><span>السنوات التدريبية</span><i data-lucide="calendar-days" class="w-5 h-5 text-[#0B1457]"></i></div><div id="mYears" class="text-3xl font-extrabold mt-3">12</div><div class="text-xs text-slate-400 mt-1">سنة هجرية لها سجلات</div></div>
+ </section>
+ <section class="mt-7 grid lg:grid-cols-5 gap-4">
+  <div class="lg:col-span-3 bg-white rounded-2xl p-5 metric"><div class="flex items-center justify-between gap-3 mb-4"><div><h2 class="font-extrabold text-lg">التوزيع السنوي للساعات</h2><p class="text-xs text-slate-500 mt-1">اضغط على السنة لتصفية الجدول حسبها</p></div><span class="text-xs text-slate-400">هجري</span></div><div class="h-64"><canvas id="yearChart"></canvas></div><div id="yearButtons" class="flex flex-wrap gap-2 mt-4"></div></div>
+  <div class="lg:col-span-2 bg-white rounded-2xl p-5 metric"><h2 class="font-extrabold text-lg">ملخص حالة الاعتماد</h2><p class="text-xs text-slate-500 mt-1">وفق الحقل المسجل في الملف الأصلي</p><div class="h-52 mt-3"><canvas id="approvalChart"></canvas></div><div class="grid grid-cols-2 gap-3 mt-3"><div class="rounded-xl bg-emerald-50 p-3"><div class="text-xs text-emerald-700">معتمد</div><div id="approvedMini" class="font-extrabold text-xl text-emerald-800">71</div></div><div class="rounded-xl bg-amber-50 p-3"><div class="text-xs text-amber-700">غير مدون</div><div id="blankMini" class="font-extrabold text-xl text-amber-800">9</div></div></div></div>
+ </section>
+ <section class="mt-7 bg-white rounded-2xl p-5 metric">
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-3"><div><h2 class="font-extrabold text-lg">سجل الدورات والبرامج</h2><p class="text-xs text-slate-500 mt-1">يمكن البحث والتصفية حسب السنة ونوع النشاط والصفة وحالة الاعتماد</p></div><div class="text-sm text-slate-500">النتائج: <b id="resultCount" class="text-slate-800">80</b></div></div>
+  <div class="filters grid sm:grid-cols-2 lg:grid-cols-5 gap-3 mt-5">
+   <input id="search" class="border border-slate-200 rounded-xl px-3 py-2.5 text-sm" placeholder="ابحث باسم الدورة أو الجهة..." oninput="renderTable()">
+   <select id="yearFilter" class="border border-slate-200 rounded-xl px-3 py-2.5 text-sm" onchange="renderTable()"><option value="">جميع السنوات</option></select>
+   <select id="typeFilter" class="border border-slate-200 rounded-xl px-3 py-2.5 text-sm" onchange="renderTable()"><option value="">جميع أنواع البرامج</option></select>
+   <select id="approvalFilter" class="border border-slate-200 rounded-xl px-3 py-2.5 text-sm" onchange="renderTable()"><option value="">جميع الحالات</option><option>معتمد</option><option>قيد الاعتماد</option><option>غير مدون</option></select>
+   <select id="roleFilter" class="border border-slate-200 rounded-xl px-3 py-2.5 text-sm" onchange="renderTable()"><option value="">منفذ ومستفيد</option><option>منفذ</option><option>مستفيد</option></select>
+  </div>
+  <div class="flex justify-end mt-3"><button onclick="clearFilters()" class="text-sm text-teal-800 font-bold">إعادة ضبط الفلاتر</button></div>
+  <div class="table-wrap mt-4 rounded-xl border border-slate-100"><table class="w-full text-sm text-right"><thead class="bg-slate-50 text-slate-600"><tr><th class="p-3">#</th><th class="p-3 min-w-64">اسم النشاط / الدورة</th><th class="p-3">السنة</th><th class="p-3">الساعات</th><th class="p-3">الصفة</th><th class="p-3">نوع النشاط</th><th class="p-3">حالة الاعتماد</th><th class="p-3 no-print">التفاصيل</th></tr></thead><tbody id="tableBody"></tbody></table></div>
+  <div id="empty" class="hidden text-center text-slate-500 py-10">لا توجد نتائج مطابقة للفلاتر.</div>
+ </section>
+ <section class="mt-7 grid md:grid-cols-2 gap-4">
+  <div class="bg-white rounded-2xl p-5 metric"><h2 class="font-extrabold">مؤشرات حسب صفة المشاركة</h2><div class="mt-4 space-y-4" id="roleSummary"></div></div>
+  <div class="bg-white rounded-2xl p-5 metric"><h2 class="font-extrabold">ملاحظات توثيقية</h2><ul class="text-sm text-slate-600 mt-4 space-y-3 list-disc pr-5"><li>البيانات مستخرجة من الملف المرفق، وتُحتسب السنة من تاريخ بداية النشاط.</li><li>عدد السجلات 80، وإجمالي المدد 887 ساعة بحسب الملف.</li><li>حالة الاعتماد الفارغة عُرضت باسم «غير مدون» ولم تُعتبر مرفوضة أو قيد الاعتماد تلقائيًا.</li><li>اسم المدرسة ورقم التواصل غير واردين في المصدر؛ يمكن إضافتهما من إعدادات الصفحة داخل الكود.</li></ul></div>
+ </section>
+</main>
+<footer class="mt-10 bg-[#010317] text-[#eaf7ff] py-7 text-center text-sm border-t-4 border-[#00E5FF]"><div class="text-xs tracking-wide text-[#C1E4FB]">All Rights Reserved 2026©</div><div class="mt-2 font-bold text-white">يوسف الحامد | <a href="https://yh-addict.github.io/vanta-voids/" target="_blank" rel="noopener noreferrer" class="text-[#00E5FF] vanta-brand hover:text-white transition" aria-label="زيارة Vanta Voids">Vanta Voids</a></div><div class="mt-2 text-xs text-[#C1E4FB]">بيشة - المملكة العربية السعودية</div></footer>
+<a href="#" onclick="whatsApp(event)" class="whatsapp fixed bottom-5 left-5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full shadow-xl w-14 h-14 flex items-center justify-center" aria-label="تواصل عبر واتساب"><i data-lucide="message-circle" class="w-7 h-7"></i></a>
+<div id="adminModal" class="hidden fixed inset-0 z-50 modal-bg items-center justify-center p-3"><div class="bg-white rounded-2xl w-full max-w-4xl max-h-[92vh] overflow-auto p-5 sm:p-7">
+ <div class="flex justify-between items-center"><div><h2 class="font-extrabold text-xl">إدارة سجل التطوير المهني</h2><p class="text-xs text-slate-500 mt-1">إضافة وتعديل وحذف السجلات</p></div><button onclick="closeAdmin()" class="p-2 rounded-lg bg-slate-100"><i data-lucide="x"></i></button></div>
+ <div id="loginArea" class="max-w-sm mx-auto py-10"><div class="text-center mb-5"><i data-lucide="lock-keyhole" class="w-10 h-10 mx-auto text-[#D8BD83]"></i><h3 class="font-bold mt-3">الدخول إلى لوحة الإدارة</h3><p class="text-xs text-slate-500 mt-1">أدخل كلمة مرور حساب الإدارة</p></div><input id="pinInput" type="password" class="w-full border rounded-xl p-3 text-center tracking-widest" placeholder="كلمة المرور"><button onclick="login()" class="w-full bg-teal-800 text-white rounded-xl p-3 mt-3 font-bold">دخول</button><p id="loginError" class="text-red-600 text-xs mt-2 text-center"></p><p class="text-xs text-slate-400 text-center mt-4">يتم التحقق من كلمة المرور عبر Firebase Authentication.</p></div>
+ <div id="adminArea" class="hidden mt-5"><div class="flex flex-wrap gap-2 mb-4"><button onclick="togglePasswordSettings()" class="rounded-xl px-4 py-2 text-sm font-bold" style="background:linear-gradient(135deg,#987b4d,#d8bd83);color:#111827"><i data-lucide="key-round" class="inline w-4 h-4 ml-1"></i>تعديل كلمة المرور</button><button onclick="newRecord()" class="bg-teal-800 text-white rounded-xl px-4 py-2 text-sm">إضافة دورة</button><button onclick="downloadBackup()" class="bg-slate-100 rounded-xl px-4 py-2 text-sm">نسخة احتياطية JSON</button><label class="bg-slate-100 rounded-xl px-4 py-2 text-sm cursor-pointer">استيراد نسخة<input type="file" accept=".json" class="hidden" onchange="importBackup(event)"></label></div>
+ <section id="passwordSettings" class="hidden mb-5 rounded-2xl p-4 border" style="background:rgba(216,189,131,.07);border-color:rgba(216,189,131,.35)">
+ <h3 class="font-bold mb-3 flex items-center gap-2"><i data-lucide="key-round" class="w-5 h-5" style="color:#d8bd83"></i>تغيير كلمة مرور الإدارة</h3>
+ <div class="grid md:grid-cols-3 gap-3">
+ <input id="currentAdminPassword" type="password" autocomplete="current-password" class="border rounded-xl p-3 text-sm" placeholder="كلمة المرور الحالية">
+ <input id="newAdminPassword" type="password" autocomplete="new-password" class="border rounded-xl p-3 text-sm" placeholder="كلمة المرور الجديدة (6 أحرف فأكثر)">
+ <input id="confirmAdminPassword" type="password" autocomplete="new-password" class="border rounded-xl p-3 text-sm" placeholder="تأكيد كلمة المرور الجديدة">
+ </div><div class="flex flex-wrap items-center gap-3 mt-3"><button onclick="updateAdminPassword()" class="rounded-xl px-4 py-2 text-sm font-bold" style="background:linear-gradient(135deg,#987b4d,#d8bd83);color:#111827">حفظ كلمة المرور الجديدة</button><p id="passwordUpdateMessage" class="text-xs"></p></div>
+ <p class="text-xs mt-2" style="color:#b9bfd0">تُحدّث في Firebase Authentication مباشرة، ولا تُحفظ داخل ملف HTML.</p></section>
+ <div class="grid md:grid-cols-2 gap-3">
+  <input id="fName" class="border rounded-xl p-3 text-sm" placeholder="اسم النشاط / الدورة">
+  <input id="fProvider" class="border rounded-xl p-3 text-sm" placeholder="جهة النشاط">
+  <input id="fStart" class="border rounded-xl p-3 text-sm" placeholder="تاريخ البداية: يوم/شهر/سنة هجرية">
+  <input id="fEnd" class="border rounded-xl p-3 text-sm" placeholder="تاريخ النهاية">
+  <input id="fHours" type="number" min="0" step=".5" class="border rounded-xl p-3 text-sm" placeholder="عدد الساعات">
+  <select id="fRole" class="border rounded-xl p-3 text-sm"><option>مستفيد</option><option>منفذ</option></select>
+  <input id="fType" class="border rounded-xl p-3 text-sm" placeholder="نوع النشاط">
+  <select id="fApproval" class="border rounded-xl p-3 text-sm"><option>معتمد</option><option>قيد الاعتماد</option><option>غير مدون</option></select>
+  <input id="fCreated" class="border rounded-xl p-3 text-sm" placeholder="تاريخ الإنشاء (اختياري)">
+  <input id="fDurationType" class="border rounded-xl p-3 text-sm" value="ساعات" placeholder="نوع المدة">
+  <textarea id="fNotes" class="border rounded-xl p-3 text-sm md:col-span-2" placeholder="ملاحظات المعتمد"></textarea>
+ </div><div class="flex gap-2 mt-4"><button onclick="saveRecord()" class="bg-teal-800 text-white rounded-xl px-5 py-2.5 font-bold">حفظ السجل</button><button onclick="cancelEdit()" class="bg-slate-100 rounded-xl px-5 py-2.5">إلغاء</button></div>
+ <div class="mt-7"><div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3"><h3 class="font-bold">السجلات الحالية</h3><select id="adminYearFilter" class="admin-year-filter sm:max-w-xs" onchange="renderAdminList()"><option value="">كل السنوات</option></select></div><div id="adminList" class="divide-y max-h-80 overflow-auto"></div></div>
+ <p class="text-xs text-amber-700 bg-amber-50 rounded-xl p-3 mt-4">تنبيه أمني: الحماية برقم سري داخل صفحة HTML هي حماية واجهة فقط وليست نظام صلاحيات آمنًا؛ لا ترفع الصفحة ببيانات حساسة على موقع عام. التعديلات تحفظ محليًا في متصفح الجهاز.</p>
+ </div></div></div>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script>
+const originalData = [{"name": "إدارة التغيير لتجويد التعليم عن بعد", "provider": "إدارة التعليم بمحافظة الأحساء", "start": "25/03/1442", "end": "25/03/1442", "year": "1442", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 2.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "معايير تصميم وإدارة الاختبارات الإلكترونية", "provider": "إدارة التعليم بمحافظة بيشة", "start": "03/04/1442", "end": "03/04/1442", "year": "1442", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 2.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "استخدام web2 في التعليم", "provider": "أخرى", "start": "28/10/1435", "end": "09/11/1435", "year": "1435", "role": "منفذ", "type": "التدريب - التدريب المباشر", "durationType": "ساعات", "hours": 20.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "ملتقى تطوير الإلكتروني الأول", "provider": "إدارة التعليم بمحافظة الطائف", "start": "29/03/1442", "end": "04/04/1442", "year": "1442", "role": "مستفيد", "type": "الملتقيات - المؤتمرات", "durationType": "ساعات", "hours": 25.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "مبرمجي ذكاء المستقبل", "provider": "المعهد الوطني للتطوير المهني التعليمي", "start": "25/05/1444", "end": "07/06/1444", "year": "1444", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 40.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "خصائص النمو", "provider": "إدارة التعليم بمحافظة بيشة", "start": "17/04/1445", "end": "17/04/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب المباشر", "durationType": "ساعات", "hours": 5.0, "created": "19-09-24", "notes": "", "approval": "معتمد"}, {"name": "مهارات العمل الجماعي : التواصل الفعال في مجموعات", "provider": "المركز الوطني للتطوير المهني التعليمي", "start": "03/11/1445", "end": "04/11/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 10.0, "created": "19-09-24", "notes": "", "approval": "معتمد"}, {"name": "إدارة المخاطر", "provider": "وزارة التعليم", "start": "10/07/1447", "end": "10/07/1447", "year": "1447", "role": "مستفيد", "type": "ورش العمل - ورش العمل", "durationType": "ساعات", "hours": 2.0, "created": "24-01-26", "notes": "", "approval": "معتمد"}, {"name": "إدارة الأداء الوظيفي للمعلمين", "provider": "وزارة التعليم", "start": "12/02/1446", "end": "12/02/1446", "year": "1446", "role": "مستفيد", "type": "ورش العمل - ورش العمل", "durationType": "ساعات", "hours": 2.0, "created": "24-01-26", "notes": "", "approval": "معتمد"}, {"name": "الكفايات المهنية لمعلم مقرر إنترنت الأشياء 1-2", "provider": "وزارة التعليم", "start": "28/07/1444", "end": "01/08/1444", "year": "1444", "role": "مستفيد", "type": "التدريب - التدريب المباشر", "durationType": "ساعات", "hours": 16.0, "created": "24-04-24", "notes": "", "approval": "معتمد"}, {"name": "ملتقى الأمن والسلامة الرابع", "provider": "إدارة التعليم بمحافظة بيشة", "start": "10/08/1442", "end": "10/08/1442", "year": "1442", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 4.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "البحث الإجرائي وتطوير الميدان التعليمي", "provider": "المعهد الوطني للتطوير المهني التعليمي", "start": "20/01/1446", "end": "20/01/1446", "year": "1446", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 9.0, "created": "19-09-24", "notes": "", "approval": "معتمد"}, {"name": "ورشة إدارة الأداء الوظيفي في وزارة التعليم", "provider": "المركز الوطني للتطوير المهني التعليمي", "start": "20/05/1448", "end": "20/05/1448", "year": "1448", "role": "مستفيد", "type": "ورش العمل - ورش العمل", "durationType": "ساعات", "hours": 2.0, "created": "16-11-26", "notes": "", "approval": "غير مدون"}, {"name": "السلطة الإدارية وتفويض الصلاحيات", "provider": "إدارة التعليم بمنطقة عسير", "start": "11/06/1447", "end": "11/06/1447", "year": "1447", "role": "مستفيد", "type": "ورش العمل - ورش العمل", "durationType": "ساعات", "hours": 4.0, "created": "24-01-26", "notes": "", "approval": "معتمد"}, {"name": "أسس ومبادئ التوجيه الطلابي", "provider": "إدارة التعليم بمحافظة بيشة", "start": "19/06/1445", "end": "21/06/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 15.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "استخدام الحاسب الآلي في التعليم", "provider": "أخرى", "start": "16/12/1432", "end": "20/12/1432", "year": "1432", "role": "مستفيد", "type": "التدريب - التدريب المباشر", "durationType": "ساعات", "hours": 20.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "النموذج الإشرافي لتمكين المدرسة", "provider": "المعهد الوطني للتطوير المهني التعليمي", "start": "12/07/1445", "end": "12/07/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 2.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "المهارات الداخلية والإدارية للموظفين", "provider": "المؤسسة العامة للتدريب التقني والمهني", "start": "16/03/1445", "end": "26/03/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 50.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "مهارات التفكير الناقد", "provider": "المؤسسة العامة للتدريب التقني والمهني", "start": "26/03/1445", "end": "06/04/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 50.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "نظام التعليم الإلكتروني وأدواته - المسابقات وعلوم الأولمبياد", "provider": "أخرى", "start": "16/03/1446", "end": "16/03/1446", "year": "1446", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 3.0, "created": "19-09-24", "notes": "", "approval": "معتمد"}, {"name": "مبادئ الذكاء الاصطناعي", "provider": "أخرى", "start": "18/03/1447", "end": "18/03/1447", "year": "1447", "role": "مستفيد", "type": "ورش العمل - ورش العمل", "durationType": "ساعات", "hours": 5.0, "created": "30-10-25", "notes": "", "approval": "معتمد"}, {"name": "أساليب العرض والتقديم", "provider": "إدارة التعليم بمحافظة بيشة", "start": "12/04/1446", "end": "13/04/1446", "year": "1446", "role": "مستفيد", "type": "التدريب - التدريب المباشر", "durationType": "ساعات", "hours": 10.0, "created": "29-01-25", "notes": "", "approval": "معتمد"}, {"name": "ورشة سياسات حوكمة البيانات", "provider": "المركز الوطني للتطوير المهني التعليمي", "start": "06/06/1448", "end": "06/06/1448", "year": "1448", "role": "مستفيد", "type": "ورش العمل - ورش العمل", "durationType": "ساعات", "hours": 2.0, "created": "16-11-26", "notes": "", "approval": "غير مدون"}, {"name": "STEP Test Preparation", "provider": "المؤسسة العامة للتدريب التقني والمهني", "start": "17/03/1448", "end": "17/04/1448", "year": "1448", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 60.0, "created": "16-11-26", "notes": "", "approval": "غير مدون"}, {"name": "تنمية مهارات السلوك التوكيدي", "provider": "إدارة التعليم بمحافظة بيشة", "start": "07/09/1445", "end": "07/09/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب المباشر", "durationType": "ساعات", "hours": 3.0, "created": "24-04-24", "notes": "", "approval": "معتمد"}, {"name": "عرض الشرائح الإلكترونية", "provider": "الجامعات السعودية", "start": "09/04/1442", "end": "09/04/1442", "year": "1442", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 3.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "نظرية تريز للتفكير الإبداعي", "provider": "المؤسسة العامة للتدريب التقني والمهني", "start": "15/05/1445", "end": "18/05/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 20.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "أسرار لغة الجسد والإلقاء المؤثر في الآخرين", "provider": "المؤسسة العامة للتدريب التقني والمهني", "start": "11/05/1445", "end": "14/05/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 20.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "أسس ومبادئ التوجيه الطلابي", "provider": "إدارة التعليم بمحافظة بيشة", "start": "19/06/1445", "end": "20/06/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب المباشر", "durationType": "ساعات", "hours": 15.0, "created": "19-09-24", "notes": "", "approval": "معتمد"}, {"name": "مبادئ السلامة والصحة المهنية طبقًا لمعايير الأوشا OSHA", "provider": "المؤسسة العامة للتدريب التقني والمهني", "start": "28/05/1446", "end": "03/06/1446", "year": "1446", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 25.0, "created": "29-01-25", "notes": "", "approval": "معتمد"}, {"name": "نحو التغيير والتطوير", "provider": "أخرى", "start": "04/06/1446", "end": "04/06/1446", "year": "1446", "role": "مستفيد", "type": "التدريب - التدريب المباشر", "durationType": "ساعات", "hours": 5.0, "created": "29-01-25", "notes": "", "approval": "معتمد"}, {"name": "ورشة إدارة المخاطر", "provider": "المركز الوطني للتطوير المهني التعليمي", "start": "06/06/1448", "end": "06/06/1448", "year": "1448", "role": "مستفيد", "type": "ورش العمل - ورش العمل", "durationType": "ساعات", "hours": 2.0, "created": "16-11-26", "notes": "", "approval": "غير مدون"}, {"name": "ورشة الأمن السيبراني", "provider": "المركز الوطني للتطوير المهني التعليمي", "start": "06/06/1448", "end": "06/06/1448", "year": "1448", "role": "مستفيد", "type": "ورش العمل - ورش العمل", "durationType": "ساعات", "hours": 2.0, "created": "16-11-26", "notes": "", "approval": "غير مدون"}, {"name": "التفاعل الإيجابي مع أولياء الأمور", "provider": "المعهد الوطني للتطوير المهني التعليمي", "start": "09/02/1448", "end": "09/02/1448", "year": "1448", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 6.0, "created": "15-08-26", "notes": "", "approval": "غير مدون"}, {"name": "تعزيز ونشر ثقافة الجودة", "provider": "الجامعات السعودية", "start": "09/04/1439", "end": "09/04/1439", "year": "1439", "role": "مستفيد", "type": "التدريب - التدريب المباشر", "durationType": "ساعات", "hours": 5.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "تنمية مهارات استخدام الإنترنت في المكتبات", "provider": "معهد الإدارة العامة", "start": "17/03/1442", "end": "17/03/1442", "year": "1442", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 3.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "توظيف التقنيات في التعليم", "provider": "أخرى", "start": "04/05/1431", "end": "06/05/1431", "year": "1431", "role": "مستفيد", "type": "التدريب - التدريب المباشر", "durationType": "ساعات", "hours": 12.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "الدورة التدريبية لمسؤولي موقع عمادة التعليم عن بعد", "provider": "الجامعات السعودية", "start": "21/01/1432", "end": "22/01/1432", "year": "1432", "role": "مستفيد", "type": "التدريب - التدريب المباشر", "durationType": "ساعات", "hours": 10.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "إدارة الموارد البشرية", "provider": "أخرى", "start": "07/04/1445", "end": "07/04/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 5.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "تدريب المدربين TOT", "provider": "المؤسسة العامة للتدريب التقني والمهني", "start": "06/04/1445", "end": "10/04/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 30.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "خصائص النمو", "provider": "إدارة التعليم بمحافظة بيشة", "start": "17/04/1445", "end": "17/04/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 5.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "صياغة الأسئلة الصفية منطلقات علمية ومهارات عملية", "provider": "المعهد الوطني للتطوير المهني التعليمي", "start": "02/01/1446", "end": "02/01/1446", "year": "1446", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 6.0, "created": "19-09-24", "notes": "", "approval": "معتمد"}, {"name": "تدريب المعلمين على علوم الأولمبياد الدولية مسار المعلوماتية", "provider": "أخرى", "start": "04/11/1445", "end": "08/11/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب المباشر", "durationType": "ساعات", "hours": 32.0, "created": "19-09-24", "notes": "", "approval": "معتمد"}, {"name": "ورشة الالتزام", "provider": "المركز الوطني للتطوير المهني التعليمي", "start": "06/06/1448", "end": "06/06/1448", "year": "1448", "role": "مستفيد", "type": "ورش العمل - ورش العمل", "durationType": "ساعات", "hours": 2.0, "created": "16-11-26", "notes": "", "approval": "غير مدون"}, {"name": "ورشة عمل الثمان الأولى للإسعافات الأولية", "provider": "المركز الوطني للتطوير المهني التعليمي", "start": "20/05/1448", "end": "20/05/1448", "year": "1448", "role": "مستفيد", "type": "ورش العمل - ورش العمل", "durationType": "ساعات", "hours": 2.0, "created": "16-11-26", "notes": "", "approval": "غير مدون"}, {"name": "المسعف المدرسي", "provider": "إدارة التعليم بمنطقة عسير", "start": "09/01/1448", "end": "09/01/1448", "year": "1448", "role": "مستفيد", "type": "ورش العمل - ورش العمل", "durationType": "ساعات", "hours": 5.0, "created": "15-08-26", "notes": "", "approval": "غير مدون"}, {"name": "استراتيجيات التدريس الحديثة", "provider": "إدارة التعليم بمحافظة بيشة", "start": "23/07/1445", "end": "24/07/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 10.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "الأمن السيبراني", "provider": "الجامعات السعودية", "start": "23/04/1442", "end": "23/04/1442", "year": "1442", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 3.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "إعداد وتصميم الحقائب التدريبية", "provider": "المؤسسة العامة للتدريب التقني والمهني", "start": "08/05/1445", "end": "10/05/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 15.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "التقويم والاعتماد المدرسي", "provider": "إدارة التعليم بمحافظة بيشة", "start": "08/04/1445", "end": "08/04/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 5.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "عرض الشرائح التقديمية", "provider": "أخرى", "start": "24/12/1437", "end": "28/12/1437", "year": "1437", "role": "منفذ", "type": "التدريب - التدريب المباشر", "durationType": "ساعات", "hours": 15.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "تنمية مهارات التفكير الناقد في بيئات التعلم الرقمي", "provider": "المعهد الوطني للتطوير المهني التعليمي", "start": "19/01/1446", "end": "19/01/1446", "year": "1446", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 6.0, "created": "19-09-24", "notes": "", "approval": "معتمد"}, {"name": "التقويم من أجل التعلم", "provider": "المعهد الوطني للتطوير المهني التعليمي", "start": "19/01/1446", "end": "19/01/1446", "year": "1446", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 6.0, "created": "19-09-24", "notes": "", "approval": "معتمد"}, {"name": "مهارات المستقبل", "provider": "المعهد الوطني للتطوير المهني التعليمي", "start": "05/03/1446", "end": "05/03/1446", "year": "1446", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 12.0, "created": "19-09-24", "notes": "", "approval": "معتمد"}, {"name": "ضغوط العمل وكيفية التعامل معها", "provider": "إدارة التعليم بمحافظة بيشة", "start": "28/10/1445", "end": "29/10/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب المباشر", "durationType": "ساعات", "hours": 10.0, "created": "19-09-24", "notes": "", "approval": "معتمد"}, {"name": "الأساس في الرعاية الشاملة للطلبة الموهوبين - المسابقات وعلوم الأولمبياد", "provider": "أخرى", "start": "16/03/1446", "end": "16/03/1446", "year": "1446", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 6.0, "created": "19-09-24", "notes": "", "approval": "معتمد"}, {"name": "مفاهيم الذكاء الاصطناعي وتطبيقاته المتقدمة", "provider": "أخرى", "start": "18/03/1447", "end": "18/03/1447", "year": "1447", "role": "مستفيد", "type": "ورش العمل - ورش العمل", "durationType": "ساعات", "hours": 5.0, "created": "30-10-25", "notes": "", "approval": "معتمد"}, {"name": "استخدام الذكاء الاصطناعي في إنشاء محتوى تعليمي نوعي تفاعلي", "provider": "الجامعات السعودية", "start": "21/08/1447", "end": "21/08/1447", "year": "1447", "role": "مستفيد", "type": "ورش العمل - ورش العمل", "durationType": "ساعات", "hours": 5.0, "created": "05-05-26", "notes": "", "approval": "معتمد"}, {"name": "تدريب بيبراس", "provider": "أخرى", "start": "14/06/1446", "end": "18/06/1446", "year": "1446", "role": "منفذ", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 30.0, "created": "29-01-25", "notes": "", "approval": "معتمد"}, {"name": "سياسة حوكمة البيانات", "provider": "وزارة التعليم", "start": "10/07/1447", "end": "10/07/1447", "year": "1447", "role": "مستفيد", "type": "ورش العمل - ورش العمل", "durationType": "ساعات", "hours": 2.0, "created": "24-01-26", "notes": "", "approval": "معتمد"}, {"name": "إدارة محتوى المواقع الإلكترونية للمعاهد العلمية", "provider": "الجامعات السعودية", "start": "01/03/1439", "end": "02/03/1439", "year": "1439", "role": "مستفيد", "type": "التدريب - التدريب المباشر", "durationType": "ساعات", "hours": 8.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "لقاء نافس", "provider": "إدارة التعليم بمحافظة بيشة", "start": "01/08/1445", "end": "01/08/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 2.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "تأهيل منسقي الجودة في المعاهد العلمية", "provider": "أخرى", "start": "15/07/1439", "end": "16/07/1439", "year": "1439", "role": "مستفيد", "type": "التدريب - التدريب المباشر", "durationType": "ساعات", "hours": 12.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "أساسيات الأفترافكت والموشن جرافيك", "provider": "معهد الإدارة العامة", "start": "23/03/1442", "end": "24/03/1442", "year": "1442", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 11.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "الأمن الفكري", "provider": "الجامعات السعودية", "start": "02/04/1442", "end": "02/04/1442", "year": "1442", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 3.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "إعداد منسقي رعاية موهوبين", "provider": "الجامعات السعودية", "start": "07/02/1435", "end": "09/02/1435", "year": "1435", "role": "مستفيد", "type": "التدريب - التدريب المباشر", "durationType": "ساعات", "hours": 12.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "حل المشكلات واتخاذ القرار", "provider": "الجامعات السعودية", "start": "04/04/1442", "end": "04/04/1442", "year": "1442", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 3.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "تنمية دافعية المتعلم للتعلم", "provider": "المعهد الوطني للتطوير المهني التعليمي", "start": "19/01/1446", "end": "19/01/1446", "year": "1446", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 6.0, "created": "19-09-24", "notes": "", "approval": "معتمد"}, {"name": "التقويم الذاتي للمدارس", "provider": "المعهد الوطني للتطوير المهني التعليمي", "start": "04/02/1446", "end": "04/01/1446", "year": "1446", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 18.0, "created": "19-09-24", "notes": "", "approval": "معتمد"}, {"name": "إدارة البيئة الصفية", "provider": "المعهد الوطني للتطوير المهني التعليمي", "start": "20/01/1446", "end": "20/01/1446", "year": "1446", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 6.0, "created": "19-09-24", "notes": "", "approval": "معتمد"}, {"name": "استراتيجيات التدريس الحديثة", "provider": "إدارة التعليم بمحافظة بيشة", "start": "23/07/1445", "end": "24/07/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب المباشر", "durationType": "ساعات", "hours": 10.0, "created": "19-09-24", "notes": "", "approval": "معتمد"}, {"name": "الاعتدال منهج وسلوك", "provider": "إدارة التعليم بمحافظة بيشة", "start": "25/08/1445", "end": "25/08/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب المباشر", "durationType": "ساعات", "hours": 2.0, "created": "19-09-24", "notes": "", "approval": "معتمد"}, {"name": "إدارة الوقت الشخصي والمهني", "provider": "المركز الوطني للتعليم الالكتروني", "start": "07/10/1445", "end": "08/10/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 10.0, "created": "19-09-24", "notes": "", "approval": "معتمد"}, {"name": "الأمن السيبراني", "provider": "وزارة التعليم", "start": "10/07/1447", "end": "10/07/1447", "year": "1447", "role": "مستفيد", "type": "ورش العمل - ورش العمل", "durationType": "ساعات", "hours": 2.0, "created": "24-01-26", "notes": "", "approval": "معتمد"}, {"name": "تحسين اتجاهات معلمي ومعلمات التعليم العام نحو دمج الطلبة ذوي اضطراب فرط الحركة", "provider": "إدارة التعليم بمنطقة عسير", "start": "15/06/1446", "end": "17/06/1446", "year": "1446", "role": "مستفيد", "type": "التدريب - التدريب المباشر", "durationType": "ساعات", "hours": 12.0, "created": "28-11-25", "notes": "", "approval": "معتمد"}, {"name": "الحصة التفاعلية ومهارات المعلم الرقمي", "provider": "إدارة التعليم بمحافظة بيشة", "start": "25/03/1442", "end": "25/03/1442", "year": "1442", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 3.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "إدارة وتنظيم معامل الحاسب الآلي", "provider": "أخرى", "start": "26/07/1430", "end": "28/07/1430", "year": "1430", "role": "مستفيد", "type": "التدريب - التدريب المباشر", "durationType": "ساعات", "hours": 12.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "الذكاء العاطفي", "provider": "المؤسسة العامة للتدريب التقني والمهني", "start": "19/05/1445", "end": "21/05/1445", "year": "1445", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 15.0, "created": "11-02-24", "notes": "", "approval": "معتمد"}, {"name": "تضمين قيم المواطنة الرقمية في التعليم", "provider": "المعهد الوطني للتطوير المهني التعليمي", "start": "18/01/1446", "end": "18/01/1446", "year": "1446", "role": "مستفيد", "type": "التدريب - التدريب الإلكتروني", "durationType": "ساعات", "hours": 7.0, "created": "19-09-24", "notes": "", "approval": "معتمد"}, {"name": "علوم الأولمبياد الدولية (مسار المعلوماتية ) المرحلة الثانية", "provider": "إدارة التعليم بمحافظة بيشة", "start": "12/03/1446", "end": "16/03/1446", "year": "1446", "role": "منفذ", "type": "التدريب - التدريب المباشر", "durationType": "ساعات", "hours": 25.0, "created": "19-09-24", "notes": "", "approval": "معتمد"}];
+let records = JSON.parse(localStorage.getItem('trainingRecords') || 'null') || originalData;
+let editingIndex = -1, yearChart, approvalChart;
+// Firebase project configuration (replace with values from Firebase Console).
+const firebaseConfig = {
+ apiKey: 'ضع_API_KEY_هنا',
+ authDomain: 'ضع_PROJECT_ID.firebaseapp.com',
+ projectId: 'ضع_PROJECT_ID',
+ appId: 'ضع_APP_ID'
+};
+const ADMIN_EMAIL = 'admin@example.com'; // Admin account email in Firebase Authentication
+let firebaseAuth = null;
+const WHATSAPP_NUMBER='966565588869';
+const $=id=>document.getElementById(id);
+const fmt=n=>Number(n||0).toLocaleString('en-US',{maximumFractionDigits:1});
+const years=()=>[...new Set(records.map(r=>r.year).filter(y=>y&&y!=='غير محدد'))].sort((a,b)=>Number(a)-Number(b));
+const sumHours=arr=>arr.reduce((s,r)=>s+(Number(r.hours)||0),0);
+function status(r){return r.approval||'غير مدون'}
+function initFilters(){
+ $('yearFilter').innerHTML='<option value="">جميع السنوات</option>'+years().map(y=>`<option>${y}</option>`).join('');
+ const types=[...new Set(records.map(r=>r.type).filter(Boolean))].sort();
+ $('typeFilter').innerHTML='<option value="">جميع أنواع البرامج</option>'+types.map(t=>`<option>${esc(t)}</option>`).join('');
+}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function updateMetrics(){
+ $('mCount').textContent=fmt(records.length);$('mHours').textContent=fmt(sumHours(records));
+ const approved=records.filter(r=>status(r)==='معتمد');
+ $('mApproved').textContent=fmt(approved.length);$('mApprovedHours').textContent=fmt(sumHours(approved))+' ساعة معتمدة';
+ $('mYears').textContent=years().length;$('approvedMini').textContent=approved.length;
+ $('blankMini').textContent=records.filter(r=>status(r)==='غير مدون').length;
+}
+function chartData(){
+ const ys=years();return {ys,hs:ys.map(y=>sumHours(records.filter(r=>r.year===y)))};
+}
+function buildCharts(){
+ const d=chartData();
+ if(yearChart)yearChart.destroy();
+ yearChart=new Chart($('yearChart'),{type:'bar',data:{labels:d.ys,datasets:[{label:'الساعات التدريبية',data:d.hs,backgroundColor:['#d8bd83','#78dce5','#8d83c8'],borderRadius:9,maxBarThickness:34}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{rtl:true,callbacks:{label:c=>fmt(c.raw)+' ساعة'}}},scales:{x:{grid:{display:false},ticks:{color:'#c7cfdd',font:{family:'Tajawal'}}},y:{beginAtZero:true,grid:{color:'rgba(205,216,235,.12)'},ticks:{precision:0,color:'#aebbd0',font:{family:'Tajawal'}}}},onClick:(e,els)=>{if(els.length){const y=d.ys[els[0].index];$('yearFilter').value=y;renderTable();document.querySelector('#tableBody').scrollIntoView({behavior:'smooth',block:'start'})}}}});
+ if(approvalChart)approvalChart.destroy();
+ const approved=records.filter(r=>status(r)==='معتمد').length,blank=records.filter(r=>status(r)==='غير مدون').length,pending=records.filter(r=>status(r)==='قيد الاعتماد').length;
+ approvalChart=new Chart($('approvalChart'),{type:'doughnut',data:{labels:['معتمد','غير مدون','قيد الاعتماد'],datasets:[{data:[approved,blank,pending],backgroundColor:['#69c6a5','#d8bd83','#78b8e8'],borderWidth:0,hoverOffset:5}]},options:{responsive:true,maintainAspectRatio:false,cutout:'70%',plugins:{legend:{position:'bottom',rtl:true,labels:{color:'#cbd3e1',usePointStyle:true,boxWidth:8,font:{family:'Tajawal'}}}}}});
+ $('yearButtons').innerHTML=d.ys.map(y=>`<button class="year-btn border border-slate-200 rounded-full px-3 py-1.5 text-xs font-bold ${$('yearFilter').value===y?'active':''}" onclick="pickYear('${y}')">${y}هـ · ${fmt(d.hs[d.ys.indexOf(y)])} س</button>`).join('')+`<button class="year-btn border border-slate-200 rounded-full px-3 py-1.5 text-xs" onclick="pickYear('')">عرض الكل</button>`;
+}
+function pickYear(y){$('yearFilter').value=y;renderTable();buildCharts()}
+function filtered(){
+ const q=$('search').value.trim().toLowerCase(),y=$('yearFilter').value,t=$('typeFilter').value,a=$('approvalFilter').value,role=$('roleFilter').value;
+ return records.map((r,i)=>({...r,_i:i})).filter(r=>(!q||(r.name+' '+r.provider).toLowerCase().includes(q))&&(!y||r.year===y)&&(!t||r.type===t)&&(!a||status(r)===a)&&(!role||r.role===role));
+}
+function renderTable(){
+ const arr=filtered();$('resultCount').textContent=arr.length;$('empty').classList.toggle('hidden',arr.length!==0);
+ $('tableBody').innerHTML=arr.map((r,j)=>`<tr class="border-t border-slate-100 hover:bg-slate-50"><td class="p-3 text-slate-400">${j+1}</td><td class="p-3"><div class="font-bold text-slate-800">${esc(r.name)}</div><div class="text-xs text-slate-400 mt-1">${esc(r.provider)}</div></td><td class="p-3">${esc(r.year)}هـ</td><td class="p-3 font-bold">${fmt(r.hours)}</td><td class="p-3">${esc(r.role)}</td><td class="p-3 text-xs">${esc((r.type||'').replace('التدريب - ','').replace('الملتقيات - ',''))}</td><td class="p-3"><span class="pill ${status(r)==='معتمد'?'bg-emerald-50 text-emerald-700':status(r)==='قيد الاعتماد'?'bg-blue-50 text-blue-700':'bg-amber-50 text-amber-700'}">${esc(status(r))}</span></td><td class="p-3 no-print"><button class="text-teal-800 font-bold text-xs" onclick="showDetails(${r._i})">عرض</button></td></tr>`).join('');
+ $('roleSummary').innerHTML=['منفذ','مستفيد'].map(role=>{const arr=records.filter(r=>r.role===role),h=sumHours(arr),pct=records.length?arr.length/records.length*100:0;return `<div><div class="flex justify-between text-sm mb-2"><b>${role}</b><span>${arr.length} سجل · ${fmt(h)} ساعة</span></div><div class="bar"><span style="width:${pct}%"></span></div></div>`}).join('');
+ buildCharts();
+}
+function showDetails(i){const r=records[i];alert(`اسم النشاط: ${r.name}\nالجهة: ${r.provider}\nالبداية: ${r.start}\nالنهاية: ${r.end}\nالسنة: ${r.year}\nالصفة: ${r.role}\nنوع النشاط: ${r.type}\nالمدة: ${r.hours} ${r.durationType}\nحالة الاعتماد: ${status(r)}\nتاريخ الإنشاء: ${r.created}\nملاحظات المعتمد: ${r.notes||'لا توجد'}`)}
+function clearFilters(){['search','yearFilter','typeFilter','approvalFilter','roleFilter'].forEach(id=>$(id).value='');renderTable()}
+function initFirebaseAuth(){
+ try{if(!window.firebase)throw new Error('تعذر تحميل Firebase. تحقق من اتصال الإنترنت.');
+ if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);firebaseAuth=firebase.auth();
+ firebaseAuth.setPersistence(firebase.auth.Auth.Persistence.SESSION);return true;
+ }catch(err){$('loginError').textContent=err.message||'تعذر تهيئة Firebase.';return false}
+}
+function openAdmin(){$('adminModal').classList.remove('hidden');$('adminModal').classList.add('flex');$('loginArea').classList.remove('hidden');$('adminArea').classList.add('hidden');$('pinInput').value='';$('loginError').textContent='';$('passwordSettings').classList.add('hidden')}
+function closeAdmin(){$('adminModal').classList.add('hidden');$('adminModal').classList.remove('flex')}
+async function login(){
+ const pass=$('pinInput').value;$('loginError').textContent='';
+ if(!pass){$('loginError').textContent='أدخل كلمة المرور.';return}
+ if(!initFirebaseAuth())return;
+ try{await firebaseAuth.signInWithEmailAndPassword(ADMIN_EMAIL,pass);
+ $('loginArea').classList.add('hidden');$('adminArea').classList.remove('hidden');renderAdminList();
+ }catch(err){$('loginError').textContent=['auth/invalid-credential','auth/wrong-password','auth/user-not-found'].includes(err.code)?'كلمة المرور غير صحيحة.':err.code==='auth/too-many-requests'?'تم تقييد المحاولات مؤقتًا. حاول لاحقًا.':'تعذر تسجيل الدخول: '+(err.message||'تحقق من إعدادات Firebase.')}
+}
+function togglePasswordSettings(){$('passwordSettings').classList.toggle('hidden')}
+async function updateAdminPassword(){
+ const current=$('currentAdminPassword').value,n=$('newAdminPassword').value,c=$('confirmAdminPassword').value,msg=$('passwordUpdateMessage');
+ msg.textContent='';msg.className='text-xs mt-2';
+ if(!firebaseAuth||!firebaseAuth.currentUser){msg.textContent='انتهت جلسة الدخول. أعد تسجيل الدخول.';return}
+ if(!current||n.length<6||n!==c){msg.textContent='أدخل الحالية، واجعل الجديدة 6 أحرف على الأقل مع تطابق التأكيد.';return}
+ try{
+ const cred=firebase.auth.EmailAuthProvider.credential(ADMIN_EMAIL,current);
+ await firebaseAuth.currentUser.reauthenticateWithCredential(cred);
+ await firebaseAuth.currentUser.updatePassword(n);
+ ['currentAdminPassword','newAdminPassword','confirmAdminPassword'].forEach(id=>$(id).value='');
+ msg.className='text-xs mt-2 text-emerald-400';msg.textContent='تم تحديث كلمة المرور في Firebase بنجاح.';
+ }catch(err){msg.className='text-xs mt-2 text-red-400';msg.textContent=['auth/wrong-password','auth/invalid-credential'].includes(err.code)?'كلمة المرور الحالية غير صحيحة.':'تعذر تحديث كلمة المرور: '+(err.message||'حاول مرة أخرى.')}
+}
+function newRecord(){editingIndex=-1;['fName','fProvider','fStart','fEnd','fHours','fCreated','fNotes'].forEach(id=>$(id).value='');$('fRole').value='مستفيد';$('fApproval').value='قيد الاعتماد';$('fType').value='التدريب - التدريب المباشر';$('fDurationType').value='ساعات'}
+function cancelEdit(){newRecord()}
+function saveRecord(){
+ const name=$('fName').value.trim(),start=$('fStart').value.trim(),hours=Number($('fHours').value);
+ if(!name||!start||!Number.isFinite(hours)||hours<0){alert('يرجى إدخال اسم الدورة وتاريخ البداية وعدد ساعات صحيح.');return}
+ const m=start.match(/\/(\d{4})$/),r={name,provider:$('fProvider').value.trim(),start,end:$('fEnd').value.trim(),year:m?m[1]:'غير محدد',hours,role:$('fRole').value,type:$('fType').value.trim(),approval:$('fApproval').value,durationType:$('fDurationType').value.trim()||'ساعات',created:$('fCreated').value.trim(),notes:$('fNotes').value.trim()};
+ if(editingIndex>=0)records[editingIndex]=r;else records.push(r);
+ persist();newRecord();renderAdminList();alert('تم حفظ التعديل محليًا في هذا المتصفح.');
+}
+function editRecord(i){const r=records[i];editingIndex=i;const map={fName:r.name,fProvider:r.provider,fStart:r.start,fEnd:r.end,fHours:r.hours,fRole:r.role,fType:r.type,fApproval:status(r),fCreated:r.created,fDurationType:r.durationType,fNotes:r.notes};Object.entries(map).forEach(([k,v])=>$(k).value=v??'');window.scrollTo({top:$('adminModal').scrollTop,behavior:'smooth'})}
+function deleteRecord(i){if(confirm('هل تريد حذف هذا السجل؟')){records.splice(i,1);persist();renderAdminList()}}
+function renderAdminList(){const sel=$('adminYearFilter');if(sel){const chosen=sel.value;sel.innerHTML='<option value="">كل السنوات</option>'+years().map(y=>`<option value="${esc(y)}">${esc(y)}هـ</option>`).join('');sel.value=chosen}const selected=sel?.value||'';const rows=records.map((r,i)=>({r,i})).filter(x=>!selected||String(x.r.year)===selected).sort((a,b)=>Number(b.r.year||0)-Number(a.r.year||0));$('adminList').innerHTML=rows.map(({r,i})=>`<div class="py-2 flex items-center justify-between gap-3 text-sm"><div class="min-w-0"><div class="font-bold truncate">${esc(r.name)}</div><div class="text-xs text-slate-400">${esc(r.year)}هـ · ${fmt(r.hours)} ساعة</div></div><div class="flex gap-2 shrink-0"><button onclick="editRecord(${i})" class="text-cyan-600 text-xs font-bold">تعديل</button><button onclick="deleteRecord(${i})" class="text-red-400 text-xs font-bold">حذف</button></div></div>`).join('')||'<div class="py-5 text-center text-slate-400 text-sm">لا توجد دورات في هذه السنة</div>'}
+function persist(){localStorage.setItem('trainingRecords',JSON.stringify(records));initFilters();updateMetrics();renderTable()}
+function downloadBackup(){const blob=new Blob([JSON.stringify(records,null,2)],{type:'application/json'});downloadBlob(blob,'training-records-backup.json')}
+function importBackup(e){const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const x=JSON.parse(rd.result);if(!Array.isArray(x))throw 0;records=x;persist();renderAdminList();alert('تم استيراد النسخة.')}catch(_){alert('تعذر قراءة ملف النسخة الاحتياطية.')}};rd.readAsText(f)}
+function exportCSV(){const cols=['name','provider','start','end','year','role','type','hours','durationType','approval','created','notes'];const labels=['اسم النشاط','جهة النشاط','تاريخ البداية','تاريخ النهاية','السنة','الصفة','نوع النشاط','المدة','نوع المدة','حالة الاعتماد','تاريخ الإنشاء','ملاحظات المعتمد'];const lines=[labels,...filtered().map(r=>cols.map(c=>r[c]??''))].map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(','));downloadBlob(new Blob(['\ufeff'+lines.join('\n')],{type:'text/csv;charset=utf-8'}),'training-records.csv')}
+function downloadBlob(blob,name){const a=document.createElement('a'),url=URL.createObjectURL(blob);a.href=url;a.download=name;a.click();URL.revokeObjectURL(url)}
+function whatsApp(e){e.preventDefault();if(!WHATSAPP_NUMBER){alert('للتفعيل: أضف رقم واتساب جهة العمل في المتغير WHATSAPP_NUMBER داخل كود الصفحة.');return}window.open('https://wa.me/'+WHATSAPP_NUMBER,'_blank')}
+initFilters();updateMetrics();renderTable();lucide.createIcons();
+</script></body></html>
